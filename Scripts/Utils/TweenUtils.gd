@@ -33,3 +33,23 @@ static func tweenScaleY(object,position,duration,trans,ease = Tween.EASE_IN_OUT)
 	.set_trans(trans)\
 	.set_ease(ease)
 	return tween
+
+static func tweenSkew(object,value,duration,trans,ease = Tween.EASE_IN_OUT):
+	var tween = object.create_tween()
+	tween.tween_property(object, "skew", value, duration)\
+	.set_trans(trans)\
+	.set_ease(ease)
+	return tween
+
+static func tweenSkewPingPong(object,startValue,endValue,duration,trans,ease = Tween.EASE_IN_OUT):
+	var tween = object.create_tween().set_loops()
+
+	tween.tween_property(object, "skew", endValue, duration)\
+		.set_trans(trans)\
+		.set_ease(ease)
+
+	tween.tween_property(object, "skew", startValue, duration)\
+		.set_trans(trans)\
+		.set_ease(ease)
+
+	return tween
