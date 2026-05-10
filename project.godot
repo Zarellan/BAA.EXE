@@ -25,6 +25,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="sheep wool simulator"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GitGodot/plugin.cfg")
+
 [input]
 
 LeftMouse={
