@@ -6,6 +6,7 @@ var twe:Tween
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,Tween.TRANS_SINE,Tween.EASE_IN_OUT)
+	#edited here
 	pass # Replace with function body.
 
 
