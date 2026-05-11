@@ -15,9 +15,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if (isInside && Input.is_action_just_pressed("LeftMouse")):
-		print("PRESSED YAY")
+		Pressed()
 	pass
 
+func Pressed():
+	print("Pressed")
 
 func _on_static_body_2d_mouse_entered() -> void:
 	isInside = true

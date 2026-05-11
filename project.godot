@@ -25,6 +25,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="sheep wool simulator"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/linux_driver_plugins/plugin.cfg")
+
 [input]
 
 LeftMouse={
