@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dvkkcbj3lxi3e" path="res://Scripts/SheepClicker.gd" id="1_0r47l"]
 [ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="1_wy1g6"]
+[ext_resource type="Script" uid="uid://dy6flq3cdngdk" path="res://Scripts/Money/Money_counter.gd" id="3_2o3fe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r47l"]
 size = Vector2(116.5, 93.5)
@@ -44,12 +45,16 @@ _data = {
 &"RESET": SubResource("Animation_2o3fe")
 }
 
-[node name="Node2D" type="Node2D" unique_id=1031348240]
+[sub_resource type="CanvasTexture" id="CanvasTexture_0r47l"]
 
-[node name="Sheep" type="Node2D" parent="." unique_id=616305903]
+[node name="main_world" type="Node2D" unique_id=1031348240]
+
+[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText")]
 position = Vector2(132, 721)
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_0r47l")
+moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/Money_Counter")
+metadata/_edit_group_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sheep" unique_id=1741717021]
 position = Vector2(0, -47)
@@ -57,7 +62,7 @@ input_pickable = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Sheep/StaticBody2D" unique_id=2066201686]
 texture_filter = 1
-position = Vector2(-0.9259262, 0)
+position = Vector2(-0.9259262, -0.46298218)
 texture = ExtResource("1_wy1g6")
 offset = Vector2(0, -17)
 hframes = 2
@@ -78,6 +83,32 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=699005217]
+
+[node name="WoolCounter" type="Control" parent="Control/CanvasLayer" unique_id=972502790]
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(1, 0)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/WoolCounter" unique_id=428712004]
+layout_mode = 1
+offset_right = 283.0
+offset_bottom = 61.0
+pivot_offset = Vector2(20, 20)
+texture = SubResource("CanvasTexture_0r47l")
+
+[node name="Money_Counter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=1335292891]
+layout_mode = 0
+offset_right = 283.0
+offset_bottom = 61.0
+pivot_offset = Vector2(0, 30)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 41
+script = ExtResource("3_2o3fe")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
+anchor_mode = 0
 
 [connection signal="mouse_entered" from="Sheep/StaticBody2D" to="Sheep" method="_on_static_body_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Sheep" method="_on_static_body_2d_mouse_exited"]

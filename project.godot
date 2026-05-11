@@ -15,6 +15,11 @@ run/main_scene="uid://cuwl22km6h2sg"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+InstantiateUtil="*uid://kxn7058ra1ts"
+GameHandler="*uid://c022lkse37ii3"
+
 [display]
 
 window/size/viewport_width=1280
@@ -24,6 +29,10 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="sheep wool simulator"
+
+[editor]
+
+run/main_run_args="--rendering-driver opengl3"
 
 [editor_plugins]
 
@@ -39,6 +48,7 @@ LeftMouse={
 
 [physics]
 
+2d/physics_engine="GodotPhysics2D"
 3d/physics_engine="Jolt Physics"
 
 [rendering]
