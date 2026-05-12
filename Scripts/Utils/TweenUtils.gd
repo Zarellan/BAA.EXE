@@ -13,6 +13,11 @@ static func isAlive(twen:Tween):
 	return false
 	pass
 
+static func StopTween(twen:Tween):
+	if (twen != null && twen.is_valid()):
+		twen.stop()
+
+
 static func EasingType(tween, easing:Ease):
 	var eas = Tween.EASE_IN_OUT
 	var transition = Tween.TRANS_LINEAR
@@ -37,14 +42,24 @@ static func tweenX(object,position,duration,eas):
 	return tween
 
 static func tweenY(object,position,duration,eas):
-	print("Twe")
 	var tween = object.create_tween()
 	var step = tween.tween_property(object, "position:y", position, duration)
 	EasingType(step, eas)
 	return tween
 
+static func tweenRotation(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "rotation_degrees", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenColor(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "modulate", position, duration)
+	EasingType(step, eas)
+	return tween
+
 static func tweenAlpha(object,position,duration,eas):
-	print("Twe")
 	var tween = object.create_tween()
 	var step = tween.tween_property(object, "modulate:a", position, duration)
 	EasingType(step, eas)

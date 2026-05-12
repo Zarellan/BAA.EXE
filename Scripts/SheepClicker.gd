@@ -3,7 +3,6 @@ extends Node2D
 
 @export var moneyText:Control
 @export var textMoneyRev:Control
-
 var isInside = false
 
 

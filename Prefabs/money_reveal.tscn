@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://v16m5xg2k4dk"]
+
+[ext_resource type="Script" uid="uid://bd5vgeuedftgb" path="res://Scripts/Money/MoneyRevealObjectExt.gd" id="1_itmgc"]
+
+[node name="MoneyReveal" type="RichTextLabel" unique_id=975418504]
+offset_left = 69.0
+offset_top = 420.0
+offset_right = 164.0
+offset_bottom = 505.0
+mouse_filter = 2
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 55
+text = "$40"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_itmgc")
+_max_size = 55
+_outline_ratio = 0.16
+_current_font_size = 55
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Timer" type="Timer" parent="." unique_id=54986603]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

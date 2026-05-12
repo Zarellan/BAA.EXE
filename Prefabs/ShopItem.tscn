@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cc2lvqg4m2iyj"]
 
 [ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="1_s46mk"]
+[ext_resource type="Script" uid="uid://cwxcmuxj4cp8" path="res://Scripts/Shop/ShopItem.gd" id="1_vpf6l"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_f7n8r"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_s46mk"]
 
@@ -15,6 +17,7 @@ offset_left = -900.0
 offset_bottom = 163.0
 grow_horizontal = 0
 pivot_offset = Vector2(900, 0)
+script = ExtResource("1_vpf6l")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)
@@ -26,17 +29,82 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_s46mk")
 
-[node name="ItemImage" type="TextureRect" parent="." unique_id=172852597]
+[node name="Holder" type="TextureRect" parent="." unique_id=302152906]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(450, 81.5)
+
+[node name="ItemImage" type="TextureRect" parent="Holder" unique_id=172852597]
 layout_mode = 1
 anchors_preset = -1
+anchor_left = 1.0
 anchor_top = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 31.0
+offset_left = -167.0
 offset_top = -63.5
-offset_right = 157.0
+offset_right = -41.0
 offset_bottom = 65.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(60, 67)
 texture = ExtResource("1_s46mk")
 expand_mode = 1
+
+[node name="Title" type="RichTextLabel" parent="Holder" unique_id=102797527]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 22.0
+offset_right = 696.0
+offset_bottom = 77.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "place holder"
+scroll_active = false
+script = ExtResource("3_f7n8r")
+_max_size = 38
+_current_font_size = 38
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Description" type="RichTextLabel" parent="Holder" unique_id=1277112873]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 82.0
+offset_right = 688.0
+offset_bottom = 145.0
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 40
+text = "this is placeHolder"
+scroll_active = false
+script = ExtResource("3_f7n8r")
+_max_size = 40
+_outline_ratio = 0.1
+_current_font_size = 40
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Price" type="RichTextLabel" parent="Holder" unique_id=1602445355]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 28.0
+offset_right = 167.0
+offset_bottom = 136.0
+pivot_offset = Vector2(83, 69.5)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 78
+text = "$50
+"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_f7n8r")
+_max_size = 81
+_current_font_size = 78
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
