@@ -2,6 +2,7 @@ class_name TweenUtils
 
 enum Ease{
 	OutCirc,
+	InSine,
 	InOutSine
 	}
 
@@ -20,6 +21,10 @@ static func EasingType(tween, easing:Ease):
 		Ease.OutCirc: 
 			eas = Tween.EASE_OUT
 			transition = Tween.TRANS_CIRC
+		Ease.InSine: 
+			eas = Tween.EASE_IN
+			transition = Tween.TRANS_SINE
+
 		Ease.InOutSine:
 			eas = Tween.EASE_IN_OUT
 			transition = Tween.TRANS_SINE
@@ -32,8 +37,16 @@ static func tweenX(object,position,duration,eas):
 	return tween
 
 static func tweenY(object,position,duration,eas):
+	print("Twe")
 	var tween = object.create_tween()
 	var step = tween.tween_property(object, "position:y", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenAlpha(object,position,duration,eas):
+	print("Twe")
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "modulate:a", position, duration)
 	EasingType(step, eas)
 	return tween
 

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cbgoqa4cgdsos"]
+
+[ext_resource type="Script" uid="uid://ccty7yo1k8ajo" path="res://Scripts/Money/MoneyRevealObject.gd" id="1_gv6nh"]
+
+[node name="MoneyRev" type="RichTextLabel" unique_id=1709931514]
+offset_right = 67.0
+offset_bottom = 62.0
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 43
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_gv6nh")
+
+[node name="Timer" type="Timer" parent="." unique_id=1267248575]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

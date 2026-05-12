@@ -2,6 +2,7 @@ extends Node2D
 
 
 @export var moneyText:Control
+@export var textMoneyRev:Control
 
 var isInside = false
 
@@ -28,8 +29,9 @@ func _process(delta: float) -> void:
 
 var scaleYtween:Tween
 func Pressed():
-	GameHandler.money += 1
+	GameHandler.money += GameHandler.increment
 	(moneyText as Money_counter).MoneyCollected()
+	(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.increment)
 	if (TweenUtils.isAlive(scaleYtween)):
 		scaleYtween.stop()
 	scale.y = defaultScale.y - 0.20

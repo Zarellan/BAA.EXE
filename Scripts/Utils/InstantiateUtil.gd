@@ -25,3 +25,15 @@ func Instantiate(packed_scene: PackedScene, parent: Node, safety = true):
 		AddAsParent(instance, parent, safety)
 	
 	return instance
+
+func InstantiateNode(node: Node, parent: Node, safety = true):
+	if not node:
+		push_error("no packscene exist")
+		return null
+	var instance = node.instantiate()
+	if parent == null:
+		AddAsTree(instance, safety)
+	else:
+		AddAsParent(instance, parent, safety)
+	
+	return instance

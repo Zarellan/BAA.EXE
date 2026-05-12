@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://dvkkcbj3lxi3e" path="res://Scripts/SheepClicker.gd" id="1_0r47l"]
 [ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="1_wy1g6"]
 [ext_resource type="Script" uid="uid://dy6flq3cdngdk" path="res://Scripts/Money/Money_counter.gd" id="3_2o3fe"]
+[ext_resource type="Script" uid="uid://33bljhcysagw" path="res://Scripts/Money/TextMoneyRev.gd" id="4_4g1jp"]
+[ext_resource type="PackedScene" uid="uid://cbgoqa4cgdsos" path="res://Prefabs/money_rev.tscn" id="5_fggf0"]
+[ext_resource type="PackedScene" uid="uid://cc2lvqg4m2iyj" path="res://Prefabs/ShopItem.tscn" id="6_2js75"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r47l"]
 size = Vector2(116.5, 93.5)
@@ -49,11 +52,12 @@ _data = {
 
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
-[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText")]
+[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev")]
 position = Vector2(132, 721)
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_0r47l")
 moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/Money_Counter")
+textMoneyRev = NodePath("../Control/CanvasLayer/TextRev")
 metadata/_edit_group_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sheep" unique_id=1741717021]
@@ -79,8 +83,6 @@ autoplay = &"Idle"
 [node name="Control" type="Control" parent="." unique_id=2002302030]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=699005217]
 
@@ -106,6 +108,65 @@ pivot_offset = Vector2(0, 30)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 41
 script = ExtResource("3_2o3fe")
+
+[node name="TextRev" type="Control" parent="Control/CanvasLayer" unique_id=1274630093 node_paths=PackedStringArray("sheep")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_4g1jp")
+sheep = NodePath("../../../Sheep/StaticBody2D")
+text = ExtResource("5_fggf0")
+
+[node name="Shop" type="Control" parent="Control/CanvasLayer" unique_id=1298681489]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+pivot_offset = Vector2(38, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/CanvasLayer/Shop" unique_id=1569495618]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -908.0
+offset_bottom = 719.0
+grow_horizontal = 0
+pivot_offset = Vector2(908, 0)
+horizontal_scroll_mode = 0
+scroll_hint_mode = 1
+tile_scroll_hint = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer/Shop/ScrollContainer" unique_id=1687245508]
+clip_contents = true
+layout_mode = 2
+
+[node name="ShopItem" parent="Control/CanvasLayer/Shop/ScrollContainer/VBoxContainer" unique_id=2083889885 instance=ExtResource("6_2js75")]
+layout_mode = 2
+
+[node name="ShopItem2" parent="Control/CanvasLayer/Shop/ScrollContainer/VBoxContainer" unique_id=1167315613 instance=ExtResource("6_2js75")]
+layout_mode = 2
+
+[node name="ShopItem3" parent="Control/CanvasLayer/Shop/ScrollContainer/VBoxContainer" unique_id=1601033561 instance=ExtResource("6_2js75")]
+layout_mode = 2
+
+[node name="ShopItem4" parent="Control/CanvasLayer/Shop/ScrollContainer/VBoxContainer" unique_id=1036308445 instance=ExtResource("6_2js75")]
+layout_mode = 2
+
+[node name="ShopItem5" parent="Control/CanvasLayer/Shop/ScrollContainer/VBoxContainer" unique_id=441568201 instance=ExtResource("6_2js75")]
+layout_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
