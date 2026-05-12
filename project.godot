@@ -17,8 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-InstantiateUtil="*uid://kxn7058ra1ts"
 GameHandler="*uid://c022lkse37ii3"
+InstantiateUtil="*uid://kxn7058ra1ts"
+ParticleManager="*uid://bkiub4wvmk5mn"
+GlobalAudio="*uid://cmt4egsoyxyif"
 
 [display]
 
@@ -29,10 +31,6 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="sheep wool simulator"
-
-[editor]
-
-run/main_run_args="--rendering-driver opengl3"
 
 [editor_plugins]
 

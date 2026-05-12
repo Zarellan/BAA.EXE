@@ -3,6 +3,7 @@ extends Node2D
 
 @export var moneyText:Control
 @export var textMoneyRev:Control
+@export var part:GPUParticles2D
 var isInside = false
 
 
@@ -12,7 +13,6 @@ var defaultScale
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
 	
 	defaultScale = scale
@@ -31,6 +31,8 @@ func Pressed():
 	GameHandler.money += GameHandler.increment
 	(moneyText as Money_counter).MoneyCollected()
 	(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.increment)
+	ParticleManager.PlayParticle(part,3)
+	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 6,randf_range(0.90,1.10))
 	if (TweenUtils.isAlive(scaleYtween)):
 		scaleYtween.stop()
 	scale.y = defaultScale.y - 0.20
