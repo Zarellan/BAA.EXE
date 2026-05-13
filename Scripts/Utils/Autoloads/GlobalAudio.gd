@@ -5,12 +5,7 @@ extends AudioStreamPlayer
 func _ready() -> void:
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-func PlayOneShot(audio_path: String, vol_DB = 0,pit = 1):
+func PlayOneShot(audio_path: String, vol_DB = 0.0,pit = 1.0):
 	
 	var pl = AudioStreamPlayer.new()
 	add_child(pl)

@@ -6,14 +6,11 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func PlayParticle(particle, count):
 	for i in range(count):
 		particle.emit_particle(
-			Transform2D(),	
+			Transform2D(),
 			Vector2.ZERO,
 			Color.WHITE,
 			Color.WHITE,

@@ -3,7 +3,8 @@ class_name TweenUtils
 enum Ease{
 	OutCirc,
 	InSine,
-	InOutSine
+	InOutSine,
+	linear
 	}
 
 
@@ -11,7 +12,6 @@ static func isAlive(twen:Tween):
 	if (twen != null && twen.is_valid()):
 		return true
 	return false
-	pass
 
 static func StopTween(twen:Tween):
 	if (twen != null && twen.is_valid()):
@@ -33,6 +33,9 @@ static func EasingType(tween, easing:Ease):
 		Ease.InOutSine:
 			eas = Tween.EASE_IN_OUT
 			transition = Tween.TRANS_SINE
+		Ease.linear:
+			eas = Tween.EASE_IN_OUT
+			transition = Tween.TRANS_LINEAR
 	tween.set_trans(transition).set_ease(eas)
 
 static func tweenX(object,position,duration,eas):
@@ -98,4 +101,10 @@ static func tweenSkewPingPong(object,startValue,endValue,duration,eas):
 	var step2 = tween.tween_property(object, "skew", endValue, duration)
 	EasingType(step2, eas)
 
+	return tween
+
+static func tweenScrollY(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "scroll_vertical", position, duration)
+	EasingType(step, eas)
 	return tween

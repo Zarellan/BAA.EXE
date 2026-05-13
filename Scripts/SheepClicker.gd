@@ -14,14 +14,19 @@ var defaultScale
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
-	
 	defaultScale = scale
+	#print(itemList.items[0].name)
 	
+	#DirAccess.make_dir_recursive_absolute("user://saver")
+	#ResourceSaver.save(itemList,"user://saver/ShopList.tres")
+	#var loader:ShopList = ResourceLoader.load("user://saver/ShopList.tres") as ShopList
+	#var vc:Vector2 = loader.items[1].vect
+	#print(vc)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (isInside && Input.is_action_just_pressed("LeftMouse")):
 		Pressed()
 	pass
@@ -46,3 +51,9 @@ func _on_static_body_2d_mouse_entered() -> void:
 func _on_static_body_2d_mouse_exited() -> void:
 	isInside = false
 	pass # Replace with function body.
+	
+	# MAX SCROLL TO DOWN
+	#var sc = $"../Control/CanvasLayer/Shop/ScrollContainer"
+	#var vbar = sc.get_v_scroll_bar()
+	#var real_max = vbar.max_value - vbar.page
+	#TweenUtils.tweenScrollY(sc,real_max,0.5,TweenUtils.Ease.OutCirc)

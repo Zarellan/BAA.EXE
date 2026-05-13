@@ -32,6 +32,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="sheep wool simulator"
 
+[editor]
+
+run/main_run_args="--rendering-driver opengl3"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/font_auto_size_labels/plugin.cfg", "res://addons/linux_driver_plugins/plugin.cfg")

@@ -5,12 +5,9 @@ class_name TextMoneyRev
 @export var text:PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#var sc = $"../Shop/ScrollContainer"
+	#TweenUtils.tweenScrollY(sc,sc.get_v_scroll_bar().max_value,2,TweenUtils.Ease.OutCirc)
 	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func RevealMoney(textMoney = 1):
 	# Get the global position of a world object (e.g., the Player)

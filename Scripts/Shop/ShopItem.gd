@@ -1,4 +1,5 @@
 extends Control
+class_name ShopItem
 
 enum Powers{
 	none,
@@ -30,8 +31,13 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
+func set_item(title:String, desc:String, pric:int, po: Powers):
+	itemName = title
+	itemDescription = desc
+	price = pric
+	power = po
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
 	pass
@@ -71,4 +77,3 @@ func Bought():
 			TweenUtils.tweenX(moneyNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
 			moneyNode.modulate = Color(1.0, 0.0, 0.0, 1.0)
 			TweenUtils.tweenColor(moneyNode,Color(1,1,1,1),0.3,TweenUtils.Ease.OutCirc)
-		print("I'm texture")
