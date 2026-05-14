@@ -86,20 +86,41 @@ anim_offset_max = 1.0
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
 script = ExtResource("8_v5bxn")
-title = "rr"
-description = "ss"
-price = 67
+title = "Raise clicker"
+description = "improve the clicker by [wave amp=30.0 freq=4.0 connected=0]10[/wave]"
+price = 25
 power = 1
+tax = 1.05
+taxInc = 0.03
+metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
+
+[sub_resource type="Resource" id="Resource_56xbq"]
+script = ExtResource("8_v5bxn")
+title = "Auto collect"
+description = "now you will auto collect +4"
+price = 25
+power = 2
+tax = 1.1
+taxInc = 0.08
+metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
+
+[sub_resource type="Resource" id="Resource_410ju"]
+script = ExtResource("8_v5bxn")
+title = "Faster Auto Collect"
+description = "make the auto collector collects faster"
+price = 250
+tax = 1.1
+taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_pbqe1"]
 script = ExtResource("9_56xbq")
-items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn")])
+items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
-[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part")]
+[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part") groups=["Sheep"]]
 position = Vector2(132, 721)
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_0r47l")

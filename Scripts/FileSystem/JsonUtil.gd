@@ -1,6 +1,6 @@
 extends Node
 class_name JsonUtil
-# NOT RECOMMENDED, USE GODOT RESOURCES INSTEAD
+# NOT RECOMMENDED, USE ResourceUtil.gd INSTEAD
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

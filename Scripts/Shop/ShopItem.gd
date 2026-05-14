@@ -3,13 +3,17 @@ class_name ShopItem
 
 enum Powers{
 	none,
-	powerClick
+	powerClick,
+	autoCollect,
+	fasterAutoCollector # MUST ADD THIS
 }
 
-@export var itemName:String = "place holder"
-@export var itemDescription:String = "this is description placeholder"
-@export var price:int = 50
-@export var power:Powers = Powers.none
+#@export var itemName:String = "place holder"
+#@export var itemDescription:String = "this is description placeholder"
+#@export var price:int = 50
+#@export var power:Powers = Powers.none
+
+@export var shopData:ShopClass
 
 #tweens
 var tweenAlpha:Tween
@@ -19,24 +23,32 @@ var tweenRotationImage:Tween
 var isInside = false
 
 var moneyNode:Control
+var levelNode:Control
 
 var originalPosXMoney
-# Called when the node enters the scene tree for the first time.
+
+@export var coins: int = 0
+
 func _ready() -> void:
 	originalPosXMoney = get_node("Holder/Price").position.x
 	moneyNode = get_node("Holder/Price")
-	get_node("Holder/Title").text = itemName
-	get_node("Holder/Description").text = itemDescription
-	moneyNode.text = "$" + str(price)
+	levelNode = get_node("Holder/Level")
+	get_node("Holder/Title").text = shopData.title
+	get_node("Holder/Description").text = shopData.description
+	moneyNode.text = "$" + str(shopData.price)
+	levelNode.text = "lv:"+ str(shopData.level)
+	SetBasedOnLevel()
 	pass # Replace with function body.
 
+func SetBasedOnLevel():
+	if (shopData.level > 0):
+		moneyNode.position.y = 61.0
+		moneyNode.scale = Vector2(0.8,0.8)
+		levelNode.modulate.a = 1
 
-func set_item(title:String, desc:String, pric:int, po: Powers):
-	itemName = title
-	itemDescription = desc
-	price = pric
-	power = po
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func set_item(shopDat:ShopClass):
+	shopData = shopDat
+
 func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
@@ -62,18 +74,44 @@ func Hovered():
 		tweenRotationImage = TweenUtils.tweenRotation(get_node("Holder/ItemImage"),0,0.2,TweenUtils.Ease.OutCirc)
 		isInside = false
 
+func ModifyTexts():
+	moneyNode.text = "$" + str(shopData.price)
+	levelNode.text = "lv:"+ str(shopData.level)
+
+var colorTween:Tween
+
+func TweenColor(col:Color):
+	TweenUtils.StopTween(colorTween)
+	moneyNode.modulate = col
+	colorTween = TweenUtils.tweenColor(moneyNode,Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
+
+var tweenXtext:Tween
 func Bought():
 	if isInside && Input.is_action_just_pressed("LeftMouse"):
-		if (power == Powers.none):
+		if (shopData.power == Powers.none):
 			push_error("no power added")
-		if (GameHandler.money >= price):
-			match power:
+			return
+		if (GameHandler.saveData.money >= shopData.price):
+			match shopData.power:
 				Powers.powerClick:
-					GameHandler.increment += 10
-			GameHandler.money -= price
-			TweenUtils.tweenY(moneyNode,61.0,0.3,TweenUtils.Ease.OutCirc)
+					GameHandler.saveData.increment += 10
+				Powers.autoCollect:
+					GameHandler.saveData.autoCollect += 4
+			GameHandler.saveData.money -= shopData.price
+			shopData.price *= shopData.tax
+			shopData.tax += shopData.taxInc
+			TweenColor(Color(0.0, 0.905, 0.2, 1.0))
+			if shopData.level == 0:
+				TweenUtils.tweenY(moneyNode,61.0,0.3,TweenUtils.Ease.OutCirc)
+				TweenUtils.tweenScale(moneyNode,Vector2(0.8,0.8),0.3,TweenUtils.Ease.OutCirc)
+				TweenUtils.tweenAlpha(levelNode,1,0.3,TweenUtils.Ease.linear)
+			shopData.level += 1
+			ModifyTexts()
+			#ResourceUtil.SaveResource(GameHandler.saveData,"ShopList.tres","saver")
+			GameHandler.SaveAllData()
+			#ResourceSaver.save(GameHandler.shopListGlob,"res://saver/ShopList.tres") # save shop list
 		else:
 			moneyNode.position.x = originalPosXMoney - 7
-			TweenUtils.tweenX(moneyNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
-			moneyNode.modulate = Color(1.0, 0.0, 0.0, 1.0)
-			TweenUtils.tweenColor(moneyNode,Color(1,1,1,1),0.3,TweenUtils.Ease.OutCirc)
+			TweenUtils.StopTween(tweenXtext)
+			tweenXtext = TweenUtils.tweenX(moneyNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
+			TweenColor(Color(1.0, 0.0, 0.0, 1.0))

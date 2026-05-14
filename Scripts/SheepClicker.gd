@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name Sheep
 
 @export var moneyText:Control
 @export var textMoneyRev:Control
@@ -32,16 +32,33 @@ func _process(_delta: float) -> void:
 	pass
 
 var scaleYtween:Tween
-func Pressed():
-	GameHandler.money += GameHandler.increment
-	(moneyText as Money_counter).MoneyCollected()
-	(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.increment)
-	ParticleManager.PlayParticle(part,3)
-	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 6,randf_range(0.90,1.10))
+var canPress = true
+
+func TweenTextMoney():
 	if (TweenUtils.isAlive(scaleYtween)):
 		scaleYtween.stop()
 	scale.y = defaultScale.y - 0.20
 	scaleYtween = TweenUtils.tweenScaleY(self,defaultScale.y,0.3,TweenUtils.Ease.OutCirc)
+
+func MoneyCollectedText():
+	(moneyText as Money_counter).MoneyCollected()
+
+func Pressed():
+	if canPress:
+		GameHandler.AddMoney()
+		MoneyCollectedText()
+		(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.saveData.increment)
+		ParticleManager.PlayParticle(part,3)
+		GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 6,randf_range(0.90,1.10))
+		#TweenTextMoney()
+		if (TweenUtils.isAlive(scaleYtween)):
+			scaleYtween.stop()
+		scale.y = defaultScale.y - 0.20
+		scaleYtween = TweenUtils.tweenScaleY(self,defaultScale.y,0.3,TweenUtils.Ease.OutCirc)
+
+		canPress = false
+		await get_tree().create_timer(0.01).timeout
+		canPress = true
 
 func _on_static_body_2d_mouse_entered() -> void:
 	isInside = true

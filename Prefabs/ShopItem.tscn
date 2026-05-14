@@ -80,6 +80,7 @@ offset_right = 688.0
 offset_bottom = 145.0
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
 text = "this is placeHolder"
 scroll_active = false
 script = ExtResource("3_f7n8r")
@@ -91,17 +92,38 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Price" type="RichTextLabel" parent="Holder" unique_id=1602445355]
 layout_mode = 0
-offset_left = 1.0
+offset_left = 15.0
 offset_top = 28.0
-offset_right = 167.0
+offset_right = 181.0
 offset_bottom = 136.0
 pivot_offset = Vector2(83, 69.5)
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/normal_font_size = 81
+bbcode_enabled = true
 text = "$50
 "
 scroll_active = false
-horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_f7n8r")
+_max_size = 81
+_current_font_size = 81
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Level" type="RichTextLabel" parent="Holder" unique_id=1208071378]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 20.999998
+offset_top = -10.000001
+offset_right = 187.0
+offset_bottom = 98.0
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(83, 69.5)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 81
+bbcode_enabled = true
+text = "lv:1"
+scroll_active = false
 vertical_alignment = 1
 script = ExtResource("3_f7n8r")
 _max_size = 81
