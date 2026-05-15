@@ -98,7 +98,7 @@ func Bought():
 				Powers.autoCollect:
 					GameHandler.saveData.autoCollect += 4
 			GameHandler.saveData.money -= shopData.price
-			shopData.price *= shopData.tax
+			shopData.price = int(floor(shopData.price * shopData.tax))
 			shopData.tax += shopData.taxInc
 			TweenColor(Color(0.0, 0.905, 0.2, 1.0))
 			if shopData.level == 0:

@@ -19,6 +19,8 @@ func _ready() -> void:
 	timerAutoCollector.start()
 	
 	sheep = get_tree().get_first_node_in_group("Sheep")
+	
+	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
 	pass # Replace with function body.
 
 

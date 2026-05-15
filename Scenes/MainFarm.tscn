@@ -109,6 +109,7 @@ script = ExtResource("8_v5bxn")
 title = "Faster Auto Collect"
 description = "make the auto collector collects faster"
 price = 250
+power = 3
 tax = 1.1
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"

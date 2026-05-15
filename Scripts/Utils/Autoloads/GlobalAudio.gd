@@ -7,14 +7,14 @@ func _ready() -> void:
 
 func PlayOneShot(audio_path: String, vol_DB = 0.0,pit = 1.0):
 	
+	var audio = load(audio_path)
+	if audio == null:
+		push_error("no audio found on "+ audio_path)
+		return
 	var pl = AudioStreamPlayer.new()
 	add_child(pl)
-	if audio_path.ends_with(".ogg"):
-		pl.stream = AudioStreamOggVorbis.load_from_file(audio_path)
-	else:
-		pl.stream = AudioStreamMP3.load_from_file(audio_path)
+	pl.stream = audio
 	pl.pitch_scale = pit
 	pl.volume_db = vol_DB
-	pl.finished.connect(func():
-		pl.queue_free())
+	pl.finished.connect(pl.queue_free)
 	pl.play()
