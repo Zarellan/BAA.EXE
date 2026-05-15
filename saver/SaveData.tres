@@ -6,12 +6,12 @@
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
 script = ExtResource("2_441t2")
-title = "Raise clicker"
-description = "improve the clicker by [wave amp=30.0 freq=4.0 connected=0]10[/wave]"
-price = 6327
-level = 20
+title = "Improve Shear"
+description = "improve the wool collect by [wave amp=30.0 freq=4.0 connected=0]10[/wave]"
+price = 17537
+level = 22
 power = 1
-tax = 1.6500000000000004
+tax = 1.71
 taxInc = 0.03
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -19,10 +19,10 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_441t2")
 title = "Auto collect"
 description = "now you will auto collect +4"
-price = 1710
-level = 11
+price = 33126
+level = 15
 power = 2
-tax = 1.9800000000000009
+tax = 2.300000000000001
 taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -30,10 +30,10 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_441t2")
 title = "Faster Auto Collect"
 description = "make the auto collector collects faster"
-price = 1033
-level = 5
+price = 27832
+level = 10
 power = 3
-tax = 1.7000000000000006
+tax = 2.300000000000001
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -44,7 +44,8 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_yt56j")
-money = 2145
-increment = 210
-autoCollect = 44
+money = 142738
+increment = 230
+autoCollect = 60
+collectSpeed = 1.5000000000000009
 shopListData = SubResource("Resource_pbqe1")

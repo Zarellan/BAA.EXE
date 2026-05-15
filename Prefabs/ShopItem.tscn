@@ -3,11 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="1_s46mk"]
 [ext_resource type="Script" uid="uid://cwxcmuxj4cp8" path="res://Scripts/Shop/ShopItem.gd" id="1_vpf6l"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_f7n8r"]
+[ext_resource type="PackedScene" uid="uid://xlvoesewx06k" path="res://Prefabs/ParticleShop.tscn" id="4_jdor1"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_s46mk"]
 
 [node name="ShopItem" type="Control" unique_id=2083889885]
-clip_contents = true
 custom_minimum_size = Vector2(900, 163)
 layout_mode = 3
 anchors_preset = 1
@@ -18,6 +18,7 @@ offset_bottom = 163.0
 grow_horizontal = 0
 pivot_offset = Vector2(900, 0)
 script = ExtResource("1_vpf6l")
+particle = ExtResource("4_jdor1")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)
@@ -91,6 +92,7 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Price" type="RichTextLabel" parent="Holder" unique_id=1602445355]
+clip_contents = false
 layout_mode = 0
 offset_left = 15.0
 offset_top = 28.0
@@ -113,9 +115,9 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 [node name="Level" type="RichTextLabel" parent="Holder" unique_id=1208071378]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 20.999998
+offset_left = 19.999998
 offset_top = -10.000001
-offset_right = 187.0
+offset_right = 186.0
 offset_bottom = 98.0
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(83, 69.5)
@@ -130,3 +132,10 @@ _max_size = 81
 _current_font_size = 81
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="ParticlePlace" type="Control" parent="Holder" unique_id=1111193086]
+anchors_preset = 0
+offset_left = 95.0
+offset_top = 82.0
+offset_right = 135.0
+offset_bottom = 122.0

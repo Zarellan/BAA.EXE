@@ -10,6 +10,12 @@
 [ext_resource type="Script" uid="uid://crrxb5hi3hyws" path="res://Scripts/Shop/ShopListInit.gd" id="7_m14hk"]
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="8_v5bxn"]
 [ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="9_56xbq"]
+[ext_resource type="Texture2D" uid="uid://dgkornijck721" path="res://Sprites/Shears/New Piskel (1).png" id="11_56xbq"]
+[ext_resource type="Script" uid="uid://ci0yi1g364a02" path="res://Scripts/Mouse/ShearsEffect.gd" id="11_410ju"]
+[ext_resource type="Texture2D" uid="uid://c6ddcvbi41kt3" path="res://Sprites/Shears/New Piskel (2).png" id="12_pbqe1"]
+[ext_resource type="Script" uid="uid://cge6w6kvhui0r" path="res://Scripts/Pause/PauseScript.gd" id="14_67qwo"]
+[ext_resource type="Script" uid="uid://dagu34l5k4x0f" path="res://Scripts/Pause/SettingsScript.gd" id="15_d3uyy"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="16_joy2m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r47l"]
 size = Vector2(116.5, 93.5)
@@ -86,8 +92,8 @@ anim_offset_max = 1.0
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
 script = ExtResource("8_v5bxn")
-title = "Raise clicker"
-description = "improve the clicker by [wave amp=30.0 freq=4.0 connected=0]10[/wave]"
+title = "Improve Shear"
+description = "improve the wool collect by [wave amp=30.0 freq=4.0 connected=0]10[/wave]"
 price = 25
 power = 1
 tax = 1.05
@@ -119,15 +125,20 @@ script = ExtResource("9_56xbq")
 items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_410ju"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_67qwo"]
+
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
-[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part") groups=["Sheep"]]
+[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part", "mouseControl") groups=["Sheep"]]
 position = Vector2(132, 721)
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_0r47l")
 moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/Money_Counter")
 textMoneyRev = NodePath("../Control/CanvasLayer/TextRev")
 part = NodePath("../GPUParticles2D")
+mouseControl = NodePath("../Control/CanvasLayer/Mouse")
 metadata/_edit_group_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sheep" unique_id=1741717021]
@@ -165,7 +176,7 @@ process_material = SubResource("ParticleProcessMaterial_2js75")
 layout_mode = 3
 anchors_preset = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=699005217]
+[node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=699005217 groups=["UI"]]
 
 [node name="WoolCounter" type="Control" parent="Control/CanvasLayer" unique_id=972502790]
 layout_mode = 3
@@ -234,12 +245,218 @@ scroll_hint_mode = 1
 tile_scroll_hint = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer/Shop/ScrollContainer" unique_id=1687245508]
-clip_contents = true
 layout_direction = 2
 layout_mode = 2
+
+[node name="Mouse" type="Control" parent="Control/CanvasLayer" unique_id=1630782413]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.00003
+offset_top = -20.000122
+offset_right = 23.99997
+offset_bottom = 19.999878
+rotation = -1.5707964
+scale = Vector2(2.55, 2.55)
+pivot_offset = Vector2(16, 20)
+mouse_filter = 2
+script = ExtResource("11_410ju")
+metadata/_edit_group_ = true
+
+[node name="Shear1" type="TextureRect" parent="Control/CanvasLayer/Mouse" unique_id=624766858]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -40.0
+offset_right = 31.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(29, 40)
+mouse_filter = 2
+texture = ExtResource("11_56xbq")
+
+[node name="Shear2" type="TextureRect" parent="Control/CanvasLayer/Mouse" unique_id=1025945393]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -40.0
+offset_right = 31.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(29, 40)
+mouse_filter = 2
+texture = ExtResource("12_pbqe1")
+
+[node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -720.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("14_67qwo")
+settings = NodePath("../Settings")
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/PauseMenu" unique_id=305637214]
+modulate = Color(0.5803922, 0.5803922, 0.5803922, 0.93333334)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.49988
+offset_top = -236.0
+offset_right = 195.49988
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("CanvasTexture_410ju")
+
+[node name="Resume" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=1396689202]
+layout_mode = 0
+offset_left = 506.0
+offset_top = 190.0
+offset_right = 772.0
+offset_bottom = 274.0
+theme_override_font_sizes/font_size = 55
+text = "Resume"
+
+[node name="Settings" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=1477876223]
+layout_mode = 0
+offset_left = 507.0
+offset_top = 284.0
+offset_right = 773.0
+offset_bottom = 368.0
+theme_override_font_sizes/font_size = 55
+text = "Settings"
+
+[node name="Save" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=991866533]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 378.0
+offset_right = 776.0
+offset_bottom = 462.0
+theme_override_font_sizes/font_size = 55
+text = "Save Data
+"
+
+[node name="Exit" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=1618380337]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 481.0
+offset_right = 774.0
+offset_bottom = 565.0
+theme_override_font_sizes/font_size = 55
+text = "Exit
+"
+
+[node name="Settings" type="Control" parent="Control/CanvasLayer" unique_id=498215830 node_paths=PackedStringArray("pauseMenu")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -720.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_d3uyy")
+pauseMenu = NodePath("../PauseMenu")
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings" unique_id=258928493]
+modulate = Color(0.50980395, 0.50980395, 0.50980395, 0.8745098)
+layout_mode = 0
+offset_left = 393.0
+offset_top = 151.0
+offset_right = 881.0
+offset_bottom = 581.0
+texture = SubResource("CanvasTexture_67qwo")
+
+[node name="SoundtrackSlider" type="HSlider" parent="Control/CanvasLayer/Settings" unique_id=1990043020]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 223.0
+offset_right = 587.336
+offset_bottom = 259.0
+scale = Vector2(2.515, 2.515)
+
+[node name="AudioSlider" type="HSlider" parent="Control/CanvasLayer/Settings" unique_id=806989973]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 338.48
+offset_right = 587.336
+offset_bottom = 374.48007
+scale = Vector2(2.515, 2.515)
+
+[node name="Back" type="Button" parent="Control/CanvasLayer/Settings" unique_id=1770219669]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 470.0
+offset_right = 779.0
+offset_bottom = 544.0
+theme_override_font_sizes/font_size = 51
+text = "Back"
+
+[node name="SoundtrackVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings" unique_id=1987295276]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 184.0
+offset_right = 821.0
+offset_bottom = 244.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 31
+text = "Track Volume:"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 31
+_current_font_size = 31
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="AudioVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings" unique_id=1888958600]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 296.0
+offset_right = 823.0
+offset_bottom = 356.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 31
+text = "Audio Volume:"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 31
+_current_font_size = 31
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
 
 [connection signal="mouse_entered" from="Sheep/StaticBody2D" to="Sheep" method="_on_static_body_2d_mouse_entered"]
+[connection signal="mouse_entered" from="Sheep/StaticBody2D" to="Control/CanvasLayer/Mouse" method="_on_static_body_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Sheep" method="_on_static_body_2d_mouse_exited"]
+[connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Control/CanvasLayer/Mouse" method="_on_static_body_2d_mouse_exited"]
+[connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Resume" to="Control/CanvasLayer/PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Settings" to="Control/CanvasLayer/PauseMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Save" to="Control/CanvasLayer/PauseMenu" method="_on_save_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Exit" to="Control/CanvasLayer/PauseMenu" method="_on_exit_pressed"]
+[connection signal="value_changed" from="Control/CanvasLayer/Settings/SoundtrackSlider" to="Control/CanvasLayer/Settings" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="Control/CanvasLayer/Settings/AudioSlider" to="Control/CanvasLayer/Settings" method="_on_audio_slider_value_changed"]
+[connection signal="pressed" from="Control/CanvasLayer/Settings/Back" to="Control/CanvasLayer/Settings" method="_on_back_pressed"]

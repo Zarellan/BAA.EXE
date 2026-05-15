@@ -8,7 +8,7 @@ class_name ShopClass
 @export var power:ShopItem.Powers
 @export var tax:float
 @export var taxInc:float
-
+@export var canBuy := true
 func _init(titl := "", desc := "" , pric := 20, po = ShopItem.Powers.none,tx:int = 1,txInc:int = 0):
 	title = titl
 	description = desc

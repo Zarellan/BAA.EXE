@@ -1,7 +1,7 @@
 extends Node
 class_name ResourceUtil
 
-static var saveTo:String = "user://" # swap to user:// once finished
+static var saveTo:String = "res://" # swap to user:// once finished
 static var type = ".tres"
 
 static func SaveResource(object, path:String, directory:String):

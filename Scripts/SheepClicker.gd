@@ -4,6 +4,8 @@ class_name Sheep
 @export var moneyText:Control
 @export var textMoneyRev:Control
 @export var part:GPUParticles2D
+@export var mouseControl:ShearsEffect
+
 var isInside = false
 
 
@@ -48,8 +50,9 @@ func Pressed():
 		GameHandler.AddMoney()
 		MoneyCollectedText()
 		(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.saveData.increment)
-		ParticleManager.PlayParticle(part,3)
-		GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 6,randf_range(0.90,1.10))
+		ParticleManager.PlayParticleOv(part,3)
+		GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 12,randf_range(0.90,1.10))
+		mouseControl.WoolCollected()
 		#TweenTextMoney()
 		if (TweenUtils.isAlive(scaleYtween)):
 			scaleYtween.stop()

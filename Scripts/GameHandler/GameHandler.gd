@@ -15,7 +15,7 @@ func _ready() -> void:
 	saveData = GameSaveData.new()
 	GameHandler.LoadAllData()
 	timerSaveCooldown = CreateTimer(3, _on_save_timer_timeout)
-	timerAutoCollector = CreateTimer(1.5, NowCollect, false)
+	timerAutoCollector = CreateTimer(saveData.collectSpeed, NowCollect, false)
 	timerAutoCollector.start()
 	
 	sheep = get_tree().get_first_node_in_group("Sheep")
@@ -63,8 +63,9 @@ func _on_save_timer_timeout():
 	canSave = true
 
 func NowCollect():
-	if (saveData.autoCollect < 0):
+	if (saveData.autoCollect <= 0):
 		return
 	sheep.MoneyCollectedText()
 	saveData.money += saveData.autoCollect
+	timerAutoCollector.wait_time = saveData.collectSpeed
 	SaveAllData()
