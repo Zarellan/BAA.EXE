@@ -27,7 +27,10 @@ var originalPosXMoney
 
 @export var coins: int = 0
 
+var frequencyWavePrice:ValueSaver = ValueSaver.new()
+
 func _ready() -> void:
+	frequencyWavePrice.number = 0
 	originalPosXMoney = get_node("Holder/Price").position.x
 	moneyNode = get_node("Holder/Price")
 	levelNode = get_node("Holder/Level")
@@ -41,7 +44,7 @@ func _ready() -> void:
 func CustomItemText(): #godot doesn't support variable inside serialize inspector, so I have to set it manually
 	match shopData.power:
 		Powers.fasterAutoCollector:
-			descriptionNode.text = "the collector will gain every [wave amp=30.0 freq=4.0]"\
+			descriptionNode.text = "the collector will gain every [wave amp=25.0 freq=10.0]"\
 			+ str(GameHandler.saveData.collectSpeed) + "[/wave] seconds"
 
 func SetBasedOnLevel():
@@ -49,6 +52,11 @@ func SetBasedOnLevel():
 		moneyNode.position.y = 61.0
 		moneyNode.scale = Vector2(0.8,0.8)
 		levelNode.modulate.a = 1
+	if (!shopData.canBuy):
+		levelNode.position.y = 28
+		levelNode.scale = Vector2(1,1)
+		moneyNode.modulate.a = 0
+
 
 func set_item(shopDat:ShopClass):
 	shopData = shopDat
@@ -56,6 +64,7 @@ func set_item(shopDat:ShopClass):
 func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
+	moneyNode.text = "[wave amp=%d freq=10]%s%d[/wave]" % [frequencyWavePrice.number, "$",shopData.price]
 	pass
 
 func Hovered():
@@ -79,7 +88,8 @@ func Hovered():
 		isInside = false
 
 func ModifyTexts():
-	moneyNode.text = "$" + str(shopData.price)
+	#moneyNode.text = "$" + str(shopData.price)
+	moneyNode.text = "[wave amp=%d freq=5]%s%d[/wave]" % [frequencyWavePrice.number, "$",shopData.price]
 	if (shopData.canBuy):
 		levelNode.text = "lv:"+ str(shopData.level)
 	else:
@@ -91,13 +101,13 @@ var colorTween:Tween
 func TweenColor(col:Color):
 	TweenUtils.StopTween(colorTween)
 	moneyNode.modulate = col
-	colorTween = TweenUtils.tweenColor(moneyNode,Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
+	colorTween = TweenUtils.tweenColorRGB(moneyNode,Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
 
 var colorTweenLevel
 func TweenColorLevel(col:Color):
 	TweenUtils.StopTween(colorTweenLevel)
 	levelNode.modulate = col
-	colorTweenLevel = TweenUtils.tweenColor(levelNode,Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
+	colorTweenLevel = TweenUtils.tweenColorRGB(levelNode,Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
 
 var tweenXtext:Tween
 
@@ -110,7 +120,13 @@ func PowersAct():
 		Powers.fasterAutoCollector:
 			GameHandler.saveData.collectSpeed -= 0.15
 			if (GameHandler.saveData.collectSpeed <= 1): # custom level max
+				TweenLevelMax()
 				shopData.canBuy = false
+
+func TweenLevelMax():
+	TweenUtils.tweenY(levelNode,28.0,0.3,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenScale(levelNode,Vector2(1,1),0.3,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenAlpha(moneyNode,0,0.3,TweenUtils.Ease.linear)
 
 var tweenXtextLevel:Tween
 func Bought():
@@ -123,14 +139,16 @@ func Bought():
 			TweenColorLevel(Color(1,0,0,1))
 			levelNode.position.x = originalPosXMoney - 7
 			TweenUtils.StopTween(tweenXtextLevel)
-			tweenXtextLevel = TweenUtils.tweenX(levelNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
+			tweenXtextLevel = TweenUtils.tweenX(levelNode,originalPosXMoney,2,TweenUtils.Ease.OutCirc)
 			return
 		if (GameHandler.saveData.money >= shopData.price):
 			PowersAct()
 			GameHandler.saveData.money -= shopData.price
 			shopData.price = int(floor(shopData.price * shopData.tax))
 			shopData.tax += shopData.taxInc
-			TweenColor(Color(0.0, 0.905, 0.2, 1.0))
+			TweenColor(Color(0.0, 0.905, 0.2))
+			frequencyWavePrice.number = 40
+			TweenUtils.tweenNumber(self,frequencyWavePrice,0,0.2,TweenUtils.Ease.linear)
 			if shopData.level == 0:
 				TweenUtils.tweenY(moneyNode,61.0,0.3,TweenUtils.Ease.OutCirc)
 				TweenUtils.tweenScale(moneyNode,Vector2(0.8,0.8),0.3,TweenUtils.Ease.OutCirc)
@@ -146,4 +164,4 @@ func Bought():
 			moneyNode.position.x = originalPosXMoney - 7
 			TweenUtils.StopTween(tweenXtext)
 			tweenXtext = TweenUtils.tweenX(moneyNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
-			TweenColor(Color(1.0, 0.0, 0.0, 1.0))
+			TweenColor(Color(1.0, 0.0, 0.0))

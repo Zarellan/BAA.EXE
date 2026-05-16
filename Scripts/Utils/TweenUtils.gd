@@ -62,9 +62,32 @@ static func tweenColor(object,position,duration,eas):
 	EasingType(step, eas)
 	return tween
 
+static func tweenColorRGB(object, color, duration, eas):
+	var tween = object.create_tween()
+	var currentColor = object.modulate
+	var step = tween.tween_method(func(col):
+		object.modulate.r = col.r
+		object.modulate.g = col.g
+		object.modulate.b = col.b
+	, currentColor, color, duration)
+	EasingType(step, eas)
+	return tween
+
 static func tweenAlpha(object,position,duration,eas):
 	var tween = object.create_tween()
 	var step = tween.tween_property(object, "modulate:a", position, duration)
+	EasingType(step, eas)
+	return tween
+	
+static func tweenNumber(owner, objectValue:ValueSaver,value,duration,eas):
+	var tween = owner.create_tween()
+	var currentInt = objectValue.number
+
+	var step = tween.tween_method(func(integral):
+		if is_instance_valid(objectValue):
+			objectValue.number = integral
+	, currentInt, value, duration)
+
 	EasingType(step, eas)
 	return tween
 

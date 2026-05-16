@@ -5,6 +5,8 @@ extends Node
 
 var sheep:Sheep
 
+var globalDelta:float
+
 var timerSaveCooldown:Timer
 var canSave = true
 var dirtySave := false
@@ -23,6 +25,8 @@ func _ready() -> void:
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
 	pass # Replace with function body.
 
+func _process(delta: float) -> void:
+	globalDelta = delta
 
 func CreateTimer(duration, delegate, oneshot = true) -> Timer:
 	var tim = Timer.new()

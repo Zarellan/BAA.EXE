@@ -1,51 +1,51 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3]
+[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://r1cgwxs8l30w"]
 
-[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_yt56j"]
-[ext_resource type="Script" path="res://Scripts/Shop/ShopClass.gd" id="2_441t2"]
-[ext_resource type="Script" path="res://Scripts/Shop/ShopList.gd" id="3_8n05o"]
+[ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_yt56j"]
+[ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_yt56j"]
+[ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="3_441t2"]
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
-script = ExtResource("2_441t2")
+script = ExtResource("2_yt56j")
 title = "Improve Shear"
-description = "improve the wool collect by [wave amp=30.0 freq=4.0 connected=0]10[/wave]"
-price = 17537
-level = 22
+description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]10[/wave]"
+price = 6327
+level = 20
 power = 1
-tax = 1.71
+tax = 1.6500000000000008
 taxInc = 0.03
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_56xbq"]
-script = ExtResource("2_441t2")
+script = ExtResource("2_yt56j")
 title = "Auto collect"
-description = "now you will auto collect +4"
-price = 33126
-level = 15
+description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+4[/wave]"
+price = 14922
+level = 14
 power = 2
-tax = 2.300000000000001
+tax = 2.220000000000001
 taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_410ju"]
-script = ExtResource("2_441t2")
+script = ExtResource("2_yt56j")
 title = "Faster Auto Collect"
 description = "make the auto collector collects faster"
-price = 27832
-level = 10
+price = 12767
+level = 9
 power = 3
-tax = 2.300000000000001
+tax = 2.180000000000001
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_pbqe1"]
-script = ExtResource("3_8n05o")
-items = Array[ExtResource("2_441t2")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju")])
+script = ExtResource("3_441t2")
+items = Array[ExtResource("2_yt56j")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_yt56j")
-money = 142738
-increment = 230
-autoCollect = 60
-collectSpeed = 1.5000000000000009
+money = 727
+increment = 210
+autoCollect = 56
+collectSpeed = 1.6500000000000008
 shopListData = SubResource("Resource_pbqe1")

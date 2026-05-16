@@ -114,6 +114,7 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Level" type="RichTextLabel" parent="Holder" unique_id=1208071378]
 modulate = Color(1, 1, 1, 0)
+clip_contents = false
 layout_mode = 0
 offset_left = 19.999998
 offset_top = -10.000001

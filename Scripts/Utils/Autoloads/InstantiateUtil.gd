@@ -26,6 +26,12 @@ func Instantiate(packed_scene: PackedScene, parent: Node, safety = true):
 	
 	return instance
 
+func AddInCurrentScene(child, safety = false):
+	if (safety):
+		get_tree().current_scene.add_child.call_deferred(child)
+	else:
+		get_tree().current_scene.add_child(child)
+
 func InstantiateNode(node: Node, parent: Node, safety = true):
 	if not node:
 		push_error("no packscene exist")
