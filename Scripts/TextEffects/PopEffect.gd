@@ -23,5 +23,7 @@ func _process_custom_fx(char_fx):
 	# visible char lerps toward 0
 	var t = clamp(time_appear[char_fx.relative_index] / 0.15, 0.0, 1.0)
 	char_fx.offset.y = lerp(-5.0, 0.0, t)
-	print("hello")
 	return true
+#char_fx.offset.y = lerp(-5.0, 0.0,
+	#sqrt(1.0 - pow(t - 1.0, 2.0))
+#)

@@ -134,7 +134,6 @@ func Bought():
 		if (shopData.power == Powers.none):
 			push_error("no power added")
 			return
-		print(shopData.canBuy)
 		if (!shopData.canBuy):
 			TweenColorLevel(Color(1,0,0,1))
 			levelNode.position.x = originalPosXMoney - 7

@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://r1cgwxs8l30w"]
+[gd_resource type="Resource" script_class="GameSaveData" format=3]
 
-[ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_yt56j"]
-[ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_yt56j"]
-[ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="3_441t2"]
+[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_yt56j"]
+[ext_resource type="Script" path="res://Scripts/Shop/ShopClass.gd" id="2_yt56j"]
+[ext_resource type="Script" path="res://Scripts/Shop/ShopList.gd" id="3_441t2"]
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
 script = ExtResource("2_yt56j")
@@ -30,10 +30,10 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_yt56j")
 title = "Faster Auto Collect"
 description = "make the auto collector collects faster"
-price = 12767
-level = 9
+price = 27832
+level = 10
 power = 3
-tax = 2.180000000000001
+tax = 2.300000000000001
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -44,8 +44,8 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_yt56j")
-money = 727
+money = 31220
 increment = 210
 autoCollect = 56
-collectSpeed = 1.6500000000000008
+collectSpeed = 1.5000000000000009
 shopListData = SubResource("Resource_pbqe1")
