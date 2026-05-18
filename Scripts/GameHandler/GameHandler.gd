@@ -69,7 +69,8 @@ func _on_save_timer_timeout():
 func NowCollect():
 	if (saveData.autoCollect <= 0):
 		return
-	sheep.MoneyCollectedText()
+	if (sheep != null):
+		sheep.MoneyCollectedText()
 	saveData.money += saveData.autoCollect
 	timerAutoCollector.wait_time = saveData.collectSpeed
 	SaveAllData()

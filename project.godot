@@ -41,6 +41,10 @@ run/main_run_args="--rendering-driver opengl3"
 
 enabled=PackedStringArray("res://addons/font_auto_size_labels/plugin.cfg", "res://addons/indentationsupport/plugin.cfg", "res://addons/linux_driver_plugins/plugin.cfg")
 
+[gui]
+
+theme/custom_font="uid://kbrkbijtwgdt"
+
 [input]
 
 LeftMouse={
@@ -56,4 +60,5 @@ LeftMouse={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"

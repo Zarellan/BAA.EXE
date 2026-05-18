@@ -18,8 +18,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if DeviceCheckerUtil.IsUsingPhone(): # if using phone, it's annoying to make shear appear in random place
+		visible = false
 		return
-	if entered:
+	if entered && !PauseScript.paused:
 		position = get_viewport().get_mouse_position() - pivot_offset
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		visible = true

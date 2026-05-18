@@ -40,6 +40,7 @@ grow_vertical = 2
 pivot_offset = Vector2(450, 81.5)
 
 [node name="ItemImage" type="TextureRect" parent="Holder" unique_id=172852597]
+texture_filter = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -57,58 +58,60 @@ texture = ExtResource("1_s46mk")
 expand_mode = 1
 
 [node name="Title" type="RichTextLabel" parent="Holder" unique_id=102797527]
+clip_contents = false
 layout_mode = 0
 offset_left = 193.0
 offset_top = 22.0
 offset_right = 696.0
 offset_bottom = 77.0
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 38
+theme_override_font_sizes/normal_font_size = 41
 bbcode_enabled = true
 text = "place holder"
 scroll_active = false
 script = ExtResource("3_f7n8r")
-_max_size = 38
-_current_font_size = 38
+_max_size = 41
+_current_font_size = 41
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Description" type="RichTextLabel" parent="Holder" unique_id=1277112873]
+clip_contents = false
 layout_mode = 0
 offset_left = 193.0
 offset_top = 82.0
 offset_right = 688.0
 offset_bottom = 145.0
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/normal_font_size = 40
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "this is placeHolder"
 scroll_active = false
 script = ExtResource("3_f7n8r")
-_max_size = 40
+_max_size = 26
 _outline_ratio = 0.1
-_current_font_size = 40
+_current_font_size = 26
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Price" type="RichTextLabel" parent="Holder" unique_id=1602445355]
 clip_contents = false
 layout_mode = 0
-offset_left = 15.0
-offset_top = 28.0
-offset_right = 181.0
-offset_bottom = 136.0
-pivot_offset = Vector2(83, 69.5)
-theme_override_constants/outline_size = 16
-theme_override_font_sizes/normal_font_size = 81
+offset_left = 13.0
+offset_top = 53.0
+offset_right = 179.0
+offset_bottom = 107.0
+pivot_offset = Vector2(83, 30.215)
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 54
 bbcode_enabled = true
 text = "$50
 "
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("3_f7n8r")
-_max_size = 81
-_current_font_size = 81
+_max_size = 54
+_current_font_size = 54
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -116,21 +119,21 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 modulate = Color(1, 1, 1, 0)
 clip_contents = false
 layout_mode = 0
-offset_left = 19.999998
-offset_top = -10.000001
-offset_right = 186.0
-offset_bottom = 98.0
+offset_left = 5.000001
+offset_top = 17.0
+offset_right = 189.25
+offset_bottom = 64.625
 scale = Vector2(0.8, 0.8)
-pivot_offset = Vector2(83, 69.5)
-theme_override_constants/outline_size = 16
-theme_override_font_sizes/normal_font_size = 81
+pivot_offset = Vector2(83, 26.4)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
 text = "lv:1"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("3_f7n8r")
 _max_size = 81
-_current_font_size = 81
+_current_font_size = 46
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 

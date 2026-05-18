@@ -29,12 +29,19 @@ var originalPosXMoney
 
 var frequencyWavePrice:ValueSaver = ValueSaver.new()
 
+var centerYdef = 53.0
+var centerYdefLevel = 28.0
+
+var priceLevelYdef = 87.0
+var levelMaxYdef = 53.0
+
 func _ready() -> void:
 	frequencyWavePrice.number = 0
 	originalPosXMoney = get_node("Holder/Price").position.x
 	moneyNode = get_node("Holder/Price")
 	levelNode = get_node("Holder/Level")
 	get_node("Holder/Title").text = shopData.title
+	get_node("Holder/ItemImage").texture = shopData.image
 	descriptionNode = get_node("Holder/Description")
 	descriptionNode.text = shopData.description
 	ModifyTexts()
@@ -49,11 +56,11 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 
 func SetBasedOnLevel():
 	if (shopData.level > 0):
-		moneyNode.position.y = 61.0
+		moneyNode.position.y = priceLevelYdef
 		moneyNode.scale = Vector2(0.8,0.8)
 		levelNode.modulate.a = 1
 	if (!shopData.canBuy):
-		levelNode.position.y = 28
+		levelNode.position.y = levelMaxYdef
 		levelNode.scale = Vector2(1,1)
 		moneyNode.modulate.a = 0
 
@@ -124,7 +131,7 @@ func PowersAct():
 				shopData.canBuy = false
 
 func TweenLevelMax():
-	TweenUtils.tweenY(levelNode,28.0,0.3,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenY(levelNode,centerYdef,0.3,TweenUtils.Ease.OutCirc)
 	TweenUtils.tweenScale(levelNode,Vector2(1,1),0.3,TweenUtils.Ease.OutCirc)
 	TweenUtils.tweenAlpha(moneyNode,0,0.3,TweenUtils.Ease.linear)
 
@@ -149,7 +156,7 @@ func Bought():
 			frequencyWavePrice.number = 40
 			TweenUtils.tweenNumber(self,frequencyWavePrice,0,0.2,TweenUtils.Ease.linear)
 			if shopData.level == 0:
-				TweenUtils.tweenY(moneyNode,61.0,0.3,TweenUtils.Ease.OutCirc)
+				TweenUtils.tweenY(moneyNode,priceLevelYdef,0.3,TweenUtils.Ease.OutCirc)
 				TweenUtils.tweenScale(moneyNode,Vector2(0.8,0.8),0.3,TweenUtils.Ease.OutCirc)
 				TweenUtils.tweenAlpha(levelNode,1,0.3,TweenUtils.Ease.linear)
 			shopData.level += 1

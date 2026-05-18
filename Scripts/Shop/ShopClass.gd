@@ -2,6 +2,7 @@ extends Resource
 class_name ShopClass
 
 @export var title: String
+@export var image:Texture2D
 @export_multiline var description: String
 @export var price:int
 @export var level:int
@@ -9,8 +10,12 @@ class_name ShopClass
 @export var tax:float
 @export var taxInc:float
 @export var canBuy := true
-func _init(titl := "", desc := "" , pric := 20, po = ShopItem.Powers.none,tx:int = 1,txInc:int = 0):
+func _init(titl := "",img:Texture2D = null, desc := "" , pric := 20, po = ShopItem.Powers.none,tx:int = 1,txInc:int = 0):
 	title = titl
+	if (img == null):
+		image = load("res://icon.svg")
+	else:
+		image = img
 	description = desc
 	price = pric
 	level = 0

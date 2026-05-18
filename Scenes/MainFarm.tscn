@@ -2,14 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dvkkcbj3lxi3e" path="res://Scripts/SheepClicker.gd" id="1_0r47l"]
 [ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="1_wy1g6"]
-[ext_resource type="Script" uid="uid://dy6flq3cdngdk" path="res://Scripts/Money/Money_counter.gd" id="3_2o3fe"]
 [ext_resource type="Texture2D" uid="uid://bfktlya4nix8w" path="res://Sprites/Sheep/wools.png" id="3_4gutc"]
 [ext_resource type="Script" uid="uid://33bljhcysagw" path="res://Scripts/Money/TextMoneyRev.gd" id="4_4g1jp"]
+[ext_resource type="Script" uid="uid://d8n5p6oxk47t" path="res://Scripts/Money/MoneyCounter.gd" id="5_5xh03"]
 [ext_resource type="PackedScene" uid="uid://cc2lvqg4m2iyj" path="res://Prefabs/ShopItem.tscn" id="6_2js75"]
 [ext_resource type="PackedScene" uid="uid://v16m5xg2k4dk" path="res://Prefabs/money_reveal.tscn" id="6_4gutc"]
 [ext_resource type="Script" uid="uid://crrxb5hi3hyws" path="res://Scripts/Shop/ShopListInit.gd" id="7_m14hk"]
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="8_v5bxn"]
 [ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="9_56xbq"]
+[ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="9_cxla1"]
+[ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="10_rg6ea"]
+[ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="10_ujam8"]
 [ext_resource type="Texture2D" uid="uid://dgkornijck721" path="res://Sprites/Shears/New Piskel (1).png" id="11_56xbq"]
 [ext_resource type="Script" uid="uid://ci0yi1g364a02" path="res://Scripts/Mouse/ShearsEffect.gd" id="11_410ju"]
 [ext_resource type="Texture2D" uid="uid://c6ddcvbi41kt3" path="res://Sprites/Shears/New Piskel (2).png" id="12_pbqe1"]
@@ -93,6 +96,7 @@ anim_offset_max = 1.0
 [sub_resource type="Resource" id="Resource_v5bxn"]
 script = ExtResource("8_v5bxn")
 title = "Improve Shear"
+image = ExtResource("9_cxla1")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]10[/wave]"
 price = 25
 power = 1
@@ -103,6 +107,7 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 [sub_resource type="Resource" id="Resource_56xbq"]
 script = ExtResource("8_v5bxn")
 title = "Auto collect"
+image = ExtResource("10_ujam8")
 description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+4[/wave]"
 price = 25
 power = 2
@@ -113,6 +118,7 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 [sub_resource type="Resource" id="Resource_410ju"]
 script = ExtResource("8_v5bxn")
 title = "Faster Auto Collect"
+image = ExtResource("10_rg6ea")
 description = "make the auto collector collects faster"
 price = 250
 power = 3
@@ -135,7 +141,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 position = Vector2(132, 721)
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_0r47l")
-moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/Money_Counter")
+moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter/Script")
 textMoneyRev = NodePath("../Control/CanvasLayer/TextRev")
 part = NodePath("../GPUParticles2D")
 mouseControl = NodePath("../Control/CanvasLayer/Mouse")
@@ -175,6 +181,7 @@ process_material = SubResource("ParticleProcessMaterial_2js75")
 [node name="Control" type="Control" parent="." unique_id=2002302030]
 layout_mode = 3
 anchors_preset = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=699005217 groups=["UI"]]
 
@@ -184,6 +191,7 @@ anchors_preset = 0
 pivot_offset = Vector2(1, 0)
 size_flags_horizontal = 0
 size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/WoolCounter" unique_id=428712004]
 layout_mode = 1
@@ -191,16 +199,31 @@ offset_right = 283.0
 offset_bottom = 61.0
 pivot_offset = Vector2(20, 20)
 texture = SubResource("CanvasTexture_0r47l")
+metadata/_edit_use_anchors_ = true
 
-[node name="Money_Counter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=1335292891]
+[node name="MoneyCounter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=2131891367]
 layout_mode = 0
 offset_right = 283.0
 offset_bottom = 61.0
-pivot_offset = Vector2(0, 30)
+pivot_offset_ratio = Vector2(0, 0.5)
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 41
+theme_override_constants/line_separation = 1
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-script = ExtResource("3_2o3fe")
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 32
+_outline_ratio = 0.0
+_current_font_size = 32
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Script" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter" unique_id=1097378439]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_5xh03")
 
 [node name="TextRev" type="Control" parent="Control/CanvasLayer" unique_id=1274630093 node_paths=PackedStringArray("sheep")]
 layout_mode = 3
@@ -218,6 +241,7 @@ grow_vertical = 2
 script = ExtResource("4_4g1jp")
 sheep = NodePath("../../../Sheep/StaticBody2D")
 text = ExtResource("6_4gutc")
+metadata/_edit_use_anchors_ = true
 
 [node name="Shop" type="Control" parent="Control/CanvasLayer" unique_id=1298681489]
 layout_mode = 3
@@ -335,7 +359,7 @@ offset_left = 506.0
 offset_top = 190.0
 offset_right = 772.0
 offset_bottom = 274.0
-theme_override_font_sizes/font_size = 55
+theme_override_font_sizes/font_size = 43
 text = "Resume"
 
 [node name="Settings" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=1477876223]
@@ -344,7 +368,7 @@ offset_left = 507.0
 offset_top = 284.0
 offset_right = 773.0
 offset_bottom = 368.0
-theme_override_font_sizes/font_size = 55
+theme_override_font_sizes/font_size = 32
 text = "Settings"
 
 [node name="Save" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=991866533]
@@ -353,7 +377,7 @@ offset_left = 505.0
 offset_top = 378.0
 offset_right = 776.0
 offset_bottom = 462.0
-theme_override_font_sizes/font_size = 55
+theme_override_font_sizes/font_size = 29
 text = "Save Data
 "
 
@@ -414,36 +438,38 @@ theme_override_font_sizes/font_size = 51
 text = "Back"
 
 [node name="SoundtrackVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings" unique_id=1987295276]
+clip_contents = false
 layout_mode = 0
 offset_left = 424.0
 offset_top = 184.0
 offset_right = 821.0
 offset_bottom = 244.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="AudioVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings" unique_id=1888958600]
+clip_contents = false
 layout_mode = 0
 offset_left = 426.0
 offset_top = 296.0
 offset_right = 823.0
 offset_bottom = 356.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
