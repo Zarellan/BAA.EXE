@@ -1,21 +1,21 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://dp1frp2vrxkl8"]
+[gd_resource type="Resource" script_class="GameSaveData" format=3]
 
-[ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_0mqfk"]
-[ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_35mi1"]
-[ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="3_5045p"]
-[ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="4_npldj"]
-[ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="5_04lpc"]
-[ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="6_hantp"]
+[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_0mqfk"]
+[ext_resource type="Script" path="res://Scripts/Shop/ShopClass.gd" id="2_35mi1"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Collector.png" id="3_5045p"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/WoolAuto.png" id="4_npldj"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/TimeCollect.png" id="5_04lpc"]
+[ext_resource type="Script" path="res://Scripts/Shop/ShopList.gd" id="6_hantp"]
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
 script = ExtResource("2_35mi1")
 title = "Improve Shear"
 image = ExtResource("3_5045p")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]10[/wave]"
-price = 29988
-level = 23
+price = 31
+level = 3
 power = 1
-tax = 1.7400000000000004
+tax = 1.1400000000000001
 taxInc = 0.03
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -24,10 +24,10 @@ script = ExtResource("2_35mi1")
 title = "Auto collect"
 image = ExtResource("4_npldj")
 description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+4[/wave]"
-price = 33126
-level = 15
+price = 27
+level = 1
 power = 2
-tax = 2.300000000000001
+tax = 1.1800000000000002
 taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -36,10 +36,9 @@ script = ExtResource("2_35mi1")
 title = "Faster Auto Collect"
 image = ExtResource("5_04lpc")
 description = "make the auto collector collects faster"
-price = 27832
-level = 10
+price = 250
 power = 3
-tax = 2.3000000000000007
+tax = 1.1
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -50,8 +49,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_0mqfk")
-money = 795
-increment = 240
-autoCollect = 60
-collectSpeed = 1.5000000000000009
+money = 20
+increment = 40
+autoCollect = 4
 shopListData = SubResource("Resource_pbqe1")

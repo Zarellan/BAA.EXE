@@ -20,3 +20,7 @@ func RevealMoney(textMoney = 1):
 	tex.text = "+" + str(textMoney)
 	# Assign to a UI element's global position
 	tex.position = (ui_pos - tex.get_rect().size / 2) + Vector2(randf_range(-60,60),randf_range(-60,60))
+	
+	
+func EventTestAgain():
+	print("it works")

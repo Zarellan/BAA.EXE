@@ -23,6 +23,7 @@ func _ready() -> void:
 	#var loader:ShopList = ResourceLoader.load("user://saver/ShopList.tres") as ShopList
 	#var vc:Vector2 = loader.items[1].vect
 	#print(vc)
+	#($"../Node2D/SimpleEventSystem" as SimpleEventSystem).invoke()
 	pass # Replace with function body.
 
 
