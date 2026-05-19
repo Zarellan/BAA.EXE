@@ -5,6 +5,7 @@ class_name Sheep
 @export var moneyText:Control
 @export var textMoneyRev:Control
 @export var part:GPUParticles2D
+@export var partRare:GPUParticles2D
 @export var mouseControl:ShearsEffect
 
 var isInside = false
@@ -47,7 +48,11 @@ func MoneyCollectedText():
 
 func Pressed():
 	if canPress:
-		GameHandler.AddMoney()
+		if (randf_range(0.0,1.0) < GameHandler.saveData.rareChance):
+			ParticleManager.PlayParticleOv(partRare,1)
+			GameHandler.AddMoneyRare()
+		else:
+			GameHandler.AddMoney()
 		MoneyCollectedText()
 		(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.saveData.increment)
 		ParticleManager.PlayParticleOv(part,3)

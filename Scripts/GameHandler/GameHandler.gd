@@ -61,6 +61,16 @@ func AddMoney():
 		timerSaveCooldown.start()
 		canSave = false
 
+func AddMoneyRare():
+	if (saveData.increment < 0):
+		return
+	saveData.money += saveData.increment * 10
+	dirtySave = true
+	if (canSave):
+		SaveAllData()
+		timerSaveCooldown.start()
+		canSave = false
+
 func _on_save_timer_timeout():
 	if dirtySave:
 		SaveAllData()

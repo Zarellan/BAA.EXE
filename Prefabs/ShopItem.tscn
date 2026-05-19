@@ -4,8 +4,13 @@
 [ext_resource type="Script" uid="uid://cwxcmuxj4cp8" path="res://Scripts/Shop/ShopItem.gd" id="1_vpf6l"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_f7n8r"]
 [ext_resource type="PackedScene" uid="uid://xlvoesewx06k" path="res://Prefabs/ParticleShop.tscn" id="4_jdor1"]
+[ext_resource type="Script" uid="uid://dqhkgfy2b1oo7" path="res://Scripts/TextEffects/FadeColor.gd" id="5_f75f0"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_s46mk"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_x4kgh"]
+script = ExtResource("5_f75f0")
+metadata/_custom_type_script = "uid://dqhkgfy2b1oo7"
 
 [node name="ShopItem" type="Control" unique_id=2083889885]
 custom_minimum_size = Vector2(900, 163)
@@ -65,13 +70,13 @@ offset_top = 22.0
 offset_right = 696.0
 offset_bottom = 77.0
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/normal_font_size = 41
 bbcode_enabled = true
 text = "place holder"
 scroll_active = false
 script = ExtResource("3_f7n8r")
 _max_size = 41
-_current_font_size = 40
+_current_font_size = 41
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -87,6 +92,7 @@ theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "this is placeHolder"
 scroll_active = false
+custom_effects = [SubResource("RichTextEffect_x4kgh")]
 script = ExtResource("3_f7n8r")
 _max_size = 26
 _outline_ratio = 0.1
@@ -102,8 +108,8 @@ offset_top = 53.0
 offset_right = 179.0
 offset_bottom = 107.0
 pivot_offset = Vector2(83, 30.215)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 39
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 54
 bbcode_enabled = true
 text = "$50
 "
@@ -111,7 +117,7 @@ scroll_active = false
 vertical_alignment = 1
 script = ExtResource("3_f7n8r")
 _max_size = 54
-_current_font_size = 39
+_current_font_size = 54
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -125,15 +131,15 @@ offset_right = 189.25
 offset_bottom = 64.625
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(83, 26.4)
-theme_override_constants/outline_size = 7
-theme_override_font_sizes/normal_font_size = 34
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 81
 bbcode_enabled = true
 text = "lv:1"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("3_f7n8r")
 _max_size = 81
-_current_font_size = 34
+_current_font_size = 81
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 

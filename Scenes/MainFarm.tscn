@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://cge6w6kvhui0r" path="res://Scripts/Pause/PauseScript.gd" id="14_67qwo"]
 [ext_resource type="Script" uid="uid://dagu34l5k4x0f" path="res://Scripts/Pause/SettingsScript.gd" id="15_d3uyy"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="16_joy2m"]
+[ext_resource type="Texture2D" uid="uid://cviimgyvwihfo" path="res://Sprites/OptionUIs/New Piskel.png" id="20_5xh03"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r47l"]
 size = Vector2(116.5, 93.5)
@@ -90,6 +91,45 @@ scale_min = 0.29999998
 scale_max = 0.5
 color_ramp = SubResource("GradientTexture1D_m14hk")
 anim_offset_max = 1.0
+turbulence_noise_strength = 3.0
+
+[sub_resource type="Curve" id="Curve_5xh03"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -76.85388), 0.0, 0.0, 0, 0, Vector2(1, 12.134888), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jy1oi"]
+curve = SubResource("Curve_5xh03")
+
+[sub_resource type="Curve" id="Curve_ujam8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.20218581, 0.23595512), 0.0, 0.0, 0, 0, Vector2(1, 0.15730345), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5xh03"]
+curve = SubResource("Curve_ujam8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ujam8"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 34.36
+angle_min = -7.4999895
+angle_max = 7.500011
+angle_curve = SubResource("CurveTexture_jy1oi")
+direction = Vector3(1, -20.33, 0)
+spread = 105.319
+flatness = 0.34
+initial_velocity_min = 269.65
+initial_velocity_max = 523.24
+gravity = Vector3(0, 98, 0)
+scale_min = 0.59999996
+color = Color(1, 0.83115786, 0.23692879, 1)
+color_ramp = SubResource("GradientTexture1D_m14hk")
+anim_offset_max = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 3.0
+turbulence_initial_displacement_min = -42.5
+turbulence_initial_displacement_max = 22.600002
+turbulence_influence_over_life = SubResource("CurveTexture_5xh03")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_0r47l"]
 
@@ -126,9 +166,19 @@ tax = 1.1
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
+[sub_resource type="Resource" id="Resource_ujam8"]
+script = ExtResource("8_v5bxn")
+title = "Rare Wool"
+image = ExtResource("9_cxla1")
+price = 2000
+power = 4
+tax = 1.2
+taxInc = 0.05
+metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
+
 [sub_resource type="Resource" id="Resource_pbqe1"]
 script = ExtResource("9_56xbq")
-items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju")])
+items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_410ju"]
@@ -137,13 +187,14 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
-[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part", "mouseControl") groups=["Sheep"]]
+[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part", "partRare", "mouseControl") groups=["Sheep"]]
 position = Vector2(132, 721)
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_0r47l")
 moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter/Script")
 textMoneyRev = NodePath("../Control/CanvasLayer/TextRev")
 part = NodePath("../GPUParticles2D")
+partRare = NodePath("../RareWool")
 mouseControl = NodePath("../Control/CanvasLayer/Mouse")
 metadata/_edit_group_ = true
 
@@ -177,6 +228,18 @@ texture = ExtResource("3_4gutc")
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_2js75")
+
+[node name="RareWool" type="GPUParticles2D" parent="." unique_id=1929619362]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_4gutc")
+position = Vector2(131, 585)
+emitting = false
+amount = 1
+texture = ExtResource("3_4gutc")
+lifetime = 6.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ujam8")
 
 [node name="Control" type="Control" parent="." unique_id=2002302030]
 layout_mode = 3
@@ -323,6 +386,27 @@ pivot_offset = Vector2(29, 40)
 mouse_filter = 2
 texture = ExtResource("12_pbqe1")
 
+[node name="OptionUI" type="Control" parent="Control/CanvasLayer" unique_id=1519445988]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseButton" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=2086305507]
+layout_mode = 0
+offset_top = 61.0
+offset_right = 64.0
+offset_bottom = 125.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/PauseButton" unique_id=2052884062]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("20_5xh03")
+
 [node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
 layout_mode = 3
 anchors_preset = 15
@@ -445,13 +529,13 @@ offset_top = 184.0
 offset_right = 821.0
 offset_bottom = 244.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -463,13 +547,13 @@ offset_top = 296.0
 offset_right = 823.0
 offset_bottom = 356.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -480,6 +564,7 @@ anchor_mode = 0
 [connection signal="mouse_entered" from="Sheep/StaticBody2D" to="Control/CanvasLayer/Mouse" method="_on_static_body_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Sheep" method="_on_static_body_2d_mouse_exited"]
 [connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Control/CanvasLayer/Mouse" method="_on_static_body_2d_mouse_exited"]
+[connection signal="pressed" from="Control/CanvasLayer/OptionUI/PauseButton" to="Control/CanvasLayer/PauseMenu" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Resume" to="Control/CanvasLayer/PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Settings" to="Control/CanvasLayer/PauseMenu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Save" to="Control/CanvasLayer/PauseMenu" method="_on_save_pressed"]

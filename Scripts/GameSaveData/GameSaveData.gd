@@ -5,4 +5,5 @@ class_name GameSaveData
 @export var increment:int = 10
 @export var autoCollect:int = 0
 @export var collectSpeed:float = 3
+@export var rareChance:float = 0.00
 @export var shopListData:ShopList

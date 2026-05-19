@@ -56,3 +56,9 @@ func _on_settings_pressed() -> void:
 		TweenUtils.tweenY(self,-get_rect().size.y,0.3,TweenUtils.Ease.InSine)
 		(settings as SettingsScript).BringSettings()
 	pass # Replace with function body.
+
+
+func _on_pause_button_pressed() -> void:
+	if !paused && !SettingsScript.settings:
+		BringPause()
+	pass # Replace with function body.

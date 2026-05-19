@@ -5,7 +5,8 @@ enum Powers{
 	none,
 	powerClick,
 	autoCollect,
-	fasterAutoCollector
+	fasterAutoCollector,
+	rareClick
 }
 
 @export var particle:PackedScene
@@ -53,6 +54,9 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 		Powers.fasterAutoCollector:
 			descriptionNode.text = "the collector will gain every [wave amp=25.0 freq=10.0]"\
 			+ str(GameHandler.saveData.collectSpeed) + "[/wave] seconds"
+		Powers.rareClick:
+			descriptionNode.text = "the chance of appereance will increase by [wave amp=25.0 freq=10.0]+0.01[/wave]\n"+\
+			"Current rare wool chance:[colorT speed=3 sColor=#FFFFFF eColor=#F5BF03]" + str(int(GameHandler.saveData.rareChance * 100)) + "%"
 
 func SetBasedOnLevel():
 	if (shopData.level > 0):
@@ -129,6 +133,12 @@ func PowersAct():
 			if (GameHandler.saveData.collectSpeed <= 1): # custom level max
 				TweenLevelMax()
 				shopData.canBuy = false
+		Powers.rareClick:
+			GameHandler.saveData.rareChance += 0.01
+			if (GameHandler.saveData.rareChance >= 0.70):
+				TweenLevelMax()
+				shopData.canBuy = false
+
 
 func TweenLevelMax():
 	TweenUtils.tweenY(levelNode,centerYdef,0.3,TweenUtils.Ease.OutCirc)
