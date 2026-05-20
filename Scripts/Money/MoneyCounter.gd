@@ -3,7 +3,7 @@ class_name MoneyCounter
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	get_parent().text = "$" + str(GameHandler.saveData.money)
+	get_parent().text = "$" + NumberFormat.Format(GameHandler.saveData.money)
 	pass
 
 var scaleTween:Tween

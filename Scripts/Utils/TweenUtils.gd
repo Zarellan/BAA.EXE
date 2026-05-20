@@ -115,9 +115,11 @@ static func tweenSkew(object,value,duration,eas):
 	EasingType(step, eas)
 	return tween
 
-static func tweenSkewPingPong(object,startValue,endValue,duration,eas):
+static func tweenSkewPingPong(object,startValue,endValue,duration,eas, instant = false):
 	var tween = object.create_tween().set_loops(-1)
 	
+	if (instant):
+		object.skew = startValue
 	var step1 = tween.tween_property(object, "skew", startValue, duration)
 	EasingType(step1, eas)
 

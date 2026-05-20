@@ -75,7 +75,7 @@ func set_item(shopDat:ShopClass):
 func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
-	moneyNode.text = "[wave amp=%d freq=10]%s%d[/wave]" % [frequencyWavePrice.number, "$",shopData.price]
+	moneyNode.text = "[wave amp=%d freq=10]%s%s[/wave]" % [frequencyWavePrice.number, "$",NumberFormat.Format(shopData.price)]
 	pass
 
 func Hovered():

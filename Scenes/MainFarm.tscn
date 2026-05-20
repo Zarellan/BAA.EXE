@@ -19,7 +19,11 @@
 [ext_resource type="Script" uid="uid://cge6w6kvhui0r" path="res://Scripts/Pause/PauseScript.gd" id="14_67qwo"]
 [ext_resource type="Script" uid="uid://dagu34l5k4x0f" path="res://Scripts/Pause/SettingsScript.gd" id="15_d3uyy"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="16_joy2m"]
-[ext_resource type="Texture2D" uid="uid://cviimgyvwihfo" path="res://Sprites/OptionUIs/New Piskel.png" id="20_5xh03"]
+[ext_resource type="Texture2D" uid="uid://y8lt7autwrv3" path="res://Sprites/OptionUIs/ShoppingKart.png" id="19_jy1oi"]
+[ext_resource type="Texture2D" uid="uid://cviimgyvwihfo" path="res://Sprites/OptionUIs/Pause.png" id="20_5xh03"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
+load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r47l"]
 size = Vector2(116.5, 93.5)
@@ -40,6 +44,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 0), Vector2i(1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Shadow:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Background/Sprite2D/SheepShadow:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_2o3fe"]
 length = 0.001
@@ -50,6 +78,30 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Shadow:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Background/Sprite2D/SheepShadow:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -187,8 +239,28 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
-[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part", "partRare", "mouseControl") groups=["Sheep"]]
-position = Vector2(132, 721)
+[node name="Background" type="Node2D" parent="." unique_id=908175260]
+position = Vector2(640, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=988172252]
+clip_children = 2
+position = Vector2(-2, 0)
+scale = Vector2(2.67, 2.67)
+texture = SubResource("CompressedTexture2D_jy1oi")
+
+[node name="SheepShadow" type="Sprite2D" parent="Background/Sprite2D" unique_id=892763658]
+self_modulate = Color(0, 0, 0, 0.3529412)
+texture_filter = 1
+position = Vector2(-193.00294, 118.351944)
+scale = Vector2(0.8089888, 0.8089888)
+skew = 0.43807757
+texture = ExtResource("1_wy1g6")
+offset = Vector2(3.2407265, -63.759247)
+hframes = 2
+frame = 1
+
+[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part", "partRare", "mouseControl", "sheepShadow") groups=["Sheep"]]
+position = Vector2(132, 680)
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_0r47l")
 moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter/Script")
@@ -196,15 +268,25 @@ textMoneyRev = NodePath("../Control/CanvasLayer/TextRev")
 part = NodePath("../GPUParticles2D")
 partRare = NodePath("../RareWool")
 mouseControl = NodePath("../Control/CanvasLayer/Mouse")
-metadata/_edit_group_ = true
+sheepShadow = NodePath("../Background/Sprite2D/SheepShadow")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sheep" unique_id=1741717021]
 position = Vector2(0, -47)
 input_pickable = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Sheep/StaticBody2D" unique_id=2066201686]
+clip_children = 2
 texture_filter = 1
 position = Vector2(-0.9259262, -0.46298218)
+texture = ExtResource("1_wy1g6")
+offset = Vector2(0, -17)
+hframes = 2
+frame = 1
+
+[node name="Shadow" type="Sprite2D" parent="Sheep/StaticBody2D/Sprite2D" unique_id=361796887]
+self_modulate = Color(0, 0, 0, 0.42745098)
+texture_filter = 1
+position = Vector2(1.8518496, 2.5555985)
 texture = ExtResource("1_wy1g6")
 offset = Vector2(0, -17)
 hframes = 2
@@ -397,8 +479,10 @@ layout_mode = 0
 offset_top = 61.0
 offset_right = 64.0
 offset_bottom = 125.0
+metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/PauseButton" unique_id=2052884062]
+visibility_layer = 3
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -406,6 +490,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("20_5xh03")
+
+[node name="ShoppingKart" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=749067165]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 61.0
+offset_right = 128.0
+offset_bottom = 125.0
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/ShoppingKart" unique_id=1618961467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_jy1oi")
 
 [node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
 layout_mode = 3

@@ -7,6 +7,7 @@ class_name Sheep
 @export var part:GPUParticles2D
 @export var partRare:GPUParticles2D
 @export var mouseControl:ShearsEffect
+@export var sheepShadow:Node2D
 
 var isInside = false
 
@@ -17,14 +18,11 @@ var defaultScale
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
+	TweenUtils.tweenSkewPingPong(sheepShadow,deg_to_rad(18),deg_to_rad(29),1,TweenUtils.Ease.InOutSine)
 	defaultScale = scale
-	#print(itemList.items[0].name)
-	#DirAccess.make_dir_recursive_absolute("user://saver")
-	#ResourceSaver.save(itemList,"user://saver/ShopList.tres")
-	#var loader:ShopList = ResourceLoader.load("user://saver/ShopList.tres") as ShopList
-	#var vc:Vector2 = loader.items[1].vect
-	#print(vc)
-	#($"../Node2D/SimpleEventSystem" as SimpleEventSystem).invoke()
+	
+	ReInitializeParticle(part)
+	ReInitializeParticle(partRare)
 	pass # Replace with function body.
 
 
@@ -33,6 +31,11 @@ func _process(_delta: float) -> void:
 	if (isInside && Input.is_action_just_pressed("LeftMouse")):
 		Pressed()
 	pass
+
+func ReInitializeParticle(partic):
+	partic.emitting = true
+	partic.restart()
+	partic.emitting = false
 
 var scaleYtween:Tween
 var canPress = true
@@ -51,6 +54,7 @@ func Pressed():
 		if (randf_range(0.0,1.0) < GameHandler.saveData.rareChance):
 			ParticleManager.PlayParticleOv(partRare,1)
 			GameHandler.AddMoneyRare()
+			GlobalAudio.PlayOneShot("res://Sounds/RareWool.mp3", 0,randf_range(0.99,1.01))
 		else:
 			GameHandler.AddMoney()
 		MoneyCollectedText()
