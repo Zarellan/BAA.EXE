@@ -2,10 +2,13 @@ extends Control
 class_name SettingsScript
 static var settings = false
 
-static var soundtrackVolume = 100
-static var audioVolume = 100
 
+var indexSettings = 0
+@export var settingText:Control
 @export var pauseMenu:Control
+@export var settingOptions:Array[Control] = []
+
+@export var shadedGrassNode:Node2D
 
 var tweenSettings:Tween
 
@@ -15,13 +18,21 @@ var soundtrackText:Control
 #@export var soundtrackText:AutoSizeRichTextLabel
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	audioText = get_node("AudioVolume")
-	soundtrackText = get_node("SoundtrackVolume")
-	(get_node("SoundtrackSlider") as HSlider).value = soundtrackVolume
-	(get_node("AudioSlider") as HSlider).value = audioVolume
-
+	audioText = get_node("Volume/AudioVolume")
+	soundtrackText = get_node("Volume/SoundtrackVolume")
+	(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveData.soundtrackVolume
+	(get_node("Volume/AudioSlider") as HSlider).value = GameHandler.saveData.audioVolume
+	(get_node("Performance/QualityOptions") as OptionButton).select(BasedOnQuality())
+	(get_node("Performance/FPSOption") as OptionButton).select(BasedOnFPS())
+	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveData.vSync
+	InitializeSettings()
 	pass # Replace with function body.
 
+func InitializeSettings():
+	Engine.max_fps = GameHandler.saveData.fps
+	SetVSync()
+	_on_quality_option_item_selected(BasedOnQuality())
+	ChangeSetting(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -30,12 +41,27 @@ func _process(_delta: float) -> void:
 		ExitSettings()
 	pass
 
+func ChangeSetting(index:int):
+	indexSettings += index
+	IndexRangeLimit(settingOptions)
+	for i in range(settingOptions.size()):
+		if (i != indexSettings):
+			settingOptions[i].visible = false
+		else:
+			settingOptions[i].visible = true
+			settingText.text = settingOptions[i].name
+			
+func IndexRangeLimit(indexMax:Array):
+	if (indexMax.size() - 1 < indexSettings):
+		indexSettings = 0
+	elif (indexSettings < 0):
+		indexSettings = indexMax.size() - 1
 func BringSettings():
 	if !settings:
 		TweenUtils.StopTween(tweenSettings)
 		tweenSettings = TweenUtils.tweenY(self,0.0,0.3,TweenUtils.Ease.OutCirc)
-		(get_node("SoundtrackSlider") as HSlider).value = soundtrackVolume
-		(get_node("AudioSlider") as HSlider).value = audioVolume
+		(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveData.soundtrackVolume
+		(get_node("Volume/AudioSlider") as HSlider).value = GameHandler.saveData.audioVolume
 		ChangeText()
 		settings = true
 
@@ -47,14 +73,14 @@ func ExitSettings():
 
 
 func _on_h_slider_value_changed(value: float) -> void:
-	soundtrackVolume = value
+	GameHandler.saveData.soundtrackVolume = value
 	GlobalSoundtrack.ChangeVolumeSettings()
 	ChangeText()
-	pass # Replace with function body.
+	pass # Replace with function body.audioVolume
 
 
 func _on_audio_slider_value_changed(value: float) -> void:
-	audioVolume = value
+	GameHandler.saveData.audioVolume = value
 	ChangeText()
 	pass # Replace with function body.
 
@@ -65,6 +91,70 @@ func _on_back_pressed() -> void:
 	pass # Replace with function body.
 
 func ChangeText():
-	(audioText as AutoSizeRichTextLabel).text = "Audio Volume:"+str(audioVolume) +"%"
-	(soundtrackText as AutoSizeRichTextLabel).text = "Track Volume:"+str(soundtrackVolume) +"%"
+	(audioText as AutoSizeRichTextLabel).text = "Audio Volume:"+str(GameHandler.saveData.audioVolume) +"%"
+	(soundtrackText as AutoSizeRichTextLabel).text = "Track Volume:"+str(GameHandler.saveData.soundtrackVolume) +"%"
 	pass
+
+
+func _on_arrow_button_left_pressed() -> void:
+	ChangeSetting(-1)
+	pass # Replace with function body.
+
+
+func _on_arrow_button_right_pressed() -> void:
+	ChangeSetting(1)
+	pass # Replace with function body.
+
+
+func _on_quality_option_item_selected(index: int) -> void:
+	match(index):
+		0:
+			GameHandler.saveData.quality = GameHandler.Quality.High
+			shadedGrassNode.visible = true
+		1:
+			GameHandler.saveData.quality = GameHandler.Quality.Low
+			shadedGrassNode.visible = false
+	var starSpawner = get_tree().get_first_node_in_group("StarSpawner")
+	(starSpawner as StarSpawner).SpawnStars()
+	pass # Replace with function body.
+
+func BasedOnQuality():
+	match(GameHandler.saveData.quality):
+		GameHandler.Quality.High:
+			return 0
+		GameHandler.Quality.Low:
+			return 1
+	pass
+
+
+func _on_fps_option_item_selected(index: int) -> void:
+	match (index):
+		0: GameHandler.saveData.fps = 30
+		1: GameHandler.saveData.fps = 60
+		2: GameHandler.saveData.fps = 120
+		3: GameHandler.saveData.fps = 0
+	Engine.max_fps = GameHandler.saveData.fps
+	pass # Replace with function body.
+
+func BasedOnFPS():
+	match (GameHandler.saveData.fps):
+		30: 
+			return 0
+		60: 
+			return 1
+		120: 
+			return 2
+		0: 
+			return 3
+
+func SetVSync():
+	if (GameHandler.saveData.vSync):
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+
+func _on_v_sync_box_toggled(toggled_on: bool) -> void:
+	GameHandler.saveData.vSync = toggled_on
+	SetVSync()
+	pass # Replace with function body.

@@ -8,7 +8,6 @@ class_name Sheep
 @export var partRare:GPUParticles2D
 @export var mouseControl:ShearsEffect
 @export var sheepShadow:Node2D
-
 var isInside = false
 
 var twe:Tween

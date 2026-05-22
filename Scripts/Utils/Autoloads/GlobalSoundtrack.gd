@@ -17,7 +17,7 @@ func ChangeVolumeSettings():
 	volume_db = VolumeSettings(current_DB)
 
 func VolumeSettings(volumeDB):
-	var soundVol = clamp(SettingsScript.soundtrackVolume,0,100)
+	var soundVol = clamp(GameHandler.saveData.soundtrackVolume,0,100)
 	
 	if (soundVol == 0):
 		return -80

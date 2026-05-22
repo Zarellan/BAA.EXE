@@ -7,3 +7,9 @@ class_name GameSaveData
 @export var collectSpeed:float = 3
 @export var rareChance:float = 0.00
 @export var shopListData:ShopList
+#settings
+@export var soundtrackVolume:float = 70
+@export var audioVolume:float = 70
+@export var quality:GameHandler.Quality = GameHandler.Quality.High
+@export var fps:int = 60
+@export var vSync:bool = true

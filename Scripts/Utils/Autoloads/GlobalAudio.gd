@@ -21,7 +21,7 @@ func PlayOneShot(audio_path: String, vol_DB = 0.0,pit = 1.0):
 	pl.play()
 
 func VolumeSettings(vol_DB):
-	var soundVol = clamp(SettingsScript.audioVolume,0,100)
+	var soundVol = clamp(GameHandler.saveData.audioVolume,0,100)
 	
 	if (soundVol == 0):
 		return -80

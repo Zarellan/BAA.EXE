@@ -1,5 +1,9 @@
 extends Node
 
+enum Quality{
+	High,
+	Low
+}
 
 @export var saveData:GameSaveData
 

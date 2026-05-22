@@ -73,6 +73,24 @@ static func tweenColorRGB(object, color, duration, eas):
 	EasingType(step, eas)
 	return tween
 
+static func tweenColorRGBPingPong(object,startValue,endValue,duration,eas):
+	var tween = object.create_tween().set_loops(-1)
+	var currentColor = object.modulate
+	var step = tween.tween_method(func(col):
+		object.modulate.r = col.r
+		object.modulate.g = col.g
+		object.modulate.b = col.b
+	, currentColor, startValue, duration)
+	EasingType(step, eas)
+	var currentColor2 = startValue
+	var step2 = tween.tween_method(func(col):
+		object.modulate.r = col.r
+		object.modulate.g = col.g
+		object.modulate.b = col.b
+	, currentColor2, endValue, duration)
+	EasingType(step2, eas)
+	return tween
+
 static func tweenAlpha(object,position,duration,eas):
 	var tween = object.create_tween()
 	var step = tween.tween_property(object, "modulate:a", position, duration)
@@ -90,11 +108,40 @@ static func tweenNumber(owner, objectValue:ValueSaver,value,duration,eas):
 
 	EasingType(step, eas)
 	return tween
+	
+static func tweenNumberPingPong(owner, objectValue:ValueSaver,value, value2,duration,eas):
+	var tween = owner.create_tween().set_loops(-1)
+
+	var step = tween.tween_method(func(integral):
+		if is_instance_valid(objectValue):
+			objectValue.number = integral
+	, value, value2, duration)
+	EasingType(step, eas)
+	var step2 = tween.tween_method(func(integral):
+		if is_instance_valid(objectValue):
+			objectValue.number = integral
+	, value2, value, duration)
+
+	EasingType(step2, eas)
+	return tween
 
 static func tweenScale(object,position,duration,eas):
 	var tween = object.create_tween()
 	var step = tween.tween_property(object, "scale", position, duration)
 	EasingType(step, eas)
+	return tween
+
+static func tweenScalePingPong(object,startValue,endValue,duration,eas, instant = false):
+	var tween = object.create_tween().set_loops(-1)
+	
+	if (instant):
+		object.scale = startValue
+	var step1 = tween.tween_property(object, "scale", startValue, duration)
+	EasingType(step1, eas)
+
+	var step2 = tween.tween_property(object, "scale", endValue, duration)
+	EasingType(step2, eas)
+
 	return tween
 
 static func tweenScaleX(object,position,duration,eas):

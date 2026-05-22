@@ -6,12 +6,14 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-func PlayParticleOv(particle, count):
-	var instance = particle.duplicate()
+func PlayParticleOv(particle: GPUParticles2D, count: int, force := false):
+	if (GameHandler.saveData.quality == GameHandler.Quality.Low && !force):
+		return
+	var instance := particle.duplicate() as GPUParticles2D
 	instance.global_position = particle.global_position
-	(instance as GPUParticles2D).amount = count
-	(instance as GPUParticles2D).emitting = true
-	(instance as GPUParticles2D).finished.connect(instance.queue_free)
+	instance.amount = count
+	instance.emitting = true
+	instance.finished.connect(instance.queue_free)
 	get_tree().current_scene.add_child.call_deferred(instance)
 
 func PlayParticle(particle, count):
