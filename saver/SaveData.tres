@@ -61,7 +61,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_0mqfk")
-money = 4830
+money = 4902
 increment = 24
 autoCollect = 72
 collectSpeed = 2.7
