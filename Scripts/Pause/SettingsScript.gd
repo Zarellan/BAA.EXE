@@ -9,6 +9,13 @@ var indexSettings = 0
 @export var settingOptions:Array[Control] = []
 
 @export var shadedGrassNode:Node2D
+@export var codeText:LineEdit
+@export var particle:PackedScene
+
+@export var codeTextMain:Control
+@export var codeTextSub:Control
+@export var codeTextTimer:Timer
+@export var codeInvalidTimer:Timer
 
 var tweenSettings:Tween
 
@@ -25,7 +32,10 @@ func _ready() -> void:
 	(get_node("Performance/QualityOptions") as OptionButton).select(BasedOnQuality())
 	(get_node("Performance/FPSOption") as OptionButton).select(BasedOnFPS())
 	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveData.vSync
+	
+	codeText.add_theme_color_override("font_placeholder_color", Color(0.658, 0.658, 0.658, 1.0))
 	InitializeSettings()
+
 	pass # Replace with function body.
 
 func InitializeSettings():
@@ -39,7 +49,43 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel") && settings:
 		(pauseMenu as PauseScript).BringPauseFromSettings()
 		ExitSettings()
+
+	if Input.is_action_just_pressed("Enter_Key") && indexSettings == 2:
+		CodeRewards()
 	pass
+
+func CodeRewards():
+	match(codeText.text.to_lower()):
+		"eid mubarak":
+			if (!CodeDoublecheck("eid mubarak")):
+				codeTextSub.text = "Eid Mubarak you too [font_size=50]🥳"
+				GameHandler.AddMoneyForce(10000)
+				get_tree().get_first_node_in_group("Sheep").BringEidCap()
+		_:
+			codeText.placeholder_text = "Invalid code"
+			CodeInvalid("Invalid code")
+
+func CodeInvalid(_str):
+	codeText.placeholder_text = _str
+	codeText.text = ""
+	codeText.add_theme_color_override("font_placeholder_color", Color(1, 0, 0))
+	codeInvalidTimer.start()
+
+func CodeDoublecheck(_str):
+	for i in range(GameHandler.saveData.checkCodes.size()):
+		if (_str == GameHandler.saveData.checkCodes[i][0]):
+			if (GameHandler.saveData.checkCodes[i][1]):
+				CodeInvalid("Already used")
+				return true
+			else:
+				GameHandler.saveData.checkCodes[i][1] = true
+				var partic = InstantiateUtil.Instantiate(particle,get_tree().get_first_node_in_group("UI"))
+				partic.global_position = get_node("Code/ParticlePosition").global_position
+				self.scale = Vector2(1.3,0.9)
+				TweenUtils.tweenScale(self,Vector2(1,1),0.3,TweenUtils.Ease.OutCirc)
+				codeTextMain.modulate.a = 1
+				codeTextTimer.start()
+				return false
 
 func ChangeSetting(index:int):
 	indexSettings += index
@@ -157,4 +203,20 @@ func SetVSync():
 func _on_v_sync_box_toggled(toggled_on: bool) -> void:
 	GameHandler.saveData.vSync = toggled_on
 	SetVSync()
+	pass # Replace with function body.
+
+
+func _on_code_submit_pressed() -> void:
+	CodeRewards()
+	pass # Replace with function body.
+
+
+func _on_code_text_timer_timeout() -> void:
+	TweenUtils.tweenAlpha(codeTextMain,0,2,TweenUtils.Ease.linear)
+	pass # Replace with function body.
+
+
+func _on_invalid_code_timer_timeout() -> void:
+	codeText.placeholder_text = "Code"
+	codeText.add_theme_color_override("font_placeholder_color", Color(0.658, 0.658, 0.658, 1.0))
 	pass # Replace with function body.

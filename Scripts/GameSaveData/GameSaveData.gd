@@ -2,7 +2,7 @@ extends Resource
 class_name GameSaveData
 
 @export var money:int = 0
-@export var increment:int = 10
+@export var increment:int = 2
 @export var autoCollect:int = 0
 @export var collectSpeed:float = 3
 @export var rareChance:float = 0.00
@@ -13,3 +13,6 @@ class_name GameSaveData
 @export var quality:GameHandler.Quality = GameHandler.Quality.High
 @export var fps:int = 60
 @export var vSync:bool = true
+
+#rewards
+@export var checkCodes:Array[Array] = [["eid mubarak",false]]

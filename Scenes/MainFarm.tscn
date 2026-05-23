@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="8_v5bxn"]
 [ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="9_56xbq"]
 [ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="9_cxla1"]
+[ext_resource type="Texture2D" uid="uid://bg6hskasnpygv" path="res://Sprites/Sheep/EidCap.png" id="9_ehq4q"]
 [ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="10_rg6ea"]
 [ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="10_ujam8"]
 [ext_resource type="Texture2D" uid="uid://dgkornijck721" path="res://Sprites/Shears/New Piskel (1).png" id="11_56xbq"]
@@ -28,7 +29,9 @@
 [ext_resource type="Texture2D" uid="uid://y8lt7autwrv3" path="res://Sprites/OptionUIs/ShoppingKart.png" id="19_jy1oi"]
 [ext_resource type="Texture2D" uid="uid://cviimgyvwihfo" path="res://Sprites/OptionUIs/Pause.png" id="20_5xh03"]
 [ext_resource type="Script" uid="uid://c7n1hdvibi2sd" path="res://Scripts/OptionUI/OptionUI.gd" id="22_rw3qx"]
+[ext_resource type="PackedScene" uid="uid://xlvoesewx06k" path="res://Prefabs/ParticleShop.tscn" id="29_62te2"]
 [ext_resource type="Texture2D" uid="uid://dxdyrvxjbfe6r" path="res://Sprites/OptionUIs/Arrow.png" id="29_pxlk8"]
+[ext_resource type="Shader" uid="uid://b735d2pmmqnol" path="res://Shaders/SwirlTransition.gdshader" id="30_0wyqw"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
 load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
@@ -197,19 +200,19 @@ turbulence_influence_over_life = SubResource("CurveTexture_5xh03")
 script = ExtResource("8_v5bxn")
 title = "Improve Shear"
 image = ExtResource("9_cxla1")
-description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]10[/wave]"
+description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]2[/wave]"
 price = 25
 power = 1
 tax = 1.05
-taxInc = 0.03
+taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_56xbq"]
 script = ExtResource("8_v5bxn")
 title = "Auto collect"
 image = ExtResource("10_ujam8")
-description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+4[/wave]"
-price = 25
+description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+8[/wave]"
+price = 250
 power = 2
 tax = 1.1
 taxInc = 0.08
@@ -220,7 +223,7 @@ script = ExtResource("8_v5bxn")
 title = "Faster Auto Collect"
 image = ExtResource("10_rg6ea")
 description = "make the auto collector collects faster"
-price = 250
+price = 1250
 power = 3
 tax = 1.1
 taxInc = 0.12
@@ -245,6 +248,15 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_67qwo"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_62te2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_62te2"]
+shader = ExtResource("30_0wyqw")
+shader_parameter/progress = 0.0
+shader_parameter/diamondPixelSize = 20.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0wyqw"]
+
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
 [node name="Background" type="Node2D" parent="." unique_id=908175260 node_paths=PackedStringArray("nightBackground")]
@@ -257,12 +269,11 @@ scale = Vector2(2.67, 2.67)
 texture = ExtResource("1_6ho1w")
 
 [node name="Stars" type="Node2D" parent="Background" unique_id=1854648822 groups=["StarSpawner"]]
+position = Vector2(66, -69)
 script = ExtResource("6_aw8uy")
 starInstance = ExtResource("3_bsamv")
-numberStarsSpawn = 1
-numberStarsSpawnLow = 1
-
-[node name="Star" parent="Background/Stars" unique_id=824519994 instance=ExtResource("3_bsamv")]
+numberStarsSpawn = 42
+numberStarsSpawnLow = 12
 
 [node name="Grasses" type="Node2D" parent="Background" unique_id=1343974052]
 
@@ -797,6 +808,21 @@ frame = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sheep/StaticBody2D" unique_id=1219642034]
 shape = SubResource("RectangleShape2D_0r47l")
 
+[node name="EidCap" type="Sprite2D" parent="Sheep/StaticBody2D" unique_id=1386736279]
+visible = false
+clip_children = 2
+position = Vector2(-39.067352, -31.921232)
+rotation = 0.18776211
+scale = Vector2(0.6406251, 0.60445607)
+texture = ExtResource("9_ehq4q")
+offset = Vector2(-7.9341125, -25.322632)
+
+[node name="Shadow" type="Sprite2D" parent="Sheep/StaticBody2D/EidCap" unique_id=1583249206]
+self_modulate = Color(0, 0, 0, 0.44705883)
+position = Vector2(6.1517386, -0.09282577)
+texture = ExtResource("9_ehq4q")
+offset = Vector2(-7.9341125, -25.322632)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sheep" unique_id=222938361]
 root_node = NodePath("../StaticBody2D")
 libraries/ = SubResource("AnimationLibrary_4g1jp")
@@ -1082,7 +1108,7 @@ theme_override_font_sizes/font_size = 55
 text = "Exit
 "
 
-[node name="Settings" type="Control" parent="Control/CanvasLayer" unique_id=498215830 node_paths=PackedStringArray("settingText", "pauseMenu", "settingOptions", "shadedGrassNode")]
+[node name="Settings" type="Control" parent="Control/CanvasLayer" unique_id=498215830 node_paths=PackedStringArray("settingText", "pauseMenu", "settingOptions", "shadedGrassNode", "codeText", "codeTextMain", "codeTextSub", "codeTextTimer", "codeInvalidTimer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1095,8 +1121,14 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("15_d3uyy")
 settingText = NodePath("Label/AutoSizeRichTextLabel")
 pauseMenu = NodePath("../PauseMenu")
-settingOptions = [NodePath("Volume"), NodePath("Performance")]
+settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code")]
 shadedGrassNode = NodePath("../../../Background/Floor/GrassesDark")
+codeText = NodePath("Code/Code")
+particle = ExtResource("29_62te2")
+codeTextMain = NodePath("CodeTextMain")
+codeTextSub = NodePath("CodeTextMain/CodeSubText")
+codeTextTimer = NodePath("Code/CodeTextTimer")
+codeInvalidTimer = NodePath("Code/InvalidCodeTimer")
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings" unique_id=258928493]
 self_modulate = Color(0.50980395, 0.50980395, 0.50980395, 0.8745098)
@@ -1200,6 +1232,7 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Performance" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1093421879]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1305,6 +1338,44 @@ offset_right = 684.00006
 offset_bottom = 353.0
 scale = Vector2(4.635, 4.635)
 
+[node name="Code" type="Control" parent="Control/CanvasLayer/Settings" unique_id=744997745]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Code" type="LineEdit" parent="Control/CanvasLayer/Settings/Code" unique_id=2046198766]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 207.0
+offset_right = 840.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 29
+placeholder_text = "Code"
+alignment = 1
+max_length = 18
+
+[node name="CodeSubmit" type="Button" parent="Control/CanvasLayer/Settings/Code" unique_id=1608924448]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 354.0
+offset_right = 799.99945
+offset_bottom = 447.0
+theme_override_font_sizes/font_size = 41
+text = "Submit"
+
+[node name="ParticlePosition" type="Control" parent="Control/CanvasLayer/Settings/Code" unique_id=1828831202]
+anchors_preset = 0
+offset_left = 634.0
+offset_top = 332.0
+offset_right = 674.0
+offset_bottom = 372.0
+
+[node name="CodeTextTimer" type="Timer" parent="Control/CanvasLayer/Settings/Code" unique_id=197390687]
+wait_time = 2.0
+one_shot = true
+
+[node name="InvalidCodeTimer" type="Timer" parent="Control/CanvasLayer/Settings/Code" unique_id=268871274]
+
 [node name="ArrowButtonLeft" type="Button" parent="Control/CanvasLayer/Settings" unique_id=161299645]
 layout_mode = 0
 offset_left = 257.0
@@ -1349,6 +1420,54 @@ offset_bottom = 544.0
 theme_override_font_sizes/font_size = 51
 text = "Back"
 
+[node name="CodeTextMain" type="TextureRect" parent="Control/CanvasLayer/Settings" unique_id=299802906]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0, 0, 0, 0.25490198)
+layout_mode = 0
+offset_left = 396.0
+offset_top = 600.0
+offset_right = 879.0
+offset_bottom = 689.0
+texture = SubResource("CanvasTexture_62te2")
+
+[node name="CodeSubText" type="RichTextLabel" parent="Control/CanvasLayer/Settings/CodeTextMain" unique_id=1905202582]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 2.0
+offset_right = 463.0
+offset_bottom = 85.0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "Eid Mubarak you too [font_size=50]🥳"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 22
+_current_font_size = 22
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Transition" type="Control" parent="Control/CanvasLayer" unique_id=586323638]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Transition" unique_id=322369329]
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_62te2")
+layout_mode = 0
+offset_right = 1278.0
+offset_bottom = 716.0
+mouse_filter = 2
+texture = SubResource("CanvasTexture_0wyqw")
+metadata/_edit_lock_ = true
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
 
@@ -1366,6 +1485,9 @@ anchor_mode = 0
 [connection signal="value_changed" from="Control/CanvasLayer/Settings/Volume/AudioSlider" to="Control/CanvasLayer/Settings" method="_on_audio_slider_value_changed"]
 [connection signal="item_selected" from="Control/CanvasLayer/Settings/Performance/QualityOptions" to="Control/CanvasLayer/Settings" method="_on_quality_option_item_selected"]
 [connection signal="toggled" from="Control/CanvasLayer/Settings/Performance/VSyncBox" to="Control/CanvasLayer/Settings" method="_on_v_sync_box_toggled"]
+[connection signal="pressed" from="Control/CanvasLayer/Settings/Code/CodeSubmit" to="Control/CanvasLayer/Settings" method="_on_code_submit_pressed"]
+[connection signal="timeout" from="Control/CanvasLayer/Settings/Code/CodeTextTimer" to="Control/CanvasLayer/Settings" method="_on_code_text_timer_timeout"]
+[connection signal="timeout" from="Control/CanvasLayer/Settings/Code/InvalidCodeTimer" to="Control/CanvasLayer/Settings" method="_on_invalid_code_timer_timeout"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonLeft" to="Control/CanvasLayer/Settings" method="_on_arrow_button_left_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonRight" to="Control/CanvasLayer/Settings" method="_on_arrow_button_right_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Back" to="Control/CanvasLayer/Settings" method="_on_back_pressed"]

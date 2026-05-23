@@ -43,7 +43,6 @@ func CreateTimer(duration, delegate, oneshot = true) -> Timer:
 	return tim
 
 func SaveAllData():
-	print("Save")
 	ResourceUtil.SaveResource(saveData,"SaveData","saver")
 	dirtySave = false
 
@@ -59,6 +58,18 @@ func AddMoney():
 	if (saveData.increment < 0):
 		return
 	saveData.money += saveData.increment
+	dirtySave = true
+	if (canSave):
+		SaveAllData()
+		timerSaveCooldown.start()
+		canSave = false
+
+func AddMoneyForce(quant:int):
+	if (saveData.increment < 0):
+		return
+	saveData.money += quant
+	if (sheep != null):
+		sheep.MoneyCollectedText()
 	dirtySave = true
 	if (canSave):
 		SaveAllData()

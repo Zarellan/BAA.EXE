@@ -22,8 +22,13 @@ func _ready() -> void:
 	
 	ReInitializeParticle(part)
 	ReInitializeParticle(partRare)
+	
+	BringEidCap()
 	pass # Replace with function body.
 
+func BringEidCap():
+	if (GameHandler.saveData.checkCodes[0][1]):
+		get_node("StaticBody2D/EidCap").visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -54,10 +59,11 @@ func Pressed():
 			ParticleManager.PlayParticleOv(partRare,1)
 			GameHandler.AddMoneyRare()
 			GlobalAudio.PlayOneShot("res://Sounds/RareWool.mp3", 0,randf_range(0.99,1.01))
+			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.saveData.increment * 10,Color(0.944, 0.608, 0.037, 1.0))
 		else:
 			GameHandler.AddMoney()
+			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.saveData.increment)
 		MoneyCollectedText()
-		(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.saveData.increment)
 		ParticleManager.PlayParticleOv(part,3)
 		GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 12,randf_range(0.90,1.10))
 		mouseControl.WoolCollected()

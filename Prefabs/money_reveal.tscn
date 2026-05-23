@@ -4,9 +4,9 @@
 
 [node name="MoneyReveal" type="RichTextLabel" unique_id=975418504]
 offset_left = 69.0
-offset_top = 120.0
+offset_top = -80.0
 offset_right = 164.0
-offset_bottom = 205.00008
+offset_bottom = 5.0000763
 mouse_filter = 2
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/normal_font_size = 32

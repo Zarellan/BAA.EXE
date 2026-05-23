@@ -125,9 +125,9 @@ var tweenXtext:Tween
 func PowersAct():
 	match shopData.power:
 		Powers.powerClick:
-			GameHandler.saveData.increment += 10
+			GameHandler.saveData.increment += 2
 		Powers.autoCollect:
-			GameHandler.saveData.autoCollect += 4
+			GameHandler.saveData.autoCollect += 8
 		Powers.fasterAutoCollector:
 			GameHandler.saveData.collectSpeed -= 0.15
 			if (GameHandler.saveData.collectSpeed <= 1): # custom level max

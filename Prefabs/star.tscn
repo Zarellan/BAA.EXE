@@ -2,15 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://duakhtlquvg18" path="res://Sprites/Background/Star.png" id="1_7get0"]
 [ext_resource type="Script" uid="uid://b2vdpkn1ho1po" path="res://Scripts/Background/Star.gd" id="1_hrqmr"]
+[ext_resource type="Shader" uid="uid://c0ora7vywqued" path="res://Shaders/CircleLight.gdshader" id="2_js6lm"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="4_lcxff"]
 
-[sub_resource type="Gradient" id="Gradient_pxlk8"]
-offsets = PackedFloat32Array(0, 0.7089947)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hrqmr"]
-gradient = SubResource("Gradient_pxlk8")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atmvy"]
+shader = ExtResource("2_js6lm")
+shader_parameter/light_position = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.3
+shader_parameter/softness = 0.385
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 1.5
 
 [node name="Star" type="Node2D" unique_id=824519994]
 script = ExtResource("1_hrqmr")
@@ -18,7 +19,6 @@ script = ExtResource("1_hrqmr")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1120654826]
 texture = ExtResource("1_7get0")
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1712287755]
-energy = 0.54
-texture = SubResource("GradientTexture2D_hrqmr")
-texture_scale = 0.89
+[node name="FakeLight" type="Sprite2D" parent="." unique_id=900876329]
+material = SubResource("ShaderMaterial_atmvy")
+texture = ExtResource("4_lcxff")
