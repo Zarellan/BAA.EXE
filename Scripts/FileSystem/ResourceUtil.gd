@@ -4,6 +4,13 @@ class_name ResourceUtil
 static var saveTo:String = "res://" # swap to user:// once finished
 static var type = ".tres"
 
+static func RemoveResources(path:String, directory:String):
+	var fullPath = RemoveRootPath(path)
+	if (!ResourceLoader.exists(saveTo + directory + "/" + fullPath + type)):
+		push_warning("no path ",saveTo,directory,"/",fullPath," found")
+		return
+	DirAccess.remove_absolute(saveTo + directory + "/" + fullPath + type)
+
 static func SaveResource(object, path:String, directory:String):
 	var dir = DirAccess.open(saveTo+directory)
 	if dir == null:

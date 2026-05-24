@@ -3,9 +3,12 @@
 [ext_resource type="Script" uid="uid://b7efkv7npgv5h" path="res://Scripts/SceneHelpersScripts/ScreenShot.gd" id="1_7pbid"]
 [ext_resource type="Texture2D" uid="uid://dgkornijck721" path="res://Sprites/Shears/New Piskel (1).png" id="2_id86e"]
 [ext_resource type="Texture2D" uid="uid://c6ddcvbi41kt3" path="res://Sprites/Shears/New Piskel (2).png" id="3_itva4"]
-[ext_resource type="Texture2D" uid="uid://ddexa33q0jksy" path="res://Sprites/ImageHelpers/New Piskel.png" id="4_id86e"]
-[ext_resource type="Texture2D" uid="uid://4aofgotq662q" path="res://Sprites/ImageHelpers/New Piskel (1).png" id="5_itva4"]
+[ext_resource type="Texture2D" uid="uid://dlg0wpnop26dj" path="res://Sprites/ImageHelpers/Up Arrow.png" id="4_6wd5m"]
+[ext_resource type="Texture2D" uid="uid://ddexa33q0jksy" path="res://Sprites/ImageHelpers/Shine.png" id="4_id86e"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="4_yopb8"]
+[ext_resource type="Texture2D" uid="uid://4aofgotq662q" path="res://Sprites/ImageHelpers/Clock.png" id="5_itva4"]
 [ext_resource type="Texture2D" uid="uid://bfktlya4nix8w" path="res://Sprites/Sheep/wools.png" id="6_c2620"]
+[ext_resource type="Texture2D" uid="uid://brhp7l4epcdiw" path="res://Sprites/Sheep/SheepHead.png" id="8_akcqe"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_id86e"]
 
@@ -170,7 +173,7 @@ offset_right = 547.0
 offset_bottom = 167.0
 scale = Vector2(4, 4)
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("4_id86e")
+texture = ExtResource("4_6wd5m")
 
 [node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/Clock" unique_id=779593529]
 texture_filter = 1
@@ -183,7 +186,8 @@ scale = Vector2(10.335, 10.335)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_itva4")
 
-[node name="Control" type="Control" parent="SubViewportContainer/SubViewport" unique_id=271243298]
+[node name="Multi" type="Control" parent="SubViewportContainer/SubViewport" unique_id=271243298]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,7 +195,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Control" unique_id=1069023263]
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Multi" unique_id=1069023263]
 texture_filter = 1
 layout_mode = 0
 offset_left = 489.0
@@ -202,7 +206,7 @@ scale = Vector2(3.835, 3.835)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_itva4")
 
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/Control" unique_id=2060686373]
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/Multi" unique_id=2060686373]
 texture_filter = 1
 clip_contents = true
 layout_mode = 0
@@ -214,7 +218,7 @@ scale = Vector2(4.765, 4.765)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_akcqe")
 
-[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/Control" unique_id=690128330]
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/Multi" unique_id=690128330]
 texture_filter = 1
 clip_contents = true
 layout_mode = 0
@@ -226,7 +230,7 @@ scale = Vector2(4.765, 4.765)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_c2620")
 
-[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/Control" unique_id=594664404]
+[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/Multi" unique_id=594664404]
 texture_filter = 1
 clip_contents = true
 layout_mode = 0
@@ -237,6 +241,149 @@ offset_bottom = 476.00003
 scale = Vector2(4.765, 4.765)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_6wd5m")
+
+[node name="Gold" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1859218306]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/Gold" unique_id=1264375827]
+self_modulate = Color(0.9999998, 0.9523191, 0.028330915, 1)
+texture_filter = 1
+clip_contents = true
+layout_mode = 0
+offset_left = 283.00003
+offset_top = 236.0
+offset_right = 347.00003
+offset_bottom = 300.0
+rotation = -0.2186118
+scale = Vector2(8.75, 8.75)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_c2620")
+
+[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/Gold" unique_id=377433516]
+self_modulate = Color(0.9999998, 0.9523191, 0.028330915, 1)
+texture_filter = 1
+clip_contents = true
+layout_mode = 0
+offset_left = 280.00003
+offset_top = 275.0
+offset_right = 344.00003
+offset_bottom = 339.0
+rotation = -0.2186118
+scale = Vector2(8.75, 8.75)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_id86e")
+
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1740725075]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Control" unique_id=903176961]
+texture_filter = 1
+layout_mode = 0
+offset_left = 250.0
+offset_top = 314.0
+offset_right = 378.00015
+offset_bottom = 442.0
+scale = Vector2(10.485, 10.485)
+pivot_offset = Vector2(19.989647, 64.94045)
+texture = ExtResource("8_akcqe")
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/Control" unique_id=1642190834]
+texture_filter = 1
+layout_mode = 0
+offset_left = 507.0
+offset_top = 69.0
+offset_right = 571.0
+offset_bottom = 133.0
+scale = Vector2(3.835, 3.835)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_itva4")
+
+[node name="ShearsDouble" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1558992751]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Mouse2" type="Control" parent="SubViewportContainer/SubViewport/ShearsDouble" unique_id=1913334823]
+anchors_preset = 0
+offset_left = 363.0
+offset_top = 381.0
+offset_right = 403.0
+offset_bottom = 421.0
+rotation = -1.5104735
+scale = Vector2(12.84, 12.84)
+pivot_offset = Vector2(16, 20)
+mouse_filter = 2
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Shear1" type="TextureRect" parent="SubViewportContainer/SubViewport/ShearsDouble/Mouse2" unique_id=754601107]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -40.0
+offset_right = 31.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.34457168
+pivot_offset = Vector2(29, 40)
+mouse_filter = 2
+texture = ExtResource("2_id86e")
+
+[node name="Shear2" type="TextureRect" parent="SubViewportContainer/SubViewport/ShearsDouble/Mouse2" unique_id=1697826478]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.0
+offset_top = -40.0
+offset_right = 31.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.0361607
+pivot_offset = Vector2(29, 40)
+mouse_filter = 2
+texture = ExtResource("3_itva4")
+
+[node name="AutoSizeRichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/ShearsDouble" unique_id=1886445390]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 5.0
+offset_right = 632.0
+offset_bottom = 225.0
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 110
+bbcode_enabled = true
+text = "[rainbow]X2"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_yopb8")
+_max_size = 110
+_outline_ratio = 0.14
+_current_font_size = 110
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1655893819]
 position = Vector2(355, 400.99997)

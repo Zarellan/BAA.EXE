@@ -10,7 +10,7 @@ shader_parameter/diamondPixelSize = 20.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_0wyqw"]
 
-[node name="Transition" type="Control" unique_id=179246562]
+[node name="Transition" type="Control" unique_id=179246562 node_paths=PackedStringArray("transitionMaterial")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -20,9 +20,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
 script = ExtResource("1_ea576")
+transitionMaterial = NodePath("TransitionLayer/TextureRect")
 
 [node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=249765526]
+layer = 20
 
 [node name="TextureRect" type="TextureRect" parent="TransitionLayer" unique_id=1380615404]
 self_modulate = Color(0, 0, 0, 1)

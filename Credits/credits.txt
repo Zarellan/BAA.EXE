@@ -1,3 +1,6 @@
 cutting sound: https://opengameart.org/content/shears
 
 reward sound: https://pixabay.com/sound-effects/film-special-effects-level-up-05-326133/
+negative sound: https://pixabay.com/sound-effects/film-special-effects-classic-game-action-negative-8-224414/
+bought sound: https://pixabay.com/sound-effects/clinking-coins-3-468426/
+party horn sound: https://pixabay.com/sound-effects/film-special-effects-party-horn-68443/

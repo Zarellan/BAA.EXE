@@ -1,7 +1,6 @@
 extends Node2D
 class_name Sheep
 
-
 @export var moneyText:Control
 @export var textMoneyRev:Control
 @export var part:GPUParticles2D
@@ -59,10 +58,10 @@ func Pressed():
 			ParticleManager.PlayParticleOv(partRare,1)
 			GameHandler.AddMoneyRare()
 			GlobalAudio.PlayOneShot("res://Sounds/RareWool.mp3", 0,randf_range(0.99,1.01))
-			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.saveData.increment * 10,Color(0.944, 0.608, 0.037, 1.0))
+			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal() * 10,Color(0.944, 0.608, 0.037, 1.0))
 		else:
 			GameHandler.AddMoney()
-			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.saveData.increment)
+			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal())
 		MoneyCollectedText()
 		ParticleManager.PlayParticleOv(part,3)
 		GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 12,randf_range(0.90,1.10))

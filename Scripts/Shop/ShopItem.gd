@@ -6,7 +6,9 @@ enum Powers{
 	powerClick,
 	autoCollect,
 	fasterAutoCollector,
-	rareClick
+	rareClick,
+	doubleClick,
+	autoCollectSheep #this was suppose to be replaced with autoCollect but it's too late (maybe in update)
 }
 
 @export var particle:PackedScene
@@ -55,8 +57,18 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 			descriptionNode.text = "the collector will gain every [wave amp=25.0 freq=10.0]"\
 			+ str(GameHandler.saveData.collectSpeed) + "[/wave] seconds"
 		Powers.rareClick:
-			descriptionNode.text = "the chance of appereance will increase by [wave amp=25.0 freq=10.0]+0.01[/wave]\n"+\
+			descriptionNode.text = "the chance of appereance wil increase by [wave amp=25.0 freq=10.0]+1%[/wave]\n"+\
 			"Current rare wool chance:[colorT speed=3 sColor=#FFFFFF eColor=#F5BF03]" + str(int(GameHandler.saveData.rareChance * 100)) + "%"
+		Powers.doubleClick:
+			descriptionNode.text = "the collection will doubles on each purchase\n"+\
+			"Current Multiplier:[rainbow]" + str(int(GameHandler.saveData.clickMultiply)) + "X"
+		Powers.autoCollectSheep:
+			if (!GameHandler.saveData.autoCollectSheepAbility):
+				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]"
+			else:
+				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\n"+\
+				"collect every:[rainbow]" + str(float(GameHandler.saveData.autoCollectSheep)) + " seconds"
+
 
 func SetBasedOnLevel():
 	if (shopData.level > 0):
@@ -127,9 +139,9 @@ func PowersAct():
 		Powers.powerClick:
 			GameHandler.saveData.increment += 2
 		Powers.autoCollect:
-			GameHandler.saveData.autoCollect += 8
+			GameHandler.saveData.autoCollect += 32
 		Powers.fasterAutoCollector:
-			GameHandler.saveData.collectSpeed -= 0.15
+			GameHandler.saveData.collectSpeed -= 0.30
 			if (GameHandler.saveData.collectSpeed <= 1): # custom level max
 				TweenLevelMax()
 				shopData.canBuy = false
@@ -138,6 +150,17 @@ func PowersAct():
 			if (GameHandler.saveData.rareChance >= 0.70):
 				TweenLevelMax()
 				shopData.canBuy = false
+		Powers.doubleClick:
+			GameHandler.saveData.clickMultiply += 1
+		Powers.autoCollectSheep:
+			if (!GameHandler.saveData.autoCollectSheepAbility):
+				GameHandler.saveData.autoCollectSheepAbility = true
+			else:
+				GameHandler.saveData.autoCollectSheep -= 0.15
+			if (GameHandler.saveData.autoCollectSheep <= 0.30):
+				TweenLevelMax()
+				shopData.canBuy = false
+
 
 
 func TweenLevelMax():
@@ -155,7 +178,8 @@ func Bought():
 			TweenColorLevel(Color(1,0,0,1))
 			levelNode.position.x = originalPosXMoney - 7
 			TweenUtils.StopTween(tweenXtextLevel)
-			tweenXtextLevel = TweenUtils.tweenX(levelNode,originalPosXMoney,2,TweenUtils.Ease.OutCirc)
+			tweenXtextLevel = TweenUtils.tweenX(levelNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
+			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
 			return
 		if (GameHandler.saveData.money >= shopData.price):
 			PowersAct()
@@ -174,6 +198,9 @@ func Bought():
 			#ResourceUtil.SaveResource(GameHandler.saveData,"ShopList.tres","saver")
 			var partic = InstantiateUtil.Instantiate(particle,get_tree().get_first_node_in_group("UI"))
 			partic.global_position = get_node("Holder/ParticlePlace").global_position
+			GlobalAudio.PlayOneShot("res://Sounds/bought.mp3",4)
+			GlobalAudio.PlayOneShot("res://Sounds/party_popper.mp3",4)
+			GlobalAudio.PlayOneShot("res://Sounds/party_sound.mp3",4)
 			GameHandler.SaveAllData()
 			#ResourceSaver.save(GameHandler.shopListGlob,"res://saver/ShopList.tres") # save shop list
 		else:
@@ -181,3 +208,4 @@ func Bought():
 			TweenUtils.StopTween(tweenXtext)
 			tweenXtext = TweenUtils.tweenX(moneyNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
 			TweenColor(Color(1.0, 0.0, 0.0))
+			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)

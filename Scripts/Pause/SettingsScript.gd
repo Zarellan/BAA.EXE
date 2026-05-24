@@ -25,6 +25,7 @@ var soundtrackText:Control
 #@export var soundtrackText:AutoSizeRichTextLabel
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	settings = false
 	audioText = get_node("Volume/AudioVolume")
 	soundtrackText = get_node("Volume/SoundtrackVolume")
 	(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveData.soundtrackVolume
@@ -41,7 +42,7 @@ func _ready() -> void:
 func InitializeSettings():
 	Engine.max_fps = GameHandler.saveData.fps
 	SetVSync()
-	_on_quality_option_item_selected(BasedOnQuality())
+	_on_quality_option_item_selected.call_deferred(BasedOnQuality())
 	ChangeSetting(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -69,6 +70,7 @@ func CodeInvalid(_str):
 	codeText.placeholder_text = _str
 	codeText.text = ""
 	codeText.add_theme_color_override("font_placeholder_color", Color(1, 0, 0))
+	GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
 	codeInvalidTimer.start()
 
 func CodeDoublecheck(_str):
@@ -82,6 +84,9 @@ func CodeDoublecheck(_str):
 				var partic = InstantiateUtil.Instantiate(particle,get_tree().get_first_node_in_group("UI"))
 				partic.global_position = get_node("Code/ParticlePosition").global_position
 				self.scale = Vector2(1.3,0.9)
+				GlobalAudio.PlayOneShot("res://Sounds/bought.mp3",4)
+				GlobalAudio.PlayOneShot("res://Sounds/party_popper.mp3",4)
+				GlobalAudio.PlayOneShot("res://Sounds/party_sound.mp3",4)
 				TweenUtils.tweenScale(self,Vector2(1,1),0.3,TweenUtils.Ease.OutCirc)
 				codeTextMain.modulate.a = 1
 				codeTextTimer.start()

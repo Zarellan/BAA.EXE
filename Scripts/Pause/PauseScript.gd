@@ -6,6 +6,7 @@ static var paused = false
 @export var settings:Control
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	paused = false
 	pass # Replace with function body.
 
 var tweenPause:Tween
