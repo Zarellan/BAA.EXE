@@ -32,6 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://bonny1fk1tevv" path="res://Sprites/ShopImages/DoubleCollect.png" id="21_bhny3"]
 [ext_resource type="Texture2D" uid="uid://8v40eu5pnywd" path="res://Sprites/ShopImages/SheepCollect.png" id="21_edtci"]
 [ext_resource type="Script" uid="uid://c7n1hdvibi2sd" path="res://Scripts/OptionUI/OptionUI.gd" id="22_rw3qx"]
+[ext_resource type="Script" uid="uid://ddlafaoapv40p" path="res://Scripts/Shop/ShopHelper.gd" id="25_e8s6q"]
+[ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/New Piskel.png" id="26_u06jq"]
 [ext_resource type="PackedScene" uid="uid://xlvoesewx06k" path="res://Prefabs/ParticleShop.tscn" id="29_62te2"]
 [ext_resource type="Texture2D" uid="uid://dxdyrvxjbfe6r" path="res://Sprites/OptionUIs/Arrow.png" id="29_pxlk8"]
 
@@ -964,6 +966,65 @@ tile_scroll_hint = true
 layout_direction = 2
 layout_mode = 2
 
+[node name="ShopHelper" type="Control" parent="Control/CanvasLayer" unique_id=211604156 node_paths=PackedStringArray("scroller")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("25_e8s6q")
+scroller = NodePath("../Shop/ScrollContainer")
+
+[node name="UpAlign" type="Control" parent="Control/CanvasLayer/ShopHelper" unique_id=466292899]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Up" type="Button" parent="Control/CanvasLayer/ShopHelper/UpAlign" unique_id=1361574283]
+layout_mode = 0
+offset_left = 283.0
+offset_right = 370.0
+offset_bottom = 90.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/ShopHelper/UpAlign/Up" unique_id=117767300]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_u06jq")
+
+[node name="DownAlign" type="Control" parent="Control/CanvasLayer/ShopHelper" unique_id=1696989066]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="Down" type="Button" parent="Control/CanvasLayer/ShopHelper/DownAlign" unique_id=117179256]
+layout_mode = 0
+offset_left = 282.0
+offset_top = -50.0
+offset_right = 369.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/ShopHelper/DownAlign/Down" unique_id=1519295224]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -3.1415927
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("26_u06jq")
+
 [node name="Mouse" type="Control" parent="Control/CanvasLayer" unique_id=1630782413]
 layout_mode = 3
 anchors_preset = 0
@@ -1014,13 +1075,15 @@ pivot_offset = Vector2(29, 40)
 mouse_filter = 2
 texture = ExtResource("12_pbqe1")
 
-[node name="OptionUI" type="Control" parent="Control/CanvasLayer" unique_id=1519445988 node_paths=PackedStringArray("shopPanel")]
+[node name="OptionUI" type="Control" parent="Control/CanvasLayer" unique_id=1519445988 node_paths=PackedStringArray("shopPanel", "upScroll", "downScroll")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("22_rw3qx")
 shopPanel = NodePath("../Shop")
+upScroll = NodePath("../ShopHelper/UpAlign")
+downScroll = NodePath("../ShopHelper/DownAlign")
 
 [node name="PauseButton" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=2086305507]
 layout_mode = 0
@@ -1218,13 +1281,13 @@ offset_right = 821.0
 offset_bottom = 244.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -1237,13 +1300,13 @@ offset_right = 823.0
 offset_bottom = 356.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -1488,6 +1551,10 @@ anchor_mode = 0
 [connection signal="mouse_entered" from="Sheep/StaticBody2D" to="Control/CanvasLayer/Mouse" method="_on_static_body_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Sheep" method="_on_static_body_2d_mouse_exited"]
 [connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Control/CanvasLayer/Mouse" method="_on_static_body_2d_mouse_exited"]
+[connection signal="button_down" from="Control/CanvasLayer/ShopHelper/UpAlign/Up" to="Control/CanvasLayer/ShopHelper" method="_on_up_button_down"]
+[connection signal="button_up" from="Control/CanvasLayer/ShopHelper/UpAlign/Up" to="Control/CanvasLayer/ShopHelper" method="_on_up_button_up"]
+[connection signal="button_down" from="Control/CanvasLayer/ShopHelper/DownAlign/Down" to="Control/CanvasLayer/ShopHelper" method="_on_down_button_down"]
+[connection signal="button_up" from="Control/CanvasLayer/ShopHelper/DownAlign/Down" to="Control/CanvasLayer/ShopHelper" method="_on_down_button_up"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/PauseButton" to="Control/CanvasLayer/PauseMenu" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/ShoppingKart" to="Control/CanvasLayer/OptionUI" method="_on_shopping_kart_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Resume" to="Control/CanvasLayer/PauseMenu" method="_on_resume_pressed"]
