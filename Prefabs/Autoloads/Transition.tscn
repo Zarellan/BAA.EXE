@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://xo3bp4rhumjk"]
+
+[ext_resource type="Script" uid="uid://c15j5bfxjnr3x" path="res://Scripts/Utils/Autoloads/TransitionScript.gd" id="1_ea576"]
+[ext_resource type="Shader" uid="uid://b735d2pmmqnol" path="res://Shaders/SwirlTransition.gdshader" id="1_ryfht"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_62te2"]
+shader = ExtResource("1_ryfht")
+shader_parameter/progress = 0.0
+shader_parameter/diamondPixelSize = 20.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0wyqw"]
+
+[node name="Transition" type="Control" unique_id=179246562]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("1_ea576")
+
+[node name="TransitionLayer" type="CanvasLayer" parent="." unique_id=249765526]
+
+[node name="TextureRect" type="TextureRect" parent="TransitionLayer" unique_id=1380615404]
+self_modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_62te2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = SubResource("CanvasTexture_0wyqw")

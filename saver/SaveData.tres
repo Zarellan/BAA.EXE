@@ -36,10 +36,10 @@ script = ExtResource("2_35mi1")
 title = "Faster Auto Collect"
 image = ExtResource("5_04lpc")
 description = "make the auto collector collects faster"
-price = 1677
-level = 2
+price = 2247
+level = 3
 power = 3
-tax = 1.3400000000000003
+tax = 1.4600000000000004
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -47,10 +47,10 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_35mi1")
 title = "Rare Wool"
 image = ExtResource("3_5045p")
-price = 3000
-level = 2
+price = 3900
+level = 3
 power = 4
-tax = 1.3
+tax = 1.35
 taxInc = 0.05
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -61,10 +61,10 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_0mqfk")
-money = 4902
+money = 3537
 increment = 24
 autoCollect = 72
-collectSpeed = 2.7
-rareChance = 0.02
+collectSpeed = 2.5500000000000003
+rareChance = 0.03
 shopListData = SubResource("Resource_pbqe1")
 checkCodes = Array[Array]([["eid mubarak", true]])

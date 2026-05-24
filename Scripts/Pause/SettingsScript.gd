@@ -220,3 +220,8 @@ func _on_invalid_code_timer_timeout() -> void:
 	codeText.placeholder_text = "Code"
 	codeText.add_theme_color_override("font_placeholder_color", Color(0.658, 0.658, 0.658, 1.0))
 	pass # Replace with function body.
+
+
+func _on_delete_data_pressed() -> void:
+	TransitionScript.ChangeScene("res://Scenes/MainFarm.tscn")
+	pass # Replace with function body.

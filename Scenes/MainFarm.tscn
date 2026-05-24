@@ -31,7 +31,6 @@
 [ext_resource type="Script" uid="uid://c7n1hdvibi2sd" path="res://Scripts/OptionUI/OptionUI.gd" id="22_rw3qx"]
 [ext_resource type="PackedScene" uid="uid://xlvoesewx06k" path="res://Prefabs/ParticleShop.tscn" id="29_62te2"]
 [ext_resource type="Texture2D" uid="uid://dxdyrvxjbfe6r" path="res://Sprites/OptionUIs/Arrow.png" id="29_pxlk8"]
-[ext_resource type="Shader" uid="uid://b735d2pmmqnol" path="res://Shaders/SwirlTransition.gdshader" id="30_0wyqw"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
 load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
@@ -249,13 +248,6 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 [sub_resource type="CanvasTexture" id="CanvasTexture_67qwo"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_62te2"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_62te2"]
-shader = ExtResource("30_0wyqw")
-shader_parameter/progress = 0.0
-shader_parameter/diamondPixelSize = 20.0
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_0wyqw"]
 
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
@@ -1121,7 +1113,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("15_d3uyy")
 settingText = NodePath("Label/AutoSizeRichTextLabel")
 pauseMenu = NodePath("../PauseMenu")
-settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code")]
+settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code"), NodePath("Data")]
 shadedGrassNode = NodePath("../../../Background/Floor/GrassesDark")
 codeText = NodePath("Code/Code")
 particle = ExtResource("29_62te2")
@@ -1339,6 +1331,7 @@ offset_bottom = 353.0
 scale = Vector2(4.635, 4.635)
 
 [node name="Code" type="Control" parent="Control/CanvasLayer/Settings" unique_id=744997745]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -1375,6 +1368,20 @@ wait_time = 2.0
 one_shot = true
 
 [node name="InvalidCodeTimer" type="Timer" parent="Control/CanvasLayer/Settings/Code" unique_id=268871274]
+
+[node name="Data" type="Control" parent="Control/CanvasLayer/Settings" unique_id=321144524]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DeleteData" type="Button" parent="Control/CanvasLayer/Settings/Data" unique_id=1711414991]
+layout_mode = 0
+offset_left = 475.0
+offset_top = 280.0
+offset_right = 803.0
+offset_bottom = 364.0
+theme_override_font_sizes/font_size = 29
+text = "Deleta Data"
 
 [node name="ArrowButtonLeft" type="Button" parent="Control/CanvasLayer/Settings" unique_id=161299645]
 layout_mode = 0
@@ -1450,24 +1457,6 @@ _current_font_size = 22
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
-[node name="Transition" type="Control" parent="Control/CanvasLayer" unique_id=586323638]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Transition" unique_id=322369329]
-self_modulate = Color(0, 0, 0, 1)
-material = SubResource("ShaderMaterial_62te2")
-layout_mode = 0
-offset_right = 1278.0
-offset_bottom = 716.0
-mouse_filter = 2
-texture = SubResource("CanvasTexture_0wyqw")
-metadata/_edit_lock_ = true
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
 
@@ -1488,6 +1477,7 @@ anchor_mode = 0
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Code/CodeSubmit" to="Control/CanvasLayer/Settings" method="_on_code_submit_pressed"]
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/CodeTextTimer" to="Control/CanvasLayer/Settings" method="_on_code_text_timer_timeout"]
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/InvalidCodeTimer" to="Control/CanvasLayer/Settings" method="_on_invalid_code_timer_timeout"]
+[connection signal="pressed" from="Control/CanvasLayer/Settings/Data/DeleteData" to="Control/CanvasLayer/Settings" method="_on_delete_data_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonLeft" to="Control/CanvasLayer/Settings" method="_on_arrow_button_left_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonRight" to="Control/CanvasLayer/Settings" method="_on_arrow_button_right_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Back" to="Control/CanvasLayer/Settings" method="_on_back_pressed"]
