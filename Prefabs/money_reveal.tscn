@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://bd5vgeuedftgb" path="res://Scripts/Money/MoneyRevealObjectExt.gd" id="1_itmgc"]
 
 [node name="MoneyReveal" type="RichTextLabel" unique_id=975418504]
+texture_filter = 1
 offset_left = 69.0
-offset_top = -180.0
+offset_top = -280.0
 offset_right = 164.0
-offset_bottom = -94.99992
+offset_bottom = -194.99992
 mouse_filter = 2
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/normal_font_size = 32

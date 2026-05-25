@@ -1047,6 +1047,7 @@ offset_right = 370.0
 offset_bottom = 90.0
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/ShopHelper/UpAlign/Up" unique_id=117767300]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1072,6 +1073,7 @@ offset_right = 369.0
 offset_bottom = 40.0
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/ShopHelper/DownAlign/Down" unique_id=1519295224]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1519,6 +1521,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="DeleteData" type="Button" parent="Control/CanvasLayer/Settings/Data" unique_id=1711414991]
+texture_filter = 1
 layout_mode = 0
 offset_left = 475.0
 offset_top = 280.0
@@ -1528,6 +1531,7 @@ theme_override_font_sizes/font_size = 29
 text = "Deleta Data"
 
 [node name="ArrowButtonLeft" type="Button" parent="Control/CanvasLayer/Settings" unique_id=161299645]
+texture_filter = 1
 layout_mode = 0
 offset_left = 257.0
 offset_top = 452.0
@@ -1545,6 +1549,7 @@ grow_vertical = 2
 texture = ExtResource("29_pxlk8")
 
 [node name="ArrowButtonRight" type="Button" parent="Control/CanvasLayer/Settings" unique_id=1781575961]
+texture_filter = 1
 layout_mode = 0
 offset_left = 881.0
 offset_top = 452.0
@@ -1563,6 +1568,7 @@ texture = ExtResource("29_pxlk8")
 flip_h = true
 
 [node name="Back" type="Button" parent="Control/CanvasLayer/Settings" unique_id=1770219669]
+texture_filter = 1
 layout_mode = 0
 offset_left = 505.0
 offset_top = 470.0

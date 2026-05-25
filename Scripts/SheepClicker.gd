@@ -18,12 +18,11 @@ var defaultScale
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	ParticleManager.PlayParticleWarmup(part)
+	ParticleManager.PlayParticleWarmup(partRare)
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
 	TweenUtils.tweenSkewPingPong(sheepShadow,deg_to_rad(18),deg_to_rad(29),1,TweenUtils.Ease.InOutSine)
 	defaultScale = scale
-	
-	ReInitializeParticle(part)
-	ReInitializeParticle(partRare)
 	
 	BringEidCap()
 	

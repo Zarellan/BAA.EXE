@@ -12,7 +12,7 @@ config_version=5
 
 config/name="BAA.EXE"
 run/main_scene="uid://cuwl22km6h2sg"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.6")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -29,14 +29,6 @@ TransitionScript="*uid://xo3bp4rhumjk"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
-
-[dotnet]
-
-project/assembly_name="sheep wool simulator"
-
-[editor]
-
-run/main_run_args="--rendering-driver opengl3"
 
 [editor_plugins]
 

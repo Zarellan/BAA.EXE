@@ -63,6 +63,7 @@ texture = ExtResource("1_s46mk")
 expand_mode = 1
 
 [node name="Title" type="RichTextLabel" parent="Holder" unique_id=102797527]
+texture_filter = 1
 clip_contents = false
 layout_mode = 0
 offset_left = 193.0
@@ -81,6 +82,7 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Description" type="RichTextLabel" parent="Holder" unique_id=1277112873]
+texture_filter = 1
 clip_contents = false
 layout_mode = 0
 offset_left = 193.0
@@ -101,6 +103,7 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Price" type="RichTextLabel" parent="Holder" unique_id=1602445355]
+texture_filter = 1
 clip_contents = false
 layout_mode = 0
 offset_left = 13.0
@@ -108,7 +111,7 @@ offset_top = 53.0
 offset_right = 179.0
 offset_bottom = 107.0
 pivot_offset = Vector2(83, 30.215)
-theme_override_constants/outline_size = 5
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 27
 bbcode_enabled = true
 text = "$431.31k
@@ -123,6 +126,7 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Level" type="RichTextLabel" parent="Holder" unique_id=1208071378]
 modulate = Color(1, 1, 1, 0)
+texture_filter = 1
 clip_contents = false
 layout_mode = 0
 offset_left = 5.000001

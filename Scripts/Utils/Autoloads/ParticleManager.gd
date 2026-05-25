@@ -5,6 +5,13 @@ extends Node
 func _ready() -> void:
 	pass # Replace with function body.
 
+func PlayParticleWarmup(particle: GPUParticles2D):
+	var instance := particle.duplicate() as GPUParticles2D
+	instance.global_position = Vector2(-9999,-9999)
+	instance.amount = 1
+	instance.emitting = true
+	instance.finished.connect(instance.queue_free)
+	get_tree().current_scene.add_child.call_deferred(instance)
 
 func PlayParticleOv(particle: GPUParticles2D, count: int, force := false):
 	if (GameHandler.saveData.quality == GameHandler.Quality.Low && !force):
