@@ -1,6 +1,9 @@
 extends Node2D
 class_name Sheep
 
+@export var tutorial:Node2D
+@export var tutorialTimer:Timer
+
 @export var moneyText:Control
 @export var textMoneyRev:Control
 @export var part:GPUParticles2D
@@ -23,8 +26,15 @@ func _ready() -> void:
 	ReInitializeParticle(partRare)
 	
 	BringEidCap()
+	
+	if (!GameHandler.saveData.tutorialed):
+		tutorialTimer.start()
+		tutorialTimer.timeout.connect(StartTutorial)
 	pass # Replace with function body.
 
+var twTutorial:Tween
+func StartTutorial():
+	twTutorial = TweenUtils.tweenAlpha(tutorial,1,2,TweenUtils.Ease.linear)
 func BringEidCap():
 	if (GameHandler.saveData.checkCodes[0][1]):
 		get_node("StaticBody2D/EidCap").visible = true
@@ -71,7 +81,11 @@ func Pressed():
 			scaleYtween.stop()
 		scale.y = defaultScale.y - 0.20
 		scaleYtween = TweenUtils.tweenScaleY(self,defaultScale.y,0.3,TweenUtils.Ease.OutCirc)
-
+		if (!GameHandler.saveData.tutorialed):
+			tutorialTimer.stop()
+			TweenUtils.StopTween(twTutorial)
+			TweenUtils.tweenAlpha(tutorial,0,0.3,TweenUtils.Ease.linear)
+			GameHandler.saveData.tutorialed = true
 		canPress = false
 		await get_tree().create_timer(0.01).timeout
 		canPress = true

@@ -129,6 +129,44 @@ _data = {
 &"RESET": SubResource("Animation_2o3fe")
 }
 
+[sub_resource type="Animation" id="Animation_u06jq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rmoyj"]
+resource_name = "Tut"
+length = 0.6667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10.235), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xkvfg"]
+_data = {
+&"RESET": SubResource("Animation_u06jq"),
+&"Tut": SubResource("Animation_rmoyj")
+}
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4gutc"]
 particles_animation = true
 particles_anim_h_frames = 3
@@ -204,7 +242,7 @@ turbulence_influence_over_life = SubResource("CurveTexture_5xh03")
 script = ExtResource("8_v5bxn")
 title = "Improve Shear"
 image = ExtResource("9_cxla1")
-description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]2[/wave]"
+description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
 price = 25
 power = 1
 tax = 1.05
@@ -790,10 +828,12 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("moneyText", "textMoneyRev", "part", "partRare", "mouseControl", "sheepShadow") groups=["Sheep"]]
+[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("tutorial", "tutorialTimer", "moneyText", "textMoneyRev", "part", "partRare", "mouseControl", "sheepShadow") groups=["Sheep"]]
 position = Vector2(132, 680)
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_0r47l")
+tutorial = NodePath("../Tutorial")
+tutorialTimer = NodePath("../Tutorial/StartTutorial")
 moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter/Script")
 textMoneyRev = NodePath("../Control/CanvasLayer/TextRev")
 part = NodePath("../GPUParticles2D")
@@ -845,6 +885,23 @@ offset = Vector2(-7.9341125, -25.322632)
 root_node = NodePath("../StaticBody2D")
 libraries/ = SubResource("AnimationLibrary_4g1jp")
 autoplay = &"Idle"
+
+[node name="Tutorial" type="Node2D" parent="." unique_id=1475479390]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(123.000015, 349)
+rotation = -3.1415927
+scale = Vector2(3.4734442, 3.4734442)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Tutorial" unique_id=1770443649]
+texture = ExtResource("26_u06jq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial" unique_id=1986836357]
+libraries/ = SubResource("AnimationLibrary_xkvfg")
+autoplay = &"Tut"
+
+[node name="StartTutorial" type="Timer" parent="Tutorial" unique_id=900519567]
+wait_time = 3.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1342187347]
 texture_filter = 1

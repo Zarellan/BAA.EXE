@@ -14,7 +14,7 @@
 script = ExtResource("2_04lpc")
 title = "Improve Shear"
 image = ExtResource("3_hantp")
-description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]2[/wave]"
+description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
 price = 25
 power = 1
 tax = 1.05
@@ -81,5 +81,6 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_npldj")
-money = 40
+money = 130
 shopListData = SubResource("Resource_pbqe1")
+tutorialed = true

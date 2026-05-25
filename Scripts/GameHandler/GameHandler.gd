@@ -19,6 +19,8 @@ var timerAutoCollectorSheep:Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if (OS.has_feature("editor")):
+		get_tree().reload_current_scene() # reloading early to face early crash rather that being surprised
 	saveData = GameSaveData.new()
 	GameHandler.LoadAllData()
 	timerSaveCooldown = CreateTimer(3, _on_save_timer_timeout)

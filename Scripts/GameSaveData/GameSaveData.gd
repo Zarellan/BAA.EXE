@@ -10,6 +10,7 @@ class_name GameSaveData
 @export var autoCollectSheep:float = 3
 @export var rareChance:float = 0.00
 @export var shopListData:ShopList
+@export var tutorialed:bool = false
 #settings
 @export var soundtrackVolume:float = 70
 @export var audioVolume:float = 70
