@@ -927,6 +927,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ujam8")
 
 [node name="Control" type="Control" parent="." unique_id=2002302030]
+layout_direction = 2
 layout_mode = 3
 anchors_preset = 0
 metadata/_edit_use_anchors_ = true
