@@ -2,9 +2,32 @@
 
 [ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="1_s46mk"]
 [ext_resource type="Script" uid="uid://cwxcmuxj4cp8" path="res://Scripts/Shop/ShopItem.gd" id="1_vpf6l"]
+[ext_resource type="Script" uid="uid://p7ewib8kpsso" path="res://Scripts/Particles/ShopParticle.gd" id="2_f75f0"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_f7n8r"]
-[ext_resource type="PackedScene" uid="uid://xlvoesewx06k" path="res://Prefabs/ParticleShop.tscn" id="4_jdor1"]
 [ext_resource type="Script" uid="uid://dqhkgfy2b1oo7" path="res://Scripts/TextEffects/FadeColor.gd" id="5_f75f0"]
+
+[sub_resource type="Gradient" id="Gradient_f7n8r"]
+offsets = PackedFloat32Array(0, 0.9351351, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wq2pi"]
+offsets = PackedFloat32Array(0, 0.34170854, 0.80904526, 1)
+colors = PackedColorArray(0.85953, 0.77638775, 1.540184e-06, 1, 0.8199614, 0.16096592, 0.7236853, 1, 0.2194601, 0.7722057, 0.9104029, 1, 1, 1, 1, 1)
+
+[sub_resource type="PackedScene" id="PackedScene_x4kgh"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741825, 1073741824, 19, 18, 2, 0, 0),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("CPUParticles2D", "CPUParticles2D", "visibility_layer", "emitting", "amount", "lifetime", "one_shot", "explosiveness", "emission_shape", "emission_sphere_radius", "particle_flag_align_y", "spread", "initial_velocity_max", "scale_amount_min", "scale_amount_max", "color_ramp", "color_initial_ramp", "script", "_on_finished", "finished"),
+"node_count": 1,
+"node_ids": PackedInt32Array(1003065689),
+"node_paths": [NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 16, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 12, 10, 13, 11, 14, 12, 15, 13, 16, 14, 17, 15, 0),
+"variants": [2, false, 30, 2.0, true, 1.0, 1, 16.6, true, 180.0, 1000.0, 0.0, 8.93, SubResource("Gradient_f7n8r"), SubResource("Gradient_wq2pi"), ExtResource("2_f75f0")],
+"version": 3
+}
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_s46mk"]
 
@@ -23,7 +46,7 @@ offset_bottom = 163.0
 grow_horizontal = 0
 pivot_offset = Vector2(900, 0)
 script = ExtResource("1_vpf6l")
-particle = ExtResource("4_jdor1")
+particle = SubResource("PackedScene_x4kgh")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)
@@ -111,8 +134,8 @@ offset_top = 53.0
 offset_right = 179.0
 offset_bottom = 107.0
 pivot_offset = Vector2(83, 30.215)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 27
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 54
 bbcode_enabled = true
 text = "$431.31k
 "
@@ -120,7 +143,7 @@ scroll_active = false
 vertical_alignment = 1
 script = ExtResource("3_f7n8r")
 _max_size = 54
-_current_font_size = 27
+_current_font_size = 54
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -135,15 +158,15 @@ offset_right = 189.25
 offset_bottom = 64.625
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(83, 26.4)
-theme_override_constants/outline_size = 9
-theme_override_font_sizes/normal_font_size = 46
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 81
 bbcode_enabled = true
 text = "lv:1"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("3_f7n8r")
 _max_size = 81
-_current_font_size = 46
+_current_font_size = 81
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 

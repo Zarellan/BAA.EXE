@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://4u105h2iafr1"]
+
+[ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_mvpit"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="2_l587h"]
+[ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="3_ek0oe"]
+[ext_resource type="Script" uid="uid://dgrns36cuqs6e" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="4_br4cx"]
+
+[sub_resource type="Resource" id="Resource_hotcp"]
+script = ExtResource("1_mvpit")
+title = "rrr"
+image = ExtResource("2_l587h")
+description = "rrrr"
+rebirthPrice = 8
+tax = 1.0
+taxInc = 1.0
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
+[sub_resource type="Resource" id="Resource_valao"]
+script = ExtResource("3_ek0oe")
+items = Array[ExtResource("1_mvpit")]([SubResource("Resource_hotcp")])
+metadata/_custom_type_script = "uid://b6bpycct3x2he"
+
+[resource]
+script = ExtResource("4_br4cx")
+rebirth = 15
+rebirthListData = SubResource("Resource_valao")

@@ -6,6 +6,7 @@ enum Quality{
 }
 
 @export var saveData:GameSaveData
+@export var saveDataRebirth:GameSaveRebirth
 
 
 var globalDelta:float
@@ -22,7 +23,8 @@ func _ready() -> void:
 	if (OS.has_feature("editor")):
 		get_tree().reload_current_scene() # reloading early to face early crash rather that being surprised
 	saveData = GameSaveData.new()
-	GameHandler.LoadAllData()
+	saveDataRebirth = GameSaveRebirth.new()
+	GameHandler.LoadAllDataGlob()
 	timerSaveCooldown = CreateTimer(3, _on_save_timer_timeout)
 	timerAutoCollector = CreateTimer(saveData.collectSpeed, NowCollect, false)
 	timerAutoCollector.start()
@@ -54,6 +56,9 @@ func SaveAllData():
 	ResourceUtil.SaveResource(saveData,"SaveData","saver")
 	dirtySave = false
 
+func SaveAllDataRebirth():
+	ResourceUtil.SaveResource(saveDataRebirth,"SaveDataRebirth","saver")
+
 func LoadAllData():
 	var loader:GameSaveData
 	loader = ResourceUtil.LoadResources("SaveData","saver") as GameSaveData
@@ -62,13 +67,29 @@ func LoadAllData():
 	saveData = loader
 	return true
 
+func LoadAllDataRebirth():
+	var loader:GameSaveRebirth
+	loader = ResourceUtil.LoadResources("SaveDataRebirth","saver") as GameSaveRebirth
+	if loader == null:
+		return false
+	saveDataRebirth = loader
+	return true
+
+func SaveAllDataGlob():
+	SaveAllData()
+	SaveAllDataRebirth()
+
+func LoadAllDataGlob():
+	LoadAllData()
+	LoadAllDataRebirth()
+
 func AddMoney():
 	if (IncrementTotal() < 0):
 		return
 	saveData.money += IncrementTotal()
 	dirtySave = true
 	if (canSave):
-		SaveAllData()
+		SaveAllDataGlob()
 		timerSaveCooldown.start()
 		canSave = false
 
@@ -80,7 +101,7 @@ func AddMoneyForce(quant:int):
 		get_sheep().MoneyCollectedText()
 	dirtySave = true
 	if (canSave):
-		SaveAllData()
+		SaveAllDataGlob()
 		timerSaveCooldown.start()
 		canSave = false
 
@@ -90,13 +111,13 @@ func AddMoneyRare():
 	saveData.money += IncrementTotal() * 10
 	dirtySave = true
 	if (canSave):
-		SaveAllData()
+		SaveAllDataGlob()
 		timerSaveCooldown.start()
 		canSave = false
 
 func _on_save_timer_timeout():
 	if dirtySave:
-		SaveAllData()
+		SaveAllDataGlob()
 	canSave = true
 
 func IncrementTotal():
@@ -109,4 +130,7 @@ func NowCollect():
 		get_sheep().MoneyCollectedText()
 	saveData.money += saveData.autoCollect
 	timerAutoCollector.wait_time = saveData.collectSpeed
-	SaveAllData()
+	SaveAllDataGlob()
+
+func GamePausedPartil() -> bool:
+	return PauseScript.paused || RebirthMenu.isRebirthMenu

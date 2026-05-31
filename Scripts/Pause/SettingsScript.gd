@@ -50,7 +50,8 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel") && settings:
 		(pauseMenu as PauseScript).BringPauseFromSettings()
 		ExitSettings()
-
+	if (Input.is_action_just_pressed("Key_Q") && settings):
+		ExitSettings()
 	if Input.is_action_just_pressed("Enter_Key") && indexSettings == 2:
 		CodeRewards()
 	pass
@@ -228,5 +229,9 @@ func _on_invalid_code_timer_timeout() -> void:
 
 
 func _on_delete_data_pressed() -> void:
+	ResourceUtil.RemoveResources("SaveData","saver")
+	GameHandler.saveData = GameSaveData.new()
+	ResourceUtil.RemoveResources("SaveDataRebirth","saver")
+	GameHandler.saveDataRebirth = GameSaveRebirth.new()
 	TransitionScript.ChangeScene("res://Scenes/MainFarm.tscn")
 	pass # Replace with function body.

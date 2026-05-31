@@ -1,19 +1,17 @@
 extends Control
-class_name ShopItem
+class_name RebirthItem
 
 enum Powers{
-	none,
-	powerClick,
-	autoCollect,
-	fasterAutoCollector,
-	rareClick,
-	doubleClick,
-	autoCollectSheep #this was suppose to be replaced with autoCollect but it's too late (maybe in update)
+	none
 }
 
 @export var particle:PackedScene
 
-@export var shopData:ShopClass
+@export var shopData:RebirthClass
+
+@export var randomSpeedTitleShade:Control
+@export var randomSpeedDescriptionShade:Control
+
 
 #tweens
 var tweenAlpha:Tween
@@ -28,8 +26,6 @@ var levelNode:Control
 
 var originalPosXMoney
 
-@export var coins: int = 0
-
 var frequencyWavePrice:ValueSaver = ValueSaver.new()
 
 var centerYdef = 53.0
@@ -40,34 +36,30 @@ var levelMaxYdef = 53.0
 
 func _ready() -> void:
 	frequencyWavePrice.number = 0
-	originalPosXMoney = get_node("Holder/Price").position.x
-	moneyNode = get_node("Holder/Price")
+	originalPosXMoney = get_node("Holder/Prce/Price").position.x
+	moneyNode = get_node("Holder/Prce/Price")
 	levelNode = get_node("Holder/Level")
-	get_node("Holder/Title").text = shopData.title
+	get_node("Holder/SubViewportContainer/SubViewport/Title").text = shopData.title
 	get_node("Holder/ItemImage").texture = shopData.image
-	descriptionNode = get_node("Holder/Description")
+	descriptionNode = get_node("Holder/SubViewportContainerDesc/SubViewport/Description")
 	descriptionNode.text = shopData.description
 	ModifyTexts()
 	CustomItemText()
 	SetBasedOnLevel()
+	RandomGradient()
 	pass # Replace with function body.
+
+func RandomGradient():
+	var mat = randomSpeedTitleShade.material.duplicate()
+	mat.set_shader_parameter("random_start", randf_range(0.0,1.0))
+	randomSpeedTitleShade.material = mat
+	var mat2 = randomSpeedDescriptionShade.material.duplicate()
+	mat2.set_shader_parameter("random_start", randf_range(0.0,1.0))
+	randomSpeedDescriptionShade.material = mat2
 func CustomItemText(): #godot doesn't support variable inside serialize inspector, so I have to set it manually
 	match shopData.power:
-		Powers.fasterAutoCollector:
-			descriptionNode.text = "the collector will gain every [wave amp=25.0 freq=10.0]"\
-			+ str(GameHandler.saveData.collectSpeed) + "[/wave] seconds"
-		Powers.rareClick:
-			descriptionNode.text = "the chance of appereance wil increase by [wave amp=25.0 freq=10.0]+1%[/wave]\n"+\
-			"Current rare wool chance:[colorT speed=3 sColor=#FFFFFF eColor=#F5BF03]" + str(int(GameHandler.saveData.rareChance * 100)) + "%"
-		Powers.doubleClick:
-			descriptionNode.text = "the collection will doubles on each purchase\n"+\
-			"Current Multiplier:[rainbow]" + str(int(GameHandler.saveData.clickMultiply)) + "X"
-		Powers.autoCollectSheep:
-			if (!GameHandler.saveData.autoCollectSheepAbility):
-				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]"
-			else:
-				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\n"+\
-				"collect every:[rainbow]" + str(float(GameHandler.saveData.autoCollectSheep)) + " seconds"
+		Powers.none:
+			pass
 
 
 func SetBasedOnLevel():
@@ -81,13 +73,13 @@ func SetBasedOnLevel():
 		moneyNode.modulate.a = 0
 
 
-func set_item(shopDat:ShopClass):
-	shopData = shopDat
+func set_item(rebirthDat:RebirthClass):
+	shopData = rebirthDat
 
 func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
-	moneyNode.text = "[wave amp=%d freq=10]%s%s[/wave]" % [frequencyWavePrice.number, "$",NumberFormat.Format(shopData.price)]
+	moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [frequencyWavePrice.number,NumberFormat.Format(shopData.rebirthPrice)]
 	pass
 
 func Hovered():
@@ -112,7 +104,7 @@ func Hovered():
 
 func ModifyTexts():
 	#moneyNode.text = "$" + str(shopData.price)
-	moneyNode.text = "[wave amp=%d freq=5]%s%d[/wave]" % [frequencyWavePrice.number, "$",shopData.price]
+	moneyNode.text = "[wave amp=%d freq=5]%s%d[/wave]" % [frequencyWavePrice.number, "$",shopData.rebirthPrice]
 	if (shopData.canBuy):
 		levelNode.text = "lv:"+ str(shopData.level)
 	else:
@@ -136,32 +128,8 @@ var tweenXtext:Tween
 
 func PowersAct():
 	match shopData.power:
-		Powers.powerClick:
-			GameHandler.saveData.increment += 2
-		Powers.autoCollect:
-			GameHandler.saveData.autoCollect += 32
-		Powers.fasterAutoCollector:
-			GameHandler.saveData.collectSpeed -= 0.30
-			if (GameHandler.saveData.collectSpeed <= 1): # custom level max
-				TweenLevelMax()
-				shopData.canBuy = false
-		Powers.rareClick:
-			GameHandler.saveData.rareChance += 0.01
-			if (GameHandler.saveData.rareChance >= 0.70):
-				TweenLevelMax()
-				shopData.canBuy = false
-		Powers.doubleClick:
-			GameHandler.saveData.clickMultiply += 1
-		Powers.autoCollectSheep:
-			if (!GameHandler.saveData.autoCollectSheepAbility):
-				GameHandler.saveData.autoCollectSheepAbility = true
-			else:
-				GameHandler.saveData.autoCollectSheep -= 0.15
-			if (GameHandler.saveData.autoCollectSheep <= 0.30):
-				TweenLevelMax()
-				shopData.canBuy = false
-
-
+		Powers.none:
+			pass
 
 func TweenLevelMax():
 	TweenUtils.tweenY(levelNode,centerYdef,0.3,TweenUtils.Ease.OutCirc)
@@ -181,10 +149,10 @@ func Bought():
 			tweenXtextLevel = TweenUtils.tweenX(levelNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
 			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
 			return
-		if (GameHandler.saveData.money >= shopData.price):
+		if (GameHandler.saveData.rebirth >= shopData.rebirthPrice):
 			PowersAct()
-			GameHandler.saveData.money -= shopData.price
-			shopData.price = int(floor(shopData.price * shopData.tax))
+			GameHandler.saveData.money -= shopData.rebirthPrice
+			shopData.rebirthPrice = int(floor(shopData.rebirthPrice * shopData.tax))
 			shopData.tax += shopData.taxInc
 			TweenColor(Color(0.0, 0.905, 0.2))
 			frequencyWavePrice.number = 40

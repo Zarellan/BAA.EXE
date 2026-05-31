@@ -17,6 +17,8 @@ func _process(_delta: float) -> void:
 			BringPause()
 		elif paused && !SettingsScript.settings:
 			ExitPause()
+	if (Input.is_action_just_pressed("Key_Q") && paused):
+		ExitPause()
 	pass
 
 
@@ -42,7 +44,7 @@ func _on_resume_pressed() -> void:
 
 
 func _on_save_pressed() -> void:
-	GameHandler.SaveAllData()
+	GameHandler.SaveAllDataGlob()
 	pass # Replace with function body.
 
 

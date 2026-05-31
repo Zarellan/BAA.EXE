@@ -1,0 +1,305 @@
+[gd_scene format=3 uid="uid://dycdj7liwrl5t"]
+
+[ext_resource type="Script" uid="uid://dlns2sqtg1uyy" path="res://Scripts/Shop/rebirth/RebirthItem.gd" id="1_nrdbl"]
+[ext_resource type="Script" uid="uid://p7ewib8kpsso" path="res://Scripts/Particles/ShopParticle.gd" id="2_r7bl7"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_gjpg2"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="4_tejl3"]
+[ext_resource type="Shader" uid="uid://cenjsprd5awq" path="res://Shaders/Text/GradientText.gdshader" id="5_gjpg2"]
+[ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/Rebirth1.png" id="6_oqi44"]
+
+[sub_resource type="Gradient" id="Gradient_f7n8r"]
+offsets = PackedFloat32Array(0, 0.9351351, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wq2pi"]
+offsets = PackedFloat32Array(0, 0.34170854, 0.80904526, 1)
+colors = PackedColorArray(0.85953, 0.77638775, 1.540184e-06, 1, 0.8199614, 0.16096592, 0.7236853, 1, 0.2194601, 0.7722057, 0.9104029, 1, 1, 1, 1, 1)
+
+[sub_resource type="PackedScene" id="PackedScene_oqi44"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741825, 1073741824, 19, 18, 2, 0, 0),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("CPUParticles2D", "CPUParticles2D", "visibility_layer", "emitting", "amount", "lifetime", "one_shot", "explosiveness", "emission_shape", "emission_sphere_radius", "particle_flag_align_y", "spread", "initial_velocity_max", "scale_amount_min", "scale_amount_max", "color_ramp", "color_initial_ramp", "script", "_on_finished", "finished"),
+"node_count": 1,
+"node_ids": PackedInt32Array(1003065689),
+"node_paths": [NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 16, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 12, 10, 13, 11, 14, 12, 15, 13, 16, 14, 17, 15, 0),
+"variants": [2, false, 30, 2.0, true, 1.0, 1, 16.6, true, 180.0, 1000.0, 0.0, 8.93, SubResource("Gradient_f7n8r"), SubResource("Gradient_wq2pi"), ExtResource("2_r7bl7")],
+"version": 3
+}
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_s46mk"]
+
+[sub_resource type="Shader" id="Shader_oqi44"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D gradient : source_color;
+uniform float gradient_mix_amount = 1.0;
+
+// NEW: Controls how fast the gradient moves. Set to 0.0 to freeze it!
+uniform float movement_speed = 1.0;
+ 
+uniform float random_start = 0.0;
+
+vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
+	float cosa = cos(rotation);
+	float sina = sin(rotation);
+	uv -= pivot;
+	return vec2(cosa * uv.x - sina * uv.y, cosa * uv.y + sina * uv.x) + pivot;
+}
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+void fragment() {
+	float gradient_Rand = rand(vec2(TIME,0.0));
+	// 1. Get the original pixel color and alpha from the text/font texture
+	vec4 text_tex = texture(TEXTURE, UV);
+	
+	// 2. Rotate the gradient 90 degrees around the center
+	vec2 myUv = rotateUV(UV, vec2(0.5, 0.5), radians(90));
+	
+	// NEW: Shift the UV coordinates over time based on our movement speed.
+	// We use \"fract()\" to keep the numbers small and prevent floating-point precision bugs.
+	myUv.x = fract(myUv.x + (TIME * movement_speed) + random_start);
+	
+	vec3 gradientTex = texture(gradient, myUv).rgb;
+	
+	// 3. Convert color into grayscale value
+	float greyscale_value = dot(gradientTex.rgb, vec3(0.299, 0.587, 0.114));
+	
+	// 4. Sample the color from your gradient palette
+	vec3 sampled_color = texture(gradient, vec2(greyscale_value, 0.0)).rgb;
+	vec3 final_gradient = mix(gradientTex.rgb, sampled_color, gradient_mix_amount);
+	
+	// 5. Apply the black outline fix
+	COLOR.rgb = mix(vec3(0.0), final_gradient, text_tex.rgb);
+	
+	// Preserve alpha
+	COLOR.a = text_tex.a;
+}"
+
+[sub_resource type="Gradient" id="Gradient_gjpg2"]
+offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tejl3"]
+gradient = SubResource("Gradient_gjpg2")
+fill_from = Vector2(0, 0.9273504)
+fill_to = Vector2(1, 0.6111111)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjpg2"]
+shader = SubResource("Shader_oqi44")
+shader_parameter/gradient = SubResource("GradientTexture2D_tejl3")
+shader_parameter/gradient_mix_amount = 1.0
+shader_parameter/movement_speed = 1.0
+shader_parameter/random_start = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tejl3"]
+shader = ExtResource("5_gjpg2")
+shader_parameter/gradient = SubResource("GradientTexture2D_tejl3")
+shader_parameter/gradient_mix_amount = 1.0
+shader_parameter/movement_speed = 1.0
+shader_parameter/random_start = 0.0
+
+[node name="RebirthItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("randomSpeedTitleShade", "randomSpeedDescriptionShade")]
+custom_minimum_size = Vector2(900, 163)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -900.0
+offset_bottom = 163.0
+grow_horizontal = 0
+pivot_offset = Vector2(900, 0)
+script = ExtResource("1_nrdbl")
+particle = SubResource("PackedScene_oqi44")
+randomSpeedTitleShade = NodePath("Holder/SubViewportContainer")
+randomSpeedDescriptionShade = NodePath("Holder/SubViewportContainerDesc")
+
+[node name="BG" type="TextureRect" parent="." unique_id=175554439]
+modulate = Color(1, 1, 1, 0.37254903)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_s46mk")
+
+[node name="Holder" type="TextureRect" parent="." unique_id=302152906]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(450, 81.5)
+
+[node name="ItemImage" type="TextureRect" parent="Holder" unique_id=172852597]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -63.5
+offset_right = -41.0
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(60, 67)
+texture = ExtResource("3_gjpg2")
+expand_mode = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Holder" unique_id=1387889320]
+material = SubResource("ShaderMaterial_gjpg2")
+layout_mode = 0
+offset_left = 193.0
+offset_top = 24.0
+offset_right = 705.0
+offset_bottom = 78.0
+
+[node name="SubViewport" type="SubViewport" parent="Holder/SubViewportContainer" unique_id=163992961]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(512, 54)
+render_target_update_mode = 4
+
+[node name="Title" type="RichTextLabel" parent="Holder/SubViewportContainer/SubViewport" unique_id=1726089732]
+self_modulate = Color(1, 1, 0, 1)
+texture_filter = 1
+clip_contents = false
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 506.0
+offset_bottom = 54.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "place holder"
+scroll_active = false
+script = ExtResource("4_tejl3")
+_max_size = 41
+_current_font_size = 41
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="SubViewportContainerDesc" type="SubViewportContainer" parent="Holder" unique_id=1884118040]
+material = SubResource("ShaderMaterial_tejl3")
+layout_mode = 0
+offset_left = 194.0
+offset_top = 80.0
+offset_right = 707.0
+offset_bottom = 147.0
+
+[node name="SubViewport" type="SubViewport" parent="Holder/SubViewportContainerDesc" unique_id=292138394]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(512, 54)
+render_target_update_mode = 4
+
+[node name="Description" type="RichTextLabel" parent="Holder/SubViewportContainerDesc/SubViewport" unique_id=1317254129]
+self_modulate = Color(1, 1, 0, 1)
+texture_filter = 1
+clip_contents = false
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 506.0
+offset_bottom = 54.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "place holder"
+scroll_active = false
+script = ExtResource("4_tejl3")
+_max_size = 26
+_current_font_size = 26
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Prce" type="Control" parent="Holder" unique_id=1003940669]
+anchors_preset = 0
+offset_top = 51.0
+offset_right = 68.0
+offset_bottom = 114.0
+
+[node name="Rebirth" type="TextureRect" parent="Holder/Prce" unique_id=1434435827]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 65.0
+offset_bottom = 66.0
+scale = Vector2(0.63580257, 0.53407496)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_oqi44")
+
+[node name="Rebirth2" type="TextureRect" parent="Holder/Prce" unique_id=1007232844]
+layout_mode = 0
+offset_left = -1.0000002
+offset_top = -5.000005
+offset_right = 63.0
+offset_bottom = 58.999996
+rotation = -3.1349044
+scale = Vector2(0.63580257, 0.53407496)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("6_oqi44")
+
+[node name="Price" type="RichTextLabel" parent="Holder/Prce" unique_id=1602445355]
+texture_filter = 1
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.48400003
+anchor_right = 1.0
+anchor_bottom = 0.48400003
+offset_top = -29.492004
+offset_right = 116.0
+offset_bottom = 24.507998
+pivot_offset = Vector2(83, 30.215)
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 54
+bbcode_enabled = true
+text = "313k"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("4_tejl3")
+_max_size = 54
+_current_font_size = 54
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Level" type="RichTextLabel" parent="Holder" unique_id=1208071378]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+clip_contents = false
+layout_mode = 0
+offset_left = 5.000001
+offset_top = 17.0
+offset_right = 189.25
+offset_bottom = 64.625
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(83, 26.4)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 81
+bbcode_enabled = true
+text = "lv:1"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("4_tejl3")
+_max_size = 81
+_current_font_size = 81
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="ParticlePlace" type="Control" parent="Holder" unique_id=1111193086]
+anchors_preset = 0
+offset_left = 95.0
+offset_top = 82.0
+offset_right = 135.0
+offset_bottom = 122.0

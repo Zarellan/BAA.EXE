@@ -20,7 +20,7 @@ func _process(_delta: float) -> void:
 	if DeviceCheckerUtil.IsUsingPhone(): # if using phone, it's annoying to make shear appear in random place
 		visible = false
 		return
-	if entered && !PauseScript.paused:
+	if entered && !GameHandler.GamePausedPartil():
 		position = get_viewport().get_mouse_position() - pivot_offset
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 		visible = true
