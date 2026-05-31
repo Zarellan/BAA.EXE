@@ -15,9 +15,10 @@ script = ExtResource("2_04lpc")
 title = "Improve Shear"
 image = ExtResource("3_hantp")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-price = 25
+price = 29
+level = 2
 power = 1
-tax = 1.05
+tax = 1.2500000000000002
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -81,6 +82,12 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_npldj")
+<<<<<<< Updated upstream
 money = 154
+=======
+money = 10413
+increment = 6
+>>>>>>> Stashed changes
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true
+checkCodes = Array[Array]([["eid mubarak", true]])
