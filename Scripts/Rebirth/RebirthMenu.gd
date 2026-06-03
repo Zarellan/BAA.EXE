@@ -7,24 +7,26 @@ static var isRebirthMenu:bool = false
 
 var tweenRebirth:Tween
 
-const base_rebirth:int = 50000
+const base_rebirth:float = 50000
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-var totalRebirth = 0
-var calcBirth = 0
+var totalRebirth = 0.0
+var calcBirth = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("Key_Q") && !isRebirthMenu):
 		BringRebirth()
 	elif (isRebirthMenu && (Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("Key_Q"))):
 		ExitRebirth()
 	calcBirth = sqrt(GameHandler.saveData.money / base_rebirth)
-	totalRebirth = floor(calcBirth)
-
-	textRebirth.text = NumberFormat.Format(totalRebirth)
+	totalRebirth = calcBirth
+	if (totalRebirth < 1000):
+		textRebirth.text = "%.2f" %totalRebirth
+	else:
+		textRebirth.text = NumberFormat.Format(totalRebirth)
 	if (totalRebirth < 1.0):
 		(buttonRebirth as Button).disabled = true
 		(buttonRebirth as Button).text = "Must atleast have\nmore than $50k"
@@ -61,6 +63,6 @@ func _on_rebirth_pressed() -> void:
 func Rebirthed():
 	ResourceUtil.RemoveResources("SaveData","saver")
 	GameHandler.saveData = GameSaveData.new()
-	GameHandler.saveDataRebirth.rebirth += totalRebirth
+	GameHandler.saveDataRebirth.rebirth += int(totalRebirth)
 	GameHandler.SaveAllDataRebirth()
 	isRebirthMenu = false

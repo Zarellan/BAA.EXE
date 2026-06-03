@@ -85,17 +85,26 @@ void fragment() {
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tejl3"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gjpg2"]
 gradient = SubResource("Gradient_gjpg2")
 fill_from = Vector2(0, 0.9273504)
 fill_to = Vector2(1, 0.6111111)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gjpg2"]
 shader = SubResource("Shader_oqi44")
-shader_parameter/gradient = SubResource("GradientTexture2D_tejl3")
+shader_parameter/gradient = SubResource("GradientTexture2D_gjpg2")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/movement_speed = 1.0
 shader_parameter/random_start = 0.0
+
+[sub_resource type="Gradient" id="Gradient_yopb8"]
+offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tejl3"]
+gradient = SubResource("Gradient_yopb8")
+fill_from = Vector2(0, 0.9273504)
+fill_to = Vector2(1, 0.6111111)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tejl3"]
 shader = ExtResource("5_gjpg2")
@@ -226,7 +235,8 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 anchors_preset = 0
 offset_top = 51.0
 offset_right = 68.0
-offset_bottom = 114.0
+offset_bottom = 114.000015
+pivot_offset = Vector2(117, 32)
 
 [node name="Rebirth" type="TextureRect" parent="Holder/Prce" unique_id=1434435827]
 layout_mode = 0
@@ -262,15 +272,15 @@ offset_top = -29.492004
 offset_right = 116.0
 offset_bottom = 24.507998
 pivot_offset = Vector2(83, 30.215)
-theme_override_constants/outline_size = 11
-theme_override_font_sizes/normal_font_size = 54
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 29
 bbcode_enabled = true
 text = "313k"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 54
-_current_font_size = 54
+_current_font_size = 29
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -285,15 +295,15 @@ offset_right = 189.25
 offset_bottom = 64.625
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(83, 26.4)
-theme_override_constants/outline_size = 16
-theme_override_font_sizes/normal_font_size = 81
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
 text = "lv:1"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 81
-_current_font_size = 81
+_current_font_size = 46
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 

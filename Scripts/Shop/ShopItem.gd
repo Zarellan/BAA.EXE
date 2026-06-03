@@ -51,6 +51,9 @@ func _ready() -> void:
 	CustomItemText()
 	SetBasedOnLevel()
 	pass # Replace with function body.
+	
+func TotalPrice():
+	return int(shopData.price / GameHandler.saveDataRebirth.offer)
 func CustomItemText(): #godot doesn't support variable inside serialize inspector, so I have to set it manually
 	match shopData.power:
 		Powers.fasterAutoCollector:
@@ -87,7 +90,7 @@ func set_item(shopDat:ShopClass):
 func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
-	moneyNode.text = "[wave amp=%d freq=10]%s%s[/wave]" % [frequencyWavePrice.number, "$",NumberFormat.Format(shopData.price)]
+	moneyNode.text = "[wave amp=%d freq=10]%s%s[/wave]" % [frequencyWavePrice.number, "$",NumberFormat.Format(TotalPrice())]
 	pass
 
 func Hovered():
@@ -112,7 +115,7 @@ func Hovered():
 
 func ModifyTexts():
 	#moneyNode.text = "$" + str(shopData.price)
-	moneyNode.text = "[wave amp=%d freq=5]%s%d[/wave]" % [frequencyWavePrice.number, "$",shopData.price]
+	moneyNode.text = "[wave amp=%d freq=5]%s%d[/wave]" % [frequencyWavePrice.number, "$",TotalPrice()]
 	if (shopData.canBuy):
 		levelNode.text = "lv:"+ str(shopData.level)
 	else:
@@ -181,9 +184,9 @@ func Bought():
 			tweenXtextLevel = TweenUtils.tweenX(levelNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
 			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
 			return
-		if (GameHandler.saveData.money >= shopData.price):
+		if (GameHandler.saveData.money >= TotalPrice()):
 			PowersAct()
-			GameHandler.saveData.money -= shopData.price
+			GameHandler.saveData.money -= TotalPrice() # must set from the origin price
 			shopData.price = int(floor(shopData.price * shopData.tax))
 			shopData.tax += shopData.taxInc
 			TweenColor(Color(0.0, 0.905, 0.2))

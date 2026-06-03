@@ -26,6 +26,71 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("6_c2620")
 region = Rect2(64, 0, 64, 64)
 
+[sub_resource type="Shader" id="Shader_oqi44"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D gradient : source_color;
+uniform float gradient_mix_amount = 1.0;
+
+// NEW: Controls how fast the gradient moves. Set to 0.0 to freeze it!
+uniform float movement_speed = 1.0;
+ 
+uniform float random_start = 0.0;
+
+vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
+	float cosa = cos(rotation);
+	float sina = sin(rotation);
+	uv -= pivot;
+	return vec2(cosa * uv.x - sina * uv.y, cosa * uv.y + sina * uv.x) + pivot;
+}
+float rand(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+void fragment() {
+	float gradient_Rand = rand(vec2(TIME,0.0));
+	// 1. Get the original pixel color and alpha from the text/font texture
+	vec4 text_tex = texture(TEXTURE, UV);
+	
+	// 2. Rotate the gradient 90 degrees around the center
+	vec2 myUv = rotateUV(UV, vec2(0.5, 0.5), radians(90));
+	
+	// NEW: Shift the UV coordinates over time based on our movement speed.
+	// We use \"fract()\" to keep the numbers small and prevent floating-point precision bugs.
+	myUv.x = fract(myUv.x + (TIME * movement_speed) + random_start);
+	
+	vec3 gradientTex = texture(gradient, myUv).rgb;
+	
+	// 3. Convert color into grayscale value
+	float greyscale_value = dot(gradientTex.rgb, vec3(0.299, 0.587, 0.114));
+	
+	// 4. Sample the color from your gradient palette
+	vec3 sampled_color = texture(gradient, vec2(greyscale_value, 0.0)).rgb;
+	vec3 final_gradient = mix(gradientTex.rgb, sampled_color, gradient_mix_amount);
+	
+	// 5. Apply the black outline fix
+	COLOR.rgb = mix(vec3(0.0), final_gradient, text_tex.rgb);
+	
+	// Preserve alpha
+	COLOR.a = text_tex.a;
+}"
+
+[sub_resource type="Gradient" id="Gradient_yopb8"]
+offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tejl3"]
+gradient = SubResource("Gradient_yopb8")
+fill_from = Vector2(0, 0.9273504)
+fill_to = Vector2(1, 0.6111111)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvesk"]
+shader = SubResource("Shader_oqi44")
+shader_parameter/gradient = SubResource("GradientTexture2D_tejl3")
+shader_parameter/gradient_mix_amount = 1.0
+shader_parameter/movement_speed = 1.0
+shader_parameter/random_start = 0.0
+
 [sub_resource type="CanvasTexture" id="CanvasTexture_7pbid"]
 
 [node name="ScreenShots" type="Node2D" unique_id=567706561]
@@ -106,13 +171,14 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("CanvasTexture_itva4")
 
 [node name="TextureRectGold" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=63622380]
-self_modulate = Color(1, 1, 0, 0.7019608)
+self_modulate = Color(0.8392157, 0.03529412, 0.72156864, 0.8235294)
 offset_right = 637.0
 offset_bottom = 636.0
 texture = SubResource("CanvasTexture_id86e")
 
 [node name="Control" type="Control" parent="SubViewportContainer/SubViewport/TextureRectGold" unique_id=252871143]
 layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -368,7 +434,6 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_itva4")
 
 [node name="ShearsDouble" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1558992751]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -426,6 +491,7 @@ mouse_filter = 2
 texture = ExtResource("3_itva4")
 
 [node name="AutoSizeRichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/ShearsDouble" unique_id=1886445390]
+visible = false
 layout_mode = 0
 offset_left = 387.0
 offset_top = 5.0
@@ -443,6 +509,40 @@ script = ExtResource("4_yopb8")
 _max_size = 110
 _outline_ratio = 0.14
 _current_font_size = 110
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/SubViewport/ShearsDouble" unique_id=1087524256]
+material = SubResource("ShaderMaterial_jvesk")
+layout_mode = 0
+offset_left = 389.0
+offset_top = 62.0
+offset_right = 625.0
+offset_bottom = 264.0
+metadata/_edit_group_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer/SubViewport/ShearsDouble/SubViewportContainer" unique_id=1776133957]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(236, 202)
+render_target_update_mode = 4
+
+[node name="Title" type="RichTextLabel" parent="SubViewportContainer/SubViewport/ShearsDouble/SubViewportContainer/SubViewport" unique_id=1245566644]
+self_modulate = Color(1, 1, 0, 1)
+texture_filter = 2
+clip_contents = false
+offset_left = 9.0
+offset_top = -1.0
+offset_right = 227.0
+offset_bottom = 168.0
+theme_override_constants/outline_size = 22
+theme_override_font_sizes/normal_font_size = 109
+bbcode_enabled = true
+text = "X2"
+scroll_active = false
+script = ExtResource("4_yopb8")
+_max_size = 112
+_current_font_size = 109
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 

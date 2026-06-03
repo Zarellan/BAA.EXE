@@ -2,7 +2,9 @@ extends Control
 class_name RebirthItem
 
 enum Powers{
-	none
+	none,
+	multiplier,
+	offer
 }
 
 @export var particle:PackedScene
@@ -22,6 +24,7 @@ var isInside = false
 
 var descriptionNode:Control
 var moneyNode:Control
+var moneyNodePos:Control
 var levelNode:Control
 
 var originalPosXMoney
@@ -36,8 +39,9 @@ var levelMaxYdef = 53.0
 
 func _ready() -> void:
 	frequencyWavePrice.number = 0
-	originalPosXMoney = get_node("Holder/Prce/Price").position.x
+	originalPosXMoney = get_node("Holder/Prce").position.x
 	moneyNode = get_node("Holder/Prce/Price")
+	moneyNodePos = get_node("Holder/Prce")
 	levelNode = get_node("Holder/Level")
 	get_node("Holder/SubViewportContainer/SubViewport/Title").text = shopData.title
 	get_node("Holder/ItemImage").texture = shopData.image
@@ -60,17 +64,24 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 	match shopData.power:
 		Powers.none:
 			pass
+		Powers.multiplier:
+			descriptionNode.text = "the more you buy it the more the collect doubles (will stay the same multiply even after [rainbow]rebirth[/rainbow])\n"+\
+			"Current Main Multiplier:" + str(int(GameHandler.saveDataRebirth.multiplier_reb)) + "X"
+		Powers.offer:
+			descriptionNode.text = "you will gain offer on every item (except rebirth items)\n"+\
+			"Current offer:" + str(int((GameHandler.saveDataRebirth.offer-1) * 100)) + "%"
+
 
 
 func SetBasedOnLevel():
 	if (shopData.level > 0):
-		moneyNode.position.y = priceLevelYdef
-		moneyNode.scale = Vector2(0.8,0.8)
+		moneyNodePos.position.y = priceLevelYdef
+		moneyNodePos.scale = Vector2(0.8,0.8)
 		levelNode.modulate.a = 1
 	if (!shopData.canBuy):
 		levelNode.position.y = levelMaxYdef
 		levelNode.scale = Vector2(1,1)
-		moneyNode.modulate.a = 0
+		moneyNodePos.modulate.a = 0
 
 
 func set_item(rebirthDat:RebirthClass):
@@ -130,7 +141,10 @@ func PowersAct():
 	match shopData.power:
 		Powers.none:
 			pass
-
+		Powers.multiplier:
+			GameHandler.saveDataRebirth.multiplier_reb += 1
+		Powers.offer:
+			GameHandler.saveDataRebirth.offer += 0.10
 func TweenLevelMax():
 	TweenUtils.tweenY(levelNode,centerYdef,0.3,TweenUtils.Ease.OutCirc)
 	TweenUtils.tweenScale(levelNode,Vector2(1,1),0.3,TweenUtils.Ease.OutCirc)
@@ -149,17 +163,17 @@ func Bought():
 			tweenXtextLevel = TweenUtils.tweenX(levelNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
 			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
 			return
-		if (GameHandler.saveData.rebirth >= shopData.rebirthPrice):
+		if (GameHandler.saveDataRebirth.rebirth >= shopData.rebirthPrice):
 			PowersAct()
-			GameHandler.saveData.money -= shopData.rebirthPrice
+			GameHandler.saveDataRebirth.rebirth -= shopData.rebirthPrice
 			shopData.rebirthPrice = int(floor(shopData.rebirthPrice * shopData.tax))
 			shopData.tax += shopData.taxInc
 			TweenColor(Color(0.0, 0.905, 0.2))
 			frequencyWavePrice.number = 40
 			TweenUtils.tweenNumber(self,frequencyWavePrice,0,0.2,TweenUtils.Ease.linear)
 			if shopData.level == 0:
-				TweenUtils.tweenY(moneyNode,priceLevelYdef,0.3,TweenUtils.Ease.OutCirc)
-				TweenUtils.tweenScale(moneyNode,Vector2(0.8,0.8),0.3,TweenUtils.Ease.OutCirc)
+				TweenUtils.tweenY(moneyNodePos,priceLevelYdef,0.3,TweenUtils.Ease.OutCirc)
+				TweenUtils.tweenScale(moneyNodePos,Vector2(0.8,0.8),0.3,TweenUtils.Ease.OutCirc)
 				TweenUtils.tweenAlpha(levelNode,1,0.3,TweenUtils.Ease.linear)
 			shopData.level += 1
 			ModifyTexts()
@@ -172,8 +186,8 @@ func Bought():
 			GameHandler.SaveAllDataGlob()
 			#ResourceSaver.save(GameHandler.shopListGlob,"res://saver/ShopList.tres") # save shop list
 		else:
-			moneyNode.position.x = originalPosXMoney - 7
+			moneyNodePos.position.x = originalPosXMoney - 7
 			TweenUtils.StopTween(tweenXtext)
-			tweenXtext = TweenUtils.tweenX(moneyNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
+			tweenXtext = TweenUtils.tweenX(moneyNodePos,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
 			TweenColor(Color(1.0, 0.0, 0.0))
 			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)

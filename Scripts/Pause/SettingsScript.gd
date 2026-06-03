@@ -229,9 +229,11 @@ func _on_invalid_code_timer_timeout() -> void:
 
 
 func _on_delete_data_pressed() -> void:
+	TransitionScript.ChangeScene("res://Scenes/MainFarm.tscn",DeleteData)
+	pass # Replace with function body.
+
+func DeleteData():
 	ResourceUtil.RemoveResources("SaveData","saver")
 	GameHandler.saveData = GameSaveData.new()
 	ResourceUtil.RemoveResources("SaveDataRebirth","saver")
 	GameHandler.saveDataRebirth = GameSaveRebirth.new()
-	TransitionScript.ChangeScene("res://Scenes/MainFarm.tscn")
-	pass # Replace with function body.

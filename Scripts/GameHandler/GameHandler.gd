@@ -121,7 +121,7 @@ func _on_save_timer_timeout():
 	canSave = true
 
 func IncrementTotal():
-	return saveData.increment * saveData.clickMultiply
+	return saveData.increment * saveData.clickMultiply * saveDataRebirth.multiplier_reb
 
 func NowCollect():
 	if (saveData.autoCollect <= 0):

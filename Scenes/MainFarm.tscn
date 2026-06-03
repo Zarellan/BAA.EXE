@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://b5fcg5dm7vrvn" path="res://Scripts/Background/StarSpawner.gd" id="6_aw8uy"]
 [ext_resource type="Script" uid="uid://crrxb5hi3hyws" path="res://Scripts/Shop/ShopListInit.gd" id="7_m14hk"]
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="8_v5bxn"]
+[ext_resource type="Shader" uid="uid://bkcddt3o2kslo" path="res://Shaders/GradientTextSimple.gdshader" id="9_26u1s"]
 [ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="9_56xbq"]
 [ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="9_cxla1"]
 [ext_resource type="Texture2D" uid="uid://bg6hskasnpygv" path="res://Sprites/Sheep/EidCap.png" id="9_ehq4q"]
@@ -22,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="10_ujam8"]
 [ext_resource type="Texture2D" uid="uid://dgkornijck721" path="res://Sprites/Shears/New Piskel (1).png" id="11_56xbq"]
 [ext_resource type="Script" uid="uid://ci0yi1g364a02" path="res://Scripts/Mouse/ShearsEffect.gd" id="11_410ju"]
+[ext_resource type="Script" uid="uid://dv8lnu1laxwmw" path="res://Scripts/ParticlesGolds/RareWoolGoldShade.gd" id="12_1x37o"]
 [ext_resource type="Texture2D" uid="uid://c6ddcvbi41kt3" path="res://Sprites/Shears/New Piskel (2).png" id="12_pbqe1"]
 [ext_resource type="Script" uid="uid://cge6w6kvhui0r" path="res://Scripts/Pause/PauseScript.gd" id="14_67qwo"]
 [ext_resource type="Script" uid="uid://bulp8qn2obimi" path="res://Scripts/Money/RebirthCounter.gd" id="15_210na"]
@@ -41,6 +43,7 @@
 [ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="28_hotcp"]
 [ext_resource type="PackedScene" uid="uid://xlvoesewx06k" path="res://Prefabs/ParticleShop.tscn" id="29_62te2"]
 [ext_resource type="Texture2D" uid="uid://dxdyrvxjbfe6r" path="res://Sprites/OptionUIs/Arrow.png" id="29_pxlk8"]
+[ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="30_mqm6h"]
 [ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="31_hotcp"]
 [ext_resource type="Texture2D" uid="uid://bgwt3qsuxxs47" path="res://Sprites/OptionUIs/ShoppingKartYellow.png" id="37_valao"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
@@ -206,6 +209,88 @@ color_ramp = SubResource("GradientTexture1D_m14hk")
 anim_offset_max = 1.0
 turbulence_noise_strength = 3.0
 
+[sub_resource type="Shader" id="Shader_1x37o"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.6.2.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+uniform int particles_anim_h_frames;
+uniform int particles_anim_v_frames;
+uniform bool particles_anim_loop;
+
+uniform sampler2D gradient : source_color;
+uniform float gradient_mix_amount = 1.0;
+
+// REPLACED TIME: Animate this from 0.0 to 1.0 via a script or AnimationPlayer!
+uniform float progress : hint_range(0.0, 1.0) = 0.0;
+uniform float random_start = 0.0;
+
+void vertex() {
+	float h_frames = float(particles_anim_h_frames);
+	float v_frames = float(particles_anim_v_frames);
+	VERTEX.xy /= vec2(h_frames, v_frames);
+	float particle_total_frames = float(particles_anim_h_frames * particles_anim_v_frames);
+	float particle_frame = floor(INSTANCE_CUSTOM.z * float(particle_total_frames));
+	if (!particles_anim_loop) {
+		particle_frame = clamp(particle_frame, 0.0, particle_total_frames - 1.0);
+	} else {
+		particle_frame = mod(particle_frame, particle_total_frames);
+	}	UV /= vec2(h_frames, v_frames);
+	UV += vec2(mod(particle_frame, h_frames) / h_frames, floor((particle_frame + 0.5) / h_frames) / v_frames);
+}
+
+vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
+	float cosa = cos(rotation);
+	float sina = sin(rotation);
+	uv -= pivot;
+	return vec2(cosa * uv.x - sina * uv.y, sina * uv.x + cosa * uv.y) + pivot;
+}
+
+void fragment() {
+	// 1. Get the original pixel color and alpha from the texture
+	vec4 text_tex = texture(TEXTURE, UV);
+	
+	// 2. Rotate the gradient 90 degrees around the center
+	vec2 myUv = rotateUV(UV, vec2(0.5, 0.5), radians(90));
+	
+	// 3. Shift the UV coordinates based on our custom progress uniform instead of TIME
+	myUv.x = fract(myUv.x + progress + random_start);
+	
+	vec3 gradientTex = texture(gradient, myUv).rgb;
+	
+	// 4. Convert color into grayscale value
+	float greyscale_value = dot(gradientTex.rgb, vec3(0.299, 0.587, 0.114));
+	
+	// 5. Sample the color from your gradient palette
+	vec3 sampled_color = texture(gradient, vec2(greyscale_value, 0.0)).rgb;
+	vec3 final_gradient = mix(gradientTex.rgb, sampled_color, gradient_mix_amount);
+	
+	// 6. Apply the black outline fix
+	COLOR.rgb = mix(vec3(0.0), final_gradient, text_tex.rgb);
+	
+	// Preserve alpha
+	COLOR.a = text_tex.a;
+}"
+
+[sub_resource type="Gradient" id="Gradient_8hf41"]
+offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iwha0"]
+gradient = SubResource("Gradient_8hf41")
+fill_from = Vector2(0, 0.9273504)
+fill_to = Vector2(1, 0.6111111)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8hf41"]
+shader = SubResource("Shader_1x37o")
+shader_parameter/particles_anim_h_frames = 3
+shader_parameter/particles_anim_v_frames = 1
+shader_parameter/particles_anim_loop = false
+shader_parameter/gradient = SubResource("GradientTexture2D_iwha0")
+shader_parameter/gradient_mix_amount = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/random_start = 0.0
+
 [sub_resource type="Curve" id="Curve_5xh03"]
 _limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, -76.85388), 0.0, 0.0, 0, 0, Vector2(1, 12.134888), 0.0, 0.0, 0, 0]
@@ -317,17 +402,120 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [sub_resource type="Resource" id="Resource_hotcp"]
 script = ExtResource("27_phtv5")
-title = "rrr"
-description = "rrrr"
-rebirthPrice = 8
-tax = 1.0
-taxInc = 1.0
+title = "Main multiplier"
+image = ExtResource("30_mqm6h")
+description = "the more you buy it the more the collect doubles (will stay the same multiply even after [rainbow]rebirth[/rainbow])"
+rebirthPrice = 1
+power = 1
+tax = 2.0
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
+[sub_resource type="Resource" id="Resource_1x37o"]
+script = ExtResource("27_phtv5")
+title = "Shop offer"
+rebirthPrice = 1
+power = 2
+tax = 2.0
+taxInc = 0.05
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("28_hotcp")
-items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp")])
+items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
+
+[sub_resource type="Gradient" id="Gradient_iwha0"]
+offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tdfnv"]
+gradient = SubResource("Gradient_iwha0")
+fill_from = Vector2(0, 0.9273504)
+fill_to = Vector2(1, 0.6111111)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1x37o"]
+shader = ExtResource("9_26u1s")
+shader_parameter/gradient = SubResource("GradientTexture2D_tdfnv")
+shader_parameter/gradient_mix_amount = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/random_start = 0.0
+
+[sub_resource type="Gradient" id="Gradient_26u1s"]
+offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1x37o"]
+gradient = SubResource("Gradient_26u1s")
+fill_from = Vector2(0, 0.9273504)
+fill_to = Vector2(1, 0.6111111)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_26u1s"]
+shader = ExtResource("9_26u1s")
+shader_parameter/gradient = SubResource("GradientTexture2D_1x37o")
+shader_parameter/gradient_mix_amount = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/random_start = 0.0
+
+[sub_resource type="Shader" id="Shader_26u1s"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D gradient : source_color;
+uniform float gradient_mix_amount = 1.0;
+
+// REPLACED TIME: Animate this from 0.0 to 1.0 via a script or AnimationPlayer!
+uniform float progress : hint_range(0.0, 1.0) = 0.0;
+
+uniform float random_start = 0.0;
+
+vec2 rotateUV(vec2 uv, vec2 pivot, float rotation) {
+	float cosa = cos(rotation);
+	float sina = sin(rotation);
+	uv -= pivot;
+	return vec2(cosa * uv.x - sina * uv.y, sina * uv.x + cosa * uv.y) + pivot;
+}
+
+void fragment() {
+	// 1. Get the original pixel color and alpha from the texture
+	vec4 text_tex = texture(TEXTURE, UV);
+	
+	// 2. Rotate the gradient 90 degrees around the center
+	vec2 myUv = rotateUV(UV, vec2(0.5, 0.5), radians(90));
+	
+	// 3. Shift the UV coordinates based on our custom progress uniform instead of TIME
+	myUv.x = fract(myUv.x + progress + random_start);
+	
+	vec3 gradientTex = texture(gradient, myUv).rgb;
+	
+	// 4. Convert color into grayscale value
+	float greyscale_value = dot(gradientTex.rgb, vec3(0.299, 0.587, 0.114));
+	
+	// 5. Sample the color from your gradient palette
+	vec3 sampled_color = texture(gradient, vec2(greyscale_value, 0.0)).rgb;
+	vec3 final_gradient = mix(gradientTex.rgb, sampled_color, gradient_mix_amount);
+	
+	// 6. Apply the black outline fix
+	COLOR.rgb = mix(vec3(0.0), final_gradient, text_tex.rgb);
+	
+	// Preserve alpha
+	COLOR.a = text_tex.a;
+}"
+
+[sub_resource type="Gradient" id="Gradient_1x37o"]
+offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8hf41"]
+gradient = SubResource("Gradient_1x37o")
+fill_from = Vector2(0, 0.9273504)
+fill_to = Vector2(1, 0.6111111)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iwha0"]
+shader = SubResource("Shader_26u1s")
+shader_parameter/gradient = SubResource("GradientTexture2D_8hf41")
+shader_parameter/gradient_mix_amount = 1.0
+shader_parameter/progress = 0.0
+shader_parameter/random_start = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_410ju"]
 
@@ -938,7 +1126,7 @@ process_material = SubResource("ParticleProcessMaterial_2js75")
 
 [node name="RareWool" type="GPUParticles2D" parent="." unique_id=1929619362]
 texture_filter = 1
-material = SubResource("CanvasItemMaterial_4gutc")
+material = SubResource("ShaderMaterial_8hf41")
 position = Vector2(131, 585)
 emitting = false
 amount = 1
@@ -947,6 +1135,9 @@ lifetime = 6.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_ujam8")
+
+[node name="GoldShadeScript" type="Node2D" parent="RareWool" unique_id=1129252644]
+script = ExtResource("12_1x37o")
 
 [node name="Control" type="Control" parent="." unique_id=2002302030]
 layout_direction = 2
@@ -1266,12 +1457,15 @@ pivot_offset = Vector2(29, 40)
 mouse_filter = 2
 texture = ExtResource("12_pbqe1")
 
-[node name="OptionUI" type="Control" parent="Control/CanvasLayer" unique_id=1519445988 node_paths=PackedStringArray("shopPanel", "rebirthPanel", "upScroll", "downScroll", "moneyText", "rebirthText")]
+[node name="OptionUI" type="Control" parent="Control/CanvasLayer" unique_id=1519445988 node_paths=PackedStringArray("refresh1", "refresh2", "shoppingKart", "shopPanel", "rebirthPanel", "upScroll", "downScroll", "moneyText", "rebirthText")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("22_rw3qx")
+refresh1 = NodePath("RebirthIc/TextureRect")
+refresh2 = NodePath("RebirthIc/TextureRect2")
+shoppingKart = NodePath("ShoppingKartRebirth/TextureRect")
 shopPanel = NodePath("../Shop")
 rebirthPanel = NodePath("../Rebirth")
 upScroll = NodePath("../ShopHelper/UpAlign")
@@ -1325,6 +1519,7 @@ offset_bottom = 125.0
 metadata/_edit_group_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" unique_id=2039548617]
+material = SubResource("ShaderMaterial_1x37o")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1346,6 +1541,7 @@ metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/RebirthIc" unique_id=1198831734]
+material = SubResource("ShaderMaterial_26u1s")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.031000001
@@ -1363,6 +1559,7 @@ texture = ExtResource("26_u06jq")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="Control/CanvasLayer/OptionUI/RebirthIc" unique_id=314948747]
+material = SubResource("ShaderMaterial_iwha0")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.031000001
