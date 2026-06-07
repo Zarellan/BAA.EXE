@@ -536,13 +536,13 @@ offset_top = -1.0
 offset_right = 227.0
 offset_bottom = 168.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 109
+theme_override_font_sizes/normal_font_size = 112
 bbcode_enabled = true
 text = "X2"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 109
+_current_font_size = 112
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
