@@ -1,18 +1,18 @@
-[gd_resource type="Resource" script_class="GameSaveRebirth" format=3]
+[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://d0xr2c5edy67n"]
 
-[ext_resource type="Script" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_l587h"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_ek0oe"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_br4cx"]
-[ext_resource type="Script" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="4_em7bg"]
-[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="5_v241v"]
+[ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_l587h"]
+[ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_ek0oe"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_br4cx"]
+[ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="4_ek0oe"]
+[ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="4_em7bg"]
+[ext_resource type="Script" uid="uid://dgrns36cuqs6e" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="5_v241v"]
 
 [sub_resource type="Resource" id="Resource_hotcp"]
 script = ExtResource("1_l587h")
 title = "Main multiplier"
 image = ExtResource("2_ek0oe")
 description = "the more you buy it the more the collect doubles (will stay the same multiply even after [rainbow]rebirth[/rainbow])"
-rebirthPrice = 64
-level = 6
+rebirthPrice = 1
 power = 1
 tax = 2.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -21,21 +21,27 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_l587h")
 title = "Shop offer"
 image = ExtResource("3_br4cx")
-rebirthPrice = 83
-level = 6
+rebirthPrice = 1
 power = 2
-tax = 2.299999999999999
+tax = 2.0
 taxInc = 0.05
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
+[sub_resource type="Resource" id="Resource_8hf41"]
+script = ExtResource("1_l587h")
+title = "Super Auto Collect"
+image = ExtResource("4_ek0oe")
+rebirthPrice = 2
+power = 3
+tax = 2.0
+taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("4_em7bg")
-items = Array[ExtResource("1_l587h")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o")])
+items = Array[ExtResource("1_l587h")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [resource]
 script = ExtResource("5_v241v")
-rebirth = 9
 rebirthListData = SubResource("Resource_valao")
-multiplier_reb = 7
-offer = 1.6000000000000003

@@ -66,11 +66,11 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 			descriptionNode.text = "the collection will doubles on each purchase\n"+\
 			"Current Multiplier:[rainbow]" + str(int(GameHandler.saveData.clickMultiply)) + "X"
 		Powers.autoCollectSheep:
-			if (!GameHandler.saveData.autoCollectSheepAbility):
+			if (!GameHandler.AutoCollectSheepActive()):
 				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]"
 			else:
 				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\n"+\
-				"collect every:[rainbow]" + str(float(GameHandler.saveData.autoCollectSheep)) + " seconds"
+				"collect every:[rainbow]" + str(float(GameHandler.AutoCollectSheepTotalParse())) + " seconds"
 
 
 func SetBasedOnLevel():
@@ -160,7 +160,7 @@ func PowersAct():
 				GameHandler.saveData.autoCollectSheepAbility = true
 			else:
 				GameHandler.saveData.autoCollectSheep -= 0.15
-			if (GameHandler.saveData.autoCollectSheep <= 0.30):
+			if (GameHandler.AutoCollectSheepTotal() <= 0.30):
 				TweenLevelMax()
 				shopData.canBuy = false
 

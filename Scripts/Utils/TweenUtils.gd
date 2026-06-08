@@ -109,6 +109,15 @@ static func tweenNumber(owner, objectValue:ValueSaver,value,duration,eas):
 	EasingType(step, eas)
 	return tween
 	
+# example: TweenUtils.tweenCustom(self, 0, 100.0, 2.0, TweenUtils.Ease.linear, func(val): print(val))
+static func tweenCustom(owner: Node, current_val: float, target_val: float, duration: float, eas: int, setter_callable: Callable) -> Tween:
+	var tween = owner.create_tween()
+	
+	# Pass the lambda function directly to the engine backend
+	var step = tween.tween_method(setter_callable, current_val, target_val, duration)
+	
+	EasingType(step, eas)
+	return tween
 static func tweenNumberPingPong(owner, objectValue:ValueSaver,value, value2,duration,eas):
 	var tween = owner.create_tween().set_loops(-1)
 

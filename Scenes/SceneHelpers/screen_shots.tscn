@@ -405,7 +405,6 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("4_id86e")
 
 [node name="Control" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1740725075]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -434,6 +433,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_itva4")
 
 [node name="ShearsDouble" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1558992751]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -525,7 +525,7 @@ metadata/_edit_group_ = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(236, 202)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Title" type="RichTextLabel" parent="SubViewportContainer/SubViewport/ShearsDouble/SubViewportContainer/SubViewport" unique_id=1245566644]
 self_modulate = Color(1, 1, 0, 1)

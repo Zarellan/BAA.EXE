@@ -45,7 +45,9 @@
 [ext_resource type="Texture2D" uid="uid://dxdyrvxjbfe6r" path="res://Sprites/OptionUIs/Arrow.png" id="29_pxlk8"]
 [ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="30_mqm6h"]
 [ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="31_hotcp"]
+[ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="32_iwha0"]
 [ext_resource type="Texture2D" uid="uid://bgwt3qsuxxs47" path="res://Sprites/OptionUIs/ShoppingKartYellow.png" id="37_valao"]
+[ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="40_8hf41"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
@@ -419,9 +421,19 @@ tax = 2.0
 taxInc = 0.05
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
+[sub_resource type="Resource" id="Resource_8hf41"]
+script = ExtResource("27_phtv5")
+title = "Super Auto Collect"
+image = ExtResource("32_iwha0")
+rebirthPrice = 2
+power = 3
+tax = 2.0
+taxInc = 0.1
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("28_hotcp")
-items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o")])
+items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [sub_resource type="Gradient" id="Gradient_iwha0"]
@@ -1197,6 +1209,7 @@ modulate = Color(1, 1, 1, 0)
 anchors_preset = 0
 offset_right = 60.0
 offset_bottom = 61.0
+metadata/_edit_use_anchors_ = true
 
 [node name="RebirthCounter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=1505046559]
 layout_mode = 1
@@ -1221,6 +1234,7 @@ _outline_ratio = 0.0
 _current_font_size = 32
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="Rebirth" type="TextureRect" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=59527763]
 layout_mode = 0
@@ -1231,6 +1245,7 @@ offset_bottom = 56.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("26_u06jq")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Rebirth2" type="TextureRect" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=480601130]
 layout_mode = 0
@@ -1241,6 +1256,7 @@ rotation = -3.1415927
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("26_u06jq")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="RebirthCountScript" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=203582194 node_paths=PackedStringArray("rebirthText")]
 anchors_preset = 0
@@ -1248,6 +1264,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("15_210na")
 rebirthText = NodePath("../RebirthCounter")
+metadata/_edit_use_anchors_ = true
 
 [node name="TextRev" type="Control" parent="Control/CanvasLayer" unique_id=1274630093 node_paths=PackedStringArray("sheep")]
 layout_mode = 3
@@ -1463,8 +1480,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("22_rw3qx")
-refresh1 = NodePath("RebirthIc/TextureRect")
-refresh2 = NodePath("RebirthIc/TextureRect2")
+refresh1 = NodePath("RebirthIc/Holder/TextureRect")
+refresh2 = NodePath("RebirthIc/Holder/TextureRect2")
 shoppingKart = NodePath("ShoppingKartRebirth/TextureRect")
 shopPanel = NodePath("../Shop")
 rebirthPanel = NodePath("../Rebirth")
@@ -1490,7 +1507,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("20_5xh03")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/PauseButton" unique_id=799126897 node_paths=PackedStringArray("node")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
 
 [node name="ShoppingKart" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=749067165]
 layout_mode = 0
@@ -1510,6 +1534,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_jy1oi")
 
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/ShoppingKart" unique_id=1333941192 node_paths=PackedStringArray("node")]
+anchors_preset = 0
+offset_left = -64.0
+offset_right = -64.0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+
 [node name="ShoppingKartRebirth" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=1487169588]
 layout_mode = 1
 offset_left = 128.0
@@ -1517,6 +1549,7 @@ offset_top = 61.0
 offset_right = 192.0
 offset_bottom = 125.0
 metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" unique_id=2039548617]
 material = SubResource("ShaderMaterial_1x37o")
@@ -1527,6 +1560,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("37_valao")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" unique_id=1118718368 node_paths=PackedStringArray("node")]
+anchors_preset = 0
+offset_left = -128.0
+offset_right = -128.0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
 
 [node name="RebirthIc" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=1552804916]
 layout_mode = 1
@@ -1540,7 +1581,16 @@ offset_bottom = 125.0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/RebirthIc" unique_id=1198831734]
+[node name="Holder" type="Control" parent="Control/CanvasLayer/OptionUI/RebirthIc" unique_id=510661483]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/RebirthIc/Holder" unique_id=1198831734]
 material = SubResource("ShaderMaterial_26u1s")
 layout_mode = 1
 anchors_preset = -1
@@ -1558,7 +1608,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("26_u06jq")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Control/CanvasLayer/OptionUI/RebirthIc" unique_id=314948747]
+[node name="TextureRect2" type="TextureRect" parent="Control/CanvasLayer/OptionUI/RebirthIc/Holder" unique_id=314948747]
 material = SubResource("ShaderMaterial_iwha0")
 layout_mode = 1
 anchors_preset = -1
@@ -1568,14 +1618,22 @@ anchor_right = 0.96900004
 anchor_bottom = 0.74500006
 offset_left = -0.015999913
 offset_top = 0.015999913
-offset_right = -0.016002655
-offset_bottom = 0.0070991516
+offset_right = -0.015995026
+offset_bottom = 0.016002655
 grow_horizontal = 2
 grow_vertical = 2
 rotation = 3.1415927
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("26_u06jq")
 expand_mode = 1
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/RebirthIc" unique_id=1301774872 node_paths=PackedStringArray("node")]
+anchors_preset = 0
+offset_left = -192.0
+offset_right = -192.0
+script = ExtResource("40_8hf41")
+node = NodePath("../Holder")
+scaleVal = 1.1
 
 [node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
 layout_mode = 3
@@ -2035,6 +2093,7 @@ grow_vertical = 2
 script = ExtResource("44_6560t")
 textRebirth = NodePath("TextureRect/Rebirths")
 buttonRebirth = NodePath("TextureRect/Rebirth")
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/RebirthMenu" unique_id=1578046687]
 self_modulate = Color(0.5803922, 0.5803922, 0.5803922, 0.93333334)
@@ -2052,6 +2111,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("CanvasTexture_410ju")
+metadata/_edit_use_anchors_ = true
 
 [node name="Rebirth" type="Button" parent="Control/CanvasLayer/RebirthMenu/TextureRect" unique_id=794072051]
 layout_mode = 1
@@ -2066,6 +2126,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "Rebirth"
+metadata/_edit_use_anchors_ = true
 
 [node name="Back" type="Button" parent="Control/CanvasLayer/RebirthMenu/TextureRect" unique_id=909055091]
 layout_mode = 1
@@ -2081,6 +2142,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "Back"
+metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="RichTextLabel" parent="Control/CanvasLayer/RebirthMenu/TextureRect" unique_id=1192629588]
 layout_mode = 1
@@ -2103,6 +2165,7 @@ _max_size = 25
 _current_font_size = 25
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="Title2" type="RichTextLabel" parent="Control/CanvasLayer/RebirthMenu/TextureRect" unique_id=1632123875]
 layout_mode = 1
@@ -2124,6 +2187,7 @@ _max_size = 15
 _current_font_size = 15
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="Rebirths" type="RichTextLabel" parent="Control/CanvasLayer/RebirthMenu/TextureRect" unique_id=603356061]
 layout_mode = 1
@@ -2149,6 +2213,7 @@ _max_size = 25
 _current_font_size = 25
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0

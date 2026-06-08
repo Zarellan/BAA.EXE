@@ -23,8 +23,8 @@ func _ready() -> void:
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
 	TweenUtils.tweenSkewPingPong(sheepShadow,deg_to_rad(18),deg_to_rad(29),1,TweenUtils.Ease.InOutSine)
 	defaultScale = scale
-	
 	BringEidCap()
+	
 	
 	if (!GameHandler.saveData.tutorialed):
 		tutorialTimer.start()

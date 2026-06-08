@@ -19,6 +19,8 @@ static var isRebirth = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	isShop = true;
+	isRebirth = false;
 	rebirthPanel.position.x = 2480
 	goldKartValue = ValueSaver.new()
 	GoldenTweens()

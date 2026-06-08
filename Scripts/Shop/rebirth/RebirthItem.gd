@@ -4,7 +4,8 @@ class_name RebirthItem
 enum Powers{
 	none,
 	multiplier,
-	offer
+	offer,
+	autoCollect
 }
 
 @export var particle:PackedScene
@@ -60,7 +61,10 @@ func RandomGradient():
 	var mat2 = randomSpeedDescriptionShade.material.duplicate()
 	mat2.set_shader_parameter("random_start", randf_range(0.0,1.0))
 	randomSpeedDescriptionShade.material = mat2
-func CustomItemText(): #godot doesn't support variable inside serialize inspector, so I have to set it manually
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+func CustomItemText(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	match shopData.power:
 		Powers.none:
 			pass
@@ -70,8 +74,16 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 		Powers.offer:
 			descriptionNode.text = "you will gain offer on every item (except rebirth items)\n"+\
 			"Current offer:" + str(int((GameHandler.saveDataRebirth.offer-1) * 100)) + "%"
+		Powers.autoCollect:
+			if (!GameHandler.saveDataRebirth.autoCollectSheepAbility):
+				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\neven after rebirth"
+			else:
+				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\neven after rebirth\n"+\
+				"super collector total:" + str(float(GameHandler.saveDataRebirth.autoCollectSheep)) + " seconds\n"+\
+				"collect every:[rainbow]" + str(float(GameHandler.AutoCollectSheepTotalParse())) + " seconds"
 
-
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 func SetBasedOnLevel():
 	if (shopData.level > 0):
@@ -137,7 +149,9 @@ func TweenColorLevel(col:Color):
 
 var tweenXtext:Tween
 
-func PowersAct():
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	match shopData.power:
 		Powers.none:
 			pass
@@ -145,10 +159,21 @@ func PowersAct():
 			GameHandler.saveDataRebirth.multiplier_reb += 1
 		Powers.offer:
 			GameHandler.saveDataRebirth.offer += 0.10
+		Powers.autoCollect:
+			GameHandler.saveDataRebirth.autoCollectSheep -= 0.15
+			if (!GameHandler.saveDataRebirth.autoCollectSheepAbility):
+				GameHandler.saveDataRebirth.autoCollectSheepAbility = true
+			if (GameHandler.saveDataRebirth.autoCollectSheep < (0.15 - 3) || is_equal_approx(GameHandler.saveDataRebirth.autoCollectSheep, (0.15 - 3))):
+				GameHandler.saveDataRebirth.autoCollectSheep = 0.15 - 3
+				TweenLevelMax()
+				shopData.canBuy = false
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 func TweenLevelMax():
 	TweenUtils.tweenY(levelNode,centerYdef,0.3,TweenUtils.Ease.OutCirc)
 	TweenUtils.tweenScale(levelNode,Vector2(1,1),0.3,TweenUtils.Ease.OutCirc)
-	TweenUtils.tweenAlpha(moneyNode,0,0.3,TweenUtils.Ease.linear)
+	TweenUtils.tweenAlpha(get_node("Holder/Prce"),0,0.3,TweenUtils.Ease.linear)
 
 var tweenXtextLevel:Tween
 func Bought():
@@ -158,9 +183,9 @@ func Bought():
 			return
 		if (!shopData.canBuy):
 			TweenColorLevel(Color(1,0,0,1))
-			levelNode.position.x = originalPosXMoney - 7
+			levelNode.position.x = 10 - 7
 			TweenUtils.StopTween(tweenXtextLevel)
-			tweenXtextLevel = TweenUtils.tweenX(levelNode,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
+			tweenXtextLevel = TweenUtils.tweenX(levelNode,10,0.3,TweenUtils.Ease.OutCirc)
 			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
 			return
 		if (GameHandler.saveDataRebirth.rebirth >= shopData.rebirthPrice):
