@@ -109,7 +109,7 @@ func AddMoneyForce(quant:int):
 func AddMoneyRare():
 	if (IncrementTotal() < 0):
 		return
-	saveData.money += IncrementTotal() * 10
+	saveData.money += IncrementTotal() * GoldWoolMultiplierTotal()
 	dirtySave = true
 	if (canSave):
 		SaveAllDataGlob()
@@ -146,3 +146,6 @@ func AutoCollectSheepTotalParse():
 		return saveData.autoCollectSheep + saveDataRebirth.autoCollectSheep
 	else:
 		return 0.15
+
+func GoldWoolMultiplierTotal():
+	return 10 + saveDataRebirth.goldWoolMultiplier

@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 /// Width of the shimmering rainbow border in pixels.
-uniform float border_px : hint_range(2.0, 24.0) = 2.0;
+uniform float border_px : hint_range(0.0, 24.0) = 2.0;
 /// Animation speed — higher values spin the gradient faster.
 uniform float speed : hint_range(0.1, 4.0) = 0.9;
 /// Brightness multiplier applied to the border colour (creates a glow effect).

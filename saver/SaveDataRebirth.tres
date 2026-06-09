@@ -1,47 +1,67 @@
-[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://d0xr2c5edy67n"]
+[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://b7pslo6wfnsf4"]
 
-[ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_l587h"]
-[ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_ek0oe"]
-[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_br4cx"]
-[ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="4_ek0oe"]
-[ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="4_em7bg"]
-[ext_resource type="Script" uid="uid://dgrns36cuqs6e" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="5_v241v"]
+[ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_ek0oe"]
+[ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_br4cx"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_em7bg"]
+[ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="4_v241v"]
+[ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="5_qyro7"]
+[ext_resource type="Script" uid="uid://dgrns36cuqs6e" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="6_0jjyt"]
 
 [sub_resource type="Resource" id="Resource_hotcp"]
-script = ExtResource("1_l587h")
+script = ExtResource("1_ek0oe")
 title = "Main multiplier"
-image = ExtResource("2_ek0oe")
+image = ExtResource("2_br4cx")
 description = "the more you buy it the more the collect doubles (will stay the same multiply even after [rainbow]rebirth[/rainbow])"
-rebirthPrice = 1
+rebirthPrice = 16384
+level = 14
 power = 1
 tax = 2.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_1x37o"]
-script = ExtResource("1_l587h")
+script = ExtResource("1_ek0oe")
 title = "Shop offer"
-image = ExtResource("3_br4cx")
-rebirthPrice = 1
+image = ExtResource("3_em7bg")
+rebirthPrice = 310796
+level = 15
 power = 2
-tax = 2.0
+tax = 2.7499999999999973
 taxInc = 0.05
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_8hf41"]
-script = ExtResource("1_l587h")
+script = ExtResource("1_ek0oe")
 title = "Super Auto Collect"
-image = ExtResource("4_ek0oe")
-rebirthPrice = 2
+image = ExtResource("4_v241v")
+rebirthPrice = 1298107
+level = 14
 power = 3
-tax = 2.0
+tax = 3.4000000000000012
+taxInc = 0.1
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
+[sub_resource type="Resource" id="Resource_tdfnv"]
+script = ExtResource("1_ek0oe")
+title = "Gold wool multiplier"
+image = ExtResource("3_em7bg")
+rebirthPrice = 30186
+level = 13
+power = 4
+tax = 2.800000000000001
 taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_valao"]
-script = ExtResource("4_em7bg")
-items = Array[ExtResource("1_l587h")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41")])
+script = ExtResource("5_qyro7")
+items = Array[ExtResource("1_ek0oe")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [resource]
-script = ExtResource("5_v241v")
+script = ExtResource("6_0jjyt")
+rebirth = 999202471
 rebirthListData = SubResource("Resource_valao")
+multiplier_reb = 15
+offer = 2.5000000000000013
+autoCollectSheepAbility = true
+autoCollectSheep = -2.0999999999999996
+goldWoolMultiplier = 65

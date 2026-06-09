@@ -7,7 +7,7 @@ static var isRebirthMenu:bool = false
 
 var tweenRebirth:Tween
 
-const base_rebirth:float = 50000
+const base_rebirth:float = 25000
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,10 +29,12 @@ func _process(_delta: float) -> void:
 		textRebirth.text = NumberFormat.Format(totalRebirth)
 	if (totalRebirth < 1.0):
 		(buttonRebirth as Button).disabled = true
-		(buttonRebirth as Button).text = "Must atleast have\nmore than $50k"
+		(buttonRebirth as Button).text = "Must atleast have\nmore than $25k"
+		get_node("TextureRect/Rebirth/TextureRect").material.set_shader_parameter("border_px", 0)
 	else:
 		(buttonRebirth as Button).disabled = false
 		(buttonRebirth as Button).text = "Rebirth"
+		get_node("TextureRect/Rebirth/TextureRect").material.set_shader_parameter("border_px", 3.78)
 	pass
 
 func BringRebirth():

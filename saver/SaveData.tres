@@ -81,6 +81,6 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_npldj")
-money = 62
+money = 630
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true

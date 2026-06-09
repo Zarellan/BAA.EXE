@@ -1,16 +1,13 @@
 extends Control
 
-
-
 @export var scroller:ScrollContainer
 @export var scrollerRebirth:ScrollContainer
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if (isUp):
-		ScrollType(-8)
+		ScrollType(-8 * delta * 100)
 	if (isDown):
-		ScrollType(8)
+		ScrollType(8 * delta * 100)
 	pass
 
 var isUp = false

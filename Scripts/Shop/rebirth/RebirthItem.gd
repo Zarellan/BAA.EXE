@@ -5,7 +5,8 @@ enum Powers{
 	none,
 	multiplier,
 	offer,
-	autoCollect
+	autoCollect,
+	goldWoolMultiply
 }
 
 @export var particle:PackedScene
@@ -38,6 +39,9 @@ var centerYdefLevel = 28.0
 var priceLevelYdef = 87.0
 var levelMaxYdef = 53.0
 
+var goldMaterial1:ShaderMaterial
+var goldMaterial2:ShaderMaterial
+
 func _ready() -> void:
 	frequencyWavePrice.number = 0
 	originalPosXMoney = get_node("Holder/Prce").position.x
@@ -52,6 +56,11 @@ func _ready() -> void:
 	CustomItemText()
 	SetBasedOnLevel()
 	RandomGradient()
+	goldMaterial1 = (get_node("BG") as Control).material.duplicate()
+	(get_node("BG") as Control).material = goldMaterial1
+	goldMaterial2 = (get_node("BG2") as Control).material.duplicate()
+	(get_node("BG2") as Control).material = goldMaterial2
+
 	pass # Replace with function body.
 
 func RandomGradient():
@@ -81,7 +90,9 @@ func CustomItemText(): #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\neven after rebirth\n"+\
 				"super collector total:" + str(float(GameHandler.saveDataRebirth.autoCollectSheep)) + " seconds\n"+\
 				"collect every:[rainbow]" + str(float(GameHandler.AutoCollectSheepTotalParse())) + " seconds"
-
+		Powers.goldWoolMultiply:
+			descriptionNode.text = "on each purchase you will gain gold wool multiplier by +5\n"+\
+			"current gold multiplier:X" + str(GameHandler.GoldWoolMultiplierTotal())
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -167,6 +178,8 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				GameHandler.saveDataRebirth.autoCollectSheep = 0.15 - 3
 				TweenLevelMax()
 				shopData.canBuy = false
+		Powers.goldWoolMultiply:
+			GameHandler.saveDataRebirth.goldWoolMultiplier += 5
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -205,9 +218,11 @@ func Bought():
 			#ResourceUtil.SaveResource(GameHandler.saveData,"ShopList.tres","saver")
 			var partic = InstantiateUtil.Instantiate(particle,get_tree().get_first_node_in_group("UI"))
 			partic.global_position = get_node("Holder/ParticlePlace").global_position
-			GlobalAudio.PlayOneShot("res://Sounds/bought.mp3",4)
-			GlobalAudio.PlayOneShot("res://Sounds/party_popper.mp3",4)
-			GlobalAudio.PlayOneShot("res://Sounds/party_sound.mp3",4)
+			GlobalAudio.PlayOneShot("res://Sounds/bought.mp3",-2)
+			GlobalAudio.PlayOneShot("res://Sounds/party_popper.mp3",5)
+			GlobalAudio.PlayOneShot("res://Sounds/party_sound.mp3",5)
+			GlobalAudio.PlayOneShot("res://Sounds/RebirthBought.mp3",3)
+			GoldBGShaderTween()
 			GameHandler.SaveAllDataGlob()
 			#ResourceSaver.save(GameHandler.shopListGlob,"res://saver/ShopList.tres") # save shop list
 		else:
@@ -216,3 +231,25 @@ func Bought():
 			tweenXtext = TweenUtils.tweenX(moneyNodePos,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
 			TweenColor(Color(1.0, 0.0, 0.0))
 			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
+
+var tweenGold:Tween
+var tweenColorBG:Tween
+var tweenColorBG2:Tween
+
+func GoldBGShaderTween():
+	TweenUtils.StopTween(tweenGold)
+	tweenGold = TweenUtils.tweenCustom(self, 7.0, 2.584, 0.3, TweenUtils.Ease.OutCirc, func(val): 
+		(get_node("BG") as Control).material.set_shader_parameter("border_px", val)
+		(get_node("BG2") as Control).material.set_shader_parameter("border_px", val)
+	)
+	ModifyColorRGB(get_node("BG"),Color(1.0, 1.0, 0.0))
+	ModifyColorRGB(get_node("BG2"),Color(1.0, 1.0, 0.0))
+	TweenUtils.StopTween(tweenColorBG)
+	TweenUtils.StopTween(tweenColorBG2)
+	tweenColorBG = TweenUtils.tweenColorRGB(get_node("BG"),Color(1,1,1),0.3,TweenUtils.Ease.OutCirc)
+	tweenColorBG2 = TweenUtils.tweenColorRGB(get_node("BG2"),Color(1,1,1),0.3,TweenUtils.Ease.OutCirc)
+
+func ModifyColorRGB(node,color:Color):
+	node.modulate.r = color.r
+	node.modulate.g = color.g
+	node.modulate.b = color.b

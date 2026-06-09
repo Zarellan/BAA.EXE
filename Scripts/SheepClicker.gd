@@ -67,7 +67,7 @@ func Pressed():
 			ParticleManager.PlayParticleOv(partRare,1)
 			GameHandler.AddMoneyRare()
 			GlobalAudio.PlayOneShot("res://Sounds/RareWool.mp3", 0,randf_range(0.99,1.01))
-			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal() * 10,Color(0.944, 0.608, 0.037, 1.0))
+			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal() * GameHandler.GoldWoolMultiplierTotal(),Color(0.945, 1.0, 0.0, 1.0))
 		else:
 			GameHandler.AddMoney()
 			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal())

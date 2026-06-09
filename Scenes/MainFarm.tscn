@@ -49,6 +49,8 @@
 [ext_resource type="Texture2D" uid="uid://bgwt3qsuxxs47" path="res://Sprites/OptionUIs/ShoppingKartYellow.png" id="37_valao"]
 [ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="40_8hf41"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
+[ext_resource type="Shader" uid="uid://c0r6nnm084nsx" path="res://Shaders/RainbowBorderCanvas.gdshader" id="50_tdfnv"]
+[ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="51_7yrkc"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
 load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
@@ -431,9 +433,18 @@ tax = 2.0
 taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
+[sub_resource type="Resource" id="Resource_tdfnv"]
+script = ExtResource("27_phtv5")
+title = "Gold wool multiplier"
+rebirthPrice = 3
+power = 4
+tax = 1.5
+taxInc = 0.1
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("28_hotcp")
-items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41")])
+items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [sub_resource type="Gradient" id="Gradient_iwha0"]
@@ -534,6 +545,33 @@ shader_parameter/random_start = 0.0
 [sub_resource type="CanvasTexture" id="CanvasTexture_67qwo"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_62te2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdfnv"]
+shader = ExtResource("50_tdfnv")
+shader_parameter/border_px = 2.0
+shader_parameter/speed = 0.9
+shader_parameter/glow_intensity = 2.0
+shader_parameter/node_size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_7yrkc"]
+offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
+colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rmap7"]
+gradient = SubResource("Gradient_7yrkc")
+fill_from = Vector2(0, 0.9273504)
+fill_to = Vector2(1, 0.6111111)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7yrkc"]
+shader = ExtResource("51_7yrkc")
+shader_parameter/border_px = 3.78000008455
+shader_parameter/speed = 0.9
+shader_parameter/glow_intensity = 2.0
+shader_parameter/node_size = Vector2(64, 41.885)
+shader_parameter/only_border = true
+shader_parameter/border_gradient = SubResource("GradientTexture2D_rmap7")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tdfnv"]
 
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
@@ -1807,13 +1845,13 @@ offset_right = 821.0
 offset_bottom = 244.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -1826,13 +1864,13 @@ offset_right = 823.0
 offset_bottom = 356.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2097,6 +2135,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/RebirthMenu" unique_id=1578046687]
 self_modulate = Color(0.5803922, 0.5803922, 0.5803922, 0.93333334)
+material = SubResource("ShaderMaterial_tdfnv")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -2127,6 +2166,16 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 text = "Rebirth"
 metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/RebirthMenu/TextureRect/Rebirth" unique_id=1997522027]
+material = SubResource("ShaderMaterial_7yrkc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_tdfnv")
 
 [node name="Back" type="Button" parent="Control/CanvasLayer/RebirthMenu/TextureRect" unique_id=909055091]
 layout_mode = 1
