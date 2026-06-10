@@ -21,7 +21,7 @@ var timerAutoCollectorSheep:Timer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if (OS.has_feature("editor")):
-		get_tree().reload_current_scene() # reloading early to face early crash rather that being surprised
+		get_tree().reload_current_scene.call_deferred() # reloading early to face early crash rather that being surprised
 	saveData = GameSaveData.new()
 	saveDataRebirth = GameSaveRebirth.new()
 	GameHandler.LoadAllDataGlob()
@@ -115,6 +115,15 @@ func AddMoneyRare():
 		SaveAllDataGlob()
 		timerSaveCooldown.start()
 		canSave = false
+func AddMoneyRainbow():
+	if (IncrementTotal() < 0):
+		return
+	saveData.money += IncrementTotal() * RainbowWoolMultiplierTotal()
+	dirtySave = true
+	if (canSave):
+		SaveAllDataGlob()
+		timerSaveCooldown.start()
+		canSave = false
 
 func _on_save_timer_timeout():
 	if dirtySave:
@@ -149,3 +158,6 @@ func AutoCollectSheepTotalParse():
 
 func GoldWoolMultiplierTotal():
 	return 10 + saveDataRebirth.goldWoolMultiplier
+	
+func RainbowWoolMultiplierTotal():
+	return 100

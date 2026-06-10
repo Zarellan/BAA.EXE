@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://fa21pp2mjy74"]
+
+[ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="1_lsmxg"]
+[ext_resource type="Texture2D" uid="uid://duakhtlquvg18" path="res://Sprites/Background/Star.png" id="2_v70la"]
+[ext_resource type="Script" uid="uid://cv0w4kyfkpu6l" path="res://Scripts/RainbowStar/RainbowStarScript.gd" id="3_v70la"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_amxxf"]
+shader = ExtResource("1_lsmxg")
+shader_parameter/speed = 0.9
+shader_parameter/rainbow_mix = 0.5
+shader_parameter/glow_intensity = 1.5
+shader_parameter/node_size = Vector2(64, 64)
+
+[sub_resource type="Curve" id="Curve_v70la"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, -1.1960461, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ekm56"]
+_data = [Vector2(0, 0), 0.0, 2.9133227, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_4slmv"]
+_data = [Vector2(0.00826446, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.15730345), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_giemr"]
+_data = [Vector2(0, 0.3595506), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="RainbowStar" type="Sprite2D" unique_id=497598136]
+material = SubResource("ShaderMaterial_amxxf")
+texture = ExtResource("2_v70la")
+script = ExtResource("3_v70la")
+movement_curve = SubResource("Curve_v70la")
+movement_curve2 = SubResource("Curve_ekm56")
+rotation_curve1 = SubResource("Curve_4slmv")
+scale_curve1 = SubResource("Curve_giemr")
+
+[node name="Timer" type="Timer" parent="." unique_id=345405016]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

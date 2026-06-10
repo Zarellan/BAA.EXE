@@ -1,13 +1,22 @@
 [gd_scene format=3 uid="uid://v16m5xg2k4dk"]
 
 [ext_resource type="Script" uid="uid://bd5vgeuedftgb" path="res://Scripts/Money/MoneyRevealObjectExt.gd" id="1_itmgc"]
+[ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="1_xb2qx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbpoy"]
+shader = ExtResource("1_xb2qx")
+shader_parameter/speed = 2.9540001370551203
+shader_parameter/rainbow_mix = 0.0
+shader_parameter/glow_intensity = 1.5
+shader_parameter/node_size = Vector2(64, 64)
 
 [node name="MoneyReveal" type="RichTextLabel" unique_id=975418504]
 texture_filter = 1
+material = SubResource("ShaderMaterial_jbpoy")
 offset_left = 69.0
-offset_top = -280.0
+offset_top = -380.0
 offset_right = 164.0
-offset_bottom = -194.99992
+offset_bottom = -294.99994
 mouse_filter = 2
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/normal_font_size = 32

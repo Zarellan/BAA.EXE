@@ -8,8 +8,11 @@ class_name Sheep
 @export var textMoneyRev:Control
 @export var part:GPUParticles2D
 @export var partRare:GPUParticles2D
+@export var partRainbow:GPUParticles2D
 @export var mouseControl:ShearsEffect
 @export var sheepShadow:Node2D
+
+@export var rainbowStarParticle:RainbowStarParticle
 var isInside = false
 
 var twe:Tween
@@ -20,6 +23,7 @@ var defaultScale
 func _ready() -> void:
 	ParticleManager.PlayParticleWarmup(part)
 	ParticleManager.PlayParticleWarmup(partRare)
+	ParticleManager.PlayParticleWarmup(partRainbow)
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
 	TweenUtils.tweenSkewPingPong(sheepShadow,deg_to_rad(18),deg_to_rad(29),1,TweenUtils.Ease.InOutSine)
 	defaultScale = scale
@@ -61,9 +65,20 @@ func TweenTextMoney():
 func MoneyCollectedText():
 	(moneyText as MoneyCounter).MoneyCollected()
 
+var rainbowSheepTween:Tween
+func RainbowWool():
+	(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal() * GameHandler.RainbowWoolMultiplierTotal(),Color(1,1,1),true)
+	ParticleManager.PlayParticleOv(partRainbow,1)
+	TweenUtils.StopTween(rainbowSheepTween)
+	rainbowStarParticle.PlayRainbowStarParticle()
+	rainbowSheepTween = TweenUtils.tweenCustom(self, 0.55, 0.0, 1.1, TweenUtils.Ease.linear, func(val): 
+		get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("rainbow_mix", val))
 func Pressed():
 	if canPress:
-		if (randf_range(0.0,1.0) < GameHandler.saveData.rareChance):
+		if (randf_range(0.0,1.0) < GameHandler.saveDataRebirth.rainbowWoolChance):
+			GameHandler.AddMoneyRainbow()
+			RainbowWool()
+		elif (randf_range(0.0,1.0) < GameHandler.saveData.rareChance):
 			ParticleManager.PlayParticleOv(partRare,1)
 			GameHandler.AddMoneyRare()
 			GlobalAudio.PlayOneShot("res://Sounds/RareWool.mp3", 0,randf_range(0.99,1.01))
