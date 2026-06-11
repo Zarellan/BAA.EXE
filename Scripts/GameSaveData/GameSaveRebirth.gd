@@ -9,3 +9,5 @@ class_name GameSaveRebirth
 @export var autoCollectSheep = 0.0 # must achieve negative
 @export var goldWoolMultiplier = 0
 @export var rainbowWoolChance:float = 0
+@export var rainbowWoolMultiplier:float = 100
+@export var cheaperRebirth:float = 1

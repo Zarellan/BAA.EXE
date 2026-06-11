@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="4_tejl3"]
 [ext_resource type="Shader" uid="uid://cenjsprd5awq" path="res://Shaders/Text/GradientText.gdshader" id="5_gjpg2"]
 [ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/Rebirth1.png" id="6_oqi44"]
+[ext_resource type="Texture2D" uid="uid://dr81fgwvrpnva" path="res://Sprites/ImageHelpers/Lock.png" id="9_2wfgr"]
 
 [sub_resource type="Gradient" id="Gradient_f7n8r"]
 offsets = PackedFloat32Array(0, 0.9351351, 1)
@@ -31,6 +32,175 @@ _bundled = {
 "variants": [2, false, 30, 2.0, true, 1.0, 1, 16.6, true, 180.0, 1000.0, 0.0, 8.93, SubResource("Gradient_f7n8r"), SubResource("Gradient_wq2pi"), ExtResource("2_r7bl7")],
 "version": 3
 }
+
+[sub_resource type="Shader" id="Shader_tejl3"]
+code = "shader_type canvas_item;
+
+/// NEW: If true, only the rainbow border is visible; the center texture is hidden.
+uniform bool border_only = false;
+
+/// Width of the shimmering rainbow border in pixels.
+uniform float border_px : hint_range(2.0, 24.0) = 2.0;
+/// Animation speed — higher values spin the hue faster.
+uniform float speed : hint_range(0.1, 4.0) = 0.9;
+/// Brightness multiplier applied to the rainbow colour (creates a glow effect).
+uniform float glow_intensity : hint_range(1.0, 3.5) = 2.0;
+/// Actual pixel dimensions of the node this material is applied to.
+uniform vec2 node_size = vec2(64.0, 64.0);
+
+// Use a varying variable to pass the modulate color from vertex to fragment step
+varying vec4 modulate_color;
+
+void vertex() {
+	// Captures the node's Modulate / Self-Modulate settings
+	modulate_color = COLOR;
+}
+
+/// Converts an HSV colour to RGB.
+vec3 hsv_to_rgb(vec3 c) {
+	vec4 k = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	vec3 p = abs(fract(c.xxx + k.xyz) * 6.0 - k.www);
+	return c.z * mix(k.xxx, clamp(p - k.xxx, 0.0, 1.0), c.y);
+}
+
+void fragment() {
+	// Grab the actual texture color of your Sprite / CanvasTexture
+	vec4 texture_color = texture(TEXTURE, UV);
+	
+	// Convert UV to pixel coordinates relative to this node.
+	vec2 pixel = UV * node_size;
+
+	// Distance from the nearest edge in pixels.
+	float dist_left   = pixel.x;
+	float dist_right  = node_size.x - pixel.x;
+	float dist_top    = pixel.y;
+	float dist_bottom = node_size.y - pixel.y;
+	float edge_dist   = min(min(dist_left, dist_right), min(dist_top, dist_bottom));
+
+	if (edge_dist > border_px) {
+		if (border_only) {
+			// If border_only is true, make the inside completely transparent
+			COLOR = vec4(0.0);
+		} else {
+			// Otherwise, show the original texture
+			COLOR = texture_color * modulate_color;
+		}
+	} else {
+		// Animated hue: TIME drives the global spin; position offsets phase
+		float denom  = max(node_size.x + node_size.y, 1.0);
+		float phase  = (pixel.x + pixel.y) / denom;
+		float hue     = fract(TIME * speed * 0.25 + phase);
+		vec3  rainbow = hsv_to_rgb(vec3(hue, 1.0, 1.0));
+
+		// Alpha fades from full at the very edge to zero at the inner boundary
+		float border_alpha = 1.0 - smoothstep(0.0, border_px, edge_dist);
+		border_alpha = pow(border_alpha, 0.5) * 0.92;
+
+		// Create the glow color
+		vec4 rainbow_glow = vec4(rainbow * glow_intensity, border_alpha);
+
+		vec3 final_rgb;
+		float final_alpha;
+
+		if (border_only) {
+			// If border_only is true, ignore the texture colors completely
+			final_rgb = rainbow_glow.rgb;
+			// Optional: cut off the border if the texture underneath is transparent (e.g. rounded UI corners)
+			final_alpha = min(texture_color.a, rainbow_glow.a);
+		} else {
+			// Blend the rainbow border ON TOP of your texture color
+			final_rgb = mix(texture_color.rgb, rainbow_glow.rgb, rainbow_glow.a);
+			final_alpha = max(texture_color.a, rainbow_glow.a * 0.5);
+		}
+
+		COLOR.rgb = final_rgb * modulate_color.rgb;
+		COLOR.a = final_alpha * modulate_color.a;
+	}
+}"
+
+[sub_resource type="Shader" id="Shader_2wfgr"]
+code = "shader_type canvas_item;
+/// Animation speed — higher values spin the hue faster.
+
+uniform float speed : hint_range(0.1, 4.0) = 0.9;
+
+/// How strongly the rainbow overrides the original sprite color (0.0 = invisible, 1.0 = pure rainbow).
+
+uniform float rainbow_mix : hint_range(0.0, 1.0) = 0.5;
+
+/// Brightness multiplier applied to the rainbow colour.
+
+uniform float glow_intensity : hint_range(1.0, 3.5) = 1.5;
+
+/// Actual pixel dimensions of a SINGLE frame of your animation.
+
+uniform vec2 node_size = vec2(64.0, 64.0);
+
+
+
+// Use varying variables to pass localized frame coordinates from vertex to fragment step
+
+varying vec2 local_uv;
+
+varying vec4 modulate_color;
+
+
+
+void vertex() {
+
+// Reconstruct a flawless 0.0 to 1.0 UV coordinate grid for the current frame, 
+
+// completely bypassing spritesheet UV offsets.
+
+local_uv = vec2(float(VERTEX_ID == 1 || VERTEX_ID == 2), float(VERTEX_ID == 2 || VERTEX_ID == 3));
+
+
+// Capture Godot's Modulate / Self-Modulate color
+
+modulate_color = COLOR;
+
+}
+
+
+
+/// Converts an HSV colour to RGB.
+
+vec3 hsv_to_rgb(vec3 c) {
+
+vec4 k = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+
+vec3 p = abs(fract(c.xxx + k.xyz) * 6.0 - k.www);
+
+return c.z * mix(k.xxx, clamp(p - k.xxx, 0.0, 1.0), c.y);
+
+}
+
+
+
+void fragment() {
+	vec4 sprite_color = texture(TEXTURE, UV);
+	
+	vec2 pixel = local_uv * node_size;
+	float denom = max(node_size.x + node_size.y, 1.0);
+	float phase = (pixel.x + pixel.y) / denom;
+	float hue   = fract(TIME * speed * 0.25 + phase);
+	vec3 rainbow = hsv_to_rgb(vec3(hue, 1.0, 1.0)) * glow_intensity;
+
+	// --- THE TRICK ---
+	// Check if modulate_color is roughly pure white (1.0, 1.0, 1.0).
+	// If it's white, use your rainbow_mix. If it's NOT white, force mix to 0.0.
+	float active_mix = rainbow_mix;
+	if (modulate_color.r < 0.99 || modulate_color.g < 0.99 || modulate_color.b < 0.99) {
+		active_mix = 0.0; // Turn off rainbow because a custom color was applied!
+	}
+
+	// Mix using our conditional active_mix
+	vec3 final_rgb = mix(sprite_color.rgb, rainbow, active_mix);
+
+	// Render
+	COLOR.rgb = final_rgb * modulate_color.rgb;
+	COLOR.a = sprite_color.a * modulate_color.a;
+}"
 
 [sub_resource type="Gradient" id="Gradient_tejl3"]
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
@@ -124,6 +294,8 @@ shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/movement_speed = 1.0
 shader_parameter/random_start = 0.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y7tmk"]
+
 [sub_resource type="Gradient" id="Gradient_yopb8"]
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
@@ -139,6 +311,8 @@ shader_parameter/gradient = SubResource("GradientTexture2D_tejl3")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/movement_speed = 1.0
 shader_parameter/random_start = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rlh1y"]
 
 [sub_resource type="Shader" id="Shader_gjpg2"]
 code = "shader_type canvas_item;
@@ -206,7 +380,7 @@ shader_parameter/node_size = Vector2(64, 17.555)
 shader_parameter/only_border = true
 shader_parameter/border_gradient = SubResource("GradientTexture2D_2wfgr")
 
-[node name="RebirthItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("randomSpeedTitleShade", "randomSpeedDescriptionShade")]
+[node name="RebirthItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("randomSpeedTitleShade", "randomSpeedDescriptionShade") groups=["RebirthGroup"]]
 custom_minimum_size = Vector2(900, 163)
 layout_mode = 3
 anchors_preset = 1
@@ -220,6 +394,8 @@ script = ExtResource("1_nrdbl")
 particle = SubResource("PackedScene_oqi44")
 randomSpeedTitleShade = NodePath("Holder/SubViewportContainer")
 randomSpeedDescriptionShade = NodePath("Holder/SubViewportContainerDesc")
+rainbowShaderMaterial = SubResource("Shader_tejl3")
+rainbowShaderMaterialMask = SubResource("Shader_2wfgr")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)
@@ -277,14 +453,15 @@ render_target_update_mode = 4
 [node name="Title" type="RichTextLabel" parent="Holder/SubViewportContainer/SubViewport" unique_id=1726089732]
 self_modulate = Color(1, 1, 0, 1)
 texture_filter = 1
+material = SubResource("ShaderMaterial_y7tmk")
 clip_contents = false
 offset_left = 3.0
 offset_top = -1.0
 offset_right = 506.0
 offset_bottom = 54.0
+theme_override_colors/font_outline_color = Color(0.60933006, 0.6093302, 0.60932994, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 41
-bbcode_enabled = true
 text = "place holder"
 scroll_active = false
 script = ExtResource("4_tejl3")
@@ -310,6 +487,7 @@ render_target_update_mode = 4
 [node name="Description" type="RichTextLabel" parent="Holder/SubViewportContainerDesc/SubViewport" unique_id=1317254129]
 self_modulate = Color(1, 1, 0, 1)
 texture_filter = 1
+material = SubResource("ShaderMaterial_rlh1y")
 clip_contents = false
 offset_left = 3.0
 offset_top = -1.0
@@ -367,15 +545,15 @@ offset_top = -29.492004
 offset_right = 116.0
 offset_bottom = 24.507998
 pivot_offset = Vector2(83, 30.215)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 29
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 54
 bbcode_enabled = true
 text = "313k"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 54
-_current_font_size = 29
+_current_font_size = 54
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -390,17 +568,27 @@ offset_right = 189.25
 offset_bottom = 64.625
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(83, 26.4)
-theme_override_constants/outline_size = 9
-theme_override_font_sizes/normal_font_size = 46
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 81
 bbcode_enabled = true
 text = "lv:1"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 81
-_current_font_size = 46
+_current_font_size = 81
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Lock" type="TextureRect" parent="Holder" unique_id=1425739941]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 55.0
+offset_right = 134.0
+offset_bottom = 119.0
+scale = Vector2(1.9608581, 1.9608581)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("9_2wfgr")
 
 [node name="ParticlePlace" type="Control" parent="Holder" unique_id=1111193086]
 anchors_preset = 0

@@ -35,9 +35,10 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func CollectSheep():
-	if (AutoCollectSheepActive()):
+	if (AutoCollectSheepActive() && is_instance_valid(get_sheep())):
 		get_sheep().Pressed()
 		timerAutoCollectorSheep.wait_time = AutoCollectSheepTotalParse()
+
 func get_sheep():
 	return get_tree().get_first_node_in_group("Sheep")
 func _process(delta: float) -> void:
@@ -160,4 +161,4 @@ func GoldWoolMultiplierTotal():
 	return 10 + saveDataRebirth.goldWoolMultiplier
 	
 func RainbowWoolMultiplierTotal():
-	return 100
+	return saveDataRebirth.rainbowWoolMultiplier

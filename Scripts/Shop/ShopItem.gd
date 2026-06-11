@@ -60,7 +60,7 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 			descriptionNode.text = "the collector will gain every [wave amp=25.0 freq=10.0]"\
 			+ str(GameHandler.saveData.collectSpeed) + "[/wave] seconds"
 		Powers.rareClick:
-			descriptionNode.text = "the chance of appereance wil increase by [wave amp=25.0 freq=10.0]+1%[/wave]\n"+\
+			descriptionNode.text = "the chance of appereance will increase by [wave amp=25.0 freq=10.0]+1%[/wave]\n"+\
 			"Current rare wool chance:[colorT speed=3 sColor=#FFFFFF eColor=#F5BF03]" + str(int(GameHandler.saveData.rareChance * 100)) + "%"
 		Powers.doubleClick:
 			descriptionNode.text = "the collection will doubles on each purchase\n"+\
@@ -90,8 +90,21 @@ func set_item(shopDat:ShopClass):
 func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
+	ExceptionalPurchase()
 	moneyNode.text = "[wave amp=%d freq=10]%s%s[/wave]" % [frequencyWavePrice.number, "$",NumberFormat.Format(TotalPrice())]
 	pass
+
+var exceptioned := false
+func ExceptionalPurchase():
+	match (shopData.power):
+		Powers.autoCollectSheep:
+			if (GameHandler.AutoCollectSheepTotal() <= 0.30 && !exceptioned):
+				TweenLevelMax()
+				levelNode.modulate.a = 1
+				levelNode.text = "lv:Max"
+				shopData.canBuy = false
+				exceptioned = true
+
 
 func Hovered():
 	var mouse_pos = get_global_mouse_position()

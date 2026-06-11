@@ -15,10 +15,10 @@ script = ExtResource("2_04lpc")
 title = "Improve Shear"
 image = ExtResource("3_hantp")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-price = 1161231
-level = 18
+price = 48
+level = 4
 power = 1
-tax = 2.8500000000000014
+tax = 1.4500000000000004
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -27,10 +27,9 @@ script = ExtResource("2_04lpc")
 title = "Auto collect"
 image = ExtResource("4_wh28c")
 description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+32[/wave]"
-price = 355126
-level = 15
+price = 250
 power = 2
-tax = 2.300000000000001
+tax = 1.1
 taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -39,10 +38,9 @@ script = ExtResource("2_04lpc")
 title = "Faster Auto Collect"
 image = ExtResource("5_w66ht")
 description = "make the auto collector collects faster"
-price = 1375
-level = 1
+price = 1250
 power = 3
-tax = 1.2200000000000002
+tax = 1.1
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -50,10 +48,9 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_04lpc")
 title = "Rare Wool"
 image = ExtResource("6_gdvw8")
-price = 16030
-level = 7
+price = 2000
 power = 4
-tax = 1.5500000000000005
+tax = 1.2
 taxInc = 0.05
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -85,10 +82,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_npldj")
-money = 325027
-increment = 38
-autoCollect = 480
-collectSpeed = 2.7
-rareChance = 0.07
+money = 94
+increment = 10
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true

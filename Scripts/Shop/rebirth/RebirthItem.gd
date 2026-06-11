@@ -1,12 +1,16 @@
 extends Control
 class_name RebirthItem
 
+static var rebirthItems:Array[RebirthItem]
+
 enum Powers{
 	none,
 	multiplier,
 	offer,
 	autoCollect,
-	goldWoolMultiply
+	goldWoolMultiply,
+	rainbowWool,
+	rainbowWoolMultiply
 }
 
 @export var particle:PackedScene
@@ -16,6 +20,8 @@ enum Powers{
 @export var randomSpeedTitleShade:Control
 @export var randomSpeedDescriptionShade:Control
 
+@export var rainbowShaderMaterial:Shader
+@export var rainbowShaderMaterialMask:Shader
 
 #tweens
 var tweenAlpha:Tween
@@ -42,6 +48,8 @@ var levelMaxYdef = 53.0
 var goldMaterial1:ShaderMaterial
 var goldMaterial2:ShaderMaterial
 
+var possibleBought = true
+
 func _ready() -> void:
 	frequencyWavePrice.number = 0
 	originalPosXMoney = get_node("Holder/Prce").position.x
@@ -60,8 +68,34 @@ func _ready() -> void:
 	(get_node("BG") as Control).material = goldMaterial1
 	goldMaterial2 = (get_node("BG2") as Control).material.duplicate()
 	(get_node("BG2") as Control).material = goldMaterial2
-
+	ExceptionalItems()
+	
+	rebirthItems.append(self)
 	pass # Replace with function body.
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+func ExceptionalItems():
+	match (shopData.power):
+		Powers.rainbowWool, Powers.rainbowWoolMultiply:
+			var shadeMater:ShaderMaterial = ShaderMaterial.new()
+			shadeMater.shader = rainbowShaderMaterial
+			(get_node("BG") as Control).material = shadeMater
+			
+			(get_node("BG2") as Control).material = shadeMater.duplicate()
+			(get_node("BG2") as Control).material.set_shader_parameter("border_only", true)
+			
+			var shadeMater2:ShaderMaterial = ShaderMaterial.new()
+			shadeMater2.shader = rainbowShaderMaterialMask
+			get_node("Holder/SubViewportContainer/SubViewport/Title").material = shadeMater2
+			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").material = shadeMater2
+			get_node("Holder/SubViewportContainer/SubViewport/Title").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			get_node("Holder/SubViewportContainer").material = null
+			get_node("Holder/SubViewportContainerDesc").material = null
+		pass
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 func RandomGradient():
 	var mat = randomSpeedTitleShade.material.duplicate()
@@ -93,6 +127,17 @@ func CustomItemText(): #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		Powers.goldWoolMultiply:
 			descriptionNode.text = "on each purchase you will gain gold wool multiplier by +5\n"+\
 			"current gold multiplier:X" + str(GameHandler.GoldWoolMultiplierTotal())
+		Powers.rainbowWool:
+			descriptionNode.text = "the chance of appereance will increase by [wave amp=25.0 freq=10.0]+1%[/wave]\n"+\
+			"Current Rainbow wool chance:" + str(GameHandler.saveDataRebirth.rainbowWoolChance * 100) + "%"
+		Powers.rainbowWoolMultiply:
+			if (GameHandler.saveDataRebirth.rainbowWoolChance <= 0.0):
+				descriptionNode.text = "on each purchase you will gain rainbow wool multiplier by +100\n"+\
+				"[color=red]purchasing Rainbow wool is recommended first"
+			else:
+				descriptionNode.text = "on each purchase you will gain rainbow wool multiplier by +100\n"+\
+				"current rainbow multiplier:X" + str(GameHandler.RainbowWoolMultiplierTotal())
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -113,8 +158,24 @@ func set_item(rebirthDat:RebirthClass):
 func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
+	CustomItemText()
+	ExceptionalLock()
 	moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [frequencyWavePrice.number,NumberFormat.Format(shopData.rebirthPrice)]
 	pass
+
+func ExceptionalLock(): # WILL CONTINUE HEEEERE
+	match (shopData.power):
+		Powers.rainbowWoolMultiply:
+			possibleBought = false
+			if GameHandler.saveDataRebirth.rainbowWoolChance > 0.01 || is_equal_approx(GameHandler.saveDataRebirth.rainbowWoolChance, 0.01):
+				
+				possibleBought = true
+	if (!possibleBought):
+		get_node("Holder/Lock").self_modulate.a = 1
+		moneyNodePos.modulate.a = 0
+	else:
+		get_node("Holder/Lock").self_modulate.a = 0
+		moneyNodePos.modulate.a = 1
 
 func Hovered():
 	var mouse_pos = get_global_mouse_position()
@@ -158,6 +219,12 @@ func TweenColorLevel(col:Color):
 	levelNode.modulate = col
 	colorTweenLevel = TweenUtils.tweenColorRGB(levelNode,Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
 
+var colorTweenLock:Tween
+func TweenColorLock(col:Color):
+	TweenUtils.StopTween(colorTweenLock)
+	get_node("Holder/Lock").self_modulate = col
+	colorTweenLock = TweenUtils.tweenColorRGBself(get_node("Holder/Lock"),Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
+
 var tweenXtext:Tween
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -180,6 +247,13 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				shopData.canBuy = false
 		Powers.goldWoolMultiply:
 			GameHandler.saveDataRebirth.goldWoolMultiplier += 5
+		Powers.rainbowWool:
+			GameHandler.saveDataRebirth.rainbowWoolChance += 0.01
+			if (GameHandler.saveDataRebirth.rainbowWoolChance >= 0.70):
+				TweenLevelMax()
+				shopData.canBuy = false
+		Powers.rainbowWoolMultiply:
+			GameHandler.saveDataRebirth.rainbowWoolMultiplier += 100
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -189,10 +263,18 @@ func TweenLevelMax():
 	TweenUtils.tweenAlpha(get_node("Holder/Prce"),0,0.3,TweenUtils.Ease.linear)
 
 var tweenXtextLevel:Tween
+var tweenXLock:Tween
+
 func Bought():
 	if isInside && Input.is_action_just_pressed("LeftMouse"):
 		if (shopData.power == Powers.none):
 			push_error("no power added")
+			return
+		if (!possibleBought):
+			get_node("Holder/Lock").position.x = 70.0 - 10
+			TweenColorLock(Color(1,0,0,1))
+			TweenUtils.StopTween(tweenXLock)
+			tweenXLock = TweenUtils.tweenX(get_node("Holder/Lock"),70,0.3,TweenUtils.Ease.OutCirc)
 			return
 		if (!shopData.canBuy):
 			TweenColorLevel(Color(1,0,0,1))

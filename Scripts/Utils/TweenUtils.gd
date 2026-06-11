@@ -72,7 +72,16 @@ static func tweenColorRGB(object, color, duration, eas):
 	, currentColor, color, duration)
 	EasingType(step, eas)
 	return tween
-
+static func tweenColorRGBself(object, color, duration, eas):
+	var tween = object.create_tween()
+	var currentColor = object.self_modulate
+	var step = tween.tween_method(func(col):
+		object.self_modulate.r = col.r
+		object.self_modulate.g = col.g
+		object.self_modulate.b = col.b
+	, currentColor, color, duration)
+	EasingType(step, eas)
+	return tween
 static func tweenColorRGBPingPong(object,startValue,endValue,duration,eas):
 	var tween = object.create_tween().set_loops(-1)
 	var currentColor = object.modulate

@@ -370,7 +370,6 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_6wd5m")
 
 [node name="Gold" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1859218306]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -405,6 +404,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("4_id86e")
 
 [node name="Control" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1740725075]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -440,6 +440,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Mouse2" type="Control" parent="SubViewportContainer/SubViewport/ShearsDouble" unique_id=1913334823]
+visible = false
 anchors_preset = 0
 offset_left = 363.0
 offset_top = 381.0
@@ -491,7 +492,6 @@ mouse_filter = 2
 texture = ExtResource("3_itva4")
 
 [node name="AutoSizeRichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/ShearsDouble" unique_id=1886445390]
-visible = false
 layout_mode = 0
 offset_left = 387.0
 offset_top = 5.0
