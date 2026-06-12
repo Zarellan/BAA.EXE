@@ -1,7 +1,7 @@
 extends Control
 class_name RebirthItem
 
-static var rebirthItems:Array[RebirthItem]
+static var rebirthItems:Dictionary[String, RebirthItem]
 
 enum Powers{
 	none,
@@ -10,7 +10,8 @@ enum Powers{
 	autoCollect,
 	goldWoolMultiply,
 	rainbowWool,
-	rainbowWoolMultiply
+	rainbowWoolMultiply,
+	cheaperRebirth
 }
 
 @export var particle:PackedScene
@@ -69,8 +70,8 @@ func _ready() -> void:
 	goldMaterial2 = (get_node("BG2") as Control).material.duplicate()
 	(get_node("BG2") as Control).material = goldMaterial2
 	ExceptionalItems()
-	
-	rebirthItems.append(self)
+	ExceptionalLock()
+	rebirthItems[shopData.title] = self
 	pass # Replace with function body.
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -123,9 +124,9 @@ func CustomItemText(): #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			else:
 				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\neven after rebirth\n"+\
 				"super collector total:" + str(float(GameHandler.saveDataRebirth.autoCollectSheep)) + " seconds\n"+\
-				"collect every:[rainbow]" + str(float(GameHandler.AutoCollectSheepTotalParse())) + " seconds"
+				"collect every:[rainbow][wave amp=25.0 freq=10.0]" + str(float(GameHandler.AutoCollectSheepTotalParse())) + "[/wave] seconds"
 		Powers.goldWoolMultiply:
-			descriptionNode.text = "on each purchase you will gain gold wool multiplier by +5\n"+\
+			descriptionNode.text = "on each purchase you will gain gold wool multiplier by [wave amp=25.0 freq=10.0]+5[/wave]\n"+\
 			"current gold multiplier:X" + str(GameHandler.GoldWoolMultiplierTotal())
 		Powers.rainbowWool:
 			descriptionNode.text = "the chance of appereance will increase by [wave amp=25.0 freq=10.0]+1%[/wave]\n"+\
@@ -133,10 +134,13 @@ func CustomItemText(): #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		Powers.rainbowWoolMultiply:
 			if (GameHandler.saveDataRebirth.rainbowWoolChance <= 0.0):
 				descriptionNode.text = "on each purchase you will gain rainbow wool multiplier by +100\n"+\
-				"[color=red]purchasing Rainbow wool is recommended first"
+				"[color=red]purchasing [wave amp=25.0 freq=10.0][color=green]Rainbow wool[/color][/wave][color=red] is recommended first"
 			else:
 				descriptionNode.text = "on each purchase you will gain rainbow wool multiplier by +100\n"+\
 				"current rainbow multiplier:X" + str(GameHandler.RainbowWoolMultiplierTotal())
+		Powers.cheaperRebirth:
+				descriptionNode.text = "the rebirth system will be cheaper on every purchase\n"+\
+				"current required rebirth:" + str(NumberFormat.Format(RebirthMenu.base_rebirth_total))
 
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -159,16 +163,14 @@ func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
 	CustomItemText()
-	ExceptionalLock()
 	moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [frequencyWavePrice.number,NumberFormat.Format(shopData.rebirthPrice)]
 	pass
 
-func ExceptionalLock(): # WILL CONTINUE HEEEERE
+func ExceptionalLock():
 	match (shopData.power):
 		Powers.rainbowWoolMultiply:
 			possibleBought = false
 			if GameHandler.saveDataRebirth.rainbowWoolChance > 0.01 || is_equal_approx(GameHandler.saveDataRebirth.rainbowWoolChance, 0.01):
-				
 				possibleBought = true
 	if (!possibleBought):
 		get_node("Holder/Lock").self_modulate.a = 1
@@ -176,6 +178,17 @@ func ExceptionalLock(): # WILL CONTINUE HEEEERE
 	else:
 		get_node("Holder/Lock").self_modulate.a = 0
 		moneyNodePos.modulate.a = 1
+
+func BoughtUnlock():
+	match (shopData.power):
+		Powers.rainbowWool:
+			if (!rebirthItems["Rainbow wool multiplier"].possibleBought):
+				rebirthItems["Rainbow wool multiplier"].Unlock()
+
+func Unlock():
+	TweenUtils.tweenAlphaSelf(get_node("Holder/Lock"),0,0.3,TweenUtils.Ease.linear)
+	TweenUtils.tweenAlpha(moneyNodePos,1,0.3,TweenUtils.Ease.linear)
+	possibleBought = true
 
 func Hovered():
 	var mouse_pos = get_global_mouse_position()
@@ -254,6 +267,8 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				shopData.canBuy = false
 		Powers.rainbowWoolMultiply:
 			GameHandler.saveDataRebirth.rainbowWoolMultiplier += 100
+		Powers.cheaperRebirth:
+			GameHandler.saveDataRebirth.cheaperRebirth += 0.10
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -275,6 +290,7 @@ func Bought():
 			TweenColorLock(Color(1,0,0,1))
 			TweenUtils.StopTween(tweenXLock)
 			tweenXLock = TweenUtils.tweenX(get_node("Holder/Lock"),70,0.3,TweenUtils.Ease.OutCirc)
+			ToShine()
 			return
 		if (!shopData.canBuy):
 			TweenColorLevel(Color(1,0,0,1))
@@ -305,6 +321,7 @@ func Bought():
 			GlobalAudio.PlayOneShot("res://Sounds/party_sound.mp3",5)
 			GlobalAudio.PlayOneShot("res://Sounds/RebirthBought.mp3",3)
 			GoldBGShaderTween()
+			BoughtUnlock()
 			GameHandler.SaveAllDataGlob()
 			#ResourceSaver.save(GameHandler.shopListGlob,"res://saver/ShopList.tres") # save shop list
 		else:
@@ -314,9 +331,29 @@ func Bought():
 			TweenColor(Color(1.0, 0.0, 0.0))
 			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
 
+
+func ToShine():
+	match (shopData.power):
+		Powers.rainbowWoolMultiply:
+			rebirthItems["Rainbow wool"].Shine()
+
 var tweenGold:Tween
 var tweenColorBG:Tween
 var tweenColorBG2:Tween
+
+var twShine:Tween
+func Shine():
+	TweenUtils.StopTween(tweenAlpha)
+	tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),170/255.0,0.2,TweenUtils.Ease.OutCirc)
+	tweenAlpha.finished.connect(ShineSignal)
+
+func ShineSignal():
+	tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),95.0/255.0,0.2,TweenUtils.Ease.OutCirc)
+	tweenAlpha.finished.connect(func():
+		tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),170/255.0,0.2,TweenUtils.Ease.OutCirc)
+		tweenAlpha.finished.connect(func():
+			tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),95.0/255.0,0.2,TweenUtils.Ease.OutCirc))
+		)
 
 func GoldBGShaderTween():
 	TweenUtils.StopTween(tweenGold)

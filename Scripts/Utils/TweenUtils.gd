@@ -105,7 +105,11 @@ static func tweenAlpha(object,position,duration,eas):
 	var step = tween.tween_property(object, "modulate:a", position, duration)
 	EasingType(step, eas)
 	return tween
-	
+static func tweenAlphaSelf(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "self_modulate:a", position, duration)
+	EasingType(step, eas)
+	return tween
 static func tweenNumber(owner, objectValue:ValueSaver,value,duration,eas):
 	var tween = owner.create_tween()
 	var currentInt = objectValue.number

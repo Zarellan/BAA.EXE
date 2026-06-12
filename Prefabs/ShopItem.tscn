@@ -3,7 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="1_s46mk"]
 [ext_resource type="Script" uid="uid://cwxcmuxj4cp8" path="res://Scripts/Shop/ShopItem.gd" id="1_vpf6l"]
 [ext_resource type="Script" uid="uid://p7ewib8kpsso" path="res://Scripts/Particles/ShopParticle.gd" id="2_f75f0"]
+[ext_resource type="Shader" uid="uid://cqvdx3wwpr46h" path="res://Shaders/KeepBlack.gdshader" id="3_8ieqa"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_f7n8r"]
+[ext_resource type="Texture2D" uid="uid://insaucig1u3h" path="res://Sprites/ShopHandleImage/WoolShop.png" id="3_x4kgh"]
 [ext_resource type="Script" uid="uid://dqhkgfy2b1oo7" path="res://Scripts/TextEffects/FadeColor.gd" id="5_f75f0"]
 
 [sub_resource type="Gradient" id="Gradient_f7n8r"]
@@ -29,7 +31,8 @@ _bundled = {
 "version": 3
 }
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_s46mk"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqwli"]
+shader = ExtResource("3_8ieqa")
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_x4kgh"]
 script = ExtResource("5_f75f0")
@@ -50,13 +53,14 @@ particle = SubResource("PackedScene_x4kgh")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)
+material = SubResource("ShaderMaterial_sqwli")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("CanvasTexture_s46mk")
+texture = ExtResource("3_x4kgh")
 
 [node name="Holder" type="TextureRect" parent="." unique_id=302152906]
 layout_mode = 1
@@ -84,25 +88,6 @@ grow_vertical = 2
 pivot_offset = Vector2(60, 67)
 texture = ExtResource("1_s46mk")
 expand_mode = 1
-
-[node name="Title" type="RichTextLabel" parent="Holder" unique_id=102797527]
-texture_filter = 1
-clip_contents = false
-layout_mode = 0
-offset_left = 193.0
-offset_top = 22.0
-offset_right = 696.0
-offset_bottom = 77.0
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 41
-bbcode_enabled = true
-text = "place holder"
-scroll_active = false
-script = ExtResource("3_f7n8r")
-_max_size = 41
-_current_font_size = 41
-_editor_defaults_set = true
-metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Description" type="RichTextLabel" parent="Holder" unique_id=1277112873]
 texture_filter = 1
@@ -176,3 +161,22 @@ offset_left = 95.0
 offset_top = 82.0
 offset_right = 135.0
 offset_bottom = 122.0
+
+[node name="Title" type="RichTextLabel" parent="Holder" unique_id=102797527]
+texture_filter = 1
+clip_contents = false
+layout_mode = 0
+offset_left = 193.0
+offset_top = 22.0
+offset_right = 696.0
+offset_bottom = 77.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "place holder"
+scroll_active = false
+script = ExtResource("3_f7n8r")
+_max_size = 41
+_current_font_size = 41
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"

@@ -1,24 +1,24 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3]
+[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://d3je3p6ir8n1k"]
 
-[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_npldj"]
-[ext_resource type="Script" path="res://Scripts/Shop/ShopClass.gd" id="2_04lpc"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Collector.png" id="3_hantp"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/WoolAuto.png" id="4_wh28c"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/TimeCollect.png" id="5_w66ht"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/GoldenWool.png" id="6_gdvw8"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_hqqsl"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepCollect.png" id="8_xdoum"]
-[ext_resource type="Script" path="res://Scripts/Shop/ShopList.gd" id="9_tu810"]
+[ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_npldj"]
+[ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_04lpc"]
+[ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="3_hantp"]
+[ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="4_wh28c"]
+[ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="5_w66ht"]
+[ext_resource type="Texture2D" uid="uid://daxuoqvor3uhv" path="res://Sprites/ShopImages/GoldenWool.png" id="6_gdvw8"]
+[ext_resource type="Texture2D" uid="uid://bonny1fk1tevv" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_hqqsl"]
+[ext_resource type="Texture2D" uid="uid://8v40eu5pnywd" path="res://Sprites/ShopImages/SheepCollect.png" id="8_xdoum"]
+[ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="9_tu810"]
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
 script = ExtResource("2_04lpc")
 title = "Improve Shear"
 image = ExtResource("3_hantp")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-price = 48
-level = 4
+price = 26
+level = 1
 power = 1
-tax = 1.4500000000000004
+tax = 1.15
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -82,7 +82,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_npldj")
-money = 94
-increment = 10
+money = 5
+increment = 4
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true

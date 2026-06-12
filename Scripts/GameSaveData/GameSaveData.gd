@@ -11,12 +11,7 @@ class_name GameSaveData
 @export var rareChance:float = 0.00
 @export var shopListData:ShopList
 @export var tutorialed:bool = false
-#settings
-@export var soundtrackVolume:float = 70
-@export var audioVolume:float = 70
-@export var quality:GameHandler.Quality = GameHandler.Quality.High
-@export var fps:int = 60
-@export var vSync:bool = true
+
 
 #rewards
 @export var checkCodes:Array[Array] = [["eid mubarak",false]]

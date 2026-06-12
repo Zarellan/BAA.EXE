@@ -28,7 +28,19 @@ point_count = 2
 _data = [Vector2(0, 0.3595506), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v70la"]
+shader = ExtResource("1_lsmxg")
+shader_parameter/speed = 4.0
+shader_parameter/rainbow_mix = 0.5
+shader_parameter/glow_intensity = 3.5
+shader_parameter/node_size = Vector2(100, 100)
+
+[sub_resource type="Curve" id="Curve_03kco"]
+_data = [Vector2(0, 0.8314607), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="RainbowStar" type="Sprite2D" unique_id=497598136]
+z_index = 1
 material = SubResource("ShaderMaterial_amxxf")
 texture = ExtResource("2_v70la")
 script = ExtResource("3_v70la")
@@ -41,5 +53,10 @@ scale_curve1 = SubResource("Curve_giemr")
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="Trail" type="Line2D" parent="." unique_id=1185387399]
+top_level = true
+material = SubResource("ShaderMaterial_v70la")
+width_curve = SubResource("Curve_03kco")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

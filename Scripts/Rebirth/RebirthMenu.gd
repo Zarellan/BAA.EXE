@@ -9,7 +9,7 @@ var tweenRebirth:Tween
 
 const base_rebirth:float = 25000
 
-var base_rebirth_total:float = 0
+static var base_rebirth_total:float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

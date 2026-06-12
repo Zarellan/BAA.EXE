@@ -28,11 +28,11 @@ func _ready() -> void:
 	settings = false
 	audioText = get_node("Volume/AudioVolume")
 	soundtrackText = get_node("Volume/SoundtrackVolume")
-	(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveData.soundtrackVolume
-	(get_node("Volume/AudioSlider") as HSlider).value = GameHandler.saveData.audioVolume
+	(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveDataSettings.soundtrackVolume
+	(get_node("Volume/AudioSlider") as HSlider).value = GameHandler.saveDataSettings.audioVolume
 	(get_node("Performance/QualityOptions") as OptionButton).select(BasedOnQuality())
 	(get_node("Performance/FPSOption") as OptionButton).select(BasedOnFPS())
-	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveData.vSync
+	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.vSync
 	
 	codeText.add_theme_color_override("font_placeholder_color", Color(0.658, 0.658, 0.658, 1.0))
 	InitializeSettings()
@@ -40,7 +40,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func InitializeSettings():
-	Engine.max_fps = GameHandler.saveData.fps
+	Engine.max_fps = GameHandler.saveDataSettings.fps
 	SetVSync()
 	_on_quality_option_item_selected.call_deferred(BasedOnQuality())
 	ChangeSetting(0)
@@ -60,7 +60,7 @@ func CodeRewards():
 	match(codeText.text.to_lower()):
 		"eid mubarak":
 			if (!CodeDoublecheck("eid mubarak")):
-				codeTextSub.text = "Eid Mubarak you too [font_size=50]🥳"
+				codeTextSub.text = "Eid Mubarak you too [font_size=50][img]res://Sprites/emojies/Party.png[/img]"
 				GameHandler.AddMoneyForce(10000)
 				get_tree().get_first_node_in_group("Sheep").BringEidCap()
 		_:
@@ -112,8 +112,8 @@ func BringSettings():
 	if !settings:
 		TweenUtils.StopTween(tweenSettings)
 		tweenSettings = TweenUtils.tweenY(self,0.0,0.3,TweenUtils.Ease.OutCirc)
-		(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveData.soundtrackVolume
-		(get_node("Volume/AudioSlider") as HSlider).value = GameHandler.saveData.audioVolume
+		(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveDataSettings.soundtrackVolume
+		(get_node("Volume/AudioSlider") as HSlider).value = GameHandler.saveDataSettings.audioVolume
 		ChangeText()
 		settings = true
 
@@ -125,14 +125,14 @@ func ExitSettings():
 
 
 func _on_h_slider_value_changed(value: float) -> void:
-	GameHandler.saveData.soundtrackVolume = value
+	GameHandler.saveDataSettings.soundtrackVolume = value
 	GlobalSoundtrack.ChangeVolumeSettings()
 	ChangeText()
 	pass # Replace with function body.audioVolume
 
 
 func _on_audio_slider_value_changed(value: float) -> void:
-	GameHandler.saveData.audioVolume = value
+	GameHandler.saveDataSettings.audioVolume = value
 	ChangeText()
 	pass # Replace with function body.
 
@@ -143,8 +143,8 @@ func _on_back_pressed() -> void:
 	pass # Replace with function body.
 
 func ChangeText():
-	(audioText as AutoSizeRichTextLabel).text = "Audio Volume:"+str(GameHandler.saveData.audioVolume) +"%"
-	(soundtrackText as AutoSizeRichTextLabel).text = "Track Volume:"+str(GameHandler.saveData.soundtrackVolume) +"%"
+	(audioText as AutoSizeRichTextLabel).text = "Audio Volume:"+str(GameHandler.saveDataSettings.audioVolume) +"%"
+	(soundtrackText as AutoSizeRichTextLabel).text = "Track Volume:"+str(GameHandler.saveDataSettings.soundtrackVolume) +"%"
 	pass
 
 
@@ -161,10 +161,10 @@ func _on_arrow_button_right_pressed() -> void:
 func _on_quality_option_item_selected(index: int) -> void:
 	match(index):
 		0:
-			GameHandler.saveData.quality = GameHandler.Quality.High
+			GameHandler.saveDataSettings.quality = GameHandler.Quality.High
 			shadedGrassNode.visible = true
 		1:
-			GameHandler.saveData.quality = GameHandler.Quality.Low
+			GameHandler.saveDataSettings.quality = GameHandler.Quality.Low
 			shadedGrassNode.visible = false
 	await RenderingServer.frame_post_draw #StarSpawner won't load in first frame reload so waiting is the solution
 	var starSpawner = get_tree().get_first_node_in_group("StarSpawner")
@@ -172,7 +172,7 @@ func _on_quality_option_item_selected(index: int) -> void:
 	pass
 
 func BasedOnQuality():
-	match(GameHandler.saveData.quality):
+	match(GameHandler.saveDataSettings.quality):
 		GameHandler.Quality.High:
 			return 0
 		GameHandler.Quality.Low:
@@ -182,15 +182,15 @@ func BasedOnQuality():
 
 func _on_fps_option_item_selected(index: int) -> void:
 	match (index):
-		0: GameHandler.saveData.fps = 30
-		1: GameHandler.saveData.fps = 60
-		2: GameHandler.saveData.fps = 120
-		3: GameHandler.saveData.fps = 0
-	Engine.max_fps = GameHandler.saveData.fps
+		0: GameHandler.saveDataSettings.fps = 30
+		1: GameHandler.saveDataSettings.fps = 60
+		2: GameHandler.saveDataSettings.fps = 120
+		3: GameHandler.saveDataSettings.fps = 0
+	Engine.max_fps = GameHandler.saveDataSettings.fps
 	pass # Replace with function body.
 
 func BasedOnFPS():
-	match (GameHandler.saveData.fps):
+	match (GameHandler.saveDataSettings.fps):
 		30: 
 			return 0
 		60: 
@@ -201,14 +201,14 @@ func BasedOnFPS():
 			return 3
 
 func SetVSync():
-	if (GameHandler.saveData.vSync):
+	if (GameHandler.saveDataSettings.vSync):
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 
 
 func _on_v_sync_box_toggled(toggled_on: bool) -> void:
-	GameHandler.saveData.vSync = toggled_on
+	GameHandler.saveDataSettings.vSync = toggled_on
 	SetVSync()
 	pass # Replace with function body.
 

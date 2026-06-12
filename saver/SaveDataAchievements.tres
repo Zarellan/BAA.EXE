@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://7q8ldg8bdrvv"]
+
+[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_t1o5m"]
+
+[resource]
+script = ExtResource("1_t1o5m")

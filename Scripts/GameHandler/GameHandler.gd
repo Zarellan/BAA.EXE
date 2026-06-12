@@ -7,6 +7,8 @@ enum Quality{
 
 @export var saveData:GameSaveData
 @export var saveDataRebirth:GameSaveRebirth
+@export var saveDataSettings:GameSaveSettings
+@export var saveDataAchievements:GameSaveAchievements # will do later
 
 
 var globalDelta:float
@@ -24,6 +26,8 @@ func _ready() -> void:
 		get_tree().reload_current_scene.call_deferred() # reloading early to face early crash rather that being surprised
 	saveData = GameSaveData.new()
 	saveDataRebirth = GameSaveRebirth.new()
+	saveDataSettings = GameSaveSettings.new()
+	saveDataAchievements = GameSaveAchievements.new()
 	GameHandler.LoadAllDataGlob()
 	timerSaveCooldown = CreateTimer(3, _on_save_timer_timeout)
 	timerAutoCollector = CreateTimer(saveData.collectSpeed, NowCollect, false)
@@ -77,13 +81,38 @@ func LoadAllDataRebirth():
 	saveDataRebirth = loader
 	return true
 
+func SaveAllDataSettings():
+	ResourceUtil.SaveResource(saveDataSettings,"SaveDataSettings","saver")
+
+func LoadAllDataSettings():
+	var loader:GameSaveSettings
+	loader = ResourceUtil.LoadResources("SaveDataSettings","saver") as GameSaveSettings
+	if loader == null:
+		return false
+	saveDataSettings = loader
+	return true
+
+func SaveAllAchievements():
+	ResourceUtil.SaveResource(saveDataAchievements,"SaveDataAchievements","saver")
+
+func LoadAllAchievements():
+	var loader:GameSaveAchievements
+	loader = ResourceUtil.LoadResources("SaveDataAchievements","saver") as GameSaveAchievements
+	if loader == null:
+		return false
+	saveDataAchievements = loader
+	return true
+	
 func SaveAllDataGlob():
 	SaveAllData()
 	SaveAllDataRebirth()
-
+	SaveAllDataSettings()
+	SaveAllAchievements()
 func LoadAllDataGlob():
 	LoadAllData()
 	LoadAllDataRebirth()
+	LoadAllDataSettings()
+	LoadAllAchievements()
 
 func AddMoney():
 	if (IncrementTotal() < 0):

@@ -49,7 +49,10 @@
 [ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="30_mqm6h"]
 [ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="31_hotcp"]
 [ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="32_iwha0"]
+[ext_resource type="Texture2D" uid="uid://db5l4xqd4h51u" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="36_p5ocn"]
+[ext_resource type="Texture2D" uid="uid://dti18jjl0ek7o" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="37_ovgwv"]
 [ext_resource type="Texture2D" uid="uid://bgwt3qsuxxs47" path="res://Sprites/OptionUIs/ShoppingKartYellow.png" id="37_valao"]
+[ext_resource type="Texture2D" uid="uid://y43oxeypu0kt" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="38_ebyxy"]
 [ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="40_8hf41"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
 [ext_resource type="Shader" uid="uid://c0r6nnm084nsx" path="res://Shaders/RainbowBorderCanvas.gdshader" id="50_tdfnv"]
@@ -531,6 +534,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_tdfnv"]
 script = ExtResource("27_phtv5")
 title = "Gold wool multiplier"
+image = ExtResource("36_p5ocn")
 rebirthPrice = 3
 power = 4
 tax = 1.5
@@ -540,6 +544,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_amxxf"]
 script = ExtResource("27_phtv5")
 title = "Rainbow wool"
+image = ExtResource("37_ovgwv")
 rebirthPrice = 4
 power = 5
 tax = 1.5
@@ -549,13 +554,32 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_p5ocn"]
 script = ExtResource("27_phtv5")
 title = "Rainbow wool multiplier"
+image = ExtResource("38_ebyxy")
 rebirthPrice = 2
 power = 6
+tax = 1.5
+taxInc = 0.04
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
+[sub_resource type="Resource" id="Resource_ovgwv"]
+script = ExtResource("27_phtv5")
+title = "Cheaper rebirth"
+rebirthPrice = 3
+power = 7
+tax = 1.6
+taxInc = 0.1
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
+[sub_resource type="Resource" id="Resource_ebyxy"]
+script = ExtResource("27_phtv5")
+title = "Free the sheep (ending)"
+rebirthPrice = 10000
+tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("28_hotcp")
-items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn")])
+items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [sub_resource type="Gradient" id="Gradient_iwha0"]
@@ -1241,16 +1265,20 @@ frame = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sheep/StaticBody2D" unique_id=1219642034]
 shape = SubResource("RectangleShape2D_0r47l")
 
-[node name="EidCap" type="Sprite2D" parent="Sheep/StaticBody2D" unique_id=1386736279]
+[node name="Skins" type="Node2D" parent="Sheep/StaticBody2D" unique_id=373995902]
+
+[node name="Eid" type="Node2D" parent="Sheep/StaticBody2D/Skins" unique_id=45087348]
 visible = false
+
+[node name="EidCap" type="Sprite2D" parent="Sheep/StaticBody2D/Skins/Eid" unique_id=1386736279]
 clip_children = 2
-position = Vector2(-39.067352, -31.921232)
-rotation = 0.18776211
-scale = Vector2(0.6406251, 0.60445607)
+position = Vector2(-39.067352, -31.921219)
+rotation = 0.1877621
+scale = Vector2(0.6406252, 0.6044561)
 texture = ExtResource("9_ehq4q")
 offset = Vector2(-7.9341125, -25.322632)
 
-[node name="Shadow" type="Sprite2D" parent="Sheep/StaticBody2D/EidCap" unique_id=1583249206]
+[node name="Shadow" type="Sprite2D" parent="Sheep/StaticBody2D/Skins/Eid/EidCap" unique_id=1583249206]
 self_modulate = Color(0, 0, 0, 0.44705883)
 position = Vector2(6.1517386, -0.09282577)
 texture = ExtResource("9_ehq4q")

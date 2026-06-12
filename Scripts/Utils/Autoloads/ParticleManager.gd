@@ -14,7 +14,7 @@ func PlayParticleWarmup(particle: GPUParticles2D):
 	get_tree().current_scene.add_child.call_deferred(instance)
 
 func PlayParticleOv(particle: GPUParticles2D, count: int, force := false):
-	if (GameHandler.saveData.quality == GameHandler.Quality.Low && !force):
+	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.Low && !force):
 		return
 	var instance := particle.duplicate() as GPUParticles2D
 	instance.global_position = particle.global_position

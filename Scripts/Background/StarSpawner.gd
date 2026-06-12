@@ -14,7 +14,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func SpawnStars():
-	var maxSpawn = numberStarsSpawn if (GameHandler.saveData.quality == GameHandler.Quality.High) else numberStarsSpawnLow
+	var maxSpawn = numberStarsSpawn if (GameHandler.saveDataSettings.quality == GameHandler.Quality.High) else numberStarsSpawnLow
 	for rem in range(starsPack.size() - 1,-1,-1):
 		starsPack[rem].queue_free()
 	starsPack.clear()

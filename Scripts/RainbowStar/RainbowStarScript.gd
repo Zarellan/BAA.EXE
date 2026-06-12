@@ -45,13 +45,28 @@ func _process(delta: float) -> void:
 		rotation_degrees += movement_curve2.sample(elaps2) * randRot * 10 * delta
 		pass
 	
+	trail()
 	
 	pass
 
 var twAlph:Tween
 func _on_timer_timeout() -> void:
+	TweenUtils.tweenAlpha(get_node("Trail"),0,0.3,TweenUtils.Ease.linear)
 	twAlph = TweenUtils.tweenAlpha(self,0,0.3,TweenUtils.Ease.linear)
 	twAlph.finished.connect(func():
 		queue_free.call_deferred()
 		RainbowStarParticle.added -= 1)
 	pass # Replace with function body.
+
+var trailArray:Array
+var maxTrail = 20
+func trail():
+	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.Low):
+		return
+	trailArray.push_front(global_position)
+	
+	if (trailArray.size() > maxTrail):
+		trailArray.pop_back()
+	get_node("Trail").clear_points()
+	for point in trailArray:
+		get_node("Trail").add_point(point)

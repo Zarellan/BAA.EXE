@@ -40,7 +40,7 @@ func StartTutorial():
 	twTutorial = TweenUtils.tweenAlpha(tutorial,1,2,TweenUtils.Ease.linear)
 func BringEidCap():
 	if (GameHandler.saveData.checkCodes[0][1]):
-		get_node("StaticBody2D/EidCap").visible = true
+		get_node("StaticBody2D/Skins/Eid").visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

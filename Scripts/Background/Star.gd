@@ -14,7 +14,7 @@ func _ready() -> void:
 	lightNode = get_node("FakeLight")
 	scale = Vector2(randf_range(0.7,1.3),randf_range(0.7,1.3))
 	rotation_degrees = randf_range(-10,10)
-	if (GameHandler.saveData.quality == GameHandler.Quality.High):
+	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.High):
 		lightNode.visible = true
 		lightNode.material = lightNode.material.duplicate()
 		materialLight = lightNode.material

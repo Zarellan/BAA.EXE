@@ -2,19 +2,21 @@ extends Control
 
 
 @export var transitionMaterial:Control
-var materialValue:ValueSaver
 
 var isChanging = false
 
 var tweenTransition:Tween
 
 func _ready() -> void:
-	materialValue = ValueSaver.new()
+
+	pass
+	
 
 func ChangeScene(sceneFile:String, complete = null):
 	if (isChanging): return
 	isChanging = true
-	tweenTransition = TweenUtils.tweenNumber(self,materialValue,1,1,TweenUtils.Ease.linear)
+	tweenTransition = TweenUtils.tweenCustom(self,0,1,1,TweenUtils.Ease.linear,func(val):
+		transitionMaterial.material.set_shader_parameter("progress", val))
 	if (typeof(complete) == TYPE_CALLABLE):
 		tweenTransition.finished.connect(func():
 			ChangeSceneFormat(sceneFile, complete))
@@ -30,11 +32,12 @@ func ChangeScene2(sceneFile:PackedScene):
 func ChangeSceneFormat(sceneFile:String, complete:Callable):
 	TweenUtils.StopTween(tweenTransition)
 	get_tree().change_scene_to_file.call_deferred(sceneFile)
-	tweenTransition = TweenUtils.tweenNumber(self,materialValue,0,1,TweenUtils.Ease.linear)
+	tweenTransition = TweenUtils.tweenCustom(self,1,0,1,TweenUtils.Ease.linear,func(val):
+		transitionMaterial.material.set_shader_parameter("progress", val))
 	if (complete.is_valid()):
 		complete.call()
 	tweenTransition.finished.connect(func():isChanging = false)
 
 func _process(_delta: float) -> void:
-	if (isChanging):
-		transitionMaterial.material.set_shader_parameter("progress", materialValue.number)
+
+	pass
