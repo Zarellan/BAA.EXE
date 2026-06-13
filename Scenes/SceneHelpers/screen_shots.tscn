@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bfktlya4nix8w" path="res://Sprites/Sheep/wools.png" id="6_c2620"]
 [ext_resource type="Texture2D" uid="uid://brhp7l4epcdiw" path="res://Sprites/Sheep/SheepHead.png" id="8_akcqe"]
 [ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="9_jvesk"]
+[ext_resource type="Texture2D" uid="uid://y8lt7autwrv3" path="res://Sprites/OptionUIs/ShoppingKart.png" id="11_wr3yg"]
+[ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/Rebirth1.png" id="12_43yl2"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_id86e"]
 
@@ -443,13 +445,13 @@ offset_top = 24.0
 offset_right = 236.0
 offset_bottom = 193.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 109
+theme_override_font_sizes/normal_font_size = 112
 bbcode_enabled = true
 text = "X5"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 109
+_current_font_size = 112
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -499,13 +501,13 @@ offset_top = 24.0
 offset_right = 236.0
 offset_bottom = 193.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 109
+theme_override_font_sizes/normal_font_size = 112
 bbcode_enabled = true
 text = "X5"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 109
+_current_font_size = 112
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -706,6 +708,148 @@ _max_size = 112
 _current_font_size = 112
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Cheaper items" type="Control" parent="SubViewportContainer/SubViewport" unique_id=711878097]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/SubViewport/Cheaper items" unique_id=1630624491]
+material = SubResource("ShaderMaterial_jvesk")
+layout_mode = 0
+offset_left = 453.0
+offset_top = 51.0
+offset_right = 689.0
+offset_bottom = 253.0
+metadata/_edit_group_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer/SubViewport/Cheaper items/SubViewportContainer" unique_id=1043680823]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(236, 202)
+render_target_update_mode = 0
+
+[node name="Title" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Cheaper items/SubViewportContainer/SubViewport" unique_id=1469203950]
+self_modulate = Color(1, 1, 0, 1)
+texture_filter = 2
+clip_contents = false
+offset_left = 9.0
+offset_top = -1.0
+offset_right = 227.0
+offset_bottom = 168.0
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/normal_font_size = 159
+bbcode_enabled = true
+text = "%"
+scroll_active = false
+script = ExtResource("4_yopb8")
+_max_size = 159
+_current_font_size = 159
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Cheaper items" unique_id=630542043]
+texture_filter = 1
+layout_mode = 0
+offset_left = 17.0
+offset_top = 87.0
+offset_right = 81.0
+offset_bottom = 151.0
+scale = Vector2(8.49, 8.49)
+texture = ExtResource("11_wr3yg")
+
+[node name="cheaper rebirth" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1569793979]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewportContainer/SubViewport/cheaper rebirth" unique_id=1615915752]
+material = SubResource("ShaderMaterial_jvesk")
+layout_mode = 0
+offset_left = 453.0
+offset_top = 51.0
+offset_right = 689.0
+offset_bottom = 253.0
+metadata/_edit_group_ = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer/SubViewport/cheaper rebirth/SubViewportContainer" unique_id=1479060352]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(236, 202)
+render_target_update_mode = 4
+
+[node name="Title" type="RichTextLabel" parent="SubViewportContainer/SubViewport/cheaper rebirth/SubViewportContainer/SubViewport" unique_id=484866812]
+self_modulate = Color(1, 1, 0, 1)
+texture_filter = 2
+clip_contents = false
+offset_left = 9.0
+offset_top = -1.0
+offset_right = 227.0
+offset_bottom = 168.0
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/normal_font_size = 159
+bbcode_enabled = true
+text = "%"
+scroll_active = false
+script = ExtResource("4_yopb8")
+_max_size = 159
+_current_font_size = 159
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Holder" type="Control" parent="SubViewportContainer/SubViewport/cheaper rebirth" unique_id=1541230007]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.000015
+offset_top = 126.000015
+offset_right = 41.000015
+offset_bottom = 126.000015
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(11.23, 11.23)
+mouse_filter = 1
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/cheaper rebirth/Holder" unique_id=1243837807]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031000001
+anchor_top = 0.172
+anchor_right = 1.031
+anchor_bottom = 0.95300007
+offset_left = 0.015999913
+offset_top = -0.008000374
+offset_right = 0.01599884
+offset_bottom = 0.0079956055
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("12_43yl2")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/cheaper rebirth/Holder" unique_id=2030327521]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.031000001
+anchor_top = 0.031000001
+anchor_right = 0.96900004
+anchor_bottom = 0.74500006
+offset_left = -0.015999913
+offset_top = 0.015999913
+offset_right = -0.015995026
+offset_bottom = 0.016002655
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("12_43yl2")
+expand_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1655893819]
 position = Vector2(355, 400.99997)

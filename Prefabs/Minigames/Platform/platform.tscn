@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cml867yqju286"]
+
+[ext_resource type="Script" uid="uid://b3bhiyefcb4u" path="res://Scenes/Minigames/PlatformWayScript.gd" id="1_lgcpj"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="2_jltqh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4da"]
+size = Vector2(128, 130)
+
+[node name="Platform" type="StaticBody2D" unique_id=959627396 node_paths=PackedStringArray("visibleNotifier", "collision")]
+scale = Vector2(2.0768611, 0.32215205)
+script = ExtResource("1_lgcpj")
+visibleNotifier = NodePath("VisibleNotif")
+collision = NodePath("CollisionShape2D")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1520999515]
+texture = ExtResource("2_jltqh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1639619076]
+shape = SubResource("RectangleShape2D_pw4da")
+one_way_collision = true
+
+[node name="VisibleNotif" type="VisibleOnScreenNotifier2D" parent="." unique_id=207588253]
+rect = Rect2(-63.980244, -65, 127.96048, 130)
+show_rect = false

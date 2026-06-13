@@ -13,7 +13,7 @@ func PlayParticleWarmup(particle: GPUParticles2D):
 	instance.finished.connect(instance.queue_free)
 	get_tree().current_scene.add_child.call_deferred(instance)
 
-func PlayParticleOv(particle: GPUParticles2D, count: int, force := false):
+func PlayParticleOv(particle: GPUParticles2D, count: int, parent:Node = null,force := false):
 	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.Low && !force):
 		return
 	var instance := particle.duplicate() as GPUParticles2D
@@ -21,7 +21,11 @@ func PlayParticleOv(particle: GPUParticles2D, count: int, force := false):
 	instance.amount = count
 	instance.emitting = true
 	instance.finished.connect(instance.queue_free)
-	get_tree().current_scene.add_child.call_deferred(instance)
+	if (parent == null):
+		get_tree().current_scene.add_child.call_deferred(instance)
+	else:
+		parent.add_child.call_deferred(instance)
+		instance.position = particle.position
 
 func PlayParticle(particle, count):
 	for i in range(count):

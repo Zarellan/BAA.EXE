@@ -1,0 +1,224 @@
+[gd_scene format=3 uid="uid://b7662k5mx1kra"]
+
+[ext_resource type="Script" uid="uid://ccfylribl655l" path="res://Scripts/Minigames/Platform/MainGamePlatform.gd" id="1_kk0mp"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="1_pw4da"]
+[ext_resource type="Script" uid="uid://dgssxv3kjghjj" path="res://Scripts/Minigames/Platform/PlayerPlatform.gd" id="2_tp4em"]
+[ext_resource type="Script" uid="uid://b5gcrtnxd2r03" path="res://Scenes/Minigames/PlatformScript.gd" id="2_y556t"]
+[ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="3_ilidr"]
+[ext_resource type="Texture2D" uid="uid://csc36qugcuweo" path="res://Sprites/Minigames/Platformer/Wool barrier.png" id="5_7qx06"]
+[ext_resource type="PackedScene" uid="uid://cml867yqju286" path="res://Prefabs/Minigames/Platform/platform.tscn" id="5_tks0h"]
+[ext_resource type="Texture2D" uid="uid://bsokeoqrg1blh" path="res://Sprites/Minigames/Platformer/Wool barrier 2.png" id="6_mt4ev"]
+[ext_resource type="Script" uid="uid://buat0fksjudlp" path="res://Scripts/Camera/ShakeCamera.gd" id="7_tks0h"]
+[ext_resource type="Texture2D" uid="uid://bfktlya4nix8w" path="res://Sprites/Sheep/wools.png" id="10_vyqy7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4da"]
+size = Vector2(128, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tp4em"]
+size = Vector2(130, 128)
+
+[sub_resource type="Animation" id="Animation_7qx06"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_7qx06"), ExtResource("6_mt4ev"), ExtResource("5_7qx06")]
+}
+
+[sub_resource type="Animation" id="Animation_mt4ev"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7qx06")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mt4ev"]
+_data = {
+&"Idle": SubResource("Animation_7qx06"),
+&"RESET": SubResource("Animation_mt4ev")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mt4ev"]
+size = Vector2(63.56125, 167.8696)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_n61n0"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_vyqy7"]
+offsets = PackedFloat32Array(0, 0.89453125, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m14hk"]
+gradient = SubResource("Gradient_vyqy7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7olyu"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(26.375, 81.025, 0)
+angle_min = -16.39999
+angle_max = 16.400011
+direction = Vector3(0, -20.33, 0)
+spread = 105.319
+flatness = 0.34
+initial_velocity_min = 28.82
+initial_velocity_max = 28.82
+angular_velocity_min = -11.900016
+angular_velocity_max = 11.899983
+gravity = Vector3(0, 98, 0)
+scale_min = 0.79999995
+color_ramp = SubResource("GradientTexture1D_m14hk")
+anim_offset_max = 1.0
+turbulence_noise_strength = 3.0
+
+[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle")]
+rotation = -0.0002622433
+script = ExtResource("1_kk0mp")
+platformPrefab = ExtResource("5_tks0h")
+woolBarrier1 = NodePath("Camera2D/WoolBarrier/Sprite")
+woolBarrier2 = NodePath("Camera2D/WoolBarrier2/Sprite")
+woolBarrier1Particle = NodePath("Camera2D/WoolBarrier/GPUParticles2D")
+woolBarrier2Particle = NodePath("Camera2D/WoolBarrier2/GPUParticles2D")
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=1320418300 node_paths=PackedStringArray("visibleNotifier")]
+position = Vector2(612, 579)
+scale = Vector2(6.0800023, 1)
+script = ExtResource("2_y556t")
+visibleNotifier = NodePath("VisibleNotif")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1874496451]
+texture = ExtResource("1_pw4da")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=527745752]
+shape = SubResource("RectangleShape2D_pw4da")
+
+[node name="VisibleNotif" type="VisibleOnScreenNotifier2D" parent="Ground" unique_id=410662065]
+rect = Rect2(-63.980244, -65, 127.96048, 130)
+show_rect = false
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1094306386 node_paths=PackedStringArray("anchorArrow", "camera", "sprite") groups=["PlayerPlatform"]]
+position = Vector2(609, 435)
+scale = Vector2(0.7503374, 0.61309457)
+script = ExtResource("2_tp4em")
+anchorArrow = NodePath("Marker2D")
+camera = NodePath("../Camera2D")
+sprite = NodePath("Sprite2D")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1250934136]
+z_index = 2
+position = Vector2(0, 63.611694)
+texture = ExtResource("1_pw4da")
+offset = Vector2(0, -63.611694)
+
+[node name="Nodo" type="Node2D" parent="CharacterBody2D/Sprite2D" unique_id=358907344]
+position = Vector2(0, -63.611717)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=706593397]
+shape = SubResource("RectangleShape2D_tp4em")
+
+[node name="Marker2D" type="Marker2D" parent="CharacterBody2D" unique_id=696460992]
+top_level = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/Marker2D" unique_id=134314699]
+position = Vector2(0, -60.548553)
+scale = Vector2(0.41359717, 2.0766077)
+texture = ExtResource("3_ilidr")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1411528697]
+position = Vector2(640, 362)
+ignore_rotation = false
+process_callback = 0
+script = ExtResource("7_tks0h")
+
+[node name="WoolBarrier" type="Node2D" parent="Camera2D" unique_id=726640866]
+position = Vector2(-640, 0)
+scale = Vector2(3.51, 4.295)
+
+[node name="Sprite" type="Sprite2D" parent="Camera2D/WoolBarrier" unique_id=1414089724]
+texture_filter = 1
+texture = ExtResource("5_7qx06")
+offset = Vector2(160.05898, -5.992508)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/WoolBarrier" unique_id=1849321197]
+libraries/ = SubResource("AnimationLibrary_mt4ev")
+autoplay = &"Idle"
+
+[node name="WoolBarrierCollision" type="Area2D" parent="Camera2D/WoolBarrier" unique_id=1340801223]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/WoolBarrier/WoolBarrierCollision" unique_id=936851123]
+position = Vector2(31.752129, 0.11641693)
+shape = SubResource("RectangleShape2D_mt4ev")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Camera2D/WoolBarrier" unique_id=874433925]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_n61n0")
+position = Vector2(32.193733, -1.3969755)
+emitting = false
+amount = 26
+texture = ExtResource("10_vyqy7")
+lifetime = 3.0
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+visibility_rect = Rect2(-100, -100, 193.71, 185.605)
+process_material = SubResource("ParticleProcessMaterial_7olyu")
+
+[node name="WoolBarrier2" type="Node2D" parent="Camera2D" unique_id=2125329844]
+position = Vector2(640, 0)
+scale = Vector2(3.51, 4.295)
+
+[node name="Sprite" type="Sprite2D" parent="Camera2D/WoolBarrier2" unique_id=315838159]
+texture_filter = 1
+texture = ExtResource("5_7qx06")
+offset = Vector2(-160.16893, -6.225334)
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/WoolBarrier2" unique_id=1172394557]
+libraries/ = SubResource("AnimationLibrary_mt4ev")
+autoplay = &"Idle"
+
+[node name="WoolBarrierCollision2" type="Area2D" parent="Camera2D/WoolBarrier2" unique_id=1121424729]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/WoolBarrier2/WoolBarrierCollision2" unique_id=867442206]
+position = Vector2(-31.752, 0.116)
+shape = SubResource("RectangleShape2D_mt4ev")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Camera2D/WoolBarrier2" unique_id=685920131]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_n61n0")
+position = Vector2(-32.194, -1.397)
+emitting = false
+amount = 26
+texture = ExtResource("10_vyqy7")
+lifetime = 3.0
+one_shot = true
+speed_scale = 3.0
+explosiveness = 1.0
+visibility_rect = Rect2(-100, -100, 193.71, 185.605)
+process_material = SubResource("ParticleProcessMaterial_7olyu")
+
+[connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="." method="_on_wool_barrier_collision_body_entered"]
+[connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="CharacterBody2D" method="_on_wool_barrier_collision_body_entered"]
+[connection signal="body_entered" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="." method="_on_wool_barrier_collision_2_body_entered"]
+[connection signal="body_entered" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="CharacterBody2D" method="_on_wool_barrier_collision_2_body_entered"]

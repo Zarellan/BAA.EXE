@@ -49,14 +49,17 @@
 [ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="30_mqm6h"]
 [ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="31_hotcp"]
 [ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="32_iwha0"]
+[ext_resource type="Texture2D" uid="uid://ionxinhbf4ew" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="35_r1qcv"]
 [ext_resource type="Texture2D" uid="uid://db5l4xqd4h51u" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="36_p5ocn"]
 [ext_resource type="Texture2D" uid="uid://dti18jjl0ek7o" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="37_ovgwv"]
 [ext_resource type="Texture2D" uid="uid://bgwt3qsuxxs47" path="res://Sprites/OptionUIs/ShoppingKartYellow.png" id="37_valao"]
 [ext_resource type="Texture2D" uid="uid://y43oxeypu0kt" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="38_ebyxy"]
 [ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="40_8hf41"]
+[ext_resource type="Texture2D" uid="uid://ccixfei6apqku" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="40_q3ouh"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
 [ext_resource type="Shader" uid="uid://c0r6nnm084nsx" path="res://Shaders/RainbowBorderCanvas.gdshader" id="50_tdfnv"]
 [ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="51_7yrkc"]
+[ext_resource type="PackedScene" uid="uid://b7662k5mx1kra" path="res://Scenes/Minigames/PlaformMinigame.tscn" id="60_17bn8"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
 load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
@@ -201,12 +204,12 @@ particles_anim_h_frames = 3
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id="Gradient_4gutc"]
+[sub_resource type="Gradient" id="Gradient_4nel2"]
 offsets = PackedFloat32Array(0, 0.89453125, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_m14hk"]
-gradient = SubResource("Gradient_4gutc")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_17bn8"]
+gradient = SubResource("Gradient_4nel2")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2js75"]
 particle_flag_disable_z = true
@@ -222,11 +225,11 @@ initial_velocity_max = 116.54
 gravity = Vector3(0, 98, 0)
 scale_min = 0.29999998
 scale_max = 0.5
-color_ramp = SubResource("GradientTexture1D_m14hk")
+color_ramp = SubResource("GradientTexture1D_17bn8")
 anim_offset_max = 1.0
 turbulence_noise_strength = 3.0
 
-[sub_resource type="Shader" id="Shader_1x37o"]
+[sub_resource type="Shader" id="Shader_wcncl"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.6.2.stable's CanvasItemMaterial.
 
 shader_type canvas_item;
@@ -293,17 +296,17 @@ void fragment() {
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_iwha0"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v1gif"]
 gradient = SubResource("Gradient_8hf41")
 fill_from = Vector2(0, 0.9273504)
 fill_to = Vector2(1, 0.6111111)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8hf41"]
-shader = SubResource("Shader_1x37o")
+shader = SubResource("Shader_wcncl")
 shader_parameter/particles_anim_h_frames = 3
 shader_parameter/particles_anim_v_frames = 1
 shader_parameter/particles_anim_loop = false
-shader_parameter/gradient = SubResource("GradientTexture2D_iwha0")
+shader_parameter/gradient = SubResource("GradientTexture2D_v1gif")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/progress = 0.0
 shader_parameter/random_start = 0.0
@@ -313,14 +316,21 @@ _limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, -76.85388), 0.0, 0.0, 0, 0, Vector2(1, 12.134888), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_jy1oi"]
+[sub_resource type="CurveTexture" id="CurveTexture_q14y5"]
 curve = SubResource("Curve_5xh03")
+
+[sub_resource type="Gradient" id="Gradient_4gutc"]
+offsets = PackedFloat32Array(0, 0.89453125, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qxec0"]
+gradient = SubResource("Gradient_4gutc")
 
 [sub_resource type="Curve" id="Curve_ujam8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.20218581, 0.23595512), 0.0, 0.0, 0, 0, Vector2(1, 0.15730345), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_5xh03"]
+[sub_resource type="CurveTexture" id="CurveTexture_fip8v"]
 curve = SubResource("Curve_ujam8")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ujam8"]
@@ -329,7 +339,7 @@ emission_shape = 1
 emission_sphere_radius = 34.36
 angle_min = -7.4999895
 angle_max = 7.500011
-angle_curve = SubResource("CurveTexture_jy1oi")
+angle_curve = SubResource("CurveTexture_q14y5")
 direction = Vector3(1, -20.33, 0)
 spread = 105.319
 flatness = 0.34
@@ -337,13 +347,13 @@ initial_velocity_min = 269.65
 initial_velocity_max = 523.24
 gravity = Vector3(0, 98, 0)
 scale_min = 0.59999996
-color_ramp = SubResource("GradientTexture1D_m14hk")
+color_ramp = SubResource("GradientTexture1D_qxec0")
 anim_offset_max = 1.0
 turbulence_enabled = true
 turbulence_noise_strength = 3.0
 turbulence_initial_displacement_min = -42.5
 turbulence_initial_displacement_max = 22.600002
-turbulence_influence_over_life = SubResource("CurveTexture_5xh03")
+turbulence_influence_over_life = SubResource("CurveTexture_fip8v")
 
 [sub_resource type="Shader" id="Shader_7yrkc"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.6.2.stable's CanvasItemMaterial.
@@ -515,6 +525,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_1x37o"]
 script = ExtResource("27_phtv5")
 title = "Shop offer"
+image = ExtResource("35_r1qcv")
 rebirthPrice = 1
 power = 2
 tax = 2.0
@@ -564,6 +575,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_ovgwv"]
 script = ExtResource("27_phtv5")
 title = "Cheaper rebirth"
+image = ExtResource("40_q3ouh")
 rebirthPrice = 3
 power = 7
 tax = 1.6
@@ -602,19 +614,19 @@ shader_parameter/random_start = 0.0
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1x37o"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r1qcv"]
 gradient = SubResource("Gradient_26u1s")
 fill_from = Vector2(0, 0.9273504)
 fill_to = Vector2(1, 0.6111111)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_26u1s"]
 shader = ExtResource("9_26u1s")
-shader_parameter/gradient = SubResource("GradientTexture2D_1x37o")
+shader_parameter/gradient = SubResource("GradientTexture2D_r1qcv")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/progress = 0.0
 shader_parameter/random_start = 0.0
 
-[sub_resource type="Shader" id="Shader_26u1s"]
+[sub_resource type="Shader" id="Shader_q3ouh"]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -663,14 +675,14 @@ void fragment() {
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8hf41"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_17bn8"]
 gradient = SubResource("Gradient_1x37o")
 fill_from = Vector2(0, 0.9273504)
 fill_to = Vector2(1, 0.6111111)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iwha0"]
-shader = SubResource("Shader_26u1s")
-shader_parameter/gradient = SubResource("GradientTexture2D_8hf41")
+shader = SubResource("Shader_q3ouh")
+shader_parameter/gradient = SubResource("GradientTexture2D_17bn8")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/progress = 0.0
 shader_parameter/random_start = 0.0
@@ -2432,6 +2444,21 @@ _current_font_size = 25
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
+
+[node name="MinigameContainer" type="SubViewportContainer" parent="Control/CanvasLayer" unique_id=299885308]
+z_index = 3
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.615, 0.615)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+
+[node name="SubViewport" type="SubViewport" parent="Control/CanvasLayer/MinigameContainer" unique_id=2075597081]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="PlatformMinigame" parent="Control/CanvasLayer/MinigameContainer/SubViewport" unique_id=2025532831 instance=ExtResource("60_17bn8")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
