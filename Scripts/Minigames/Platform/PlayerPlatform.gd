@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const rotationSpeed = 2
-const JUMP_VELOCITY = -700.0
+var JUMP_VELOCITY = 0
 
 var jump_angle: float = 0.0
 var xPow = 0
@@ -14,12 +14,20 @@ var jumped = true
 @export var camera:Camera2D
 @export var sprite:Sprite2D
 
+var stomped = false
 var skewTween:Tween
+
+var camTween:Tween
+
+var defaultScale = Vector2()
+
+var twScaleSprite:Tween
+func _ready() -> void:
+	JUMP_VELOCITY = -GameHandler.saveDataRebirth.powerJump
+	defaultScale = sprite.scale
 func _physics_process(delta: float) -> void:
 	anchorArrow.position = $Sprite2D/Nodo.global_position
-	#print(get_viewport_rect().size.x * camera.zoom.x)
-	#print(camera.position.x + (get_viewport_rect().size.x * camera.zoom.x / 2))
-	# Add the gravity.
+
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		velocity.x = -jumpVector.x
@@ -28,49 +36,83 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		anchorArrow.visible = true
 		if (jumped):
-			TweenUtils.tweenY(camera,position.y - 100,0.5,TweenUtils.Ease.OutCirc)
-			sprite.scale = Vector2(1.1,0.6)
-			TweenUtils.tweenScale(sprite,Vector2(1,1),0.5,TweenUtils.Ease.OutCirc)
+			camTween = TweenUtils.tweenY(camera,position.y - 100,0.5,TweenUtils.Ease.OutCirc)
+			TweenUtils.StopTween(twScaleSprite)
+			if (!stomped):
+				sprite.scale = Vector2(defaultScale.x + 0.3,defaultScale.y - 0.5)
+			else:
+				sprite.scale = Vector2(defaultScale.x + 0.6,defaultScale.y - 0.5)
+			twScaleSprite = TweenUtils.tweenScale(sprite,defaultScale,0.5,TweenUtils.Ease.OutCirc)
 			skewTween = TweenUtils.tweenSkewPingPong(sprite,deg_to_rad(-10),deg_to_rad(10),0.4,TweenUtils.Ease.InOutSine)
+			PlatformMinigame.instance.CameraZoom()
+			stomped = false
+			GlobalAudio.PlayOneShot("res://Sounds/land.mp3",0,randf_range(0.95,1.05))
 		jumped = false
-	# Handle jump.
+
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		jumped = true
-		sprite.scale = Vector2(0.8,1.3)
-		TweenUtils.tweenScale(sprite,Vector2(1,1),0.5,TweenUtils.Ease.OutCirc)
+		TweenUtils.StopTween(twScaleSprite)
+		sprite.scale = Vector2(defaultScale.x * 0.6,defaultScale.y  * 1.6)
+		twScaleSprite = TweenUtils.tweenScale(sprite,defaultScale,0.5,TweenUtils.Ease.OutCirc)
 		TweenUtils.StopTween(skewTween)
 		TweenUtils.tweenSkew(sprite,deg_to_rad(0),0.4,TweenUtils.Ease.OutCirc)
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+		GlobalAudio.PlayOneShot("res://Sounds/jump.mp3",-6)
+	Stomping()
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if is_on_floor():
-		# 1. CONSTANT ROTATION: Change the angle at a fixed rate over time
 		jump_angle += direction * rotationSpeed * delta
 		
-		# Optional: Clamp the angle so the player can't aim into the ground
 		jump_angle = clamp(jump_angle, deg_to_rad(-75), deg_to_rad(75))
 		
-		# 2. CALCULATE VECTOR: Convert the angle into an X and Y launch force
-		# Vector2.UP is (0, -1). We rotate it by our jump_angle, then multiply by launch force.
 		jumpVector = Vector2.UP.rotated(jump_angle) * JUMP_VELOCITY
-		
-		# 3. APPLY TO ARROW VISUAL
-		anchorArrow.rotation = jump_angle# --- ARROW ROTATION LOGIC ---
+
+		anchorArrow.rotation = jump_angle
 	if is_on_floor():
-		# angle() calculates the exact angle of a Vector2. 
-		# We use xPow for horizontal, and JUMP_VELOCITY for vertical preview.
 		var jump_vector = Vector2(xPow, JUMP_VELOCITY)
 		anchorArrow.rotation = jumpVector.angle() - deg_to_rad(90)
+	#ForceCameraFollow(delta)
+	FlipSprite()
+	CameraMax()
+	CameraMaxGameOver()
 	move_and_slide()
 
+func FlipSprite():
+	if (jumpVector.x > 0):
+		sprite.flip_h = false
+		sprite.get_node("Shadow").flip_h = false
+	else:
+		sprite.flip_h = true
+		sprite.get_node("Shadow").flip_h = true
+func Stomping():
+	if (Input.is_action_just_pressed("ui_down") \
+	&& !is_on_floor() \
+	&& !stomped \
+	&& GameHandler.saveDataRebirth.powerStomp):
+		xPow = 0
+		jumpVector.x = 0
+		velocity.x = 0
+		velocity.y = 1500
+		stomped = true
+
+func CameraMax():
+	var deadZone = 200.0 / camera.zoom.y
+	if (global_position.y < camera.global_position.y - deadZone):
+		camera.global_position.y = global_position.y + deadZone
+		TweenUtils.StopTween(camTween)
+
+func CameraMaxGameOver():
+	var deadZone = 400.0 / camera.zoom.y
+	if (global_position.y > camera.global_position.y + deadZone):
+		PlatformMinigame.instance.GameOver()
 
 func _on_wool_barrier_collision_body_entered(body: Node2D) -> void:
 	if (!body.is_in_group("PlayerPlatform")):
 		return
 	if (jumpVector.x > 0):
 		jumpVector.x = -jumpVector.x
-	pass # Replace with function body.
+		WoolHitEffect()
+	pass
 
 
 func _on_wool_barrier_collision_2_body_entered(body: Node2D) -> void:
@@ -78,4 +120,11 @@ func _on_wool_barrier_collision_2_body_entered(body: Node2D) -> void:
 		return
 	if (jumpVector.x < 0):
 		jumpVector.x = -jumpVector.x
+		WoolHitEffect()
 	pass # Replace with function body.
+
+func WoolHitEffect():
+	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg",6,randf_range(0.95,1.05))
+	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg",6,randf_range(0.85,0.95))
+	GlobalAudio.PlayOneShot("res://Sounds/land.mp3",0,randf_range(1.30,1.50))
+	GlobalAudio.PlayOneShot("res://Sounds/land.mp3",0,randf_range(1.15,1.30))

@@ -59,7 +59,6 @@
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
 [ext_resource type="Shader" uid="uid://c0r6nnm084nsx" path="res://Shaders/RainbowBorderCanvas.gdshader" id="50_tdfnv"]
 [ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="51_7yrkc"]
-[ext_resource type="PackedScene" uid="uid://b7662k5mx1kra" path="res://Scenes/Minigames/PlaformMinigame.tscn" id="60_17bn8"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
 load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
@@ -532,12 +531,32 @@ tax = 2.0
 taxInc = 0.05
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
+[sub_resource type="Resource" id="Resource_17bn8"]
+script = ExtResource("27_phtv5")
+title = "More jump power"
+rebirthPrice = 4
+power = 3
+tax = 1.5
+taxInc = 0.03
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
+[sub_resource type="Resource" id="Resource_wcncl"]
+script = ExtResource("27_phtv5")
+title = "Power stomp"
+description = "are you tired of ending up losing on unpredictable direction ?
+well this power is for you :)
+press down once you jump to stomp in predictable way"
+rebirthPrice = 25
+power = 9
+tax = 1.0
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
 [sub_resource type="Resource" id="Resource_8hf41"]
 script = ExtResource("27_phtv5")
 title = "Super Auto Collect"
 image = ExtResource("32_iwha0")
 rebirthPrice = 2
-power = 3
+power = 4
 tax = 2.0
 taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -547,7 +566,7 @@ script = ExtResource("27_phtv5")
 title = "Gold wool multiplier"
 image = ExtResource("36_p5ocn")
 rebirthPrice = 3
-power = 4
+power = 5
 tax = 1.5
 taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -557,7 +576,7 @@ script = ExtResource("27_phtv5")
 title = "Rainbow wool"
 image = ExtResource("37_ovgwv")
 rebirthPrice = 4
-power = 5
+power = 6
 tax = 1.5
 taxInc = 0.05
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -567,7 +586,7 @@ script = ExtResource("27_phtv5")
 title = "Rainbow wool multiplier"
 image = ExtResource("38_ebyxy")
 rebirthPrice = 2
-power = 6
+power = 7
 tax = 1.5
 taxInc = 0.04
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -577,7 +596,7 @@ script = ExtResource("27_phtv5")
 title = "Cheaper rebirth"
 image = ExtResource("40_q3ouh")
 rebirthPrice = 3
-power = 7
+power = 8
 tax = 1.6
 taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -591,7 +610,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("28_hotcp")
-items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
+items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_17bn8"), SubResource("Resource_wcncl"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [sub_resource type="Gradient" id="Gradient_iwha0"]
@@ -2026,13 +2045,13 @@ offset_right = 821.0
 offset_bottom = 244.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2045,13 +2064,13 @@ offset_right = 823.0
 offset_bottom = 356.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2446,6 +2465,7 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
 [node name="MinigameContainer" type="SubViewportContainer" parent="Control/CanvasLayer" unique_id=299885308]
+visible = false
 z_index = 3
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2456,9 +2476,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 disable_3d = true
 handle_input_locally = false
 size = Vector2i(1280, 720)
-render_target_update_mode = 4
-
-[node name="PlatformMinigame" parent="Control/CanvasLayer/MinigameContainer/SubViewport" unique_id=2025532831 instance=ExtResource("60_17bn8")]
+render_target_update_mode = 0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0

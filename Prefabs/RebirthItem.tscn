@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_gjpg2"]
 [ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="3_tejl3"]
 [ext_resource type="Shader" uid="uid://byyuwqcbc6wae" path="res://Shaders/RainbowBorder.gdshader" id="4_2wfgr"]
+[ext_resource type="Shader" uid="uid://l51dbb1f302e" path="res://Shaders/Glitching.gdshader" id="4_og0cr"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="4_tejl3"]
 [ext_resource type="Shader" uid="uid://cenjsprd5awq" path="res://Shaders/Text/GradientText.gdshader" id="5_gjpg2"]
 [ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/Rebirth1.png" id="6_oqi44"]
@@ -202,6 +203,14 @@ void fragment() {
 	COLOR.a = sprite_color.a * modulate_color.a;
 }"
 
+[sub_resource type="Gradient" id="Gradient_og0cr"]
+offsets = PackedFloat32Array(0, 0.74038464, 0.8605769)
+colors = PackedColorArray(0, 0, 1, 1, 0.27058825, 0.47843137, 1, 1, 0.3137255, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2xvu0"]
+gradient = SubResource("Gradient_og0cr")
+fill_to = Vector2(0.97863245, 0.94017094)
+
 [sub_resource type="Gradient" id="Gradient_tejl3"]
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
@@ -380,6 +389,15 @@ shader_parameter/node_size = Vector2(64, 17.555)
 shader_parameter/only_border = true
 shader_parameter/border_gradient = SubResource("GradientTexture2D_2wfgr")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hh24n"]
+shader = ExtResource("4_og0cr")
+shader_parameter/is_active = true
+shader_parameter/shake_power = 0.002000000095
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 3.750000178125
+shader_parameter/shake_block_size = 30.0000013775
+shader_parameter/randomization_amount = 1.0
+
 [node name="RebirthItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("randomSpeedTitleShade", "randomSpeedDescriptionShade")]
 custom_minimum_size = Vector2(900, 163)
 layout_mode = 3
@@ -396,6 +414,7 @@ randomSpeedTitleShade = NodePath("Holder/SubViewportContainer")
 randomSpeedDescriptionShade = NodePath("Holder/SubViewportContainerDesc")
 rainbowShaderMaterial = SubResource("Shader_tejl3")
 rainbowShaderMaterialMask = SubResource("Shader_2wfgr")
+borderGradient = SubResource("GradientTexture2D_2xvu0")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)
@@ -545,15 +564,15 @@ offset_top = -29.492004
 offset_right = 116.0
 offset_bottom = 24.507998
 pivot_offset = Vector2(83, 30.215)
-theme_override_constants/outline_size = 11
-theme_override_font_sizes/normal_font_size = 54
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 29
 bbcode_enabled = true
 text = "313k"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 54
-_current_font_size = 54
+_current_font_size = 29
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -568,15 +587,15 @@ offset_right = 189.25
 offset_bottom = 64.625
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(83, 26.4)
-theme_override_constants/outline_size = 16
-theme_override_font_sizes/normal_font_size = 81
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 46
 bbcode_enabled = true
 text = "lv:1"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 81
-_current_font_size = 81
+_current_font_size = 46
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -608,3 +627,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_s46mk")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=1916997902]
+position = Vector2(449.5, 81)
+scale = Vector2(4.495, 0.81)
+copy_mode = 2
+
+[node name="GlitchingEffect" type="ColorRect" parent="BackBufferCopy" unique_id=371253417]
+visible = false
+material = SubResource("ShaderMaterial_hh24n")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2

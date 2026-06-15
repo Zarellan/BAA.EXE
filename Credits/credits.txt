@@ -5,3 +5,11 @@ negative sound: https://pixabay.com/sound-effects/film-special-effects-classic-g
 bought sound: https://pixabay.com/sound-effects/clinking-coins-3-468426/
 party horn sound: https://pixabay.com/sound-effects/film-special-effects-party-horn-68443/
 rebirth bought sound: https://pixabay.com/sound-effects/technology-game-bonus-03-487857/
+jump sound: https://pixabay.com/sound-effects/film-special-effects-whoosh-gaming-jump-243507/
+jump land sound: https://pixabay.com/sound-effects/film-special-effects-land2-43790/
+game over sound: https://pixabay.com/sound-effects/musical-game-over-39-199830/
+wool hit: https://pixabay.com/sound-effects/film-special-effects-heavy-cloth-rustle-106346/
+
+Platform minigame soundtrack: https://pixabay.com/music/upbeat-level-one-8-bit-pixel-warriors-chapter-one-415685/
+MainMenu soundtrack: https://pixabay.com/music/beats-lovely-garden-540008/
+coming soon: https://pixabay.com/music/video-games-crush-boost-372070/

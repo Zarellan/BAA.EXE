@@ -1,57 +1,89 @@
 [gd_scene format=3 uid="uid://b7662k5mx1kra"]
 
 [ext_resource type="Script" uid="uid://ccfylribl655l" path="res://Scripts/Minigames/Platform/MainGamePlatform.gd" id="1_kk0mp"]
-[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="1_pw4da"]
 [ext_resource type="Script" uid="uid://dgssxv3kjghjj" path="res://Scripts/Minigames/Platform/PlayerPlatform.gd" id="2_tp4em"]
 [ext_resource type="Script" uid="uid://b5gcrtnxd2r03" path="res://Scenes/Minigames/PlatformScript.gd" id="2_y556t"]
 [ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="3_ilidr"]
+[ext_resource type="Texture2D" uid="uid://dgirwjhs053n5" path="res://Sprites/Background/Floor.png" id="4_7olyu"]
 [ext_resource type="Texture2D" uid="uid://csc36qugcuweo" path="res://Sprites/Minigames/Platformer/Wool barrier.png" id="5_7qx06"]
 [ext_resource type="PackedScene" uid="uid://cml867yqju286" path="res://Prefabs/Minigames/Platform/platform.tscn" id="5_tks0h"]
+[ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="6_7olyu"]
 [ext_resource type="Texture2D" uid="uid://bsokeoqrg1blh" path="res://Sprites/Minigames/Platformer/Wool barrier 2.png" id="6_mt4ev"]
 [ext_resource type="Script" uid="uid://buat0fksjudlp" path="res://Scripts/Camera/ShakeCamera.gd" id="7_tks0h"]
 [ext_resource type="Texture2D" uid="uid://bfktlya4nix8w" path="res://Sprites/Sheep/wools.png" id="10_vyqy7"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="11_vyqy7"]
+[ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="12_jmhar"]
+
+[sub_resource type="Curve" id="Curve_vyqy7"]
+_limits = [3.0, 15.0, 0.0, 10000.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(10000, 15), 0.0022724876, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4da"]
-size = Vector2(128, 130)
+size = Vector2(137.16626, 130)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tp4em"]
-size = Vector2(130, 128)
+size = Vector2(86.6283, 122.456635)
 
-[sub_resource type="Animation" id="Animation_7qx06"]
+[sub_resource type="Animation" id="Animation_4nel2"]
 resource_name = "Idle"
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.9666667),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("5_7qx06"), ExtResource("6_mt4ev"), ExtResource("5_7qx06")]
+"values": [Vector2i(0, 0), Vector2i(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Shadow:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_mt4ev"]
+[sub_resource type="Animation" id="Animation_0gehf"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:texture")
+tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_7qx06")]
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Shadow:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mt4ev"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0gehf"]
 _data = {
-&"Idle": SubResource("Animation_7qx06"),
-&"RESET": SubResource("Animation_mt4ev")
+&"Idle": SubResource("Animation_4nel2"),
+&"RESET": SubResource("Animation_0gehf")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mt4ev"]
@@ -90,7 +122,131 @@ color_ramp = SubResource("GradientTexture1D_m14hk")
 anim_offset_max = 1.0
 turbulence_noise_strength = 3.0
 
-[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle")]
+[sub_resource type="Animation" id="Animation_5yvr5"]
+resource_name = "Idle"
+length = 0.6666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_7qx06"), ExtResource("6_mt4ev"), ExtResource("5_7qx06")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Shadow:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_7qx06"), ExtResource("6_mt4ev"), ExtResource("5_7qx06")]
+}
+
+[sub_resource type="Animation" id="Animation_pyr1d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7qx06")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Shadow:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7qx06")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pyr1d"]
+_data = {
+&"Idle": SubResource("Animation_5yvr5"),
+&"RESET": SubResource("Animation_pyr1d")
+}
+
+[sub_resource type="Animation" id="Animation_7olyu"]
+resource_name = "Idle"
+length = 0.6666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_7qx06"), ExtResource("6_mt4ev"), ExtResource("5_7qx06")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Shadow:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_7qx06"), ExtResource("6_mt4ev"), ExtResource("5_7qx06")]
+}
+
+[sub_resource type="Animation" id="Animation_jmhar"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7qx06")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Shadow:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_7qx06")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mt4ev"]
+_data = {
+&"Idle": SubResource("Animation_7olyu"),
+&"RESET": SubResource("Animation_jmhar")
+}
+
+[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle", "textScore", "player", "camera")]
 rotation = -0.0002622433
 script = ExtResource("1_kk0mp")
 platformPrefab = ExtResource("5_tks0h")
@@ -98,18 +254,30 @@ woolBarrier1 = NodePath("Camera2D/WoolBarrier/Sprite")
 woolBarrier2 = NodePath("Camera2D/WoolBarrier2/Sprite")
 woolBarrier1Particle = NodePath("Camera2D/WoolBarrier/GPUParticles2D")
 woolBarrier2Particle = NodePath("Camera2D/WoolBarrier2/GPUParticles2D")
+textScore = NodePath("Control/CanvasLayer/UpAlign/AutoSizeRichTextLabel")
+curveDistance = SubResource("Curve_vyqy7")
+player = NodePath("CharacterBody2D")
+camera = NodePath("Camera2D")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1320418300 node_paths=PackedStringArray("visibleNotifier")]
 position = Vector2(612, 579)
 scale = Vector2(6.0800023, 1)
 script = ExtResource("2_y556t")
 visibleNotifier = NodePath("VisibleNotif")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1874496451]
-texture = ExtResource("1_pw4da")
+position = Vector2(4.694105, -290.18668)
+scale = Vector2(0.43592238, 2.280048)
+texture = ExtResource("4_7olyu")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Ground" unique_id=995741723]
+position = Vector2(2.8557374, 10573.048)
+scale = Vector2(0.3285939, 78.21042)
+texture = ExtResource("4_7olyu")
+flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=527745752]
+position = Vector2(4.58313, 0)
 shape = SubResource("RectangleShape2D_pw4da")
 
 [node name="VisibleNotif" type="VisibleOnScreenNotifier2D" parent="Ground" unique_id=410662065]
@@ -126,15 +294,28 @@ sprite = NodePath("Sprite2D")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1250934136]
+clip_children = 2
 z_index = 2
-position = Vector2(0, 63.611694)
-texture = ExtResource("1_pw4da")
-offset = Vector2(0, -63.611694)
+position = Vector2(1.7434056, 63.88836)
+scale = Vector2(1.29, 1.472)
+texture = ExtResource("6_7olyu")
+offset = Vector2(-0.44726563, -61.40625)
+hframes = 2
+
+[node name="Shadow" type="Sprite2D" parent="CharacterBody2D/Sprite2D" unique_id=1299076653]
+self_modulate = Color(0, 0, 0, 0.42745098)
+position = Vector2(1.6187134, 3.314148)
+scale = Vector2(0.9999999, 1)
+texture = ExtResource("6_7olyu")
+offset = Vector2(-0.44726563, -61.40625)
+hframes = 2
+frame = 1
 
 [node name="Nodo" type="Node2D" parent="CharacterBody2D/Sprite2D" unique_id=358907344]
 position = Vector2(0, -63.611717)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=706593397]
+position = Vector2(1.8475342, 2.7714844)
 shape = SubResource("RectangleShape2D_tp4em")
 
 [node name="Marker2D" type="Marker2D" parent="CharacterBody2D" unique_id=696460992]
@@ -145,24 +326,41 @@ position = Vector2(0, -60.548553)
 scale = Vector2(0.41359717, 2.0766077)
 texture = ExtResource("3_ilidr")
 
+[node name="SheepAnimation" type="AnimationPlayer" parent="CharacterBody2D" unique_id=1286563607]
+libraries/ = SubResource("AnimationLibrary_0gehf")
+autoplay = &"Idle"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1411528697]
 position = Vector2(640, 362)
 ignore_rotation = false
 process_callback = 0
 script = ExtResource("7_tks0h")
 
+[node name="Background" type="Node2D" parent="Camera2D" unique_id=1629976090]
+z_index = -2
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/Background" unique_id=1829684731]
+position = Vector2(2.143921, -1.7258682)
+scale = Vector2(2.6767533, 2.6850939)
+texture = ExtResource("12_jmhar")
+
 [node name="WoolBarrier" type="Node2D" parent="Camera2D" unique_id=726640866]
 position = Vector2(-640, 0)
 scale = Vector2(3.51, 4.295)
 
 [node name="Sprite" type="Sprite2D" parent="Camera2D/WoolBarrier" unique_id=1414089724]
+clip_children = 2
 texture_filter = 1
 texture = ExtResource("5_7qx06")
 offset = Vector2(160.05898, -5.992508)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/WoolBarrier" unique_id=1849321197]
-libraries/ = SubResource("AnimationLibrary_mt4ev")
-autoplay = &"Idle"
+[node name="Shadow" type="Sprite2D" parent="Camera2D/WoolBarrier/Sprite" unique_id=1369759698]
+modulate = Color(0, 0, 0, 0.21568628)
+texture_filter = 1
+position = Vector2(-7.149995, 1.395448)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("5_7qx06")
+offset = Vector2(160.05898, -5.992508)
 
 [node name="WoolBarrierCollision" type="Area2D" parent="Camera2D/WoolBarrier" unique_id=1340801223]
 
@@ -184,6 +382,10 @@ explosiveness = 1.0
 visibility_rect = Rect2(-100, -100, 193.71, 185.605)
 process_material = SubResource("ParticleProcessMaterial_7olyu")
 
+[node name="WoolPlayer" type="AnimationPlayer" parent="Camera2D/WoolBarrier" unique_id=300899370]
+libraries/ = SubResource("AnimationLibrary_pyr1d")
+autoplay = &"Idle"
+
 [node name="WoolBarrier2" type="Node2D" parent="Camera2D" unique_id=2125329844]
 position = Vector2(640, 0)
 scale = Vector2(3.51, 4.295)
@@ -194,9 +396,14 @@ texture = ExtResource("5_7qx06")
 offset = Vector2(-160.16893, -6.225334)
 flip_h = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/WoolBarrier2" unique_id=1172394557]
-libraries/ = SubResource("AnimationLibrary_mt4ev")
-autoplay = &"Idle"
+[node name="Shadow" type="Sprite2D" parent="Camera2D/WoolBarrier2/Sprite" unique_id=165600809]
+modulate = Color(0, 0, 0, 0.21568628)
+texture_filter = 1
+position = Vector2(-315.98172, 0.9417628)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("5_7qx06")
+offset = Vector2(160.05898, -5.992508)
+flip_h = true
 
 [node name="WoolBarrierCollision2" type="Area2D" parent="Camera2D/WoolBarrier2" unique_id=1121424729]
 
@@ -217,6 +424,53 @@ speed_scale = 3.0
 explosiveness = 1.0
 visibility_rect = Rect2(-100, -100, 193.71, 185.605)
 process_material = SubResource("ParticleProcessMaterial_7olyu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/WoolBarrier2" unique_id=1172394557]
+libraries/ = SubResource("AnimationLibrary_mt4ev")
+autoplay = &"Idle"
+
+[node name="Control" type="Control" parent="." unique_id=1892803073]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=884886200]
+
+[node name="UpAlign" type="Control" parent="Control/CanvasLayer" unique_id=408426199]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AutoSizeRichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer/UpAlign" unique_id=1666883950]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.0
+offset_right = 111.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 40
+text = "0"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_vyqy7")
+_max_size = 40
+_outline_ratio = 0.28
+_current_font_size = 40
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="." method="_on_wool_barrier_collision_body_entered"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="CharacterBody2D" method="_on_wool_barrier_collision_body_entered"]

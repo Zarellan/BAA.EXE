@@ -7,11 +7,13 @@ enum Powers{
 	none,
 	multiplier,
 	offer,
+	jumpPower,
 	autoCollect,
 	goldWoolMultiply,
 	rainbowWool,
 	rainbowWoolMultiply,
-	cheaperRebirth
+	cheaperRebirth,
+	stomp
 }
 
 @export var particle:PackedScene
@@ -24,6 +26,7 @@ enum Powers{
 @export var rainbowShaderMaterial:Shader
 @export var rainbowShaderMaterialMask:Shader
 
+@export var borderGradient:Texture2D
 #tweens
 var tweenAlpha:Tween
 var tweenHolder:Tween
@@ -35,7 +38,7 @@ var descriptionNode:Control
 var moneyNode:Control
 var moneyNodePos:Control
 var levelNode:Control
-
+var itemImage:Control
 var originalPosXMoney
 
 var frequencyWavePrice:ValueSaver = ValueSaver.new()
@@ -58,7 +61,8 @@ func _ready() -> void:
 	moneyNodePos = get_node("Holder/Prce")
 	levelNode = get_node("Holder/Level")
 	get_node("Holder/SubViewportContainer/SubViewport/Title").text = shopData.title
-	get_node("Holder/ItemImage").texture = shopData.image
+	itemImage = get_node("Holder/ItemImage")
+	itemImage.texture = shopData.image
 	descriptionNode = get_node("Holder/SubViewportContainerDesc/SubViewport/Description")
 	descriptionNode.text = shopData.description
 	ModifyTexts()
@@ -94,9 +98,28 @@ func ExceptionalItems():
 			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 			get_node("Holder/SubViewportContainer").material = null
 			get_node("Holder/SubViewportContainerDesc").material = null
+		Powers.jumpPower , Powers.stomp:
+			get_node("BackBufferCopy/GlitchingEffect").visible = true
+			(get_node("BG") as Control).material.set_shader_parameter("border_gradient", borderGradient)
+			SetUniqueShader((get_node("Holder/SubViewportContainer") as Control))
+			(get_node("Holder/SubViewportContainer") as Control).material.set_shader_parameter("gradient",borderGradient)
+			SetUniqueShader((get_node("Holder/SubViewportContainerDesc") as Control))
+			(get_node("Holder/SubViewportContainerDesc") as Control).material.set_shader_parameter("gradient",Texture2D.new())
+			get_node("Holder/SubViewportContainer/SubViewport/Title").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			SetUniqueShader(itemImage)
+			itemImage.material = null
+			if (shopData.power == Powers.stomp):
+				SetUniqueShader(get_node("BackBufferCopy/GlitchingEffect"))
+				get_node("BackBufferCopy/GlitchingEffect").material.set_shader_parameter("shake_power",0.0015)
+
 		pass
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+func SetUniqueShader(obj:Control):
+	var shade = obj.material.duplicate()
+	obj.material = shade
 
 func RandomGradient():
 	var mat = randomSpeedTitleShade.material.duplicate()
@@ -118,6 +141,10 @@ func CustomItemText(): #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		Powers.offer:
 			descriptionNode.text = "you will gain offer on every item (except rebirth items)\n"+\
 			"Current offer:" + str(int((GameHandler.saveDataRebirth.offer-1) * 100)) + "%"
+		Powers.jumpPower:
+			descriptionNode.text = "will increase the power jump of sheep in plaform minigame\n"+\
+			"Current power jump:" + str(GameHandler.saveDataRebirth.powerJump)
+
 		Powers.autoCollect:
 			if (!GameHandler.saveDataRebirth.autoCollectSheepAbility):
 				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\neven after rebirth"
@@ -250,6 +277,11 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			GameHandler.saveDataRebirth.multiplier_reb += 1
 		Powers.offer:
 			GameHandler.saveDataRebirth.offer += 0.10
+		Powers.jumpPower:
+			GameHandler.saveDataRebirth.powerJump += 25
+			if (GameHandler.saveDataRebirth.powerJump > 1500 || is_equal_approx(GameHandler.saveDataRebirth.powerJump,1000)):
+				TweenLevelMax()
+				shopData.canBuy = false
 		Powers.autoCollect:
 			GameHandler.saveDataRebirth.autoCollectSheep -= 0.15
 			if (!GameHandler.saveDataRebirth.autoCollectSheepAbility):
@@ -269,6 +301,11 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			GameHandler.saveDataRebirth.rainbowWoolMultiplier += 100
 		Powers.cheaperRebirth:
 			GameHandler.saveDataRebirth.cheaperRebirth += 0.10
+		Powers.cheaperRebirth:
+			GameHandler.saveDataRebirth.powerStomp = true
+			TweenLevelMax()
+			shopData.canBuy = false
+
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
