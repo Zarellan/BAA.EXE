@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bfktlya4nix8w" path="res://Sprites/Sheep/wools.png" id="10_vyqy7"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="11_vyqy7"]
 [ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="12_jmhar"]
+[ext_resource type="PackedScene" uid="uid://d1fnkwoonwspi" path="res://Prefabs/Utils/OverlapTouch/OverlapTouch.tscn" id="14_5yvr5"]
 
 [sub_resource type="Curve" id="Curve_vyqy7"]
 _limits = [3.0, 15.0, 0.0, 10000.0]
@@ -85,6 +86,35 @@ _data = {
 &"Idle": SubResource("Animation_4nel2"),
 &"RESET": SubResource("Animation_0gehf")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yvr5"]
+size = Vector2(86.62775, 3.4611816)
+
+[sub_resource type="Gradient" id="Gradient_lgcpj"]
+offsets = PackedFloat32Array(0, 0.8154762, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jltqh"]
+gradient = SubResource("Gradient_lgcpj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5yvr5"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(43.97, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = -105.49999
+angle_max = 105.500015
+direction = Vector3(0, -6.28, 0)
+spread = 180.0
+initial_velocity_min = 51.73
+initial_velocity_max = 163.79
+angular_velocity_min = -117.94001
+angular_velocity_max = 117.93998
+gravity = Vector3(0, 200, 0)
+scale_min = 2.0
+scale_max = 4.0
+color = Color(0.025231631, 0.7677174, 0.089202814, 1)
+color_ramp = SubResource("GradientTexture1D_jltqh")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mt4ev"]
 size = Vector2(63.56125, 167.8696)
@@ -284,13 +314,14 @@ shape = SubResource("RectangleShape2D_pw4da")
 rect = Rect2(-63.980244, -65, 127.96048, 130)
 show_rect = false
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1094306386 node_paths=PackedStringArray("anchorArrow", "camera", "sprite") groups=["PlayerPlatform"]]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1094306386 node_paths=PackedStringArray("anchorArrow", "camera", "sprite", "dirtParticle") groups=["PlayerPlatform"]]
 position = Vector2(609, 435)
 scale = Vector2(0.7503374, 0.61309457)
 script = ExtResource("2_tp4em")
 anchorArrow = NodePath("Marker2D")
 camera = NodePath("../Camera2D")
 sprite = NodePath("Sprite2D")
+dirtParticle = NodePath("DirtParticle")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1250934136]
@@ -329,6 +360,21 @@ texture = ExtResource("3_ilidr")
 [node name="SheepAnimation" type="AnimationPlayer" parent="CharacterBody2D" unique_id=1286563607]
 libraries/ = SubResource("AnimationLibrary_0gehf")
 autoplay = &"Idle"
+
+[node name="FeetDetector" type="Area2D" parent="CharacterBody2D" unique_id=1616031084]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/FeetDetector" unique_id=577646160]
+position = Vector2(1.8327026, 65.39026)
+shape = SubResource("RectangleShape2D_5yvr5")
+
+[node name="DirtParticle" type="GPUParticles2D" parent="CharacterBody2D" unique_id=787544183]
+position = Vector2(2.4998312, 63.873055)
+emitting = false
+amount = 149
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5yvr5")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1411528697]
 position = Vector2(640, 362)
@@ -458,6 +504,7 @@ offset_left = -111.0
 offset_right = 111.0
 offset_bottom = 75.0
 grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 theme_override_constants/outline_size = 11
 theme_override_font_sizes/normal_font_size = 40
 text = "0"
@@ -472,7 +519,53 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureButton" type="TextureButton" parent="Control/CanvasLayer" unique_id=1755211308]
+offset_left = 1128.0
+offset_top = 545.0
+offset_right = 1192.0
+offset_bottom = 609.0
+scale = Vector2(3.235, 3.235)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_ilidr")
+
+[node name="Left" type="Control" parent="Control/CanvasLayer" unique_id=1797993946]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="LeftTouch" parent="Control/CanvasLayer/Left" unique_id=2111246949 instance=ExtResource("14_5yvr5")]
+layout_mode = 1
+offset_left = 86.0
+offset_top = -102.24
+offset_right = 150.0
+offset_bottom = -38.23998
+rotation = -1.5707964
+scale = Vector2(3.372, 3.372)
+rawMath = true
+
+[node name="RightTouch" parent="Control/CanvasLayer/Left" unique_id=768735005 instance=ExtResource("14_5yvr5")]
+layout_mode = 1
+offset_left = 322.0
+offset_top = -102.24
+offset_right = 386.0
+offset_bottom = -38.23998
+rotation = 1.5707964
+scale = Vector2(3.372, 3.372)
+rawMath = true
+
+[connection signal="body_entered" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_exited"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="." method="_on_wool_barrier_collision_body_entered"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="CharacterBody2D" method="_on_wool_barrier_collision_body_entered"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="." method="_on_wool_barrier_collision_2_body_entered"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="CharacterBody2D" method="_on_wool_barrier_collision_2_body_entered"]
+[connection signal="button_down" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_down"]
+[connection signal="button_up" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_up"]
+[connection signal="touched" from="Control/CanvasLayer/Left/LeftTouch" to="CharacterBody2D" method="_on_left_touch_touched"]
+[connection signal="untouched" from="Control/CanvasLayer/Left/LeftTouch" to="CharacterBody2D" method="_on_left_touch_untouched"]
+[connection signal="touched" from="Control/CanvasLayer/Left/RightTouch" to="CharacterBody2D" method="_on_right_touch_touched"]
+[connection signal="untouched" from="Control/CanvasLayer/Left/RightTouch" to="CharacterBody2D" method="_on_right_touch_untouched"]

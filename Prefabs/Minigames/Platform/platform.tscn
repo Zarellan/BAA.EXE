@@ -1,20 +1,49 @@
 [gd_scene format=3 uid="uid://cml867yqju286"]
 
 [ext_resource type="Script" uid="uid://b3bhiyefcb4u" path="res://Scenes/Minigames/PlatformWayScript.gd" id="1_lgcpj"]
-[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="2_jltqh"]
+[ext_resource type="Texture2D" uid="uid://we0uv8gbuk5x" path="res://Sprites/Minigames/Platformer/Floors/New Piskel.png" id="2_lgcpj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4da"]
 size = Vector2(128, 130)
 
-[node name="Platform" type="StaticBody2D" unique_id=959627396 node_paths=PackedStringArray("visibleNotifier", "collision")]
+[sub_resource type="Gradient" id="Gradient_lgcpj"]
+offsets = PackedFloat32Array(0, 0.8154762, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jltqh"]
+gradient = SubResource("Gradient_lgcpj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgcpj"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(63.965, 63.96, 1)
+angular_velocity_min = -105.52001
+angular_velocity_max = 105.51998
+gravity = Vector3(0, 98, 0)
+linear_accel_min = -37.940002
+linear_accel_max = 44.819996
+scale_min = 3.0
+scale_max = 5.0
+color = Color(0.73383784, 0.518263, 0.3773565, 1)
+color_ramp = SubResource("GradientTexture1D_jltqh")
+
+[node name="Platform" type="AnimatableBody2D" unique_id=1521895515 node_paths=PackedStringArray("visibleNotifier", "collision", "partic")]
 scale = Vector2(2.0768611, 0.32215205)
 script = ExtResource("1_lgcpj")
 visibleNotifier = NodePath("VisibleNotif")
 collision = NodePath("CollisionShape2D")
-metadata/_edit_group_ = true
+partic = NodePath("GPUParticles2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1520999515]
-texture = ExtResource("2_jltqh")
+clip_children = 2
+position = Vector2(-1.9259833, -9.312374)
+scale = Vector2(2.2720585, 7.905816)
+texture = ExtResource("2_lgcpj")
+
+[node name="Shadow" type="Sprite2D" parent="Sprite2D" unique_id=1988597899]
+self_modulate = Color(0, 0, 0, 0.25490198)
+position = Vector2(1.0596026, 3.1411047)
+texture = ExtResource("2_lgcpj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1639619076]
 shape = SubResource("RectangleShape2D_pw4da")
@@ -23,3 +52,13 @@ one_way_collision = true
 [node name="VisibleNotif" type="VisibleOnScreenNotifier2D" parent="." unique_id=207588253]
 rect = Rect2(-63.980244, -65, 127.96048, 130)
 show_rect = false
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=842684334]
+z_index = -1
+scale = Vector2(0.63406336, 0.62750506)
+emitting = false
+amount = 21
+lifetime = 4.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lgcpj")

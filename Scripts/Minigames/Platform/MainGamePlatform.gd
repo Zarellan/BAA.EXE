@@ -33,7 +33,40 @@ func _ready() -> void:
 	PlatformSpawner()
 	died = false
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/PlatformMinigame.mp3")
+	
+	#modify_curve_domain()
 	pass # Replace with function body.
+
+func modify_curve_domain():
+	if not curveDistance:
+		push_error("curveDistance is not assigned!")
+		return
+		
+	var last_index = curveDistance.point_count - 1
+	if last_index < 0:
+		return
+		
+	var old_pos = curveDistance.get_point_position(last_index)
+	var left_tangent = curveDistance.get_point_left_tangent(last_index)
+	var right_tangent = curveDistance.get_point_right_tangent(last_index)
+	var left_mode = curveDistance.get_point_left_mode(last_index)
+	var right_mode = curveDistance.get_point_right_mode(last_index)
+	
+
+	curveDistance.max_domain = 55000.0
+	
+	var old_x = old_pos.x if old_pos.x != 0 else 1.0
+	var scale_factor = 55000.0 / old_x
+	if scale_factor != 0:
+		left_tangent = left_tangent / scale_factor
+		right_tangent = right_tangent / scale_factor
+
+	var new_pos = Vector2(55000.0, 15.0)
+	
+	curveDistance.remove_point(last_index)
+	curveDistance.add_point(new_pos, left_tangent, right_tangent, left_mode, right_mode)
+	
+	curveDistance.emit_changed()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -95,6 +128,8 @@ func CameraZoom():
 static func IncScore():
 	score += 1
 	instance.textScore.text = str(score)
+	instance.textScore.scale = Vector2(randf_range(0.6,1.5),randf_range(0.6,1.5))
+	TweenUtils.tweenScale(instance.textScore,Vector2.ONE,0.3,TweenUtils.Ease.OutCirc)
 	pass
 
 var twVolume:Tween

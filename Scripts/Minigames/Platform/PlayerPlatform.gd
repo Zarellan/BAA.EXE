@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name PlayerPlatform
 
 const rotationSpeed = 2
 var JUMP_VELOCITY = 0
@@ -13,6 +13,7 @@ var jumped = true
 @export var anchorArrow:Marker2D
 @export var camera:Camera2D
 @export var sprite:Sprite2D
+@export var dirtParticle:GPUParticles2D
 
 var stomped = false
 var skewTween:Tween
@@ -22,6 +23,8 @@ var camTween:Tween
 var defaultScale = Vector2()
 
 var twScaleSprite:Tween
+
+var prevVelocityY = 0
 func _ready() -> void:
 	JUMP_VELOCITY = -GameHandler.saveDataRebirth.powerJump
 	defaultScale = sprite.scale
@@ -32,6 +35,8 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 		velocity.x = -jumpVector.x
 		anchorArrow.visible = false
+		prevVelocityY = velocity.y
+		ControlInAir(delta)
 	else:
 		velocity.x = 0
 		anchorArrow.visible = true
@@ -47,9 +52,13 @@ func _physics_process(delta: float) -> void:
 			PlatformMinigame.instance.CameraZoom()
 			stomped = false
 			GlobalAudio.PlayOneShot("res://Sounds/land.mp3",0,randf_range(0.95,1.05))
+			var impactParticle = 0
+			if (platform != null):
+				impactParticle = platform.JumpedOn(prevVelocityY)
+				ParticleManager.PlayParticleOv(dirtParticle,int(impactParticle)) # will calculate later
 		jumped = false
 
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if (Input.is_action_just_pressed("ui_accept") || touchedUp) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		jumped = true
 		TweenUtils.StopTween(twScaleSprite)
@@ -58,8 +67,10 @@ func _physics_process(delta: float) -> void:
 		TweenUtils.StopTween(skewTween)
 		TweenUtils.tweenSkew(sprite,deg_to_rad(0),0.4,TweenUtils.Ease.OutCirc)
 		GlobalAudio.PlayOneShot("res://Sounds/jump.mp3",-6)
+		touchedUp = false
 	Stomping()
 	var direction := Input.get_axis("ui_left", "ui_right")
+	direction += int(touchedRight) - int(touchedLeft)
 	if is_on_floor():
 		jump_angle += direction * rotationSpeed * delta
 		
@@ -69,7 +80,6 @@ func _physics_process(delta: float) -> void:
 
 		anchorArrow.rotation = jump_angle
 	if is_on_floor():
-		var jump_vector = Vector2(xPow, JUMP_VELOCITY)
 		anchorArrow.rotation = jumpVector.angle() - deg_to_rad(90)
 	#ForceCameraFollow(delta)
 	FlipSprite()
@@ -77,6 +87,10 @@ func _physics_process(delta: float) -> void:
 	CameraMaxGameOver()
 	move_and_slide()
 
+func ControlInAir(delta):
+	var direction := Input.get_axis("ui_left", "ui_right")
+	direction += int(touchedRight) - int(touchedLeft)
+	jumpVector.x += -direction * GameHandler.saveDataRebirth.airAcceleration * delta
 func FlipSprite():
 	if (jumpVector.x > 0):
 		sprite.flip_h = false
@@ -128,3 +142,44 @@ func WoolHitEffect():
 	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg",6,randf_range(0.85,0.95))
 	GlobalAudio.PlayOneShot("res://Sounds/land.mp3",0,randf_range(1.30,1.50))
 	GlobalAudio.PlayOneShot("res://Sounds/land.mp3",0,randf_range(1.15,1.30))
+
+var touchedLeft = false
+func _on_left_touch_touched() -> void:
+	touchedLeft = true
+	pass # Replace with function body.
+
+
+func _on_left_touch_untouched() -> void:
+	touchedLeft = false
+	pass # Replace with function body.
+
+var touchedRight = false
+func _on_right_touch_touched() -> void:
+	touchedRight = true
+	pass # Replace with function body.
+
+
+func _on_right_touch_untouched() -> void:
+	touchedRight = false
+	pass # Replace with function body.
+
+var touchedUp = false
+func _on_texture_button_button_down() -> void:
+	touchedUp = true
+	pass # Replace with function body.
+
+func _on_texture_button_button_up() -> void:
+	touchedUp = false
+	pass # Replace with function body.
+
+var platform:PlatformWay
+func _on_feet_detector_body_entered(body: Node2D) -> void:
+	if (body is PlatformWay):
+		platform = body
+	pass # Replace with function body.
+
+
+func _on_feet_detector_body_exited(body: Node2D) -> void:
+	if (body is PlatformWay):
+		platform = null
+	pass # Replace with function body.

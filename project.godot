@@ -70,6 +70,10 @@ touching={
 ]
 }
 
+[internationalization]
+
+rendering/root_node_layout_direction=1
+
 [physics]
 
 2d/physics_engine="GodotPhysics2D"
