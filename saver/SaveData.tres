@@ -82,7 +82,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_npldj")
-money = 9
+money = 21
 increment = 6
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true
