@@ -3,21 +3,23 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bsokeoqrg1blh"
-path="res://.godot/imported/Wool barrier 2.png-c2c8bfd406b71ce0fce2a1e9114844ce.ctex"
+path.s3tc="res://.godot/imported/Wool barrier 2.png-c2c8bfd406b71ce0fce2a1e9114844ce.s3tc.ctex"
+path.etc2="res://.godot/imported/Wool barrier 2.png-c2c8bfd406b71ce0fce2a1e9114844ce.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Sprites/Minigames/Platformer/Wool barrier 2.png"
-dest_files=["res://.godot/imported/Wool barrier 2.png-c2c8bfd406b71ce0fce2a1e9114844ce.ctex"]
+dest_files=["res://.godot/imported/Wool barrier 2.png-c2c8bfd406b71ce0fce2a1e9114844ce.s3tc.ctex", "res://.godot/imported/Wool barrier 2.png-c2c8bfd406b71ce0fce2a1e9114844ce.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

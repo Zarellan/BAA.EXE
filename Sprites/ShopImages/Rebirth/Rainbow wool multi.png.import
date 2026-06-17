@@ -3,21 +3,23 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://y43oxeypu0kt"
-path="res://.godot/imported/Rainbow wool multi.png-d2270d91530ea84c50d3a9f9fa6f266c.ctex"
+path.s3tc="res://.godot/imported/Rainbow wool multi.png-d2270d91530ea84c50d3a9f9fa6f266c.s3tc.ctex"
+path.etc2="res://.godot/imported/Rainbow wool multi.png-d2270d91530ea84c50d3a9f9fa6f266c.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png"
-dest_files=["res://.godot/imported/Rainbow wool multi.png-d2270d91530ea84c50d3a9f9fa6f266c.ctex"]
+dest_files=["res://.godot/imported/Rainbow wool multi.png-d2270d91530ea84c50d3a9f9fa6f266c.s3tc.ctex", "res://.godot/imported/Rainbow wool multi.png-d2270d91530ea84c50d3a9f9fa6f266c.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

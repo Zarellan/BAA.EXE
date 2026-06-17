@@ -9,12 +9,15 @@ func PlayParticleWarmup(particle: GPUParticles2D):
 	var instance := particle.duplicate() as GPUParticles2D
 	instance.global_position = Vector2(-9999,-9999)
 	instance.amount = 1
+	instance.speed_scale = 10.0
 	instance.emitting = true
 	instance.finished.connect(instance.queue_free)
 	get_tree().current_scene.add_child.call_deferred(instance)
 
 func PlayParticleOv(particle: GPUParticles2D, count: int, parent:Node = null,force := false):
 	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.Low && !force):
+		return
+	if (count <= 0): # just don't play it
 		return
 	var instance := particle.duplicate() as GPUParticles2D
 	instance.global_position = particle.global_position

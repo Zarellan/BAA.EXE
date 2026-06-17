@@ -27,6 +27,10 @@ enum Powers{
 @export var rainbowShaderMaterialMask:Shader
 
 @export var borderGradient:Texture2D
+
+@export var bG:Control
+@export var bG2:Control
+
 #tweens
 var tweenAlpha:Tween
 var tweenHolder:Tween
@@ -69,10 +73,10 @@ func _ready() -> void:
 	CustomItemText()
 	SetBasedOnLevel()
 	RandomGradient()
-	goldMaterial1 = (get_node("BG") as Control).material.duplicate()
-	(get_node("BG") as Control).material = goldMaterial1
-	goldMaterial2 = (get_node("BG2") as Control).material.duplicate()
-	(get_node("BG2") as Control).material = goldMaterial2
+	goldMaterial1 = bG.material.duplicate()
+	bG.material = goldMaterial1
+	goldMaterial2 = bG2.material.duplicate()
+	bG2.material = goldMaterial2
 	ExceptionalItems()
 	ExceptionalLock()
 	rebirthItems[shopData.title] = self
@@ -85,10 +89,10 @@ func ExceptionalItems():
 		Powers.rainbowWool, Powers.rainbowWoolMultiply:
 			var shadeMater:ShaderMaterial = ShaderMaterial.new()
 			shadeMater.shader = rainbowShaderMaterial
-			(get_node("BG") as Control).material = shadeMater
+			bG.material = shadeMater
 			
-			(get_node("BG2") as Control).material = shadeMater.duplicate()
-			(get_node("BG2") as Control).material.set_shader_parameter("border_only", true)
+			bG2.material = shadeMater.duplicate()
+			bG2.material.set_shader_parameter("border_only", true)
 			
 			var shadeMater2:ShaderMaterial = ShaderMaterial.new()
 			shadeMater2.shader = rainbowShaderMaterialMask
@@ -100,7 +104,7 @@ func ExceptionalItems():
 			get_node("Holder/SubViewportContainerDesc").material = null
 		Powers.jumpPower , Powers.stomp:
 			get_node("BackBufferCopy/GlitchingEffect").visible = true
-			(get_node("BG") as Control).material.set_shader_parameter("border_gradient", borderGradient)
+			bG.material.set_shader_parameter("border_gradient", borderGradient)
 			SetUniqueShader((get_node("Holder/SubViewportContainer") as Control))
 			(get_node("Holder/SubViewportContainer") as Control).material.set_shader_parameter("gradient",borderGradient)
 			SetUniqueShader((get_node("Holder/SubViewportContainerDesc") as Control))
@@ -129,9 +133,9 @@ func RandomGradient():
 	mat2.set_shader_parameter("random_start", randf_range(0.0,1.0))
 	randomSpeedDescriptionShade.material = mat2
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-func CustomItemText(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#region Custom Item Text
+
+func CustomItemText():
 	match shopData.power:
 		Powers.none:
 			pass
@@ -142,8 +146,8 @@ func CustomItemText(): #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			descriptionNode.text = "you will gain offer on every item (except rebirth items)\n"+\
 			"Current offer:" + str(int((GameHandler.saveDataRebirth.offer-1) * 100)) + "%"
 		Powers.jumpPower:
-			descriptionNode.text = "will increase the power jump of sheep in plaform minigame\n"+\
-			"Current power jump:" + str(GameHandler.saveDataRebirth.powerJump)
+			descriptionNode.text = "will increase the power jump of sheep in plaform minigame by +100\n"+\
+			"Current power jump:" + str(GameHandler.TotalJumpPower())
 
 		Powers.autoCollect:
 			if (!GameHandler.saveDataRebirth.autoCollectSheepAbility):
@@ -169,8 +173,7 @@ func CustomItemText(): #++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				descriptionNode.text = "the rebirth system will be cheaper on every purchase\n"+\
 				"current required rebirth:" + str(NumberFormat.Format(RebirthMenu.base_rebirth_total))
 
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#endregion
 
 func SetBasedOnLevel():
 	if (shopData.level > 0):
@@ -224,7 +227,7 @@ func Hovered():
 		TweenUtils.StopTween(tweenAlpha)
 		TweenUtils.StopTween(tweenHolder)
 		TweenUtils.StopTween(tweenRotationImage)
-		tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),170/255.0,0.2,TweenUtils.Ease.OutCirc)
+		tweenAlpha = TweenUtils.tweenAlpha(bG,170/255.0,0.2,TweenUtils.Ease.OutCirc)
 		tweenHolder = TweenUtils.tweenScale(get_node("Holder"),Vector2(1.02,1.02),0.2,TweenUtils.Ease.OutCirc)
 		tweenRotationImage = TweenUtils.tweenRotation(get_node("Holder/ItemImage"),-5,0.2,TweenUtils.Ease.OutCirc)
 		isInside = true
@@ -232,7 +235,7 @@ func Hovered():
 		TweenUtils.StopTween(tweenAlpha)
 		TweenUtils.StopTween(tweenHolder)
 		TweenUtils.StopTween(tweenRotationImage)
-		tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),95.0/255.0,0.2,TweenUtils.Ease.OutCirc)
+		tweenAlpha = TweenUtils.tweenAlpha(bG,95.0/255.0,0.2,TweenUtils.Ease.OutCirc)
 		tweenHolder = TweenUtils.tweenScale(get_node("Holder"),Vector2(1,1),0.2,TweenUtils.Ease.OutCirc)
 		tweenRotationImage = TweenUtils.tweenRotation(get_node("Holder/ItemImage"),0,0.2,TweenUtils.Ease.OutCirc)
 		isInside = false
@@ -278,7 +281,7 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		Powers.offer:
 			GameHandler.saveDataRebirth.offer += 0.10
 		Powers.jumpPower:
-			GameHandler.saveDataRebirth.powerJump += 25
+			GameHandler.saveDataRebirth.powerJump += 100
 			if (GameHandler.saveDataRebirth.powerJump > 1500 || is_equal_approx(GameHandler.saveDataRebirth.powerJump,1000)):
 				TweenLevelMax()
 				shopData.canBuy = false
@@ -381,29 +384,29 @@ var tweenColorBG2:Tween
 var twShine:Tween
 func Shine():
 	TweenUtils.StopTween(tweenAlpha)
-	tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),170/255.0,0.2,TweenUtils.Ease.OutCirc)
+	tweenAlpha = TweenUtils.tweenAlpha(bG,170/255.0,0.2,TweenUtils.Ease.OutCirc)
 	tweenAlpha.finished.connect(ShineSignal)
 
 func ShineSignal():
-	tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),95.0/255.0,0.2,TweenUtils.Ease.OutCirc)
+	tweenAlpha = TweenUtils.tweenAlpha(bG,95.0/255.0,0.2,TweenUtils.Ease.OutCirc)
 	tweenAlpha.finished.connect(func():
-		tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),170/255.0,0.2,TweenUtils.Ease.OutCirc)
+		tweenAlpha = TweenUtils.tweenAlpha(bG,170/255.0,0.2,TweenUtils.Ease.OutCirc)
 		tweenAlpha.finished.connect(func():
-			tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),95.0/255.0,0.2,TweenUtils.Ease.OutCirc))
+			tweenAlpha = TweenUtils.tweenAlpha(bG,95.0/255.0,0.2,TweenUtils.Ease.OutCirc))
 		)
 
 func GoldBGShaderTween():
 	TweenUtils.StopTween(tweenGold)
 	tweenGold = TweenUtils.tweenCustom(self, 7.0, 2.584, 0.3, TweenUtils.Ease.OutCirc, func(val): 
-		(get_node("BG") as Control).material.set_shader_parameter("border_px", val)
-		(get_node("BG2") as Control).material.set_shader_parameter("border_px", val)
+		bG.material.set_shader_parameter("border_px", val)
+		bG2.material.set_shader_parameter("border_px", val)
 	)
-	ModifyColorRGB(get_node("BG"),Color(1.0, 1.0, 0.0))
-	ModifyColorRGB(get_node("BG2"),Color(1.0, 1.0, 0.0))
+	ModifyColorRGB(bG,Color(1.0, 1.0, 0.0))
+	ModifyColorRGB(bG2,Color(1.0, 1.0, 0.0))
 	TweenUtils.StopTween(tweenColorBG)
 	TweenUtils.StopTween(tweenColorBG2)
-	tweenColorBG = TweenUtils.tweenColorRGB(get_node("BG"),Color(1,1,1),0.3,TweenUtils.Ease.OutCirc)
-	tweenColorBG2 = TweenUtils.tweenColorRGB(get_node("BG2"),Color(1,1,1),0.3,TweenUtils.Ease.OutCirc)
+	tweenColorBG = TweenUtils.tweenColorRGB(bG,Color(1,1,1),0.3,TweenUtils.Ease.OutCirc)
+	tweenColorBG2 = TweenUtils.tweenColorRGB(bG2,Color(1,1,1),0.3,TweenUtils.Ease.OutCirc)
 
 func ModifyColorRGB(node,color:Color):
 	node.modulate.r = color.r

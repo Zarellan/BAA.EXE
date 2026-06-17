@@ -22,6 +22,7 @@ var tweenScaleWool2:Tween
 @export var max_difficulty_height: float = -10000.0
 
 var died = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if (instance == null):
@@ -34,8 +35,8 @@ func _ready() -> void:
 	died = false
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/PlatformMinigame.mp3")
 	
-	#modify_curve_domain()
-	pass # Replace with function body.
+	modify_curve_domain()
+	pass
 
 func modify_curve_domain():
 	if not curveDistance:
@@ -53,15 +54,16 @@ func modify_curve_domain():
 	var right_mode = curveDistance.get_point_right_mode(last_index)
 	
 
-	curveDistance.max_domain = 55000.0
+	curveDistance.max_domain = GameHandler.saveDataRebirth.curveDistance
 	
 	var old_x = old_pos.x if old_pos.x != 0 else 1.0
-	var scale_factor = 55000.0 / old_x
+	var scale_factor = GameHandler.saveDataRebirth.curveDistance / old_x
 	if scale_factor != 0:
 		left_tangent = left_tangent / scale_factor
 		right_tangent = right_tangent / scale_factor
 
-	var new_pos = Vector2(55000.0, 15.0)
+	var new_pos = Vector2(GameHandler.saveDataRebirth.curveDistance\
+	, GameHandler.saveDataRebirth.curveValue)
 	
 	curveDistance.remove_point(last_index)
 	curveDistance.add_point(new_pos, left_tangent, right_tangent, left_mode, right_mode)
@@ -69,11 +71,13 @@ func modify_curve_domain():
 	curveDistance.emit_changed()
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if (maxSpawnY > get_tree().get_first_node_in_group("PlayerPlatform").position.y - 1000):
 		maxSpawnY = currentYspawn - 500
 		PlatformSpawner()
+	
 	pass
 
 
@@ -93,7 +97,7 @@ func _on_wool_barrier_collision_2_body_entered(body: Node2D) -> void:
 	TweenUtils.StopTween(tweenScaleWool2)
 	woolBarrier2.scale.x = 0.85
 	tweenScaleWool2 = TweenUtils.tweenScaleX(woolBarrier2,1,0.6,TweenUtils.Ease.OutCirc)
-	ParticleManager.PlayParticleOv(woolBarrier2Particle,randf_range(12,26),woolBarrier2.get_parent())
+	ParticleManager.PlayParticleOv(woolBarrier2Particle,randf_range(12.0,26.0),woolBarrier2.get_parent())
 	pass # Replace with function body.
 
 var currentYspawn:float = 358.0
@@ -102,18 +106,54 @@ var maxSpawnY:float = currentYspawn - 3000
 func PlatformSpawner():
 	while (currentYspawn > maxSpawnY):
 		var platf = InstantiateUtil.Instantiate(platformPrefab, self)
-		platf.position = Vector2(CalculateBasedOfZoomXrng(platf),currentYspawn)
-		currentYspawn -= clamp(randf_range(45 * curveDistance.sample(absf(player.global_position.y)),\
-		45 * curveDistance.sample(absf(player.global_position.y))),0,1000) # yeah I won't make it unbeatable
-		CalculateBasedOfZoomXrng(platf)
+		platf.position = Vector2(CalculateBasedOfZoomXrng(),currentYspawn)
 
-func CalculateBasedOfZoomXrng(platform):
+		var current_scale = lerpf(2.077, 0.5, curveDistance.sample(absf(player.global_position.y))/ curveDistance.max_value)
+		platf.platformType = PlatformType()
+		(platf as PlatformWay).speed = DefinePlatformSpeed(platf.platformType)
+		platf.scale.x = current_scale
+		currentYspawn -= clamp(randf_range(45 * curveDistance.sample(absf(player.global_position.y)),\
+		45 * curveDistance.sample(absf(player.global_position.y))),0,1000)
+		CalculateBasedOfZoomXrng()
+
+var moveStart = 4.5
+func PlatformType():
+	# 1. Check if the player has crossed the moveStart threshold
+	if (curveDistance.sample(absf(player.global_position.y)) >= moveStart):
+		
+		var currentDistance = curveDistance.sample(absf(player.global_position.y))
+		
+		var normalizedDistance = (currentDistance - moveStart) / (curveDistance.max_value - moveStart)
+		if (randf_range(0.0,1.0) < lerpf(0.0,0.5,normalizedDistance)):
+			return PlatformWay.Type.move
+	return PlatformWay.Type.normal
+
+func DefinePlatformSpeed(type: PlatformWay.Type):
+	# 1. FIX: Slide the parenthesis back so .sample() closes before checking >= moveStart
+	if (curveDistance.sample(absf(player.global_position.y)) >= moveStart \
+	&& type == PlatformWay.Type.move):
+		
+		var current_curve_val = curveDistance.sample(absf(player.global_position.y))
+		
+		var normalized_ratio = (current_curve_val - moveStart) / (curveDistance.max_value - moveStart)
+		normalized_ratio = clampf(normalized_ratio, 0.0, 1.0)
+		
+		var base_speed = lerpf(100.0, 600.0, normalized_ratio)
+		
+		var final_speed = base_speed * randf_range(0.85, 1.15)
+		
+		return clampf(final_speed, 100.0, 600.0)
+	return 0.0
+
+func CalculateBasedOfZoomXrng():
 	var screen_x = camera.global_position.x
 	var plaformWidth = 265
 	
 	var dynamicWidth = plaformWidth / camera.zoom.x
 	var value = Vector2(screen_x - dynamicWidth, screen_x + dynamicWidth)
 	return randf_range(value.x, value.y)
+	
+
 func CameraZoom():
 	var height_ratio = abs(player.global_position.y) / 20000.0
 	height_ratio = clamp(height_ratio, 0.0, 1.0)

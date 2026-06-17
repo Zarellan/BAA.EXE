@@ -38,7 +38,7 @@ shader = ExtResource("3_8ieqa")
 script = ExtResource("5_f75f0")
 metadata/_custom_type_script = "uid://dqhkgfy2b1oo7"
 
-[node name="ShopItem" type="Control" unique_id=2083889885]
+[node name="ShopItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("title", "descriptionNode", "textureImage", "moneyNode", "levelNode")]
 custom_minimum_size = Vector2(900, 163)
 layout_mode = 3
 anchors_preset = 1
@@ -50,6 +50,11 @@ grow_horizontal = 0
 pivot_offset = Vector2(900, 0)
 script = ExtResource("1_vpf6l")
 particle = SubResource("PackedScene_x4kgh")
+title = NodePath("Holder/Title")
+descriptionNode = NodePath("Holder/Description")
+textureImage = NodePath("Holder/ItemImage")
+moneyNode = NodePath("Holder/Price")
+levelNode = NodePath("Holder/Level")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)

@@ -11,7 +11,7 @@ class_name GameSaveData
 @export var rareChance:float = 0.00
 @export var shopListData:ShopList
 @export var tutorialed:bool = false
-
+@export var jumpPower:float = 0.00
 
 #rewards
 @export var checkCodes:Array[Array] = [["eid mubarak",false]]

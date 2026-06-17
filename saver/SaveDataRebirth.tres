@@ -1,21 +1,16 @@
-[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://brda5328fmqln"]
+[gd_resource type="Resource" script_class="GameSaveRebirth" format=3]
 
-[ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_0jjyt"]
-[ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_may26"]
-[ext_resource type="Texture2D" uid="uid://ionxinhbf4ew" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="3_4uhcc"]
-[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="4_862cu"]
-[ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="5_urp6s"]
-[ext_resource type="Texture2D" uid="uid://db5l4xqd4h51u" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="6_35u3r"]
-[ext_resource type="Texture2D" uid="uid://dti18jjl0ek7o" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="7_toumy"]
-[ext_resource type="Texture2D" uid="uid://y43oxeypu0kt" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="8_3yqr6"]
-[ext_resource type="Texture2D" uid="uid://ccixfei6apqku" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="9_4hq2p"]
-[ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="10_4y6oi"]
-[ext_resource type="Script" uid="uid://dgrns36cuqs6e" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="11_lkks2"]
-
-[sub_resource type="Curve" id="Curve_vyqy7"]
-_limits = [3.0, 15.0, 0.0, 55000.0]
-_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(55000, 15), 0.00041317957, 0.0, 0, 0]
-point_count = 2
+[ext_resource type="Script" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_0jjyt"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_may26"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="3_4uhcc"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="4_862cu"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="5_urp6s"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="6_35u3r"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="7_toumy"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="8_3yqr6"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="9_4hq2p"]
+[ext_resource type="Script" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="10_4y6oi"]
+[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="11_lkks2"]
 
 [sub_resource type="Resource" id="Resource_hotcp"]
 script = ExtResource("1_0jjyt")
@@ -41,7 +36,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_0jjyt")
 title = "More jump power"
 image = ExtResource("4_862cu")
-rebirthPrice = 4
+rebirthPrice = 2
 power = 3
 tax = 1.5
 taxInc = 0.03
@@ -113,7 +108,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_0jjyt")
 title = "Free the sheep (ending)"
 image = ExtResource("4_862cu")
-rebirthPrice = 10000
+rebirthPrice = 5000
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -125,4 +120,3 @@ metadata/_custom_type_script = "uid://b6bpycct3x2he"
 [resource]
 script = ExtResource("11_lkks2")
 rebirthListData = SubResource("Resource_valao")
-curveTest = SubResource("Curve_vyqy7")

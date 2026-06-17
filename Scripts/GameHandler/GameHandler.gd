@@ -191,3 +191,6 @@ func GoldWoolMultiplierTotal():
 	
 func RainbowWoolMultiplierTotal():
 	return saveDataRebirth.rainbowWoolMultiplier
+
+func TotalJumpPower():
+	return saveData.jumpPower + saveDataRebirth.powerJump

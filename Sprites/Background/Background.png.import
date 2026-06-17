@@ -3,21 +3,23 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://culgokfekyvvr"
-path="res://.godot/imported/Background.png-eacdde193fce433c193bd8fe63d7b3ab.ctex"
+path.s3tc="res://.godot/imported/Background.png-eacdde193fce433c193bd8fe63d7b3ab.s3tc.ctex"
+path.etc2="res://.godot/imported/Background.png-eacdde193fce433c193bd8fe63d7b3ab.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Sprites/Background/Background.png"
-dest_files=["res://.godot/imported/Background.png-eacdde193fce433c193bd8fe63d7b3ab.ctex"]
+dest_files=["res://.godot/imported/Background.png-eacdde193fce433c193bd8fe63d7b3ab.s3tc.ctex", "res://.godot/imported/Background.png-eacdde193fce433c193bd8fe63d7b3ab.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

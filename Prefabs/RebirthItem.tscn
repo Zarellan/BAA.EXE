@@ -398,7 +398,7 @@ shader_parameter/shake_speed = 3.750000178125
 shader_parameter/shake_block_size = 30.0000013775
 shader_parameter/randomization_amount = 1.0
 
-[node name="RebirthItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("randomSpeedTitleShade", "randomSpeedDescriptionShade")]
+[node name="RebirthItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("randomSpeedTitleShade", "randomSpeedDescriptionShade", "bG", "bG2")]
 custom_minimum_size = Vector2(900, 163)
 layout_mode = 3
 anchors_preset = 1
@@ -415,6 +415,8 @@ randomSpeedDescriptionShade = NodePath("Holder/SubViewportContainerDesc")
 rainbowShaderMaterial = SubResource("Shader_tejl3")
 rainbowShaderMaterialMask = SubResource("Shader_2wfgr")
 borderGradient = SubResource("GradientTexture2D_2xvu0")
+bG = NodePath("BG")
+bG2 = NodePath("BG2")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)
@@ -564,15 +566,15 @@ offset_top = -29.492004
 offset_right = 116.0
 offset_bottom = 24.507998
 pivot_offset = Vector2(83, 30.215)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 29
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 54
 bbcode_enabled = true
 text = "313k"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 54
-_current_font_size = 29
+_current_font_size = 54
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -587,15 +589,15 @@ offset_right = 189.25
 offset_bottom = 64.625
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(83, 26.4)
-theme_override_constants/outline_size = 9
-theme_override_font_sizes/normal_font_size = 46
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 81
 bbcode_enabled = true
 text = "lv:1"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 81
-_current_font_size = 46
+_current_font_size = 81
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 

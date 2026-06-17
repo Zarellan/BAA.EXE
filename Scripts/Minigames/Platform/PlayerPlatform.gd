@@ -26,8 +26,9 @@ var twScaleSprite:Tween
 
 var prevVelocityY = 0
 func _ready() -> void:
-	JUMP_VELOCITY = -GameHandler.saveDataRebirth.powerJump
+	JUMP_VELOCITY = -GameHandler.TotalJumpPower()
 	defaultScale = sprite.scale
+	ParticleManager.PlayParticleWarmup(dirtParticle)
 func _physics_process(delta: float) -> void:
 	anchorArrow.position = $Sprite2D/Nodo.global_position
 
@@ -37,6 +38,8 @@ func _physics_process(delta: float) -> void:
 		anchorArrow.visible = false
 		prevVelocityY = velocity.y
 		ControlInAir(delta)
+		HitBarrier()
+		HitBarrier2()
 	else:
 		velocity.x = 0
 		anchorArrow.visible = true
@@ -120,23 +123,39 @@ func CameraMaxGameOver():
 	if (global_position.y > camera.global_position.y + deadZone):
 		PlatformMinigame.instance.GameOver()
 
+var enteredBarrier = false
 func _on_wool_barrier_collision_body_entered(body: Node2D) -> void:
 	if (!body.is_in_group("PlayerPlatform")):
 		return
-	if (jumpVector.x > 0):
+	enteredBarrier = true
+	pass
+func _on_wool_barrier_collision_body_exited(body: Node2D) -> void:
+	if (!body.is_in_group("PlayerPlatform")):
+		return
+	enteredBarrier = false
+	pass # Replace with function body.
+
+func HitBarrier():
+	if (enteredBarrier && jumpVector.x > 0):
 		jumpVector.x = -jumpVector.x
 		WoolHitEffect()
-	pass
-
-
+var enteredBarrier2 = false
 func _on_wool_barrier_collision_2_body_entered(body: Node2D) -> void:
 	if (!body.is_in_group("PlayerPlatform")):
 		return
-	if (jumpVector.x < 0):
-		jumpVector.x = -jumpVector.x
-		WoolHitEffect()
+	enteredBarrier2 = true
 	pass # Replace with function body.
 
+func _on_wool_barrier_collision_2_body_exited(body: Node2D) -> void:
+	if (!body.is_in_group("PlayerPlatform")):
+		return
+	enteredBarrier2 = false
+	pass # Replace with function body.
+
+func HitBarrier2():
+	if (enteredBarrier2 && jumpVector.x < 0):
+		jumpVector.x = -jumpVector.x
+		WoolHitEffect()
 func WoolHitEffect():
 	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg",6,randf_range(0.95,1.05))
 	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg",6,randf_range(0.85,0.95))

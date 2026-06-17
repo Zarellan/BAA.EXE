@@ -17,7 +17,7 @@ dest_files=["res://.godot/imported/WoolShop.png-9da679179632e38494b1f49203b45ceb
 
 compress/mode=0
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

@@ -61,7 +61,7 @@ func CodeRewards():
 		"eid mubarak":
 			if (!CodeDoublecheck("eid mubarak")):
 				codeTextSub.text = "Eid Mubarak you too [font_size=50][img]res://Sprites/emojies/Party.png[/img]"
-				GameHandler.AddMoneyForce(10000)
+				GameHandler.AddMoneyForce(3000)
 				get_tree().get_first_node_in_group("Sheep").BringEidCap()
 		_:
 			codeText.placeholder_text = "Invalid code"

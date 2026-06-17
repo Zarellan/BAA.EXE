@@ -8,7 +8,8 @@ enum Powers{
 	fasterAutoCollector,
 	rareClick,
 	doubleClick,
-	autoCollectSheep #this was suppose to be replaced with autoCollect but it's too late (maybe in update)
+	autoCollectSheep, #this was suppose to be replaced with autoCollect but it's too late (maybe in update)
+	jumpPower
 }
 
 @export var particle:PackedScene
@@ -22,15 +23,16 @@ var tweenRotationImage:Tween
 
 var isInside = false
 
-var descriptionNode:Control
-var moneyNode:Control
-var levelNode:Control
 
 var originalPosXMoney
 
 @export var coins: int = 0
 
-var frequencyWavePrice:ValueSaver = ValueSaver.new()
+@export var title:Control
+@export var descriptionNode:Control
+@export var textureImage:Control
+@export var moneyNode:Control
+@export var levelNode:Control
 
 var centerYdef = 53.0
 var centerYdefLevel = 28.0
@@ -39,13 +41,9 @@ var priceLevelYdef = 87.0
 var levelMaxYdef = 53.0
 
 func _ready() -> void:
-	frequencyWavePrice.number = 0
 	originalPosXMoney = get_node("Holder/Price").position.x
-	moneyNode = get_node("Holder/Price")
-	levelNode = get_node("Holder/Level")
-	get_node("Holder/Title").text = shopData.title
-	get_node("Holder/ItemImage").texture = shopData.image
-	descriptionNode = get_node("Holder/Description")
+	title.text = shopData.title
+	textureImage.texture = shopData.image
 	descriptionNode.text = shopData.description
 	ModifyTexts()
 	CustomItemText()
@@ -54,6 +52,9 @@ func _ready() -> void:
 	
 func TotalPrice():
 	return int(shopData.price / GameHandler.saveDataRebirth.offer)
+	
+#region Custom Item Text
+
 func CustomItemText(): #godot doesn't support variable inside serialize inspector, so I have to set it manually
 	match shopData.power:
 		Powers.fasterAutoCollector:
@@ -71,6 +72,12 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 			else:
 				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\n"+\
 				"collect every:[rainbow]" + str(float(GameHandler.AutoCollectSheepTotalParse())) + " seconds"
+		Powers.jumpPower:
+			descriptionNode.text = "will increase the power jump of sheep in plaform minigame by +25\n"+\
+			"Current power jump:" + str(GameHandler.TotalJumpPower())
+			
+#endregion
+
 
 
 func SetBasedOnLevel():
@@ -91,7 +98,6 @@ func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
 	ExceptionalPurchase()
-	moneyNode.text = "[wave amp=%d freq=10]%s%s[/wave]" % [frequencyWavePrice.number, "$",NumberFormat.Format(TotalPrice())]
 	pass
 
 var exceptioned := false
@@ -128,7 +134,7 @@ func Hovered():
 
 func ModifyTexts():
 	#moneyNode.text = "$" + str(shopData.price)
-	moneyNode.text = "[wave amp=%d freq=5]%s%d[/wave]" % [frequencyWavePrice.number, "$",TotalPrice()]
+	moneyNode.text = "[wave amp=%d freq=5]%s%s[/wave]" % [0, "$",NumberFormat.Format(TotalPrice())]
 	if (shopData.canBuy):
 		levelNode.text = "lv:"+ str(shopData.level)
 	else:
@@ -150,6 +156,7 @@ func TweenColorLevel(col:Color):
 
 var tweenXtext:Tween
 
+#region Power Act
 func PowersAct():
 	match shopData.power:
 		Powers.powerClick:
@@ -176,8 +183,12 @@ func PowersAct():
 			if (GameHandler.AutoCollectSheepTotal() <= 0.30):
 				TweenLevelMax()
 				shopData.canBuy = false
-
-
+		Powers.jumpPower:
+			GameHandler.saveData.jumpPower += 25
+			if (GameHandler.saveData.jumpPower >= 500):
+				TweenLevelMax()
+				shopData.canBuy = false
+#endregion
 
 func TweenLevelMax():
 	TweenUtils.tweenY(levelNode,centerYdef,0.3,TweenUtils.Ease.OutCirc)
@@ -203,8 +214,8 @@ func Bought():
 			shopData.price = int(floor(shopData.price * shopData.tax))
 			shopData.tax += shopData.taxInc
 			TweenColor(Color(0.0, 0.905, 0.2))
-			frequencyWavePrice.number = 40
-			TweenUtils.tweenNumber(self,frequencyWavePrice,0,0.2,TweenUtils.Ease.linear)
+			TweenUtils.tweenCustom(self,40,0,0.2,TweenUtils.Ease.linear,func(val):
+					moneyNode.text = "[wave amp=%d freq=10]%s%s[/wave]" % [val, "$",NumberFormat.Format(TotalPrice())])
 			if shopData.level == 0:
 				TweenUtils.tweenY(moneyNode,priceLevelYdef,0.3,TweenUtils.Ease.OutCirc)
 				TweenUtils.tweenScale(moneyNode,Vector2(0.8,0.8),0.3,TweenUtils.Ease.OutCirc)

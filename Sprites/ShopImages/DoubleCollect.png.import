@@ -3,21 +3,23 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bonny1fk1tevv"
-path="res://.godot/imported/DoubleCollect.png-491e31d4d293994957dd7d658124fcbb.ctex"
+path.s3tc="res://.godot/imported/DoubleCollect.png-491e31d4d293994957dd7d658124fcbb.s3tc.ctex"
+path.etc2="res://.godot/imported/DoubleCollect.png-491e31d4d293994957dd7d658124fcbb.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Sprites/ShopImages/DoubleCollect.png"
-dest_files=["res://.godot/imported/DoubleCollect.png-491e31d4d293994957dd7d658124fcbb.ctex"]
+dest_files=["res://.godot/imported/DoubleCollect.png-491e31d4d293994957dd7d658124fcbb.s3tc.ctex", "res://.godot/imported/DoubleCollect.png-491e31d4d293994957dd7d658124fcbb.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

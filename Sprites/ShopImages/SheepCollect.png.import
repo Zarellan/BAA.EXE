@@ -3,21 +3,23 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8v40eu5pnywd"
-path="res://.godot/imported/SheepCollect.png-147751d8e48521c0b3c5c1278e23e80a.ctex"
+path.s3tc="res://.godot/imported/SheepCollect.png-147751d8e48521c0b3c5c1278e23e80a.s3tc.ctex"
+path.etc2="res://.godot/imported/SheepCollect.png-147751d8e48521c0b3c5c1278e23e80a.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Sprites/ShopImages/SheepCollect.png"
-dest_files=["res://.godot/imported/SheepCollect.png-147751d8e48521c0b3c5c1278e23e80a.ctex"]
+dest_files=["res://.godot/imported/SheepCollect.png-147751d8e48521c0b3c5c1278e23e80a.s3tc.ctex", "res://.godot/imported/SheepCollect.png-147751d8e48521c0b3c5c1278e23e80a.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

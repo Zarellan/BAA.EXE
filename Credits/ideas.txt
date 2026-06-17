@@ -3,3 +3,6 @@ rebirths:
 cheaper rebirthing
 
 ending (10k rebirth)
+
+boost on jump (platform minigame)
+idea by: saif

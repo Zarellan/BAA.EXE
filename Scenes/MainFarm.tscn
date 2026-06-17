@@ -506,9 +506,18 @@ tax = 1.1
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
+[sub_resource type="Resource" id="Resource_q3ouh"]
+script = ExtResource("8_v5bxn")
+title = "Jump Power"
+price = 400
+power = 7
+tax = 1.1
+taxInc = 0.2
+metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
+
 [sub_resource type="Resource" id="Resource_pbqe1"]
 script = ExtResource("9_56xbq")
-items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q")])
+items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [sub_resource type="Resource" id="Resource_hotcp"]
@@ -534,7 +543,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_17bn8"]
 script = ExtResource("27_phtv5")
 title = "More jump power"
-rebirthPrice = 4
+rebirthPrice = 2
 power = 3
 tax = 1.5
 taxInc = 0.03
@@ -604,7 +613,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_ebyxy"]
 script = ExtResource("27_phtv5")
 title = "Free the sheep (ending)"
-rebirthPrice = 10000
+rebirthPrice = 5000
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -2045,13 +2054,13 @@ offset_right = 821.0
 offset_bottom = 244.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2064,13 +2073,13 @@ offset_right = 823.0
 offset_bottom = 356.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2464,19 +2473,10 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
-[node name="MinigameContainer" type="SubViewportContainer" parent="Control/CanvasLayer" unique_id=299885308]
-visible = false
-z_index = 3
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.615, 0.615)
-pivot_offset_ratio = Vector2(0.5, 0.5)
-
-[node name="SubViewport" type="SubViewport" parent="Control/CanvasLayer/MinigameContainer" unique_id=2075597081]
-disable_3d = true
-handle_input_locally = false
-size = Vector2i(1280, 720)
-render_target_update_mode = 0
+[node name="SquareRootCalculate" type="Timer" parent="Control/CanvasLayer/RebirthMenu" unique_id=1576530731]
+wait_time = 0.5
+one_shot = true
+autostart = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
@@ -2510,3 +2510,4 @@ anchor_mode = 0
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Back" to="Control/CanvasLayer/Settings" method="_on_back_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/RebirthMenu/TextureRect/Rebirth" to="Control/CanvasLayer/RebirthMenu" method="_on_rebirth_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/RebirthMenu/TextureRect/Back" to="Control/CanvasLayer/RebirthMenu" method="_on_back_pressed"]
+[connection signal="timeout" from="Control/CanvasLayer/RebirthMenu/SquareRootCalculate" to="Control/CanvasLayer/RebirthMenu" method="_on_square_root_calculate_timeout"]

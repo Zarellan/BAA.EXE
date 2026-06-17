@@ -410,7 +410,7 @@ offset = Vector2(160.05898, -5.992508)
 
 [node name="WoolBarrierCollision" type="Area2D" parent="Camera2D/WoolBarrier" unique_id=1340801223]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/WoolBarrier/WoolBarrierCollision" unique_id=936851123]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/WoolBarrier/WoolBarrierCollision" unique_id=936851123 groups=["Barrier1"]]
 position = Vector2(31.752129, 0.11641693)
 shape = SubResource("RectangleShape2D_mt4ev")
 
@@ -453,7 +453,7 @@ flip_h = true
 
 [node name="WoolBarrierCollision2" type="Area2D" parent="Camera2D/WoolBarrier2" unique_id=1121424729]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/WoolBarrier2/WoolBarrierCollision2" unique_id=867442206]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/WoolBarrier2/WoolBarrierCollision2" unique_id=867442206 groups=["Barrier2"]]
 position = Vector2(-31.752, 0.116)
 shape = SubResource("RectangleShape2D_mt4ev")
 
@@ -561,8 +561,10 @@ rawMath = true
 [connection signal="body_exited" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_exited"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="." method="_on_wool_barrier_collision_body_entered"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="CharacterBody2D" method="_on_wool_barrier_collision_body_entered"]
+[connection signal="body_exited" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="CharacterBody2D" method="_on_wool_barrier_collision_body_exited"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="." method="_on_wool_barrier_collision_2_body_entered"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="CharacterBody2D" method="_on_wool_barrier_collision_2_body_entered"]
+[connection signal="body_exited" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="CharacterBody2D" method="_on_wool_barrier_collision_2_body_exited"]
 [connection signal="button_down" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_down"]
 [connection signal="button_up" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_up"]
 [connection signal="touched" from="Control/CanvasLayer/Left/LeftTouch" to="CharacterBody2D" method="_on_left_touch_touched"]

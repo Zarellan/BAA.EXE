@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cml867yqju286"]
 
 [ext_resource type="Script" uid="uid://b3bhiyefcb4u" path="res://Scenes/Minigames/PlatformWayScript.gd" id="1_lgcpj"]
-[ext_resource type="Texture2D" uid="uid://we0uv8gbuk5x" path="res://Sprites/Minigames/Platformer/Floors/New Piskel.png" id="2_lgcpj"]
+[ext_resource type="Texture2D" uid="uid://we0uv8gbuk5x" path="res://Sprites/Minigames/Platformer/Floors/Platform.png" id="2_lgcpj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4da"]
 size = Vector2(128, 130)

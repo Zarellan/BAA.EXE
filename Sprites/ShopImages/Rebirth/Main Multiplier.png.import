@@ -3,21 +3,23 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cce7c8i62ko24"
-path="res://.godot/imported/Main Multiplier.png-d1f7311049901b30dffc349e150a65b6.ctex"
+path.s3tc="res://.godot/imported/Main Multiplier.png-d1f7311049901b30dffc349e150a65b6.s3tc.ctex"
+path.etc2="res://.godot/imported/Main Multiplier.png-d1f7311049901b30dffc349e150a65b6.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Sprites/ShopImages/Rebirth/Main Multiplier.png"
-dest_files=["res://.godot/imported/Main Multiplier.png-d1f7311049901b30dffc349e150a65b6.ctex"]
+dest_files=["res://.godot/imported/Main Multiplier.png-d1f7311049901b30dffc349e150a65b6.s3tc.ctex", "res://.godot/imported/Main Multiplier.png-d1f7311049901b30dffc349e150a65b6.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
-compress/lossy_quality=0.7
+compress/lossy_quality=1.0
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

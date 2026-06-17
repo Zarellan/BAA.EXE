@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/GoldenWool.png" id="6_gdvw8"]
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_hqqsl"]
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepCollect.png" id="8_xdoum"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="9_04lpc"]
 [ext_resource type="Script" path="res://Scripts/Shop/ShopList.gd" id="9_tu810"]
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
@@ -15,10 +16,9 @@ script = ExtResource("2_04lpc")
 title = "Improve Shear"
 image = ExtResource("3_hantp")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-price = 29
-level = 2
+price = 25
 power = 1
-tax = 1.2500000000000002
+tax = 1.05
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -75,14 +75,26 @@ tax = 1.1
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
+[sub_resource type="Resource" id="Resource_q3ouh"]
+script = ExtResource("2_04lpc")
+title = "Jump Power"
+image = ExtResource("9_04lpc")
+price = 1458
+level = 4
+power = 7
+tax = 1.9
+taxInc = 0.2
+metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
+
 [sub_resource type="Resource" id="Resource_pbqe1"]
 script = ExtResource("9_tu810")
-items = Array[ExtResource("2_04lpc")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q")])
+items = Array[ExtResource("2_04lpc")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_npldj")
-money = 21
-increment = 6
+money = 814
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true
+jumpPower = 100.0
+checkCodes = Array[Array]([["eid mubarak", true]])
