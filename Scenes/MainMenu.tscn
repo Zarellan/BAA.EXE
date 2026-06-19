@@ -9,13 +9,15 @@
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tt5f1"]
 load_path = "res://.godot/imported/WoolShop.png-9da679179632e38494b1f49203b45ceb.ctex"
 
-[node name="MainMenu" type="Control" unique_id=246279159 node_paths=PackedStringArray("bar", "background")]
+[node name="MainMenu" type="Control" unique_id=246279159 node_paths=PackedStringArray("bar", "background", "sheep", "tex")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_tt5f1")
 bar = NodePath("CanvasLayer/TextureProgressBar")
 scenePath = "res://Scenes/MainFarm.tscn"
 background = NodePath("CanvasLayer/TextureRect")
+sheep = NodePath("CanvasLayer/Control/Sheep")
+tex = NodePath("CanvasLayer/Text")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1951249456]
 
@@ -34,25 +36,34 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("2_8saeu")
 
-[node name="Sheep" type="TextureRect" parent="CanvasLayer" unique_id=1227730264]
-clip_children = 2
-offset_left = 363.0
-offset_top = 135.0
-offset_right = 950.0
-offset_bottom = 722.0
-texture = ExtResource("3_df05h")
-metadata/_edit_group_ = true
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=275115062]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_right = 24.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="Sheep2" type="TextureRect" parent="CanvasLayer/Sheep" unique_id=1833341389]
-self_modulate = Color(0, 0, 0, 0.40392157)
-layout_mode = 0
-offset_left = 15.0
-offset_top = 2.0
-offset_right = 602.0
-offset_bottom = 589.0
+[node name="Sheep" type="Sprite2D" parent="CanvasLayer/Control" unique_id=572679202]
+clip_children = 2
+scale = Vector2(4.73, 4.73)
 texture = ExtResource("3_df05h")
+offset = Vector2(-0.21139526, -63.424934)
+
+[node name="Shadow" type="Sprite2D" parent="CanvasLayer/Control/Sheep" unique_id=441388734]
+self_modulate = Color(0, 0, 0, 0.4)
+position = Vector2(3.3826766, 0.42283297)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("3_df05h")
+offset = Vector2(-0.21139526, -63.424934)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer" unique_id=501843342]
+visible = false
 offset_left = 86.0
 offset_top = 612.0
 offset_right = 1188.0
@@ -66,8 +77,8 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -291.0
-offset_top = -62.0
+offset_top = -305.895
 offset_right = 295.0
-offset_bottom = 231.0
+offset_bottom = -12.894989
 grow_horizontal = 2
 texture = ExtResource("4_ghw46")

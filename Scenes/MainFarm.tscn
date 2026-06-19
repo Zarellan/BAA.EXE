@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="9_cxla1"]
 [ext_resource type="Texture2D" uid="uid://bg6hskasnpygv" path="res://Sprites/Sheep/EidCap.png" id="9_ehq4q"]
 [ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="9_rmap7"]
+[ext_resource type="Script" uid="uid://bxskybthm3w0s" path="res://Scripts/Skins.gd" id="10_qxec0"]
 [ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="10_rg6ea"]
 [ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="10_ujam8"]
 [ext_resource type="Texture2D" uid="uid://dgkornijck721" path="res://Sprites/Shears/New Piskel (1).png" id="11_56xbq"]
@@ -1323,6 +1324,7 @@ frame = 1
 shape = SubResource("RectangleShape2D_0r47l")
 
 [node name="Skins" type="Node2D" parent="Sheep/StaticBody2D" unique_id=373995902]
+script = ExtResource("10_qxec0")
 
 [node name="Eid" type="Node2D" parent="Sheep/StaticBody2D/Skins" unique_id=45087348]
 visible = false
@@ -2071,13 +2073,13 @@ offset_right = 821.0
 offset_bottom = 244.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2090,13 +2092,13 @@ offset_right = 823.0
 offset_bottom = 356.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2277,13 +2279,13 @@ offset_top = 192.0
 offset_right = 693.0
 offset_bottom = 252.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Glitch Effect"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
