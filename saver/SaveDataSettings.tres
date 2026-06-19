@@ -5,3 +5,4 @@
 [resource]
 script = ExtResource("1_qbu3y")
 vSync = false
+glitchEffect = false

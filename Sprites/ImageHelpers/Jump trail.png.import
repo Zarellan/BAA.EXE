@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp6g5leu2mpjr"
-path="res://.godot/imported/image.png-97f35fddcb0632d8b98d73b4a113548f.ctex"
+uid="uid://ctmrb4qaqq5ql"
+path="res://.godot/imported/Jump trail.png-8a0101609b8ebd34ba6d5f6bef3b6cef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ScreenShotPictures/image.png"
-dest_files=["res://.godot/imported/image.png-97f35fddcb0632d8b98d73b4a113548f.ctex"]
+source_file="res://Sprites/ImageHelpers/Jump trail.png"
+dest_files=["res://.godot/imported/Jump trail.png-8a0101609b8ebd34ba6d5f6bef3b6cef.ctex"]
 
 [params]
 

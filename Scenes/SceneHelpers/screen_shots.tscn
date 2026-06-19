@@ -12,6 +12,10 @@
 [ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="9_jvesk"]
 [ext_resource type="Texture2D" uid="uid://y8lt7autwrv3" path="res://Sprites/OptionUIs/ShoppingKart.png" id="11_wr3yg"]
 [ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/Rebirth1.png" id="12_43yl2"]
+[ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="13_a2kqi"]
+[ext_resource type="Texture2D" uid="uid://we0uv8gbuk5x" path="res://Sprites/Minigames/Platformer/Floors/Platform.png" id="14_4gbwn"]
+[ext_resource type="Texture2D" uid="uid://ctmrb4qaqq5ql" path="res://Sprites/ImageHelpers/Jump trail.png" id="15_qhww1"]
+[ext_resource type="Texture2D" uid="uid://dbgvnhkper0ea" path="res://Sprites/OptionUIs/StompParticle.png" id="16_qe1ba"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_id86e"]
 
@@ -761,6 +765,7 @@ scale = Vector2(8.49, 8.49)
 texture = ExtResource("11_wr3yg")
 
 [node name="cheaper rebirth" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1569793979]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -779,7 +784,7 @@ metadata/_edit_group_ = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(236, 202)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Title" type="RichTextLabel" parent="SubViewportContainer/SubViewport/cheaper rebirth/SubViewportContainer/SubViewport" unique_id=484866812]
 self_modulate = Color(1, 1, 0, 1)
@@ -850,6 +855,227 @@ rotation = 3.1415927
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("12_43yl2")
 expand_mode = 1
+
+[node name="SheepJump" type="Control" parent="SubViewportContainer/SubViewport" unique_id=743900444]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sheep" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepJump" unique_id=621350583]
+texture_filter = 1
+layout_mode = 0
+offset_left = -4.999996
+offset_top = -84.99999
+offset_right = 121.0
+offset_bottom = 43.000008
+scale = Vector2(3.505, 3.505)
+texture = ExtResource("13_a2kqi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Platform" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepJump" unique_id=113698457]
+texture_filter = 1
+layout_mode = 0
+offset_left = 22.0
+offset_top = 398.0
+offset_right = 589.0
+offset_bottom = 664.0
+texture = ExtResource("14_4gbwn")
+
+[node name="UpArrow" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepJump" unique_id=1009000311]
+texture_filter = 1
+layout_mode = 0
+offset_left = 407.0
+offset_top = 4.0
+offset_right = 657.0
+offset_bottom = 254.0
+texture = ExtResource("4_6wd5m")
+
+[node name="UpArrow2" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepJump" unique_id=1685681999]
+texture_filter = 1
+layout_mode = 0
+offset_left = 156.0
+offset_top = 243.0
+offset_right = 514.0
+offset_bottom = 601.0
+texture = ExtResource("15_qhww1")
+
+[node name="SheepAir" type="Control" parent="SubViewportContainer/SubViewport" unique_id=509252276]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sheep" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=655534233]
+texture_filter = 1
+layout_mode = 0
+offset_left = 182.00002
+offset_top = 159.0
+offset_right = 308.0
+offset_bottom = 287.0
+scale = Vector2(1.915, 1.915)
+texture = ExtResource("13_a2kqi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Platform" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=1196977129]
+texture_filter = 1
+layout_mode = 0
+offset_left = 398.0
+offset_top = 379.0
+offset_right = 612.0
+offset_bottom = 567.0
+texture = ExtResource("14_4gbwn")
+
+[node name="Platform3" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=1962778165]
+texture_filter = 1
+layout_mode = 0
+offset_left = 31.0
+offset_top = 460.0
+offset_right = 245.0
+offset_bottom = 648.0
+texture = ExtResource("14_4gbwn")
+
+[node name="Platform2" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=1737606370]
+texture_filter = 1
+layout_mode = 0
+offset_left = -10.0
+offset_top = 24.0
+offset_right = 204.0
+offset_bottom = 212.0
+texture = ExtResource("14_4gbwn")
+
+[node name="UpArrow2" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=1840543122]
+texture_filter = 1
+layout_mode = 0
+offset_left = 267.0
+offset_top = 400.99997
+offset_right = 625.0
+offset_bottom = 759.0
+rotation = -1.3303852
+texture = ExtResource("15_qhww1")
+
+[node name="UpArrow3" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=166328451]
+texture_filter = 1
+layout_mode = 0
+offset_left = 217.0
+offset_top = 67.0
+offset_right = 575.0
+offset_bottom = 425.00003
+rotation = 1.2104439
+texture = ExtResource("15_qhww1")
+flip_h = true
+
+[node name="UpArrow" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=1353407490]
+texture_filter = 1
+layout_mode = 0
+offset_left = 407.0
+offset_top = 4.0
+offset_right = 657.0
+offset_bottom = 254.0
+texture = ExtResource("4_6wd5m")
+
+[node name="SheepStomp" type="Control" parent="SubViewportContainer/SubViewport" unique_id=151066371]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sheep4" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepStomp" unique_id=2109190275]
+self_modulate = Color(1, 1, 1, 0.15686275)
+texture_filter = 1
+layout_mode = 0
+offset_left = 238.0
+offset_top = -101.0
+offset_right = 364.0
+offset_bottom = 27.0
+scale = Vector2(2.81, 4.53)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("13_a2kqi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Sheep3" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepStomp" unique_id=1078294694]
+self_modulate = Color(1, 1, 1, 0.2627451)
+texture_filter = 1
+layout_mode = 0
+offset_left = 244.0
+offset_top = 54.000027
+offset_right = 370.0
+offset_bottom = 182.00003
+scale = Vector2(3.39, 3.855)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("13_a2kqi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Sheep2" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepStomp" unique_id=1755791314]
+self_modulate = Color(1, 1, 1, 0.50980395)
+texture_filter = 1
+layout_mode = 0
+offset_left = 242.0
+offset_top = 138.0
+offset_right = 368.0
+offset_bottom = 266.0
+scale = Vector2(3.725, 3.18)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("13_a2kqi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Sheep" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepStomp" unique_id=1571873667]
+texture_filter = 1
+layout_mode = 0
+offset_left = 240.0
+offset_top = 191.0
+offset_right = 366.0
+offset_bottom = 319.0
+scale = Vector2(4.535, 3.085)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("13_a2kqi")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Platform" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepStomp" unique_id=1963293386]
+texture_filter = 1
+layout_mode = 0
+offset_left = 22.0
+offset_top = 398.0
+offset_right = 589.0
+offset_bottom = 664.0
+texture = ExtResource("14_4gbwn")
+
+[node name="UpArrow" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepStomp" unique_id=748122152]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 407.0
+offset_top = 4.0
+offset_right = 657.0
+offset_bottom = 254.0
+texture = ExtResource("4_6wd5m")
+
+[node name="UpArrow2" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepStomp" unique_id=553786319]
+texture_filter = 1
+layout_mode = 0
+offset_left = 255.0
+offset_top = 160.0
+offset_right = 632.0
+offset_bottom = 589.0
+texture = ExtResource("16_qe1ba")
+
+[node name="UpArrow3" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepStomp" unique_id=1031815706]
+texture_filter = 1
+layout_mode = 0
+offset_left = -26.0
+offset_top = 156.0
+offset_right = 351.0
+offset_bottom = 585.0
+texture = ExtResource("16_qe1ba")
+flip_h = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1655893819]
 position = Vector2(355, 400.99997)

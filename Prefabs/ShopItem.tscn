@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_f7n8r"]
 [ext_resource type="Texture2D" uid="uid://insaucig1u3h" path="res://Sprites/ShopHandleImage/WoolShop.png" id="3_x4kgh"]
 [ext_resource type="Script" uid="uid://dqhkgfy2b1oo7" path="res://Scripts/TextEffects/FadeColor.gd" id="5_f75f0"]
+[ext_resource type="Shader" uid="uid://l51dbb1f302e" path="res://Shaders/Glitching.gdshader" id="8_sqwli"]
 
 [sub_resource type="Gradient" id="Gradient_f7n8r"]
 offsets = PackedFloat32Array(0, 0.9351351, 1)
@@ -38,7 +39,16 @@ shader = ExtResource("3_8ieqa")
 script = ExtResource("5_f75f0")
 metadata/_custom_type_script = "uid://dqhkgfy2b1oo7"
 
-[node name="ShopItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("title", "descriptionNode", "textureImage", "moneyNode", "levelNode")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2vdq"]
+shader = ExtResource("8_sqwli")
+shader_parameter/is_active = true
+shader_parameter/shake_power = 0.002000000095
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 3.750000178125
+shader_parameter/shake_block_size = 30.0000013775
+shader_parameter/randomization_amount = 1.0
+
+[node name="ShopItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("title", "descriptionNode", "textureImage", "moneyNode", "levelNode", "glitchNode")]
 custom_minimum_size = Vector2(900, 163)
 layout_mode = 3
 anchors_preset = 1
@@ -55,6 +65,7 @@ descriptionNode = NodePath("Holder/Description")
 textureImage = NodePath("Holder/ItemImage")
 moneyNode = NodePath("Holder/Price")
 levelNode = NodePath("Holder/Level")
+glitchNode = NodePath("BackBufferCopy/GlitchingEffect")
 
 [node name="BG" type="TextureRect" parent="." unique_id=175554439]
 modulate = Color(1, 1, 1, 0.37254903)
@@ -185,3 +196,21 @@ _max_size = 41
 _current_font_size = 41
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=551579502]
+position = Vector2(449.5, 81)
+scale = Vector2(4.495, 0.81)
+copy_mode = 2
+
+[node name="GlitchingEffect" type="ColorRect" parent="BackBufferCopy" unique_id=462549386]
+visible = false
+material = SubResource("ShaderMaterial_h2vdq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2

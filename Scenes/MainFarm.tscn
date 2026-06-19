@@ -46,14 +46,18 @@
 [ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="28_hotcp"]
 [ext_resource type="PackedScene" uid="uid://xlvoesewx06k" path="res://Prefabs/ParticleShop.tscn" id="29_62te2"]
 [ext_resource type="Texture2D" uid="uid://dxdyrvxjbfe6r" path="res://Sprites/OptionUIs/Arrow.png" id="29_pxlk8"]
+[ext_resource type="Texture2D" uid="uid://b6hlvftej0og2" path="res://Sprites/ShopImages/SheepJump.png" id="30_17bn8"]
 [ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="30_mqm6h"]
 [ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="31_hotcp"]
+[ext_resource type="Texture2D" uid="uid://bjb5u8r2etxs7" path="res://Sprites/ShopImages/SheepAir.png" id="31_v1gif"]
 [ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="32_iwha0"]
 [ext_resource type="Texture2D" uid="uid://ionxinhbf4ew" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="35_r1qcv"]
 [ext_resource type="Texture2D" uid="uid://db5l4xqd4h51u" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="36_p5ocn"]
 [ext_resource type="Texture2D" uid="uid://dti18jjl0ek7o" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="37_ovgwv"]
 [ext_resource type="Texture2D" uid="uid://bgwt3qsuxxs47" path="res://Sprites/OptionUIs/ShoppingKartYellow.png" id="37_valao"]
+[ext_resource type="Texture2D" uid="uid://bp6g5leu2mpjr" path="res://Sprites/ShopImages/Rebirth/SheepJump.png" id="37_wcncl"]
 [ext_resource type="Texture2D" uid="uid://y43oxeypu0kt" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="38_ebyxy"]
+[ext_resource type="Texture2D" uid="uid://ba5uas4gtk2g4" path="res://Sprites/ShopImages/Rebirth/Stomp.png" id="39_q14y5"]
 [ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="40_8hf41"]
 [ext_resource type="Texture2D" uid="uid://ccixfei6apqku" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="40_q3ouh"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
@@ -509,15 +513,26 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 [sub_resource type="Resource" id="Resource_q3ouh"]
 script = ExtResource("8_v5bxn")
 title = "Jump Power"
+image = ExtResource("30_17bn8")
 price = 400
 power = 7
 tax = 1.1
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
+[sub_resource type="Resource" id="Resource_v1gif"]
+script = ExtResource("8_v5bxn")
+title = "Air acceleration"
+image = ExtResource("31_v1gif")
+price = 725
+power = 8
+tax = 1.2
+taxInc = 0.25
+metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
+
 [sub_resource type="Resource" id="Resource_pbqe1"]
 script = ExtResource("9_56xbq")
-items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh")])
+items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh"), SubResource("Resource_v1gif")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [sub_resource type="Resource" id="Resource_hotcp"]
@@ -543,6 +558,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_17bn8"]
 script = ExtResource("27_phtv5")
 title = "More jump power"
+image = ExtResource("37_wcncl")
 rebirthPrice = 2
 power = 3
 tax = 1.5
@@ -552,6 +568,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_wcncl"]
 script = ExtResource("27_phtv5")
 title = "Power stomp"
+image = ExtResource("39_q14y5")
 description = "are you tired of ending up losing on unpredictable direction ?
 well this power is for you :)
 press down once you jump to stomp in predictable way"
@@ -1969,7 +1986,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("15_d3uyy")
 settingText = NodePath("Label/AutoSizeRichTextLabel")
 pauseMenu = NodePath("../PauseMenu")
-settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code"), NodePath("Data")]
+settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code"), NodePath("Data"), NodePath("Effects")]
 shadedGrassNode = NodePath("../../../Background/Floor/GrassesDark")
 codeText = NodePath("Code/Code")
 particle = ExtResource("29_62te2")
@@ -2230,6 +2247,7 @@ one_shot = true
 [node name="InvalidCodeTimer" type="Timer" parent="Control/CanvasLayer/Settings/Code" unique_id=268871274]
 
 [node name="Data" type="Control" parent="Control/CanvasLayer/Settings" unique_id=321144524]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2245,6 +2263,37 @@ offset_bottom = 364.0
 theme_override_font_sizes/font_size = 20
 text = "Deleta All Data"
 metadata/_edit_use_anchors_ = true
+
+[node name="Effects" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1518168345]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GlitchEffect" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Effects" unique_id=1730065324]
+clip_contents = false
+layout_mode = 0
+offset_left = 442.0
+offset_top = 192.0
+offset_right = 693.0
+offset_bottom = 252.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 30
+text = "Glitch Effect"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 31
+_current_font_size = 30
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="GlitchEffectBox" type="CheckBox" parent="Control/CanvasLayer/Settings/Effects" unique_id=1098920819]
+layout_mode = 0
+offset_left = 619.0
+offset_top = 168.0
+offset_right = 643.0
+offset_bottom = 192.0
+scale = Vector2(4.635, 4.635)
 
 [node name="ArrowButtonLeft" type="Button" parent="Control/CanvasLayer/Settings" unique_id=161299645]
 texture_filter = 1
@@ -2505,6 +2554,7 @@ anchor_mode = 0
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/CodeTextTimer" to="Control/CanvasLayer/Settings" method="_on_code_text_timer_timeout"]
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/InvalidCodeTimer" to="Control/CanvasLayer/Settings" method="_on_invalid_code_timer_timeout"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Data/DeleteData" to="Control/CanvasLayer/Settings" method="_on_delete_data_pressed"]
+[connection signal="toggled" from="Control/CanvasLayer/Settings/Effects/GlitchEffectBox" to="Control/CanvasLayer/Settings" method="_on_glitch_effect_box_toggled"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonLeft" to="Control/CanvasLayer/Settings" method="_on_arrow_button_left_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonRight" to="Control/CanvasLayer/Settings" method="_on_arrow_button_right_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Back" to="Control/CanvasLayer/Settings" method="_on_back_pressed"]

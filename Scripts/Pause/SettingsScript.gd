@@ -33,7 +33,7 @@ func _ready() -> void:
 	(get_node("Performance/QualityOptions") as OptionButton).select(BasedOnQuality())
 	(get_node("Performance/FPSOption") as OptionButton).select(BasedOnFPS())
 	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.vSync
-	
+	(get_node("Effects/GlitchEffectBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.glitchEffect
 	codeText.add_theme_color_override("font_placeholder_color", Color(0.658, 0.658, 0.658, 1.0))
 	InitializeSettings()
 
@@ -238,3 +238,14 @@ func DeleteData():
 	GameHandler.saveData = GameSaveData.new()
 	ResourceUtil.RemoveResources("SaveDataRebirth","saver")
 	GameHandler.saveDataRebirth = GameSaveRebirth.new()
+
+
+func _on_glitch_effect_box_toggled(toggled_on: bool) -> void:
+	var keys = ShopItem.shopItems.keys()
+	var keysRebirth = RebirthItem.rebirthItems.keys()
+	GameHandler.saveDataSettings.glitchEffect = toggled_on
+	for i in range(keys.size()):
+		ShopItem.shopItems[keys[i]].GlitchApply()
+	for i in range(keysRebirth.size()):
+		RebirthItem.rebirthItems[keysRebirth[i]].GlitchApply()
+	pass # Replace with function body.

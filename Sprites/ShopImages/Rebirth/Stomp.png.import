@@ -2,22 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cas2w37hq0pib"
-path="res://.godot/imported/sheep sprite thumbnail.png-e0975eb39f71fdceffacdf5cfe75b8bd.ctex"
+uid="uid://ba5uas4gtk2g4"
+path="res://.godot/imported/Stomp.png-cd4f0d6821b45cbd3a3449237ee94d71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ImageHelpers/sheep sprite thumbnail.png"
-dest_files=["res://.godot/imported/sheep sprite thumbnail.png-e0975eb39f71fdceffacdf5cfe75b8bd.ctex"]
+source_file="res://Sprites/ShopImages/Rebirth/Stomp.png"
+dest_files=["res://.godot/imported/Stomp.png-cd4f0d6821b45cbd3a3449237ee94d71.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
-compress/lossy_quality=1.0
+compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1

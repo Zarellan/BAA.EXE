@@ -93,7 +93,7 @@ func _physics_process(delta: float) -> void:
 func ControlInAir(delta):
 	var direction := Input.get_axis("ui_left", "ui_right")
 	direction += int(touchedRight) - int(touchedLeft)
-	jumpVector.x += -direction * GameHandler.saveDataRebirth.airAcceleration * delta
+	jumpVector.x += -direction * GameHandler.TotalAirAcceleration() * delta
 func FlipSprite():
 	if (jumpVector.x > 0):
 		sprite.flip_h = false
@@ -156,6 +156,7 @@ func HitBarrier2():
 	if (enteredBarrier2 && jumpVector.x < 0):
 		jumpVector.x = -jumpVector.x
 		WoolHitEffect()
+
 func WoolHitEffect():
 	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg",6,randf_range(0.95,1.05))
 	GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg",6,randf_range(0.85,0.95))

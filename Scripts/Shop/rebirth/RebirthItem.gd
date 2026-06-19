@@ -82,6 +82,8 @@ func _ready() -> void:
 	rebirthItems[shopData.title] = self
 	pass # Replace with function body.
 
+func GlitchApply():
+	ExceptionalItems()
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 func ExceptionalItems():
@@ -103,7 +105,6 @@ func ExceptionalItems():
 			get_node("Holder/SubViewportContainer").material = null
 			get_node("Holder/SubViewportContainerDesc").material = null
 		Powers.jumpPower , Powers.stomp:
-			get_node("BackBufferCopy/GlitchingEffect").visible = true
 			bG.material.set_shader_parameter("border_gradient", borderGradient)
 			SetUniqueShader((get_node("Holder/SubViewportContainer") as Control))
 			(get_node("Holder/SubViewportContainer") as Control).material.set_shader_parameter("gradient",borderGradient)
@@ -111,11 +112,16 @@ func ExceptionalItems():
 			(get_node("Holder/SubViewportContainerDesc") as Control).material.set_shader_parameter("gradient",Texture2D.new())
 			get_node("Holder/SubViewportContainer/SubViewport/Title").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
-			SetUniqueShader(itemImage)
-			itemImage.material = null
-			if (shopData.power == Powers.stomp):
-				SetUniqueShader(get_node("BackBufferCopy/GlitchingEffect"))
-				get_node("BackBufferCopy/GlitchingEffect").material.set_shader_parameter("shake_power",0.0015)
+			if (itemImage.material != null):
+				SetUniqueShader(itemImage)
+				itemImage.material = null
+			if (GameHandler.saveDataSettings.glitchEffect):
+				get_node("BackBufferCopy/GlitchingEffect").visible = true
+				if (shopData.power == Powers.stomp):
+					SetUniqueShader(get_node("BackBufferCopy/GlitchingEffect"))
+					get_node("BackBufferCopy/GlitchingEffect").material.set_shader_parameter("shake_power",0.0015)
+			else:
+				get_node("BackBufferCopy/GlitchingEffect").visible = false
 
 		pass
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

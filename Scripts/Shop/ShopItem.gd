@@ -1,6 +1,8 @@
 extends Control
 class_name ShopItem
 
+static var shopItems:Dictionary[String, ShopItem]
+
 enum Powers{
 	none,
 	powerClick,
@@ -9,7 +11,8 @@ enum Powers{
 	rareClick,
 	doubleClick,
 	autoCollectSheep, #this was suppose to be replaced with autoCollect but it's too late (maybe in update)
-	jumpPower
+	jumpPower,
+	airAccel
 }
 
 @export var particle:PackedScene
@@ -33,6 +36,7 @@ var originalPosXMoney
 @export var textureImage:Control
 @export var moneyNode:Control
 @export var levelNode:Control
+@export var glitchNode:Control
 
 var centerYdef = 53.0
 var centerYdefLevel = 28.0
@@ -48,14 +52,18 @@ func _ready() -> void:
 	ModifyTexts()
 	CustomItemText()
 	SetBasedOnLevel()
+	ExceptionalItems()
+	shopItems[shopData.title] = self
 	pass # Replace with function body.
-	
+
+func GlitchApply():
+	ExceptionalItems()
 func TotalPrice():
 	return int(shopData.price / GameHandler.saveDataRebirth.offer)
 	
 #region Custom Item Text
 
-func CustomItemText(): #godot doesn't support variable inside serialize inspector, so I have to set it manually
+func CustomItemText():
 	match shopData.power:
 		Powers.fasterAutoCollector:
 			descriptionNode.text = "the collector will gain every [wave amp=25.0 freq=10.0]"\
@@ -75,9 +83,30 @@ func CustomItemText(): #godot doesn't support variable inside serialize inspecto
 		Powers.jumpPower:
 			descriptionNode.text = "will increase the power jump of sheep in plaform minigame by +25\n"+\
 			"Current power jump:" + str(GameHandler.TotalJumpPower())
-			
+		Powers.airAccel:
+			descriptionNode.text = "will increase the air acceleration of sheep in plaform minigame by +50\n(you can move the sheep left or right while jumping)\n"+\
+			"Current acceleration power:" + str(GameHandler.TotalAirAcceleration())
+
 #endregion
 
+#region Exceptional Items
+func ExceptionalItems():
+	match (shopData.power):
+		Powers.airAccel, Powers.jumpPower:
+			if (!GameHandler.saveDataSettings.glitchEffect):
+				glitchNode.visible = false
+				return
+			glitchNode.visible = true
+			if (shopData.power == Powers.airAccel):
+				SetUniqueShader(glitchNode)
+				glitchNode.material.set_shader_parameter("shake_power",0.0011)
+
+		pass
+
+#endregion
+func SetUniqueShader(obj:Control):
+	var shade = obj.material.duplicate()
+	obj.material = shade
 
 
 func SetBasedOnLevel():
@@ -188,6 +217,12 @@ func PowersAct():
 			if (GameHandler.saveData.jumpPower >= 500):
 				TweenLevelMax()
 				shopData.canBuy = false
+		Powers.airAccel:
+			GameHandler.saveData.airAcceleration += 50
+			if (GameHandler.saveData.airAcceleration >= 500):
+				TweenLevelMax()
+				shopData.canBuy = false
+
 #endregion
 
 func TweenLevelMax():

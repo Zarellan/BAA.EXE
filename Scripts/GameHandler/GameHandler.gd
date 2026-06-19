@@ -194,3 +194,6 @@ func RainbowWoolMultiplierTotal():
 
 func TotalJumpPower():
 	return saveData.jumpPower + saveDataRebirth.powerJump
+
+func TotalAirAcceleration():
+	return saveData.airAcceleration + saveDataRebirth.airAcceleration
