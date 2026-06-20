@@ -65,7 +65,7 @@ func Move(delta):
 		direction = -1
 
 var twPosY:Tween
-func JumpedOn(velocityStrengthY: float):
+func JumpedOn(velocityStrengthY: float, stomped = false):
 	var standard_landing_velocity = 500.0
 	
 	var velocity_factor = absf(velocityStrengthY) / standard_landing_velocity
@@ -79,6 +79,8 @@ func JumpedOn(velocityStrengthY: float):
 	var min_sink = 0.3 * platfImpact
 	var max_sink = 12.0 * platfImpact
 	randomY = clampf(randomY, min_sink, max_sink)
+	if (stomped):
+		randomY *= 3
 	twPosY = TweenUtils.tweenY(self, defaultPosY + randomY, 0.3, TweenUtils.Ease.OutCirc)
 	twPosY.finished.connect(func():
 		twPosY = TweenUtils.tweenY(self, defaultPosY, 0.3, TweenUtils.Ease.InSine)
@@ -94,6 +96,6 @@ func CountPoint():
 func HidePlatform():
 	if (isHiding):
 		return
-	TweenUtils.tweenAlpha(self,0,0.8,TweenUtils.Ease.linear).finished.connect(func():
+	TweenUtils.tweenAlpha(self,0,0.05,TweenUtils.Ease.linear).finished.connect(func():
 		queue_free())
 	isHiding = true

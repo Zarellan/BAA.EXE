@@ -50,15 +50,17 @@ func _physics_process(delta: float) -> void:
 				sprite.scale = Vector2(defaultScale.x + 0.3,defaultScale.y - 0.5)
 			else:
 				sprite.scale = Vector2(defaultScale.x + 0.6,defaultScale.y - 0.5)
+				GlobalAudio.PlayOneShot("res://Sounds/impactStomp.ogg",0,randf_range(0.95,1.05))
 			twScaleSprite = TweenUtils.tweenScale(sprite,defaultScale,0.5,TweenUtils.Ease.OutCirc)
 			skewTween = TweenUtils.tweenSkewPingPong(sprite,deg_to_rad(-10),deg_to_rad(10),0.4,TweenUtils.Ease.InOutSine)
 			PlatformMinigame.instance.CameraZoom()
-			stomped = false
 			GlobalAudio.PlayOneShot("res://Sounds/land.mp3",0,randf_range(0.95,1.05))
 			var impactParticle = 0
 			if (platform != null):
-				impactParticle = platform.JumpedOn(prevVelocityY)
-				ParticleManager.PlayParticleOv(dirtParticle,int(impactParticle)) # will calculate later
+				impactParticle = platform.JumpedOn(prevVelocityY, stomped)
+				ParticleManager.PlayParticleOv(dirtParticle,int(impactParticle))
+			stomped = false
+
 		jumped = false
 
 	if (Input.is_action_just_pressed("ui_accept") || touchedUp) and is_on_floor():
@@ -110,7 +112,22 @@ func Stomping():
 		jumpVector.x = 0
 		velocity.x = 0
 		velocity.y = 1500
+		sprite.scale = Vector2(defaultScale.x * 0.7,defaultScale.y * 1.3)
+		GlobalAudio.PlayOneShot("res://Sounds/droppingSound.ogg",0,randf_range(0.90,0.99))
+		GlobalAudio.PlayOneShot("res://Sounds/droppingSound.ogg",0,randf_range(1.03,1.15))
 		stomped = true
+		while (stomped):
+			var obj = get_node("Sprite2D").duplicate()
+			obj.offset = Vector2(0,0)
+			obj.get_node("Shadow").offset = Vector2(0,0)
+			obj.ready.connect(func():
+				TweenUtils.tweenScale(obj,Vector2(1.3,0.7),0.3,TweenUtils.Ease.linear)
+				TweenUtils.tweenAlpha(obj,0,0.3,TweenUtils.Ease.linear).finished.connect(func():
+					obj.queue_free())
+			)
+			get_tree().current_scene.add_child(obj)
+			obj.global_position = self.global_position
+			await get_tree().create_timer(0.04).timeout
 
 func CameraMax():
 	var deadZone = 200.0 / camera.zoom.y

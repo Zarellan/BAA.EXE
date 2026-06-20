@@ -41,8 +41,15 @@ func _ready() -> void:
 		if (!GameHandler.saveData.tutorialed):
 			tutorialTimer.start()
 			tutorialTimer.timeout.connect(StartTutorial)
+	SheepShaderCondition()
 	pass # Replace with function body.
 
+func SheepShaderCondition():
+	if (!isMain):
+		get_node("StaticBody2D/Sprite2D/SheepBright").material = null
+		get_node("StaticBody2D/Sprite2D/SheepBright").queue_free()
+		get_node("StaticBody2D/Skins/Eid/EidCap/SheepBright").material = null
+		get_node("StaticBody2D/Skins/Eid/EidCap/SheepBright").queue_free()
 var twTutorial:Tween
 func StartTutorial():
 	twTutorial = TweenUtils.tweenAlpha(tutorial,1,2,TweenUtils.Ease.linear)
@@ -122,7 +129,12 @@ func _on_static_body_2d_mouse_exited() -> void:
 	if (isMain):
 		isInside = false
 	pass # Replace with function body.
-	
+
+var flashTween:Tween
+func BrightSkin():
+	TweenUtils.StopTween(flashTween)
+	flashTween = TweenUtils.tweenCustom(self,1,0,1.2,TweenUtils.Ease.linear,func(val):
+		get_node("StaticBody2D/Sprite2D/SheepBright").material.set_shader_parameter("flash_modifier", val))
 	# MAX SCROLL TO DOWN
 	#var sc = $"../Control/CanvasLayer/Shop/ScrollContainer"
 	#var vbar = sc.get_v_scroll_bar()

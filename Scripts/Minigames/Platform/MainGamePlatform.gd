@@ -73,7 +73,7 @@ func modify_curve_domain():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (maxSpawnY > get_tree().get_first_node_in_group("PlayerPlatform").position.y - 1000):
 		maxSpawnY = currentYspawn - 500
 		PlatformSpawner()

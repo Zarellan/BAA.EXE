@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/Rebirth1.png" id="12_43yl2"]
 [ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="13_a2kqi"]
 [ext_resource type="Texture2D" uid="uid://we0uv8gbuk5x" path="res://Sprites/Minigames/Platformer/Floors/Platform.png" id="14_4gbwn"]
-[ext_resource type="Texture2D" uid="uid://ctmrb4qaqq5ql" path="res://Sprites/ImageHelpers/Jump trail.png" id="15_qhww1"]
 [ext_resource type="Texture2D" uid="uid://dbgvnhkper0ea" path="res://Sprites/OptionUIs/StompParticle.png" id="16_qe1ba"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_id86e"]
@@ -449,13 +448,13 @@ offset_top = 24.0
 offset_right = 236.0
 offset_bottom = 193.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 112
+theme_override_font_sizes/normal_font_size = 109
 bbcode_enabled = true
 text = "X5"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 112
+_current_font_size = 109
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -505,13 +504,13 @@ offset_top = 24.0
 offset_right = 236.0
 offset_bottom = 193.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 112
+theme_override_font_sizes/normal_font_size = 109
 bbcode_enabled = true
 text = "X5"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 112
+_current_font_size = 109
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -703,13 +702,13 @@ offset_top = -1.0
 offset_right = 227.0
 offset_bottom = 168.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 112
+theme_override_font_sizes/normal_font_size = 109
 bbcode_enabled = true
 text = "X2"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 112
+_current_font_size = 109
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -900,7 +899,6 @@ offset_left = 156.0
 offset_top = 243.0
 offset_right = 514.0
 offset_bottom = 601.0
-texture = ExtResource("15_qhww1")
 
 [node name="SheepAir" type="Control" parent="SubViewportContainer/SubViewport" unique_id=509252276]
 visible = false
@@ -956,7 +954,6 @@ offset_top = 400.99997
 offset_right = 625.0
 offset_bottom = 759.0
 rotation = -1.3303852
-texture = ExtResource("15_qhww1")
 
 [node name="UpArrow3" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=166328451]
 texture_filter = 1
@@ -966,7 +963,6 @@ offset_top = 67.0
 offset_right = 575.0
 offset_bottom = 425.00003
 rotation = 1.2104439
-texture = ExtResource("15_qhww1")
 flip_h = true
 
 [node name="UpArrow" type="TextureRect" parent="SubViewportContainer/SubViewport/SheepAir" unique_id=1353407490]

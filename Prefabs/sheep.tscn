@@ -1,18 +1,84 @@
 [gd_scene format=3 uid="uid://cp3edlim8vx5p"]
 
 [ext_resource type="Script" uid="uid://dvkkcbj3lxi3e" path="res://Scripts/SheepClicker.gd" id="1_pwu8p"]
-[ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="2_vhidr"]
 [ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="3_m7uoi"]
+[ext_resource type="Shader" uid="uid://bfwmiku07we8u" path="res://Shaders/SheepBright.gdshader" id="4_m7uoi"]
 [ext_resource type="Script" uid="uid://bxskybthm3w0s" path="res://Scripts/Skins.gd" id="4_sbckw"]
+[ext_resource type="Shader" uid="uid://bwj0by7csk3cm" path="res://Shaders/BrightSprite.gdshader" id="4_vhidr"]
 [ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="5_ibwm0"]
 [ext_resource type="Texture2D" uid="uid://bg6hskasnpygv" path="res://Sprites/Sheep/EidCap.png" id="6_vt7wm"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pwu8p"]
+shader = ExtResource("4_vhidr")
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="Shader" id="Shader_ut7ki"]
+code = "shader_type canvas_item;
+
+/// Animation speed — higher values spin the hue faster.
+uniform float speed : hint_range(0.1, 4.0) = 0.9;
+/// How strongly the rainbow overrides the original sprite color (0.0 = invisible, 1.0 = pure rainbow).
+uniform float rainbow_mix : hint_range(0.0, 1.0) = 0.5;
+/// Brightness multiplier applied to the rainbow colour.
+uniform float glow_intensity : hint_range(1.0, 3.5) = 1.5;
+/// Actual pixel dimensions of a SINGLE frame of your animation.
+uniform vec2 node_size = vec2(64.0, 64.0);
+
+// Use varying variables to pass localized frame coordinates from vertex to fragment step
+varying vec2 local_uv;
+varying vec4 modulate_color;
+
+void vertex() {
+	// Reconstruct a flawless 0.0 to 1.0 UV coordinate grid for the current frame, 
+	// completely bypassing spritesheet UV offsets.
+	local_uv = vec2(float(VERTEX_ID == 1 || VERTEX_ID == 2), float(VERTEX_ID == 2 || VERTEX_ID == 3));
+	
+	// Capture Godot's Modulate / Self-Modulate color
+	modulate_color = COLOR;
+}
+
+/// Converts an HSV colour to RGB.
+vec3 hsv_to_rgb(vec3 c) {
+	vec4 k = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	vec3 p = abs(fract(c.xxx + k.xyz) * 6.0 - k.www);
+	return c.z * mix(k.xxx, clamp(p - k.xxx, 0.0, 1.0), c.y);
+}
+
+void fragment() {
+	// Sample the original sprite color using the engine's built-in UV (preserves animation frame)
+	vec4 sprite_color = texture(TEXTURE, UV);
+	
+	// Convert our local frame UV to relative pixel coordinates
+	vec2 pixel = local_uv * node_size;
+
+	// Animated hue calculations locked onto the active frame mask
+	float denom = max(node_size.x + node_size.y, 1.0);
+	float phase = (pixel.x + pixel.y) / denom;
+	float hue   = fract(TIME * speed * 0.25 + phase);
+	vec3 rainbow = hsv_to_rgb(vec3(hue, 1.0, 1.0)) * glow_intensity;
+
+	// Mix the rainbow directly onto the sprite
+	vec3 final_rgb = mix(sprite_color.rgb, rainbow, rainbow_mix);
+
+	// Render using the sprite's alpha mask and modulation colors
+	COLOR.rgb = final_rgb * modulate_color.rgb;
+	COLOR.a = sprite_color.a * modulate_color.a;
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xyweb"]
-shader = ExtResource("2_vhidr")
+shader = SubResource("Shader_ut7ki")
 shader_parameter/speed = 1.03900004609262
 shader_parameter/rainbow_mix = 0.0
 shader_parameter/glow_intensity = 1.5
 shader_parameter/node_size = Vector2(256, 256)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vhidr"]
+shader = ExtResource("4_vhidr")
+shader_parameter/flash_modifier = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7uoi"]
+shader = ExtResource("4_m7uoi")
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r47l"]
 size = Vector2(116.5, 93.5)
@@ -115,6 +181,7 @@ _data = {
 }
 
 [node name="Sheep" type="Node2D" unique_id=1343371003 node_paths=PackedStringArray("skins")]
+material = SubResource("ShaderMaterial_pwu8p")
 scale = Vector2(2.16, 2.16)
 script = ExtResource("1_pwu8p")
 skins = NodePath("StaticBody2D/Skins")
@@ -136,11 +203,21 @@ frame = 1
 [node name="Shadow" type="Sprite2D" parent="StaticBody2D/Sprite2D" unique_id=169449084]
 self_modulate = Color(0, 0, 0, 0.42745098)
 texture_filter = 1
+material = SubResource("ShaderMaterial_vhidr")
+use_parent_material = true
 position = Vector2(1.8518496, 2.5555985)
 texture = ExtResource("3_m7uoi")
 offset = Vector2(0, -17)
 hframes = 2
 frame = 1
+
+[node name="SheepBright" type="ColorRect" parent="StaticBody2D/Sprite2D" unique_id=1418510157]
+material = SubResource("ShaderMaterial_m7uoi")
+offset_left = -63.888885
+offset_top = -46.981453
+offset_right = 58.33333
+offset_bottom = 47.92592
+mouse_filter = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=681644792]
 shape = SubResource("RectangleShape2D_0r47l")
@@ -152,7 +229,6 @@ skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResourc
 skinUses = [NodePath("Eid")]
 
 [node name="Eid" type="Node2D" parent="StaticBody2D/Skins" unique_id=242466799]
-visible = false
 
 [node name="EidCap" type="Sprite2D" parent="StaticBody2D/Skins/Eid" unique_id=825859892]
 clip_children = 2
@@ -167,6 +243,14 @@ self_modulate = Color(0, 0, 0, 0.44705883)
 position = Vector2(6.1517386, -0.09282577)
 texture = ExtResource("6_vt7wm")
 offset = Vector2(-7.9341125, -25.322632)
+
+[node name="SheepBright" type="ColorRect" parent="StaticBody2D/Skins/Eid/EidCap" unique_id=964060625]
+material = SubResource("ShaderMaterial_m7uoi")
+offset_left = -27.418617
+offset_top = -58.50894
+offset_right = 18.643295
+offset_bottom = 8.643677
+mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1748554935]
 root_node = NodePath("../StaticBody2D")

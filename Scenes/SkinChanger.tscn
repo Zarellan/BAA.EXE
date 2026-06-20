@@ -18,7 +18,7 @@ load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ct
 
 [node name="SkinChanger" type="Node2D" unique_id=336374009 node_paths=PackedStringArray("sheep", "textSkin", "textDescSkin", "textEffectSkin")]
 script = ExtResource("1_bfxyv")
-sheep = NodePath("Sheep")
+sheep = NodePath("Sheep2")
 textSkin = NodePath("Control/CanvasLayer/Title")
 textDescSkin = NodePath("Control/CanvasLayer/Description")
 textEffectSkin = NodePath("Control/CanvasLayer/Effect")
@@ -640,9 +640,8 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 59
 text = "Apply"
 
-[node name="Sheep" parent="." unique_id=1343371003 instance=ExtResource("2_x5u6f")]
+[node name="Sheep2" parent="." unique_id=1343371003 instance=ExtResource("2_x5u6f")]
 position = Vector2(467.99997, 668)
 scale = Vector2(3.055, 3.055)
-isSkin = true
 
 [connection signal="pressed" from="Control/CanvasLayer/ApplySkin" to="." method="_on_apply_skin_pressed"]

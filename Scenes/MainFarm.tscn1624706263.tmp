@@ -1197,7 +1197,6 @@ texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
 [node name="Sheep" parent="." unique_id=1343371003 node_paths=PackedStringArray("tutorial", "tutorialTimer", "moneyText", "textMoneyRev", "part", "partRare", "partRainbow", "mouseControl", "sheepShadow", "rainbowStarParticle") groups=["Sheep"] instance=ExtResource("8_wcncl")]
-light_mask = 3
 position = Vector2(132, 680)
 isMain = true
 tutorial = NodePath("../Tutorial")
@@ -2431,6 +2430,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("64_fip8v")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Control/CanvasLayer/SkinPanel" unique_id=926455685]
@@ -2456,22 +2456,6 @@ render_target_update_mode = 4
 
 [node name="SkinChanger" parent="Control/CanvasLayer/SkinPanel/SubViewportContainer/SubViewport" unique_id=336374009 instance=ExtResource("64_qxec0")]
 
-[node name="Back" type="Button" parent="Control/CanvasLayer/SkinPanel" unique_id=1446037317]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -147.0
-offset_top = -81.0
-offset_right = 150.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 39
-text = "Back"
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
 
@@ -2481,7 +2465,6 @@ anchor_mode = 0
 [connection signal="button_up" from="Control/CanvasLayer/ShopHelper/DownAlign/Down" to="Control/CanvasLayer/ShopHelper" method="_on_down_button_up"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/PauseButton" to="Control/CanvasLayer/PauseMenu" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/ShoppingKart" to="Control/CanvasLayer/OptionUI" method="_on_shopping_kart_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/OptionUI/SkinsButton" to="Control/CanvasLayer/SkinPanel" method="_on_skins_button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" to="Control/CanvasLayer/OptionUI" method="_on_shopping_kart_rebirth_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/RebirthIc" to="Control/CanvasLayer/RebirthMenu" method="_on_rebirth_ic_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Resume" to="Control/CanvasLayer/PauseMenu" method="_on_resume_pressed"]
@@ -2503,4 +2486,3 @@ anchor_mode = 0
 [connection signal="pressed" from="Control/CanvasLayer/RebirthMenu/TextureRect/Rebirth" to="Control/CanvasLayer/RebirthMenu" method="_on_rebirth_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/RebirthMenu/TextureRect/Back" to="Control/CanvasLayer/RebirthMenu" method="_on_back_pressed"]
 [connection signal="timeout" from="Control/CanvasLayer/RebirthMenu/SquareRootCalculate" to="Control/CanvasLayer/RebirthMenu" method="_on_square_root_calculate_timeout"]
-[connection signal="pressed" from="Control/CanvasLayer/SkinPanel/Back" to="Control/CanvasLayer/SkinPanel" method="_on_back_pressed"]

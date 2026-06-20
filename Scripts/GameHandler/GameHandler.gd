@@ -173,10 +173,10 @@ func NowCollect():
 	SaveAllDataGlob()
 
 func GamePausedPartil() -> bool:
-	return PauseScript.paused || RebirthMenu.isRebirthMenu
+	return PauseScript.paused || RebirthMenu.isRebirthMenu || saveDataRebirth.autoCollectSheepAbility || SkinChanger.isSkinChanging
 	
 func AutoCollectSheepActive():
-	return saveData.autoCollectSheepAbility || saveDataRebirth.autoCollectSheepAbility
+	return saveData.autoCollectSheepAbility
 
 func AutoCollectSheepTotal():
 	return saveData.autoCollectSheep + saveDataRebirth.autoCollectSheep
@@ -197,3 +197,13 @@ func TotalJumpPower():
 
 func TotalAirAcceleration():
 	return saveData.airAcceleration + saveDataRebirth.airAcceleration
+
+func KeysWhenExit(ignoreKey:Array[String]):
+	var input:Array[String] = ["ui_cancel","Key_Q", "Key_A"]
+	for i in range(input.size()):
+		if (ignoreKey.has(input[i])):
+			continue
+		if (Input.is_action_just_pressed(input[i])):
+			return true
+	return false
+	

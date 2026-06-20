@@ -23,7 +23,7 @@ var calcBirth = 0.0
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("Key_Q") && !isRebirthMenu):
 		BringRebirth()
-	elif (isRebirthMenu && (Input.is_action_just_pressed("ui_cancel") || Input.is_action_just_pressed("Key_Q"))):
+	elif (isRebirthMenu && (GameHandler.KeysWhenExit([]))):
 		ExitRebirth()
 	pass
 func CalculateRebirth(): # it's not in _process for optimization reason
