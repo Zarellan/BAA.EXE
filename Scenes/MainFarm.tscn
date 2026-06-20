@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cuwl22km6h2sg"]
 
-[ext_resource type="Script" uid="uid://dvkkcbj3lxi3e" path="res://Scripts/SheepClicker.gd" id="1_0r47l"]
 [ext_resource type="Script" uid="uid://o4xv73vec1sb" path="res://Scripts/Background/Background.gd" id="1_5wibg"]
 [ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="1_6ho1w"]
 [ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="1_wy1g6"]
@@ -15,12 +14,10 @@
 [ext_resource type="Script" uid="uid://b5fcg5dm7vrvn" path="res://Scripts/Background/StarSpawner.gd" id="6_aw8uy"]
 [ext_resource type="Script" uid="uid://crrxb5hi3hyws" path="res://Scripts/Shop/ShopListInit.gd" id="7_m14hk"]
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="8_v5bxn"]
+[ext_resource type="PackedScene" uid="uid://cp3edlim8vx5p" path="res://Prefabs/sheep.tscn" id="8_wcncl"]
 [ext_resource type="Shader" uid="uid://bkcddt3o2kslo" path="res://Shaders/GradientTextSimple.gdshader" id="9_26u1s"]
 [ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="9_56xbq"]
 [ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="9_cxla1"]
-[ext_resource type="Texture2D" uid="uid://bg6hskasnpygv" path="res://Sprites/Sheep/EidCap.png" id="9_ehq4q"]
-[ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="9_rmap7"]
-[ext_resource type="Script" uid="uid://bxskybthm3w0s" path="res://Scripts/Skins.gd" id="10_qxec0"]
 [ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="10_rg6ea"]
 [ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="10_ujam8"]
 [ext_resource type="Texture2D" uid="uid://dgkornijck721" path="res://Sprites/Shears/New Piskel (1).png" id="11_56xbq"]
@@ -62,107 +59,14 @@
 [ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="40_8hf41"]
 [ext_resource type="Texture2D" uid="uid://ccixfei6apqku" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="40_q3ouh"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
+[ext_resource type="Texture2D" uid="uid://bbb3h1wamtq6k" path="res://Sprites/OptionUIs/Arrow Sk.png" id="46_v1gif"]
 [ext_resource type="Shader" uid="uid://c0r6nnm084nsx" path="res://Shaders/RainbowBorderCanvas.gdshader" id="50_tdfnv"]
 [ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="51_7yrkc"]
+[ext_resource type="Texture2D" uid="uid://clfttv2ggs4qt" path="res://Sprites/OptionUIs/WhiteShirt.png" id="54_q14y5"]
+[ext_resource type="PackedScene" uid="uid://isevecd4fd6k" path="res://Scenes/SkinChanger.tscn" id="64_qxec0"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
 load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xyweb"]
-shader = ExtResource("9_rmap7")
-shader_parameter/speed = 1.03900004609262
-shader_parameter/rainbow_mix = 0.0
-shader_parameter/glow_intensity = 1.5
-shader_parameter/node_size = Vector2(256, 256)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r47l"]
-size = Vector2(116.5, 93.5)
-
-[sub_resource type="Animation" id="Animation_0r47l"]
-resource_name = "Idle"
-length = 1.0000033
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/Shadow:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../Background/Floor/SheepShadow:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_2o3fe"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/Shadow:frame_coords")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../Background/Floor/SheepShadow:frame_coords")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector2i(1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4g1jp"]
-_data = {
-&"Idle": SubResource("Animation_0r47l"),
-&"RESET": SubResource("Animation_2o3fe")
-}
 
 [sub_resource type="Animation" id="Animation_u06jq"]
 length = 0.001
@@ -578,6 +482,15 @@ power = 9
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
+[sub_resource type="Resource" id="Resource_q14y5"]
+script = ExtResource("27_phtv5")
+title = "Longer curve"
+rebirthPrice = 6
+power = 10
+tax = 1.2
+taxInc = 0.03
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
 [sub_resource type="Resource" id="Resource_8hf41"]
 script = ExtResource("27_phtv5")
 title = "Super Auto Collect"
@@ -637,7 +550,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("28_hotcp")
-items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_17bn8"), SubResource("Resource_wcncl"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
+items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_17bn8"), SubResource("Resource_wcncl"), SubResource("Resource_q14y5"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [sub_resource type="Gradient" id="Gradient_iwha0"]
@@ -1282,10 +1195,9 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Sheep" type="Node2D" parent="." unique_id=616305903 node_paths=PackedStringArray("tutorial", "tutorialTimer", "moneyText", "textMoneyRev", "part", "partRare", "partRainbow", "mouseControl", "sheepShadow", "rainbowStarParticle") groups=["Sheep"]]
+[node name="Sheep" parent="." unique_id=1343371003 node_paths=PackedStringArray("tutorial", "tutorialTimer", "moneyText", "textMoneyRev", "part", "partRare", "partRainbow", "mouseControl", "sheepShadow", "rainbowStarParticle") groups=["Sheep"] instance=ExtResource("8_wcncl")]
 position = Vector2(132, 680)
-scale = Vector2(2.16, 2.16)
-script = ExtResource("1_0r47l")
+isMain = true
 tutorial = NodePath("../Tutorial")
 tutorialTimer = NodePath("../Tutorial/StartTutorial")
 moneyText = NodePath("../Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter/Script")
@@ -1296,57 +1208,6 @@ partRainbow = NodePath("../RainbowWool")
 mouseControl = NodePath("../Control/CanvasLayer/Mouse")
 sheepShadow = NodePath("../Background/Floor/SheepShadow")
 rainbowStarParticle = NodePath("../RainbowStarParticle")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Sheep" unique_id=1741717021]
-position = Vector2(0, -47)
-input_pickable = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Sheep/StaticBody2D" unique_id=2066201686]
-clip_children = 2
-texture_filter = 1
-material = SubResource("ShaderMaterial_xyweb")
-position = Vector2(-0.9259262, -0.46298218)
-texture = ExtResource("1_wy1g6")
-offset = Vector2(0, -17)
-hframes = 2
-frame = 1
-
-[node name="Shadow" type="Sprite2D" parent="Sheep/StaticBody2D/Sprite2D" unique_id=361796887]
-self_modulate = Color(0, 0, 0, 0.42745098)
-texture_filter = 1
-position = Vector2(1.8518496, 2.5555985)
-texture = ExtResource("1_wy1g6")
-offset = Vector2(0, -17)
-hframes = 2
-frame = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sheep/StaticBody2D" unique_id=1219642034]
-shape = SubResource("RectangleShape2D_0r47l")
-
-[node name="Skins" type="Node2D" parent="Sheep/StaticBody2D" unique_id=373995902]
-script = ExtResource("10_qxec0")
-
-[node name="Eid" type="Node2D" parent="Sheep/StaticBody2D/Skins" unique_id=45087348]
-visible = false
-
-[node name="EidCap" type="Sprite2D" parent="Sheep/StaticBody2D/Skins/Eid" unique_id=1386736279]
-clip_children = 2
-position = Vector2(-39.067352, -31.921219)
-rotation = 0.1877621
-scale = Vector2(0.6406252, 0.6044561)
-texture = ExtResource("9_ehq4q")
-offset = Vector2(-7.9341125, -25.322632)
-
-[node name="Shadow" type="Sprite2D" parent="Sheep/StaticBody2D/Skins/Eid/EidCap" unique_id=1583249206]
-self_modulate = Color(0, 0, 0, 0.44705883)
-position = Vector2(6.1517386, -0.09282577)
-texture = ExtResource("9_ehq4q")
-offset = Vector2(-7.9341125, -25.322632)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sheep" unique_id=222938361]
-root_node = NodePath("../StaticBody2D")
-libraries/ = SubResource("AnimationLibrary_4g1jp")
-autoplay = &"Idle"
 
 [node name="Tutorial" type="Node2D" parent="." unique_id=1475479390]
 modulate = Color(1, 1, 1, 0)
@@ -1532,7 +1393,7 @@ script = ExtResource("15_210na")
 rebirthText = NodePath("../RebirthCounter")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextRev" type="Control" parent="Control/CanvasLayer" unique_id=1274630093 node_paths=PackedStringArray("sheep")]
+[node name="TextRev" type="Control" parent="Control/CanvasLayer" unique_id=1274630093 node_paths=PackedStringArray("sheep") groups=["Sheep"]]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -1546,7 +1407,7 @@ offset_bottom = -360.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_4g1jp")
-sheep = NodePath("../../../Sheep/StaticBody2D")
+sheep = NodePath("../../../Sheep")
 text = ExtResource("6_4gutc")
 metadata/_edit_use_anchors_ = true
 
@@ -1655,7 +1516,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("31_hotcp")
+texture = ExtResource("46_v1gif")
 metadata/_edit_use_anchors_ = true
 
 [node name="DownAlign" type="Control" parent="Control/CanvasLayer/ShopHelper" unique_id=1696989066]
@@ -1669,7 +1530,10 @@ grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="Down" type="Button" parent="Control/CanvasLayer/ShopHelper/DownAlign" unique_id=117179256]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.225
+anchor_bottom = -0.225
 offset_left = 282.0
 offset_top = -50.0
 offset_right = 369.0
@@ -1686,7 +1550,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -3.1415927
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("31_hotcp")
+texture = ExtResource("46_v1gif")
 metadata/_edit_use_anchors_ = true
 
 [node name="Mouse" type="Control" parent="Control/CanvasLayer" unique_id=1630782413]
@@ -1808,12 +1672,41 @@ script = ExtResource("40_8hf41")
 node = NodePath("../TextureRect")
 scaleVal = 1.1
 
+[node name="SkinsButton" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=2089612583]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.6
+anchor_right = 1.6
+offset_left = 64.0
+offset_top = 61.0
+offset_right = 128.0
+offset_bottom = 125.0
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/SkinsButton" unique_id=981149617]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("54_q14y5")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/SkinsButton" unique_id=1846695674 node_paths=PackedStringArray("node")]
+anchors_preset = 0
+offset_left = -64.0
+offset_right = -64.0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+
 [node name="ShoppingKartRebirth" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=1487169588]
 layout_mode = 1
-offset_left = 128.0
-offset_top = 61.0
-offset_right = 192.0
-offset_bottom = 125.0
+offset_left = 64.0
+offset_top = 125.0
+offset_right = 128.0
+offset_bottom = 189.0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -2073,13 +1966,13 @@ offset_right = 821.0
 offset_bottom = 244.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2092,13 +1985,13 @@ offset_right = 823.0
 offset_bottom = 356.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2279,13 +2172,13 @@ offset_top = 192.0
 offset_right = 693.0
 offset_bottom = 252.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Glitch Effect"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2529,13 +2422,41 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
+[node name="SkinPanel" type="Control" parent="Control/CanvasLayer" unique_id=1936878502]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/CanvasLayer/SkinPanel" unique_id=926455685]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 189.0
+offset_right = -191.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Control/CanvasLayer/SkinPanel/SubViewportContainer" unique_id=1409458311]
+handle_input_locally = false
+canvas_item_default_texture_filter = 0
+sdf_oversize = 0
+sdf_scale = 2
+size = Vector2i(900, 720)
+render_target_update_mode = 4
+
+[node name="SkinChanger" parent="Control/CanvasLayer/SkinPanel/SubViewportContainer/SubViewport" unique_id=336374009 instance=ExtResource("64_qxec0")]
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
 
-[connection signal="mouse_entered" from="Sheep/StaticBody2D" to="Sheep" method="_on_static_body_2d_mouse_entered"]
-[connection signal="mouse_entered" from="Sheep/StaticBody2D" to="Control/CanvasLayer/Mouse" method="_on_static_body_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Sheep" method="_on_static_body_2d_mouse_exited"]
-[connection signal="mouse_exited" from="Sheep/StaticBody2D" to="Control/CanvasLayer/Mouse" method="_on_static_body_2d_mouse_exited"]
 [connection signal="button_down" from="Control/CanvasLayer/ShopHelper/UpAlign/Up" to="Control/CanvasLayer/ShopHelper" method="_on_up_button_down"]
 [connection signal="button_up" from="Control/CanvasLayer/ShopHelper/UpAlign/Up" to="Control/CanvasLayer/ShopHelper" method="_on_up_button_up"]
 [connection signal="button_down" from="Control/CanvasLayer/ShopHelper/DownAlign/Down" to="Control/CanvasLayer/ShopHelper" method="_on_down_button_down"]

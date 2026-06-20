@@ -160,8 +160,8 @@ func _on_save_timer_timeout():
 		SaveAllDataGlob()
 	canSave = true
 
-func IncrementTotal():
-	return saveData.increment * saveData.clickMultiply * saveDataRebirth.multiplier_reb
+func IncrementTotal() -> int:
+	return saveData.increment * saveData.clickMultiply * saveDataRebirth.multiplier_reb * saveDataAchievements.multiplyMoneyAchievement
 
 func NowCollect():
 	if (saveData.autoCollect <= 0):

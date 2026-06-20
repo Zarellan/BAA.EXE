@@ -13,7 +13,8 @@ enum Powers{
 	rainbowWool,
 	rainbowWoolMultiply,
 	cheaperRebirth,
-	stomp
+	stomp,
+	longerCurve
 }
 
 @export var particle:PackedScene
@@ -104,7 +105,7 @@ func ExceptionalItems():
 			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 			get_node("Holder/SubViewportContainer").material = null
 			get_node("Holder/SubViewportContainerDesc").material = null
-		Powers.jumpPower , Powers.stomp:
+		Powers.jumpPower , Powers.stomp , Powers.longerCurve:
 			bG.material.set_shader_parameter("border_gradient", borderGradient)
 			SetUniqueShader((get_node("Holder/SubViewportContainer") as Control))
 			(get_node("Holder/SubViewportContainer") as Control).material.set_shader_parameter("gradient",borderGradient)
@@ -177,7 +178,10 @@ func CustomItemText():
 				"current rainbow multiplier:X" + str(GameHandler.RainbowWoolMultiplierTotal())
 		Powers.cheaperRebirth:
 				descriptionNode.text = "the rebirth system will be cheaper on every purchase\n"+\
-				"current required rebirth:" + str(NumberFormat.Format(RebirthMenu.base_rebirth_total))
+				"current required rebirth:" + str(NumberFormat.Format(int(RebirthMenu.base_rebirth_total)))
+		Powers.longerCurve:
+			descriptionNode.text = "the curve of platform minigame difficulty will be longer\n(meaning the game will get easier)\n"+\
+			"current curve length:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveDistance)))
 
 #endregion
 

@@ -1,6 +1,10 @@
 extends Node2D
 class_name Sheep
 
+
+@export var isMain = false
+@export var isSkin = false
+
 @export var tutorial:Node2D
 @export var tutorialTimer:Timer
 
@@ -13,7 +17,10 @@ class_name Sheep
 @export var sheepShadow:Node2D
 
 @export var rainbowStarParticle:RainbowStarParticle
-var isInside = false
+
+@export var skins:Skins
+
+static var isInside = false
 
 var twe:Tween
 
@@ -21,18 +28,19 @@ var defaultScale
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	ParticleManager.PlayParticleWarmup(part)
-	ParticleManager.PlayParticleWarmup(partRare)
-	ParticleManager.PlayParticleWarmup(partRainbow)
+
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
-	TweenUtils.tweenSkewPingPong(sheepShadow,deg_to_rad(18),deg_to_rad(29),1,TweenUtils.Ease.InOutSine)
 	defaultScale = scale
-	BringEidCap()
 	
+	if (isMain):
+		TweenUtils.tweenSkewPingPong(sheepShadow,deg_to_rad(18),deg_to_rad(29),1,TweenUtils.Ease.InOutSine)
+		ParticleManager.PlayParticleWarmup(part)
+		ParticleManager.PlayParticleWarmup(partRare)
+		ParticleManager.PlayParticleWarmup(partRainbow)
 	
-	if (!GameHandler.saveData.tutorialed):
-		tutorialTimer.start()
-		tutorialTimer.timeout.connect(StartTutorial)
+		if (!GameHandler.saveData.tutorialed):
+			tutorialTimer.start()
+			tutorialTimer.timeout.connect(StartTutorial)
 	pass # Replace with function body.
 
 var twTutorial:Tween
@@ -44,7 +52,7 @@ func BringEidCap():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if (isInside && Input.is_action_just_pressed("LeftMouse")):
+	if (isInside && Input.is_action_just_pressed("LeftMouse") && isMain):
 		Pressed()
 	pass
 
@@ -105,12 +113,14 @@ func Pressed():
 		canPress = true
 
 func _on_static_body_2d_mouse_entered() -> void:
-	isInside = true
+	if (isMain):
+		isInside = true
 	pass # Replace with function body.
 
 
 func _on_static_body_2d_mouse_exited() -> void:
-	isInside = false
+	if (isMain):
+		isInside = false
 	pass # Replace with function body.
 	
 	# MAX SCROLL TO DOWN

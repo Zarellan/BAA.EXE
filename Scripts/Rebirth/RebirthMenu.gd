@@ -36,7 +36,7 @@ func CalculateRebirth(): # it's not in _process for optimization reason
 		textRebirth.text = NumberFormat.Format(totalRebirth)
 	if (totalRebirth < 1.0):
 		(buttonRebirth as Button).disabled = true
-		(buttonRebirth as Button).text = "Must atleast have\nmore than $"+NumberFormat.Format(base_rebirth_total)
+		(buttonRebirth as Button).text = "Must atleast have\nmore than $"+NumberFormat.Format(int(base_rebirth_total))
 		textureRebirth.material.set_shader_parameter("border_px", 0)
 	else:
 		(buttonRebirth as Button).disabled = false

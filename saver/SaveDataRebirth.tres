@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="3_urp6s"]
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/SheepJump.png" id="4_35u3r"]
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Stomp.png" id="5_toumy"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="6_3yqr6"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="7_4hq2p"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="8_4y6oi"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="9_lkks2"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="10_nwlfp"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="11_4ctki"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="6_3yqr6"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="7_4hq2p"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="8_4y6oi"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="9_lkks2"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="10_nwlfp"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="11_4ctki"]
 [ext_resource type="Script" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="12_tyo4l"]
 [ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="13_qy0dg"]
 
@@ -56,10 +56,20 @@ power = 9
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
+[sub_resource type="Resource" id="Resource_q14y5"]
+script = ExtResource("1_4uhcc")
+title = "Longer curve"
+image = ExtResource("6_3yqr6")
+rebirthPrice = 6
+power = 10
+tax = 1.2
+taxInc = 0.03
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
 [sub_resource type="Resource" id="Resource_8hf41"]
 script = ExtResource("1_4uhcc")
 title = "Super Auto Collect"
-image = ExtResource("6_3yqr6")
+image = ExtResource("7_4hq2p")
 rebirthPrice = 2
 power = 4
 tax = 2.0
@@ -69,7 +79,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_tdfnv"]
 script = ExtResource("1_4uhcc")
 title = "Gold wool multiplier"
-image = ExtResource("7_4hq2p")
+image = ExtResource("8_4y6oi")
 rebirthPrice = 3
 power = 5
 tax = 1.5
@@ -79,7 +89,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_amxxf"]
 script = ExtResource("1_4uhcc")
 title = "Rainbow wool"
-image = ExtResource("8_4y6oi")
+image = ExtResource("9_lkks2")
 rebirthPrice = 4
 power = 6
 tax = 1.5
@@ -89,7 +99,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_p5ocn"]
 script = ExtResource("1_4uhcc")
 title = "Rainbow wool multiplier"
-image = ExtResource("9_lkks2")
+image = ExtResource("10_nwlfp")
 rebirthPrice = 2
 power = 7
 tax = 1.5
@@ -99,7 +109,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_ovgwv"]
 script = ExtResource("1_4uhcc")
 title = "Cheaper rebirth"
-image = ExtResource("10_nwlfp")
+image = ExtResource("11_4ctki")
 rebirthPrice = 3
 power = 8
 tax = 1.6
@@ -109,14 +119,14 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_ebyxy"]
 script = ExtResource("1_4uhcc")
 title = "Free the sheep (ending)"
-image = ExtResource("11_4ctki")
+image = ExtResource("6_3yqr6")
 rebirthPrice = 5000
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("12_tyo4l")
-items = Array[ExtResource("1_4uhcc")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_17bn8"), SubResource("Resource_wcncl"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
+items = Array[ExtResource("1_4uhcc")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_17bn8"), SubResource("Resource_wcncl"), SubResource("Resource_q14y5"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [resource]

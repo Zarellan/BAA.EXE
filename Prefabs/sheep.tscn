@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://cp3edlim8vx5p"]
+
+[ext_resource type="Script" uid="uid://dvkkcbj3lxi3e" path="res://Scripts/SheepClicker.gd" id="1_pwu8p"]
+[ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="2_vhidr"]
+[ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="3_m7uoi"]
+[ext_resource type="Script" uid="uid://bxskybthm3w0s" path="res://Scripts/Skins.gd" id="4_sbckw"]
+[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="5_ibwm0"]
+[ext_resource type="Texture2D" uid="uid://bg6hskasnpygv" path="res://Sprites/Sheep/EidCap.png" id="6_vt7wm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xyweb"]
+shader = ExtResource("2_vhidr")
+shader_parameter/speed = 1.03900004609262
+shader_parameter/rainbow_mix = 0.0
+shader_parameter/glow_intensity = 1.5
+shader_parameter/node_size = Vector2(256, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0r47l"]
+size = Vector2(116.5, 93.5)
+
+[sub_resource type="Resource" id="Resource_ykfix"]
+script = ExtResource("5_ibwm0")
+description = "just thrilling with the originality"
+effectDescription = "Effect: None"
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
+[sub_resource type="Resource" id="Resource_fip8v"]
+script = ExtResource("5_ibwm0")
+name = "Eid"
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
+[sub_resource type="Animation" id="Animation_0r47l"]
+resource_name = "Idle"
+length = 1.0000033
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Shadow:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Background/Floor/SheepShadow:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2o3fe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Shadow:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Background/Floor/SheepShadow:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4g1jp"]
+_data = {
+&"Idle": SubResource("Animation_0r47l"),
+&"RESET": SubResource("Animation_2o3fe")
+}
+
+[node name="Sheep" type="Node2D" unique_id=1343371003 node_paths=PackedStringArray("skins")]
+scale = Vector2(2.16, 2.16)
+script = ExtResource("1_pwu8p")
+skins = NodePath("StaticBody2D/Skins")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1508455365]
+position = Vector2(0, -47)
+input_pickable = true
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=597110287]
+clip_children = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_xyweb")
+position = Vector2(-0.9259262, -0.46298218)
+texture = ExtResource("3_m7uoi")
+offset = Vector2(0, -17)
+hframes = 2
+frame = 1
+
+[node name="Shadow" type="Sprite2D" parent="StaticBody2D/Sprite2D" unique_id=169449084]
+self_modulate = Color(0, 0, 0, 0.42745098)
+texture_filter = 1
+position = Vector2(1.8518496, 2.5555985)
+texture = ExtResource("3_m7uoi")
+offset = Vector2(0, -17)
+hframes = 2
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=681644792]
+shape = SubResource("RectangleShape2D_0r47l")
+
+[node name="Skins" type="Node2D" parent="StaticBody2D" unique_id=1683950373 node_paths=PackedStringArray("sheep", "skinUses")]
+script = ExtResource("4_sbckw")
+sheep = NodePath("../..")
+skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
+skinUses = [NodePath("Eid")]
+
+[node name="Eid" type="Node2D" parent="StaticBody2D/Skins" unique_id=242466799]
+visible = false
+
+[node name="EidCap" type="Sprite2D" parent="StaticBody2D/Skins/Eid" unique_id=825859892]
+clip_children = 2
+position = Vector2(-39.067352, -31.921219)
+rotation = 0.1877621
+scale = Vector2(0.6406252, 0.6044561)
+texture = ExtResource("6_vt7wm")
+offset = Vector2(-7.9341125, -25.322632)
+
+[node name="Shadow" type="Sprite2D" parent="StaticBody2D/Skins/Eid/EidCap" unique_id=2061136842]
+self_modulate = Color(0, 0, 0, 0.44705883)
+position = Vector2(6.1517386, -0.09282577)
+texture = ExtResource("6_vt7wm")
+offset = Vector2(-7.9341125, -25.322632)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1748554935]
+root_node = NodePath("../StaticBody2D")
+libraries/ = SubResource("AnimationLibrary_4g1jp")
+autoplay = &"Idle"
+
+[connection signal="mouse_entered" from="StaticBody2D" to="." method="_on_static_body_2d_mouse_entered"]
+[connection signal="mouse_exited" from="StaticBody2D" to="." method="_on_static_body_2d_mouse_exited"]
