@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cviimgyvwihfo"
-path.s3tc="res://.godot/imported/Pause.png-1dc5dee503428c5899b73bef5a7cb443.s3tc.ctex"
-path.etc2="res://.godot/imported/Pause.png-1dc5dee503428c5899b73bef5a7cb443.etc2.ctex"
+path="res://.godot/imported/Pause.png-1dc5dee503428c5899b73bef5a7cb443.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/OptionUIs/Pause.png"
-dest_files=["res://.godot/imported/Pause.png-1dc5dee503428c5899b73bef5a7cb443.s3tc.ctex", "res://.godot/imported/Pause.png-1dc5dee503428c5899b73bef5a7cb443.etc2.ctex"]
+dest_files=["res://.godot/imported/Pause.png-1dc5dee503428c5899b73bef5a7cb443.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=1.0
 compress/uastc_level=0

@@ -21,9 +21,9 @@ var totalRebirth = 0.0
 var calcBirth = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if (Input.is_action_just_pressed("Key_Q") && !isRebirthMenu):
-		BringRebirth()
-	elif (isRebirthMenu && (GameHandler.KeysWhenExit([]))):
+	#if (Input.is_action_just_pressed("Key_Q") && !isRebirthMenu && !GameHandler.IsTypingMain()):
+		#BringRebirth()
+	if (isRebirthMenu && (Input.is_action_just_pressed("ui_cancel"))):
 		ExitRebirth()
 	pass
 func CalculateRebirth(): # it's not in _process for optimization reason
@@ -73,7 +73,7 @@ func Rebirthed():
 	GameHandler.saveData = GameSaveData.new()
 	GameHandler.saveDataRebirth.rebirth += int(totalRebirth)
 	GameHandler.SaveAllDataRebirth()
-	isRebirthMenu = false
+	GameHandler.StaticReset()
 
 
 func _on_square_root_calculate_timeout() -> void:

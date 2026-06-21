@@ -8,10 +8,11 @@ func _ready() -> void:
 var skinChangeTween:Tween
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("Key_A") && !SkinChanger.isSkinChanging):
-		BringSkinChanger()
-	elif (SkinChanger.isSkinChanging && (GameHandler.KeysWhenExit([]))):
+	#if (Input.is_action_just_pressed("Key_A") && !SkinChanger.isSkinChanging):
+		#BringSkinChanger()
+	if (SkinChanger.isSkinChanging && Input.is_action_just_pressed("ui_cancel")):
 		ExitSkinChanger()
+	
 	pass
 
 func BringSkinChanger():

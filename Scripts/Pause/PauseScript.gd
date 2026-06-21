@@ -17,7 +17,7 @@ func _process(_delta: float) -> void:
 			BringPause()
 		elif paused && !SettingsScript.settings:
 			ExitPause()
-	elif (GameHandler.KeysWhenExit([]) && paused):
+	elif (Input.is_action_just_pressed("ui_cancel") && paused):
 		ExitPause()
 	pass
 

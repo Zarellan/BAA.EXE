@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccixfei6apqku"
-path.s3tc="res://.godot/imported/Cheaper rebirth.png-855ca02f250a986abc3aa574ee8ed544.s3tc.ctex"
-path.etc2="res://.godot/imported/Cheaper rebirth.png-855ca02f250a986abc3aa574ee8ed544.etc2.ctex"
+path="res://.godot/imported/Cheaper rebirth.png-855ca02f250a986abc3aa574ee8ed544.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png"
-dest_files=["res://.godot/imported/Cheaper rebirth.png-855ca02f250a986abc3aa574ee8ed544.s3tc.ctex", "res://.godot/imported/Cheaper rebirth.png-855ca02f250a986abc3aa574ee8ed544.etc2.ctex"]
+dest_files=["res://.godot/imported/Cheaper rebirth.png-855ca02f250a986abc3aa574ee8ed544.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=1.0
 compress/uastc_level=0

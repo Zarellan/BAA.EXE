@@ -9,6 +9,7 @@ extends Control
 var progress : Array[float] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/MainMenu.mp3")
 	#ResourceLoader.load_threaded_request(scenePath)
 	TweenUtils.tweenScalePingPong(background,Vector2(1,1.05),Vector2(1,1),2,TweenUtils.Ease.InOutSine)
 	TweenUtils.tweenSkewPingPong(sheep,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
@@ -34,5 +35,6 @@ func _process(delta: float) -> void:
 			set_process(false)
 			
 			var scene = ResourceLoader.load_threaded_get(scenePath)
-			TransitionScript.ChangeScene2(scene)
+			TransitionScript.ChangeScene2(scene,func():
+				GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3"))
 	pass

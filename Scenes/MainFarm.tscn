@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://v16m5xg2k4dk" path="res://Prefabs/money_reveal.tscn" id="6_4gutc"]
 [ext_resource type="Script" uid="uid://b5fcg5dm7vrvn" path="res://Scripts/Background/StarSpawner.gd" id="6_aw8uy"]
 [ext_resource type="Script" uid="uid://crrxb5hi3hyws" path="res://Scripts/Shop/ShopListInit.gd" id="7_m14hk"]
+[ext_resource type="Texture2D" uid="uid://dgirwjhs053n5" path="res://Sprites/Background/Floor.png" id="7_ykfix"]
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="8_v5bxn"]
 [ext_resource type="PackedScene" uid="uid://cp3edlim8vx5p" path="res://Prefabs/sheep.tscn" id="8_wcncl"]
 [ext_resource type="Shader" uid="uid://bkcddt3o2kslo" path="res://Shaders/GradientTextSimple.gdshader" id="9_26u1s"]
@@ -65,9 +66,6 @@
 [ext_resource type="Texture2D" uid="uid://clfttv2ggs4qt" path="res://Sprites/OptionUIs/WhiteShirt.png" id="54_q14y5"]
 [ext_resource type="Script" uid="uid://bv6wpis75gryx" path="res://Scripts/SkinChanger/SkinChangeMain.gd" id="64_fip8v"]
 [ext_resource type="PackedScene" uid="uid://isevecd4fd6k" path="res://Scenes/SkinChanger.tscn" id="64_qxec0"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jy1oi"]
-load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
 
 [sub_resource type="Animation" id="Animation_u06jq"]
 length = 0.001
@@ -478,7 +476,7 @@ image = ExtResource("39_q14y5")
 description = "are you tired of ending up losing on unpredictable direction ?
 well this power is for you :)
 press down once you jump to stomp in predictable way"
-rebirthPrice = 25
+rebirthPrice = 10
 power = 9
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -938,9 +936,9 @@ offset = Vector2(0, -31.835205)
 
 [node name="Floor" type="Sprite2D" parent="Background" unique_id=988172252]
 clip_children = 2
-position = Vector2(-1.399967, 0)
+position = Vector2(-1.3999634, 0)
 scale = Vector2(2.6725001, 2.67)
-texture = SubResource("CompressedTexture2D_jy1oi")
+texture = ExtResource("7_ykfix")
 
 [node name="SheepShadow" type="Sprite2D" parent="Background/Floor" unique_id=892763658]
 self_modulate = Color(0, 0, 0, 0.3529412)
@@ -2038,11 +2036,13 @@ theme_override_font_sizes/font_size = 37
 selected = 0
 fit_to_longest_item = false
 allow_reselect = true
-item_count = 2
+item_count = 3
 popup/item_0/text = "High"
 popup/item_0/id = 0
 popup/item_1/text = "Low"
 popup/item_1/id = 1
+popup/item_2/text = "LowX"
+popup/item_2/id = 2
 
 [node name="FPS" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Performance" unique_id=1638539434]
 clip_contents = false
@@ -2429,6 +2429,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -720.0
+offset_bottom = -720.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("64_fip8v")
@@ -2471,6 +2473,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 39
 text = "Back"
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://ck8sbd8jiikcc"]
+[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://66enwrno5ixb"]
 
 [ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_4uhcc"]
 [ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_862cu"]
@@ -51,7 +51,7 @@ image = ExtResource("5_toumy")
 description = "are you tired of ending up losing on unpredictable direction ?
 well this power is for you :)
 press down once you jump to stomp in predictable way"
-rebirthPrice = 25
+rebirthPrice = 10
 power = 9
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -132,5 +132,3 @@ metadata/_custom_type_script = "uid://b6bpycct3x2he"
 [resource]
 script = ExtResource("13_qy0dg")
 rebirthListData = SubResource("Resource_valao")
-powerJump = 1200.0
-powerStomp = true

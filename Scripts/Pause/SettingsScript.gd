@@ -21,11 +21,14 @@ var tweenSettings:Tween
 
 var audioText:Control
 var soundtrackText:Control
+
+static var isCode:bool = false
 #@export var audioText:AutoSizeRichTextLabel
 #@export var soundtrackText:AutoSizeRichTextLabel
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	settings = false
+	SetCodeMode(false)
 	audioText = get_node("Volume/AudioVolume")
 	soundtrackText = get_node("Volume/SoundtrackVolume")
 	(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveDataSettings.soundtrackVolume
@@ -50,8 +53,8 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel") && settings:
 		(pauseMenu as PauseScript).BringPauseFromSettings()
 		ExitSettings()
-	if (Input.is_action_just_pressed("Key_Q") && settings):
-		ExitSettings()
+	#if (GameHandler.KeysWhenExit([]) && settings):
+		#ExitSettings()
 	if Input.is_action_just_pressed("Enter_Key") && indexSettings == 2:
 		CodeRewards()
 	pass
@@ -62,7 +65,8 @@ func CodeRewards():
 			if (!CodeDoublecheck("eid mubarak")):
 				codeTextSub.text = "Eid Mubarak you too [font_size=50][img]res://Sprites/emojies/Party.png[/img]"
 				GameHandler.AddMoneyForce(3000)
-				get_tree().get_first_node_in_group("Sheep").BringEidCap()
+				#get_tree().get_first_node_in_group("Sheep").BringEidCap()
+				GameHandler.UnlockSkin("Eid")
 		_:
 			codeText.placeholder_text = "Invalid code"
 			CodeInvalid("Invalid code")
@@ -93,6 +97,16 @@ func CodeDoublecheck(_str):
 				codeTextTimer.start()
 				return false
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.unicode != 0:
+		var asc = event.unicode
+		if (isCode && ((asc >= 97 and asc <= 122) or (asc >= 65 and asc <= 90))):
+			codeText.text += char(asc)
+	if event is InputEventKey and event.pressed:
+		if event.physical_keycode == KEY_BACKSPACE && isCode:
+			codeText.text = codeText.text.left(-1)
+		elif event.physical_keycode == KEY_SPACE && isCode:
+			codeText.text += ' '
 func ChangeSetting(index:int):
 	indexSettings += index
 	IndexRangeLimit(settingOptions)
@@ -102,7 +116,24 @@ func ChangeSetting(index:int):
 		else:
 			settingOptions[i].visible = true
 			settingText.text = settingOptions[i].name
-			
+			if (settingOptions[i].name == "Code"):
+				SetCodeMode(true)
+			else:
+				SetCodeMode(false)
+
+func SetCodeMode(tog:bool):
+	isCode = tog
+	if (tog):
+		get_node("Code/CodeSubmit").focus_mode = FocusMode.FOCUS_NONE
+		get_node("ArrowButtonLeft").focus_mode = FocusMode.FOCUS_NONE
+		get_node("ArrowButtonRight").focus_mode = FocusMode.FOCUS_NONE
+		get_node("Back").focus_mode = FocusMode.FOCUS_NONE
+	else:
+		get_node("Code/CodeSubmit").focus_mode = FocusMode.FOCUS_ALL
+		get_node("ArrowButtonLeft").focus_mode = FocusMode.FOCUS_ALL
+		get_node("ArrowButtonRight").focus_mode = FocusMode.FOCUS_ALL
+		get_node("Back").focus_mode = FocusMode.FOCUS_ALL
+		#$Code/CodeSubmit.focus_mode = FocusMode.FOCUS_NONE
 func IndexRangeLimit(indexMax:Array):
 	if (indexMax.size() - 1 < indexSettings):
 		indexSettings = 0
@@ -116,12 +147,15 @@ func BringSettings():
 		(get_node("Volume/AudioSlider") as HSlider).value = GameHandler.saveDataSettings.audioVolume
 		ChangeText()
 		settings = true
+		if (indexSettings == 2):
+			SetCodeMode(true)
 
 func ExitSettings():
 	if settings:
 		TweenUtils.StopTween(tweenSettings)
 		tweenSettings = TweenUtils.tweenY(self,-get_rect().size.y,0.3,TweenUtils.Ease.InSine)
 		settings = false
+		SetCodeMode(false)
 
 
 func _on_h_slider_value_changed(value: float) -> void:
@@ -234,10 +268,8 @@ func _on_delete_data_pressed() -> void:
 	pass # Replace with function body.
 
 func DeleteData():
-	ResourceUtil.RemoveResources("SaveData","saver")
-	GameHandler.saveData = GameSaveData.new()
-	ResourceUtil.RemoveResources("SaveDataRebirth","saver")
-	GameHandler.saveDataRebirth = GameSaveRebirth.new()
+	GameHandler.ResetData()
+	GameHandler.StaticReset()
 
 
 func _on_glitch_effect_box_toggled(toggled_on: bool) -> void:

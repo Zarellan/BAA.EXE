@@ -290,9 +290,15 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			GameHandler.saveDataRebirth.multiplier_reb += 1
 		Powers.offer:
 			GameHandler.saveDataRebirth.offer += 0.10
+
+			var keys = ShopItem.shopItems.keys()
+			var keysRebirth = RebirthItem.rebirthItems.keys()
+			for i in range(keys.size()):
+				ShopItem.shopItems[keys[i]].ModifyTexts()
+
 		Powers.jumpPower:
 			GameHandler.saveDataRebirth.powerJump += 100
-			if (GameHandler.saveDataRebirth.powerJump > 1500 || is_equal_approx(GameHandler.saveDataRebirth.powerJump,1000)):
+			if (GameHandler.saveDataRebirth.powerJump > 10000 || is_equal_approx(GameHandler.saveDataRebirth.powerJump,1000)):
 				TweenLevelMax()
 				shopData.canBuy = false
 		Powers.autoCollect:
@@ -314,11 +320,12 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			GameHandler.saveDataRebirth.rainbowWoolMultiplier += 100
 		Powers.cheaperRebirth:
 			GameHandler.saveDataRebirth.cheaperRebirth += 0.10
-		Powers.cheaperRebirth:
+		Powers.stomp:
 			GameHandler.saveDataRebirth.powerStomp = true
 			TweenLevelMax()
 			shopData.canBuy = false
-
+		Powers.longerCurve:
+			GameHandler.saveDataRebirth.curveDistance += 5000
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -340,6 +347,7 @@ func Bought():
 			TweenColorLock(Color(1,0,0,1))
 			TweenUtils.StopTween(tweenXLock)
 			tweenXLock = TweenUtils.tweenX(get_node("Holder/Lock"),70,0.3,TweenUtils.Ease.OutCirc)
+			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
 			ToShine()
 			return
 		if (!shopData.canBuy):

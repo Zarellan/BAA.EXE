@@ -180,5 +180,8 @@ func GameOver():
 		GlobalSoundtrack.pitch_scale = val).finished.connect(func():
 			TweenUtils.tweenCustom(self, 0, -80, 4, TweenUtils.Ease.linear, func(val): 
 				GlobalSoundtrack.volume_db = val))
+	if (GameHandler.saveDataAchievements.platformMinigameScore < score):
+		GameHandler.saveDataAchievements.platformMinigameScore = score
+	GameHandler.SaveAllDataGlob()
 	died = true
 	pass

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://cdiie4qh7mgmu"]
+[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://dcurg86joopb5"]
 
 [ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_hantp"]
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_wh28c"]
@@ -17,10 +17,9 @@ script = ExtResource("2_wh28c")
 title = "Improve Shear"
 image = ExtResource("3_w66ht")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-price = 69
-level = 5
+price = 25
 power = 1
-tax = 1.5500000000000005
+tax = 1.05
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -104,7 +103,6 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_hantp")
-money = 362
-increment = 12
+money = 10
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true

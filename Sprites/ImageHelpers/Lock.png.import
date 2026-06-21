@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dr81fgwvrpnva"
-path.s3tc="res://.godot/imported/Lock.png-aada0f3a02abac748d04ad2fcc266d5e.s3tc.ctex"
-path.etc2="res://.godot/imported/Lock.png-aada0f3a02abac748d04ad2fcc266d5e.etc2.ctex"
+path="res://.godot/imported/Lock.png-aada0f3a02abac748d04ad2fcc266d5e.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/ImageHelpers/Lock.png"
-dest_files=["res://.godot/imported/Lock.png-aada0f3a02abac748d04ad2fcc266d5e.s3tc.ctex", "res://.godot/imported/Lock.png-aada0f3a02abac748d04ad2fcc266d5e.etc2.ctex"]
+dest_files=["res://.godot/imported/Lock.png-aada0f3a02abac748d04ad2fcc266d5e.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=1.0
 compress/uastc_level=0

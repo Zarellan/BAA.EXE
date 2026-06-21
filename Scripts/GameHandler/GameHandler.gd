@@ -8,7 +8,7 @@ enum Quality{
 @export var saveData:GameSaveData
 @export var saveDataRebirth:GameSaveRebirth
 @export var saveDataSettings:GameSaveSettings
-@export var saveDataAchievements:GameSaveAchievements # will do later
+@export var saveDataAchievements:GameSaveAchievements
 
 
 var globalDelta:float
@@ -114,6 +114,13 @@ func LoadAllDataGlob():
 	LoadAllDataSettings()
 	LoadAllAchievements()
 
+func ResetData():
+	ResourceUtil.RemoveResources("SaveData","saver")
+	saveData = GameSaveData.new()
+	ResourceUtil.RemoveResources("SaveDataRebirth","saver")
+	saveDataRebirth = GameSaveRebirth.new()
+	ResourceUtil.RemoveResources("SaveDataAchievements","saver")
+	saveDataAchievements = GameSaveAchievements.new()
 func AddMoney():
 	if (IncrementTotal() < 0):
 		return
@@ -161,7 +168,10 @@ func _on_save_timer_timeout():
 	canSave = true
 
 func IncrementTotal() -> int:
-	return saveData.increment * saveData.clickMultiply * saveDataRebirth.multiplier_reb * saveDataAchievements.multiplyMoneyAchievement
+	return saveData.increment * saveData.clickMultiply\
+	* saveDataRebirth.multiplier_reb\
+	* saveDataAchievements.multiplyMoneyAchievement\
+	* 1 + (((saveDataAchievements.platformMinigameScore / 30.0)))
 
 func NowCollect():
 	if (saveData.autoCollect <= 0):
@@ -204,6 +214,25 @@ func KeysWhenExit(ignoreKey:Array[String]):
 		if (ignoreKey.has(input[i])):
 			continue
 		if (Input.is_action_just_pressed(input[i])):
-			return true
+				if (input[i] == "ui_cancel" || !IsTypingMain()):
+					return true
 	return false
-	
+
+func IsTypingMain():
+	return SettingsScript.isCode
+
+func StaticReset():
+	RebirthMenu.isRebirthMenu = false
+	SkinChanger.isSkinChanging = false
+	PauseScript.paused = false
+	SettingsScript.settings = false
+	SettingsScript.isCode = false
+
+func UnlockSkin(strn:String):
+	var skn:Array[SkinItem] = saveDataAchievements.skins
+	for i in range(skn.size()):
+		if (skn[i].name == strn):
+			skn[i].unlocked = true
+			SaveAllDataGlob()
+			return
+	push_error("no skin found as ",strn)

@@ -9,10 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://col8i6cdksjl4" path="res://Sprites/Background/Grass.png" id="6_77y01"]
 [ext_resource type="Script" uid="uid://dxmag42v53qiw" path="res://Scripts/Background/GrassTween.gd" id="7_ptdcd"]
 [ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="8_6lplx"]
+[ext_resource type="Texture2D" uid="uid://dgirwjhs053n5" path="res://Sprites/Background/Floor.png" id="8_ibc7c"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="9_qwu56"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jj64x"]
-load_path = "res://.godot/imported/Floor.png-b394b1e9eb27ff151139b993455faec0.ctex"
+[ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="11_b1oa7"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2sy7n"]
 
@@ -282,7 +281,7 @@ offset = Vector2(0, -31.835205)
 clip_children = 2
 position = Vector2(-1.399967, 0)
 scale = Vector2(2.6725001, 2.67)
-texture = SubResource("CompressedTexture2D_jj64x")
+texture = ExtResource("8_ibc7c")
 
 [node name="SheepShadow" type="Sprite2D" parent="Background/Floor" unique_id=1431314661]
 self_modulate = Color(0, 0, 0, 0.3529412)
@@ -640,8 +639,53 @@ size_flags_vertical = 0
 theme_override_font_sizes/font_size = 59
 text = "Apply"
 
+[node name="Left" type="Button" parent="Control/CanvasLayer" unique_id=7457223]
+offset_left = 78.0
+offset_top = -32.0
+offset_right = 151.60547
+offset_bottom = 118.84738
+rotation = -1.5707964
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 59
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Left" unique_id=1853779009]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("11_b1oa7")
+
+[node name="Right" type="Button" parent="Control/CanvasLayer" unique_id=2078785639]
+offset_left = 745.0
+offset_top = -33.0
+offset_right = 818.60547
+offset_bottom = 117.84738
+rotation = -1.5707964
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 59
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Right" unique_id=926276633]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("11_b1oa7")
+flip_v = true
+
 [node name="Sheep2" parent="." unique_id=1343371003 instance=ExtResource("2_x5u6f")]
 position = Vector2(467.99997, 668)
 scale = Vector2(3.055, 3.055)
 
 [connection signal="pressed" from="Control/CanvasLayer/ApplySkin" to="." method="_on_apply_skin_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Right" to="." method="_on_right_pressed"]

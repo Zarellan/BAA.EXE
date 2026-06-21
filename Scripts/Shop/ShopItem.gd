@@ -219,7 +219,7 @@ func PowersAct():
 				shopData.canBuy = false
 		Powers.airAccel:
 			GameHandler.saveData.airAcceleration += 50
-			if (GameHandler.saveData.airAcceleration >= 500):
+			if (GameHandler.saveData.airAcceleration >= 3000):
 				TweenLevelMax()
 				shopData.canBuy = false
 
@@ -229,6 +229,7 @@ func TweenLevelMax():
 	TweenUtils.tweenY(levelNode,centerYdef,0.3,TweenUtils.Ease.OutCirc)
 	TweenUtils.tweenScale(levelNode,Vector2(1,1),0.3,TweenUtils.Ease.OutCirc)
 	TweenUtils.tweenAlpha(moneyNode,0,0.3,TweenUtils.Ease.linear)
+
 
 var tweenXtextLevel:Tween
 func Bought():

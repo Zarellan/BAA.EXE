@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dngoefhb0qcm3"
-path.s3tc="res://.godot/imported/Party.png-4e1a18c1ddf14181a2a3d9e1bec483f7.s3tc.ctex"
-path.etc2="res://.godot/imported/Party.png-4e1a18c1ddf14181a2a3d9e1bec483f7.etc2.ctex"
+path="res://.godot/imported/Party.png-4e1a18c1ddf14181a2a3d9e1bec483f7.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/emojies/Party.png"
-dest_files=["res://.godot/imported/Party.png-4e1a18c1ddf14181a2a3d9e1bec483f7.s3tc.ctex", "res://.godot/imported/Party.png-4e1a18c1ddf14181a2a3d9e1bec483f7.etc2.ctex"]
+dest_files=["res://.godot/imported/Party.png-4e1a18c1ddf14181a2a3d9e1bec483f7.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=1.0
 compress/uastc_level=0

@@ -3,21 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://daxuoqvor3uhv"
-path.s3tc="res://.godot/imported/GoldenWool.png-2381d76002e2593c983c8d830103f6de.s3tc.ctex"
-path.etc2="res://.godot/imported/GoldenWool.png-2381d76002e2593c983c8d830103f6de.etc2.ctex"
+path="res://.godot/imported/GoldenWool.png-2381d76002e2593c983c8d830103f6de.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc", "etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Sprites/ShopImages/GoldenWool.png"
-dest_files=["res://.godot/imported/GoldenWool.png-2381d76002e2593c983c8d830103f6de.s3tc.ctex", "res://.godot/imported/GoldenWool.png-2381d76002e2593c983c8d830103f6de.etc2.ctex"]
+dest_files=["res://.godot/imported/GoldenWool.png-2381d76002e2593c983c8d830103f6de.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=1.0
 compress/uastc_level=0

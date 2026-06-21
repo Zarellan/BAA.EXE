@@ -7,10 +7,12 @@ class_name Skins
 
 static var currentSkin = "Def"
 var index:int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
-	GameHandler.saveDataAchievements.skins = skins
+	if (GameHandler.saveDataAchievements.skins == null || GameHandler.saveDataAchievements.skins.size() == 0):
+		GameHandler.saveDataAchievements.skins = skins
+		GameHandler.saveDataAchievements.skinUsed = GameHandler.saveDataAchievements.skins[0].name
 	currentSkin = GameHandler.saveDataAchievements.skinUsed
 	FindSkinIndex(currentSkin)
 	LoadSkin()

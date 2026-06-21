@@ -1,20 +1,23 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://drcmgkue6nsfo"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://brpu2yj6bam2b"]
 
-[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_t1o5m"]
-[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_jdlx1"]
+[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_jdlx1"]
+[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_2yxkc"]
 
 [sub_resource type="Resource" id="Resource_ykfix"]
-script = ExtResource("2_jdlx1")
+script = ExtResource("2_2yxkc")
 description = "just thrilling with the originality"
 effectDescription = "Effect: None"
+unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_fip8v"]
-script = ExtResource("2_jdlx1")
+script = ExtResource("2_2yxkc")
 name = "Eid"
+description = "the game was suppose to be for eid, but then I decide to polish it"
+effectDescription = "Effect: collect multiplier x1.4"
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [resource]
-script = ExtResource("1_t1o5m")
-skins = Array[ExtResource("2_jdlx1")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
+script = ExtResource("1_jdlx1")
+skins = Array[ExtResource("2_2yxkc")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
 skinUsed = "Default"
