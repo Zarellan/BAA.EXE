@@ -10,6 +10,8 @@ func _ready() -> void:
 		var pref = InstantiateUtil.Instantiate(shopPrefab,$ScrollContainer/VBoxContainer)
 		(pref as ShopItem).set_item(ls)
 	GameHandler.saveData.shopListData = listInit
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
 func loadSystem():

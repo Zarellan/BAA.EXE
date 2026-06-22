@@ -110,6 +110,7 @@ func Pressed():
 			GameHandler.AddMoney()
 			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal())
 		MoneyCollectedText()
+		part.modulate = GameHandler.saveDataSettings.sheepColor
 		ParticleManager.PlayParticleOv(part,3)
 		GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 12,randf_range(0.90,1.10))
 		mouseControl.WoolCollected()

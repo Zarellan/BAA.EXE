@@ -16,6 +16,8 @@ func _ready() -> void:
 	currentSkin = GameHandler.saveDataAchievements.skinUsed
 	FindSkinIndex(currentSkin)
 	LoadSkin()
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
 

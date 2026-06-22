@@ -9,4 +9,6 @@ func _ready() -> void:
 	lightNode.material = lightNode.material.duplicate()
 	materialLight = lightNode.material
 	materialLight.set_shader_parameter("radius", randf_range(0.2,0.3))
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.

@@ -28,6 +28,8 @@ func InitializeSkin():
 	textDescSkin.text = GameHandler.saveDataAchievements.skins[skinClass.index].description
 
 func _process(_delta: float) -> void:
+	if (!isSkinChanging):
+		return
 	if (Input.is_action_just_pressed("ui_right")):
 		ChangeSkinPlace(1)
 	elif (Input.is_action_just_pressed("ui_left")):

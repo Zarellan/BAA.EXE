@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://dovgjckh111lo"]
+[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://b1wpn48bwt4dd"]
 
 [ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_rscn1"]
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_hantp"]
@@ -17,9 +17,10 @@ script = ExtResource("2_hantp")
 title = "Improve Shear"
 image = ExtResource("3_wh28c")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-price = 25
+price = 4824
+level = 12
 power = 1
-tax = 1.05
+tax = 2.250000000000001
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -28,9 +29,10 @@ script = ExtResource("2_hantp")
 title = "Auto collect"
 image = ExtResource("4_w66ht")
 description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+32[/wave]"
-price = 250
+price = 324
+level = 2
 power = 2
-tax = 1.1
+tax = 1.2600000000000002
 taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -70,9 +72,10 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_hantp")
 title = "[rainbow]Auto Collect Sheep"
 image = ExtResource("8_tu810")
-price = 4000
+price = 4400
+level = 1
 power = 6
-tax = 1.1
+tax = 1.3
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -80,9 +83,10 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_hantp")
 title = "Jump Power"
 image = ExtResource("9_bo316")
-price = 400
+price = 5817
+level = 6
 power = 7
-tax = 1.1
+tax = 2.3000000000000003
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -103,6 +107,11 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_rscn1")
-money = 349
+money = 4948
+increment = 26
+autoCollect = 64
+autoCollectSheepAbility = true
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true
+jumpPower = 150.0
+checkCodes = Array[Array]([["eid mubarak", true]])

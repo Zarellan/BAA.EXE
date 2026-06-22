@@ -11,6 +11,8 @@ var spawned = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#SpawnStars()
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
 func SpawnStars():
@@ -18,6 +20,8 @@ func SpawnStars():
 	for rem in range(starsPack.size() - 1,-1,-1):
 		starsPack[rem].queue_free()
 	starsPack.clear()
+	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.TooLow):
+		return
 	spawnLuck = 0.50
 	spawned = 0
 	for y in range(-316.0,200,28):

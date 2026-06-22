@@ -9,6 +9,8 @@ var mater:ShaderMaterial
 func _ready() -> void:
 	#var sc = $"../Shop/ScrollContainer"
 	#TweenUtils.tweenScrollY(sc,sc.get_v_scroll_bar().max_value,2,TweenUtils.Ease.OutCirc)
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
 func RevealMoney(textMoney = 1, color:Color = Color(1,1,1,1), rainbow = false):
@@ -28,5 +30,5 @@ func RevealMoney(textMoney = 1, color:Color = Color(1,1,1,1), rainbow = false):
 		mater.set_shader_parameter("rainbow_mix", 0.5)
 		tex.material = mater
 	
-func EventTestAgain():
-	print("it works")
+#func EventTestAgain():
+	#print("it works")

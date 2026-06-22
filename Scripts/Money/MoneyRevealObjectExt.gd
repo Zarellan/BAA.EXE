@@ -6,7 +6,8 @@ extends AutoSizeRichTextLabel
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	TweenUtils.tweenY(self,position.y - 100,0.3,TweenUtils.Ease.OutCirc)
-	
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
 

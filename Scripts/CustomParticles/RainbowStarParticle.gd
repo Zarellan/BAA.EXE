@@ -10,6 +10,8 @@ var maxStars:int = 40
 var spawnPlace:Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
 

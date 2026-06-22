@@ -205,6 +205,9 @@ func _on_quality_option_item_selected(index: int) -> void:
 		1:
 			GameHandler.saveDataSettings.quality = GameHandler.Quality.Low
 			shadedGrassNode.visible = false
+		2:
+			GameHandler.saveDataSettings.quality = GameHandler.Quality.TooLow
+			shadedGrassNode.visible = false
 	await RenderingServer.frame_post_draw #StarSpawner won't load in first frame reload so waiting is the solution
 	var starSpawner = get_tree().get_first_node_in_group("StarSpawner")
 	(starSpawner as StarSpawner).SpawnStars.call_deferred()
@@ -216,6 +219,8 @@ func BasedOnQuality():
 			return 0
 		GameHandler.Quality.Low:
 			return 1
+		GameHandler.Quality.TooLow:
+			return 2
 	pass
 
 

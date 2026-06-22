@@ -17,4 +17,6 @@ func _ready() -> void:
 	TweenUtils.tweenSkewPingPong(self,deg_to_rad(end),deg_to_rad(start),duration,TweenUtils.Ease.InOutSine)
 	TweenUtils.tweenSkewPingPong(preShadowObj,deg_to_rad(end_preShadow),deg_to_rad(start_preShadow),duration,TweenUtils.Ease.InOutSine)
 	TweenUtils.tweenSkewPingPong(shadowObj,deg_to_rad(end_shadow),deg_to_rad(start_shadow),duration,TweenUtils.Ease.InOutSine)
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.

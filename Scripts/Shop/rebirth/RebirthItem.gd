@@ -347,7 +347,6 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			GameHandler.saveDataRebirth.offer += 0.10
 
 			var keys = ShopItem.shopItems.keys()
-			var keysRebirth = RebirthItem.rebirthItems.keys()
 			for i in range(keys.size()):
 				ShopItem.shopItems[keys[i]].ModifyTexts()
 

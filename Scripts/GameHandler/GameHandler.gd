@@ -2,7 +2,8 @@ extends Node
 
 enum Quality{
 	High,
-	Low
+	Low,
+	TooLow
 }
 
 @onready var emptyShader:Shader = preload("res://Shaders/EmptyShader/Empty.gdshader")
@@ -38,6 +39,8 @@ func _ready() -> void:
 	timerAutoCollectorSheep.start()
 	timerAutoCollectorSheep.wait_time = AutoCollectSheepTotalParse()
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
 func CollectSheep():

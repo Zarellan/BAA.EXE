@@ -4,8 +4,7 @@
 
 [resource]
 script = ExtResource("1_qbu3y")
-quality = 1
+quality = 2
 vSync = false
 glitchEffect = false
 shadingBorders = false
-sheepColor = Color(1, 0, 0, 1)
