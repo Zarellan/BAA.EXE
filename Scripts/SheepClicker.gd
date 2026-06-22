@@ -41,8 +41,16 @@ func _ready() -> void:
 		if (!GameHandler.saveData.tutorialed):
 			tutorialTimer.start()
 			tutorialTimer.timeout.connect(StartTutorial)
+	else:
+		SetUniqueShader(get_node("StaticBody2D/Sprite2D"))
+		
 	SheepShaderCondition()
 	pass # Replace with function body.
+	
+func SetUniqueShader(obj:Node):
+	if (is_instance_valid(obj.material)):
+		var shade = obj.material.duplicate()
+		obj.material = shade
 
 func SheepShaderCondition():
 	if (!isMain):

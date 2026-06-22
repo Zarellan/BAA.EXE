@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://brpu2yj6bam2b"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://difd5eum41ydl"]
 
 [ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_jdlx1"]
 [ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_2yxkc"]
@@ -7,6 +7,8 @@
 script = ExtResource("2_2yxkc")
 description = "just thrilling with the originality"
 effectDescription = "Effect: None"
+achievementName = "None"
+achievementTask = "None"
 unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
@@ -15,9 +17,12 @@ script = ExtResource("2_2yxkc")
 name = "Eid"
 description = "the game was suppose to be for eid, but then I decide to polish it"
 effectDescription = "Effect: collect multiplier x1.4"
+achievementName = "Code"
+achievementTask = "Type \"eid mubarak\" in code settings"
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [resource]
 script = ExtResource("1_jdlx1")
 skins = Array[ExtResource("2_2yxkc")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
 skinUsed = "Default"
+platformMinigameScore = 21

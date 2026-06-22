@@ -4,7 +4,6 @@ class_name RebirthMenu
 static var isRebirthMenu:bool = false
 @export var textRebirth:Control
 @export var buttonRebirth:Control
-
 var tweenRebirth:Tween
 
 const base_rebirth:float = 15000
@@ -12,9 +11,14 @@ const base_rebirth:float = 15000
 static var base_rebirth_total:float = 0
 
 var textureRebirth:TextureRect
+var textureRebirthMain:TextureRect
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	textureRebirth = (get_node("TextureRect/Rebirth/TextureRect") as TextureRect)
+	textureRebirthMain = (get_node("TextureRect") as TextureRect)
+	InitializeShader()
+	#SetShader(false)
 	pass # Replace with function body.
 
 var totalRebirth = 0.0
@@ -79,3 +83,32 @@ func Rebirthed():
 func _on_square_root_calculate_timeout() -> void:
 	CalculateRebirth()
 	pass # Replace with function body.
+
+var textureRebirthShader:Shader
+var textureRebirthMainShader:Shader
+
+func InitializeShader():
+	textureRebirthShader = SetVariableInitialize(textureRebirth)
+	textureRebirthMainShader = SetVariableInitialize(textureRebirthMain)
+
+func SetShader(isShading:bool):
+	if (!isShading):
+		EmptyShade(textureRebirth)
+		textureRebirth.visible = false
+		EmptyShade(textureRebirthMain)
+	else:
+		SetShaderFromVariable(textureRebirth, textureRebirthShader)
+		textureRebirth.visible = true
+		SetShaderFromVariable(textureRebirthMain, textureRebirthMainShader)
+	pass
+
+func SetVariableInitialize(objShader: CanvasItem):
+	if (is_instance_valid(objShader) && objShader.material is ShaderMaterial && is_instance_valid(objShader.material.shader)):
+		return objShader.material.shader
+	return null
+func SetShaderFromVariable(obj:CanvasItem, varShader:Shader):
+	if (varShader != null && is_instance_valid(obj) && obj.material is ShaderMaterial):
+		obj.material.shader = varShader
+func EmptyShade(objShader: CanvasItem):
+	if (is_instance_valid(objShader) && objShader.material is ShaderMaterial && is_instance_valid(objShader.material.shader)):
+		objShader.material.shader = GameHandler.emptyShader

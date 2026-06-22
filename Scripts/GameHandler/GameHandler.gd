@@ -5,6 +5,8 @@ enum Quality{
 	Low
 }
 
+@onready var emptyShader:Shader = preload("res://Shaders/EmptyShader/Empty.gdshader")
+
 @export var saveData:GameSaveData
 @export var saveDataRebirth:GameSaveRebirth
 @export var saveDataSettings:GameSaveSettings

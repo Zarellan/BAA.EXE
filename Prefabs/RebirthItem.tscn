@@ -566,15 +566,15 @@ offset_top = -29.492004
 offset_right = 116.0
 offset_bottom = 24.507998
 pivot_offset = Vector2(83, 30.215)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 29
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 54
 bbcode_enabled = true
 text = "313k"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 54
-_current_font_size = 29
+_current_font_size = 54
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -589,15 +589,15 @@ offset_right = 189.25
 offset_bottom = 64.625
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(83, 26.4)
-theme_override_constants/outline_size = 9
-theme_override_font_sizes/normal_font_size = 46
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/normal_font_size = 81
 bbcode_enabled = true
 text = "lv:1"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("4_tejl3")
 _max_size = 81
-_current_font_size = 46
+_current_font_size = 81
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -619,7 +619,6 @@ offset_right = 135.0
 offset_bottom = 122.0
 
 [node name="BG2" type="TextureRect" parent="." unique_id=200296123]
-visible = false
 modulate = Color(1, 1, 1, 0.37254903)
 material = SubResource("ShaderMaterial_og0cr")
 layout_mode = 1

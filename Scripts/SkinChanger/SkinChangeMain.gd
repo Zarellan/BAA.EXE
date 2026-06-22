@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 func BringSkinChanger():
 	TweenUtils.StopTween(skinChangeTween)
 	skinChangeTween = TweenUtils.tweenY(self,0,0.3,TweenUtils.Ease.OutCirc)
+	get_node("SubViewportContainer/SubViewport/SkinChanger").PrepSkin()
 	SkinChanger.isSkinChanging = true
 
 func ExitSkinChanger():

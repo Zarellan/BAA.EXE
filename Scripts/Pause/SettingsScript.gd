@@ -17,6 +17,8 @@ var indexSettings = 0
 @export var codeTextTimer:Timer
 @export var codeInvalidTimer:Timer
 
+@export var colorPicker:ColorPickerButton
+
 var tweenSettings:Tween
 
 var audioText:Control
@@ -37,14 +39,17 @@ func _ready() -> void:
 	(get_node("Performance/FPSOption") as OptionButton).select(BasedOnFPS())
 	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.vSync
 	(get_node("Effects/GlitchEffectBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.glitchEffect
+	(get_node("Effects/BorderShadeBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.shadingBorders
 	codeText.add_theme_color_override("font_placeholder_color", Color(0.658, 0.658, 0.658, 1.0))
 	InitializeSettings()
-
+	get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	colorPicker.color = GameHandler.saveDataSettings.sheepColor
 	pass # Replace with function body.
 
 func InitializeSettings():
 	Engine.max_fps = GameHandler.saveDataSettings.fps
 	SetVSync()
+	_on_border_shade_box_toggled.call_deferred(GameHandler.saveDataSettings.shadingBorders)
 	_on_quality_option_item_selected.call_deferred(BasedOnQuality())
 	ChangeSetting(0)
 
@@ -280,4 +285,26 @@ func _on_glitch_effect_box_toggled(toggled_on: bool) -> void:
 		ShopItem.shopItems[keys[i]].GlitchApply()
 	for i in range(keysRebirth.size()):
 		RebirthItem.rebirthItems[keysRebirth[i]].GlitchApply()
+	pass # Replace with function body.
+
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	colorPicker.color = Color(color.r,color.g,color.b,1.0)
+	GameHandler.saveDataSettings.sheepColor = colorPicker.color
+	get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	pass # Replace with function body.
+
+
+func _on_border_shade_box_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_border_shade_box_toggled(toggled_on: bool) -> void:
+	await RenderingServer.frame_post_draw
+	var keysRebirth = RebirthItem.rebirthItems.keys()
+	GameHandler.saveDataSettings.shadingBorders = toggled_on
+	for i in range(keysRebirth.size()):
+		RebirthItem.rebirthItems[keysRebirth[i]].SetShader(GameHandler.saveDataSettings.shadingBorders)
+	get_tree().get_first_node_in_group("RebirthMenu").SetShader(GameHandler.saveDataSettings.shadingBorders)
+	get_tree().get_first_node_in_group("OptionUI").SetShader(GameHandler.saveDataSettings.shadingBorders)
 	pass # Replace with function body.

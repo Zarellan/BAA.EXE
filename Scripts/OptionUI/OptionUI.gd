@@ -145,3 +145,34 @@ func EnsureTextChange():
 	TweenUtils.StopTween(tweenRebirthText)
 	TweenUtils.tweenAlpha(moneyText,moneyAlphaVal,0.3,TweenUtils.Ease.linear)
 	TweenUtils.tweenAlpha(rebirthText,rebirthAlphaVal,0.3,TweenUtils.Ease.linear)
+
+
+var goldRebirthShader:Shader
+var goldRebirthShader2:Shader
+var goldKartShader:Shader
+
+func InitializeShader():
+	goldRebirthShader = SetVariableInitialize(refresh1)
+	goldRebirthShader2 = SetVariableInitialize(refresh2)
+	goldKartShader = SetVariableInitialize(shoppingKart)
+func SetShader(isShading:bool):
+	if (!isShading):
+		EmptyShade(refresh1)
+		EmptyShade(refresh2)
+		EmptyShade(shoppingKart)
+	else:
+		SetShaderFromVariable(refresh1, goldRebirthShader)
+		SetShaderFromVariable(refresh2, goldRebirthShader2)
+		SetShaderFromVariable(shoppingKart, goldKartShader)
+	pass
+
+func SetVariableInitialize(objShader: CanvasItem):
+	if (is_instance_valid(objShader) && objShader.material is ShaderMaterial && is_instance_valid(objShader.material.shader)):
+		return objShader.material.shader
+	return null
+func SetShaderFromVariable(obj:CanvasItem, varShader:Shader):
+	if (varShader != null && is_instance_valid(obj) && obj.material is ShaderMaterial):
+		obj.material.shader = varShader
+func EmptyShade(objShader: CanvasItem):
+	if (is_instance_valid(objShader) && objShader.material is ShaderMaterial && is_instance_valid(objShader.material.shader)):
+		objShader.material.shader = GameHandler.emptyShader

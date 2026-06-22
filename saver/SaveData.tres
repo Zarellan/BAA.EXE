@@ -1,21 +1,21 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://dcurg86joopb5"]
+[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://dovgjckh111lo"]
 
-[ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_hantp"]
-[ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_wh28c"]
-[ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="3_w66ht"]
-[ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="4_gdvw8"]
-[ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="5_hqqsl"]
-[ext_resource type="Texture2D" uid="uid://daxuoqvor3uhv" path="res://Sprites/ShopImages/GoldenWool.png" id="6_xdoum"]
-[ext_resource type="Texture2D" uid="uid://bonny1fk1tevv" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_tu810"]
-[ext_resource type="Texture2D" uid="uid://8v40eu5pnywd" path="res://Sprites/ShopImages/SheepCollect.png" id="8_bo316"]
-[ext_resource type="Texture2D" uid="uid://b6hlvftej0og2" path="res://Sprites/ShopImages/SheepJump.png" id="9_d26l7"]
-[ext_resource type="Texture2D" uid="uid://bjb5u8r2etxs7" path="res://Sprites/ShopImages/SheepAir.png" id="10_tjmsw"]
-[ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="11_y80fh"]
+[ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_rscn1"]
+[ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_hantp"]
+[ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="3_wh28c"]
+[ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="4_w66ht"]
+[ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="5_gdvw8"]
+[ext_resource type="Texture2D" uid="uid://daxuoqvor3uhv" path="res://Sprites/ShopImages/GoldenWool.png" id="6_hqqsl"]
+[ext_resource type="Texture2D" uid="uid://bonny1fk1tevv" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_xdoum"]
+[ext_resource type="Texture2D" uid="uid://8v40eu5pnywd" path="res://Sprites/ShopImages/SheepCollect.png" id="8_tu810"]
+[ext_resource type="Texture2D" uid="uid://b6hlvftej0og2" path="res://Sprites/ShopImages/SheepJump.png" id="9_bo316"]
+[ext_resource type="Texture2D" uid="uid://bjb5u8r2etxs7" path="res://Sprites/ShopImages/SheepAir.png" id="10_d26l7"]
+[ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="11_tjmsw"]
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
-script = ExtResource("2_wh28c")
+script = ExtResource("2_hantp")
 title = "Improve Shear"
-image = ExtResource("3_w66ht")
+image = ExtResource("3_wh28c")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
 price = 25
 power = 1
@@ -24,9 +24,9 @@ taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_56xbq"]
-script = ExtResource("2_wh28c")
+script = ExtResource("2_hantp")
 title = "Auto collect"
-image = ExtResource("4_gdvw8")
+image = ExtResource("4_w66ht")
 description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+32[/wave]"
 price = 250
 power = 2
@@ -35,9 +35,9 @@ taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_410ju"]
-script = ExtResource("2_wh28c")
+script = ExtResource("2_hantp")
 title = "Faster Auto Collect"
-image = ExtResource("5_hqqsl")
+image = ExtResource("5_gdvw8")
 description = "make the auto collector collects faster"
 price = 1250
 power = 3
@@ -46,9 +46,9 @@ taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_ujam8"]
-script = ExtResource("2_wh28c")
+script = ExtResource("2_hantp")
 title = "Rare Wool"
-image = ExtResource("6_xdoum")
+image = ExtResource("6_hqqsl")
 price = 2000
 power = 4
 tax = 1.2
@@ -56,9 +56,9 @@ taxInc = 0.05
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_62te2"]
-script = ExtResource("2_wh28c")
+script = ExtResource("2_hantp")
 title = "[rainbow]Multilplier"
-image = ExtResource("7_tu810")
+image = ExtResource("7_xdoum")
 description = "the more you buy it the more the collect doubles"
 price = 7000
 power = 5
@@ -67,9 +67,9 @@ taxInc = 0.3
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_ehq4q"]
-script = ExtResource("2_wh28c")
+script = ExtResource("2_hantp")
 title = "[rainbow]Auto Collect Sheep"
-image = ExtResource("8_bo316")
+image = ExtResource("8_tu810")
 price = 4000
 power = 6
 tax = 1.1
@@ -77,9 +77,9 @@ taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_q3ouh"]
-script = ExtResource("2_wh28c")
+script = ExtResource("2_hantp")
 title = "Jump Power"
-image = ExtResource("9_d26l7")
+image = ExtResource("9_bo316")
 price = 400
 power = 7
 tax = 1.1
@@ -87,9 +87,9 @@ taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_v1gif"]
-script = ExtResource("2_wh28c")
+script = ExtResource("2_hantp")
 title = "Air acceleration"
-image = ExtResource("10_tjmsw")
+image = ExtResource("10_d26l7")
 price = 725
 power = 8
 tax = 1.2
@@ -97,12 +97,12 @@ taxInc = 0.25
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_pbqe1"]
-script = ExtResource("11_y80fh")
-items = Array[ExtResource("2_wh28c")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh"), SubResource("Resource_v1gif")])
+script = ExtResource("11_tjmsw")
+items = Array[ExtResource("2_hantp")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh"), SubResource("Resource_v1gif")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
-script = ExtResource("1_hantp")
-money = 10
+script = ExtResource("1_rscn1")
+money = 349
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true

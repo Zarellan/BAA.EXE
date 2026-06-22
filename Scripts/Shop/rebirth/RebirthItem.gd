@@ -59,6 +59,7 @@ var goldMaterial2:ShaderMaterial
 
 var possibleBought = true
 
+
 func _ready() -> void:
 	frequencyWavePrice.number = 0
 	originalPosXMoney = get_node("Holder/Prce").position.x
@@ -80,42 +81,95 @@ func _ready() -> void:
 	bG2.material = goldMaterial2
 	ExceptionalItems()
 	ExceptionalLock()
+	InitializeShader()
 	rebirthItems[shopData.title] = self
 	pass # Replace with function body.
 
+var currentShaderBG:Shader
+var currentShaderBG2:Shader
+var currentShaderImage:Shader
+var currentShaderTitleView:Shader
+var currentShaderDescView:Shader
+var currentShaderTitleText:Shader
+var currentShaderDescText:Shader
+
+func InitializeShader():
+	currentShaderBG = SetVariableInitialize(bG)
+	currentShaderBG2 = SetVariableInitialize(bG2)
+	currentShaderImage = SetVariableInitialize(itemImage)
+	currentShaderTitleView = SetVariableInitialize(get_node("Holder/SubViewportContainer"))
+	currentShaderDescView = SetVariableInitialize(get_node("Holder/SubViewportContainerDesc"))
+	currentShaderTitleText = SetVariableInitialize(get_node("Holder/SubViewportContainer/SubViewport/Title"))
+	currentShaderDescText = SetVariableInitialize(get_node("Holder/SubViewportContainerDesc/SubViewport/Description"))
+
+func SetShader(isShading:bool): # from settings
+	if (!isShading):
+		EmptyShade(bG)
+		EmptyShade(bG2)
+		EmptyShade(itemImage)
+		EmptyShade(get_node("Holder/SubViewportContainer"))
+		EmptyShade(get_node("Holder/SubViewportContainerDesc"))
+		EmptyShade(get_node("Holder/SubViewportContainer/SubViewport/Title"))
+		EmptyShade(get_node("Holder/SubViewportContainerDesc/SubViewport/Description"))
+
+		bG2.visible = false
+	else:
+		SetShaderFromVariable(bG, currentShaderBG)
+		SetShaderFromVariable(bG2, currentShaderBG2)
+		SetShaderFromVariable(itemImage, currentShaderImage)
+		SetShaderFromVariable(get_node("Holder/SubViewportContainer"), currentShaderTitleView)
+		SetShaderFromVariable(get_node("Holder/SubViewportContainerDesc"), currentShaderDescView)
+		SetShaderFromVariable(get_node("Holder/SubViewportContainer/SubViewport/Title"), currentShaderTitleText)
+		SetShaderFromVariable(get_node("Holder/SubViewportContainerDesc/SubViewport/Description"), currentShaderDescText)
+		bG2.visible = true
+		ExceptionalItems()
+	pass
+func SetVariableInitialize(objShader: CanvasItem):
+	if (is_instance_valid(objShader) && objShader.material is ShaderMaterial && is_instance_valid(objShader.material.shader)):
+		return objShader.material.shader
+	return null
+func SetShaderFromVariable(obj:CanvasItem, varShader:Shader):
+	if (varShader != null && is_instance_valid(obj) && obj.material is ShaderMaterial):
+		obj.material.shader = varShader
+func EmptyShade(objShader: CanvasItem):
+	if (is_instance_valid(objShader) && objShader.material is ShaderMaterial && is_instance_valid(objShader.material.shader)):
+		objShader.material.shader = GameHandler.emptyShader
 func GlitchApply():
 	ExceptionalItems()
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+var isDuplicatedException = false
 func ExceptionalItems():
 	match (shopData.power):
 		Powers.rainbowWool, Powers.rainbowWoolMultiply:
-			var shadeMater:ShaderMaterial = ShaderMaterial.new()
-			shadeMater.shader = rainbowShaderMaterial
-			bG.material = shadeMater
-			
-			bG2.material = shadeMater.duplicate()
+			if (!isDuplicatedException):
+				var shadeMater:ShaderMaterial = ShaderMaterial.new()
+				shadeMater.shader = rainbowShaderMaterial
+				bG.material = shadeMater
+				var shadeMater2:ShaderMaterial = ShaderMaterial.new()
+				shadeMater2.shader = rainbowShaderMaterialMask
+				bG2.material = shadeMater.duplicate()
+				get_node("Holder/SubViewportContainer/SubViewport/Title").material = shadeMater2
+				get_node("Holder/SubViewportContainerDesc/SubViewport/Description").material = shadeMater2
 			bG2.material.set_shader_parameter("border_only", true)
-			
-			var shadeMater2:ShaderMaterial = ShaderMaterial.new()
-			shadeMater2.shader = rainbowShaderMaterialMask
-			get_node("Holder/SubViewportContainer/SubViewport/Title").material = shadeMater2
-			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").material = shadeMater2
 			get_node("Holder/SubViewportContainer/SubViewport/Title").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
-			get_node("Holder/SubViewportContainer").material = null
-			get_node("Holder/SubViewportContainerDesc").material = null
+			get_node("Holder/SubViewportContainer").material = GameHandler.emptyShader
+			get_node("Holder/SubViewportContainerDesc").material = GameHandler.emptyShader
 		Powers.jumpPower , Powers.stomp , Powers.longerCurve:
 			bG.material.set_shader_parameter("border_gradient", borderGradient)
-			SetUniqueShader((get_node("Holder/SubViewportContainer") as Control))
+			bG2.visible = false
+			if (!isDuplicatedException):
+				SetUniqueShader((get_node("Holder/SubViewportContainer") as Control))
 			(get_node("Holder/SubViewportContainer") as Control).material.set_shader_parameter("gradient",borderGradient)
-			SetUniqueShader((get_node("Holder/SubViewportContainerDesc") as Control))
+			if (!isDuplicatedException):
+				SetUniqueShader((get_node("Holder/SubViewportContainerDesc") as Control))
 			(get_node("Holder/SubViewportContainerDesc") as Control).material.set_shader_parameter("gradient",Texture2D.new())
 			get_node("Holder/SubViewportContainer/SubViewport/Title").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
-			if (itemImage.material != null):
-				SetUniqueShader(itemImage)
-				itemImage.material = null
+			#if (itemImage.material != null):
+			SetUniqueShader(itemImage)
+			itemImage.material.shader = GameHandler.emptyShader
 			if (GameHandler.saveDataSettings.glitchEffect):
 				get_node("BackBufferCopy/GlitchingEffect").visible = true
 				if (shopData.power == Powers.stomp):
@@ -123,8 +177,8 @@ func ExceptionalItems():
 					get_node("BackBufferCopy/GlitchingEffect").material.set_shader_parameter("shake_power",0.0015)
 			else:
 				get_node("BackBufferCopy/GlitchingEffect").visible = false
-
 		pass
+	isDuplicatedException = true
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -203,6 +257,7 @@ func _process(_delta: float) -> void:
 	Hovered()
 	Bought()
 	CustomItemText()
+
 	moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [frequencyWavePrice.number,NumberFormat.Format(shopData.rebirthPrice)]
 	pass
 

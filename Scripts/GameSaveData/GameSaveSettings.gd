@@ -7,3 +7,5 @@ class_name GameSaveSettings
 @export var fps:int = 60
 @export var vSync:bool = true
 @export var glitchEffect:bool = true
+@export var shadingBorders:bool = true
+@export var sheepColor:Color = Color(1,1,1,1)

@@ -25,8 +25,8 @@ var died = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if (instance == null):
-		instance = self
+	#if (instance == null):
+	instance = self # the class isn't singleton so it's better to always instance when loaded to this scene
 	tweenScaleWool1 = TweenUtils.tweenScalePingPong(woolBarrier1,Vector2(0.95,1),Vector2(1.05,1),3.2,TweenUtils.Ease.InOutSine)
 	tweenScaleWool2 = TweenUtils.tweenScalePingPong(woolBarrier2,Vector2(0.95,1),Vector2(1.05,1),3.2,TweenUtils.Ease.InOutSine)
 	ParticleManager.PlayParticleWarmup(woolBarrier1Particle)

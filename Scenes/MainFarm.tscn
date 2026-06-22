@@ -61,7 +61,6 @@
 [ext_resource type="Texture2D" uid="uid://ccixfei6apqku" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="40_q3ouh"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
 [ext_resource type="Texture2D" uid="uid://bbb3h1wamtq6k" path="res://Sprites/OptionUIs/Arrow Sk.png" id="46_v1gif"]
-[ext_resource type="Shader" uid="uid://c0r6nnm084nsx" path="res://Shaders/RainbowBorderCanvas.gdshader" id="50_tdfnv"]
 [ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="51_7yrkc"]
 [ext_resource type="Texture2D" uid="uid://clfttv2ggs4qt" path="res://Sprites/OptionUIs/WhiteShirt.png" id="54_q14y5"]
 [ext_resource type="Script" uid="uid://bv6wpis75gryx" path="res://Scripts/SkinChanger/SkinChangeMain.gd" id="64_fip8v"]
@@ -651,8 +650,93 @@ shader_parameter/random_start = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_62te2"]
 
+[sub_resource type="Shader" id="Shader_fip8v"]
+code = "shader_type canvas_item;
+
+/// NEW: If true, only the rainbow border is visible; the center texture is hidden.
+uniform bool border_only = false;
+
+/// Width of the shimmering rainbow border in pixels.
+uniform float border_px : hint_range(2.0, 24.0) = 2.0;
+/// Animation speed — higher values spin the hue faster.
+uniform float speed : hint_range(0.1, 4.0) = 0.9;
+/// Brightness multiplier applied to the rainbow colour (creates a glow effect).
+uniform float glow_intensity : hint_range(1.0, 3.5) = 2.0;
+/// Actual pixel dimensions of the node this material is applied to.
+uniform vec2 node_size = vec2(64.0, 64.0);
+
+// Use a varying variable to pass the modulate color from vertex to fragment step
+varying vec4 modulate_color;
+
+void vertex() {
+	// Captures the node's Modulate / Self-Modulate settings
+	modulate_color = COLOR;
+}
+
+/// Converts an HSV colour to RGB.
+vec3 hsv_to_rgb(vec3 c) {
+	vec4 k = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+	vec3 p = abs(fract(c.xxx + k.xyz) * 6.0 - k.www);
+	return c.z * mix(k.xxx, clamp(p - k.xxx, 0.0, 1.0), c.y);
+}
+
+void fragment() {
+	// Grab the actual texture color of your Sprite / CanvasTexture
+	vec4 texture_color = texture(TEXTURE, UV);
+	
+	// Convert UV to pixel coordinates relative to this node.
+	vec2 pixel = UV * node_size;
+
+	// Distance from the nearest edge in pixels.
+	float dist_left   = pixel.x;
+	float dist_right  = node_size.x - pixel.x;
+	float dist_top    = pixel.y;
+	float dist_bottom = node_size.y - pixel.y;
+	float edge_dist   = min(min(dist_left, dist_right), min(dist_top, dist_bottom));
+
+	if (edge_dist > border_px) {
+		if (border_only) {
+			// If border_only is true, make the inside completely transparent
+			COLOR = vec4(0.0);
+		} else {
+			// Otherwise, show the original texture
+			COLOR = texture_color * modulate_color;
+		}
+	} else {
+		// Animated hue: TIME drives the global spin; position offsets phase
+		float denom  = max(node_size.x + node_size.y, 1.0);
+		float phase  = (pixel.x + pixel.y) / denom;
+		float hue     = fract(TIME * speed * 0.25 + phase);
+		vec3  rainbow = hsv_to_rgb(vec3(hue, 1.0, 1.0));
+
+		// Alpha fades from full at the very edge to zero at the inner boundary
+		float border_alpha = 1.0 - smoothstep(0.0, border_px, edge_dist);
+		border_alpha = pow(border_alpha, 0.5) * 0.92;
+
+		// Create the glow color
+		vec4 rainbow_glow = vec4(rainbow * glow_intensity, border_alpha);
+
+		vec3 final_rgb;
+		float final_alpha;
+
+		if (border_only) {
+			// If border_only is true, ignore the texture colors completely
+			final_rgb = rainbow_glow.rgb;
+			// Optional: cut off the border if the texture underneath is transparent (e.g. rounded UI corners)
+			final_alpha = min(texture_color.a, rainbow_glow.a);
+		} else {
+			// Blend the rainbow border ON TOP of your texture color
+			final_rgb = mix(texture_color.rgb, rainbow_glow.rgb, rainbow_glow.a);
+			final_alpha = max(texture_color.a, rainbow_glow.a * 0.5);
+		}
+
+		COLOR.rgb = final_rgb * modulate_color.rgb;
+		COLOR.a = final_alpha * modulate_color.a;
+	}
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tdfnv"]
-shader = ExtResource("50_tdfnv")
+shader = SubResource("Shader_fip8v")
 shader_parameter/border_only = false
 shader_parameter/border_px = 2.0
 shader_parameter/speed = 0.9
@@ -1604,7 +1688,7 @@ pivot_offset = Vector2(29, 40)
 mouse_filter = 2
 texture = ExtResource("12_pbqe1")
 
-[node name="OptionUI" type="Control" parent="Control/CanvasLayer" unique_id=1519445988 node_paths=PackedStringArray("refresh1", "refresh2", "shoppingKart", "shopPanel", "rebirthPanel", "upScroll", "downScroll", "moneyText", "rebirthText")]
+[node name="OptionUI" type="Control" parent="Control/CanvasLayer" unique_id=1519445988 node_paths=PackedStringArray("refresh1", "refresh2", "shoppingKart", "shopPanel", "rebirthPanel", "upScroll", "downScroll", "moneyText", "rebirthText") groups=["OptionUI"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -1626,6 +1710,7 @@ layout_mode = 0
 offset_top = 61.0
 offset_right = 64.0
 offset_bottom = 125.0
+focus_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1652,6 +1737,7 @@ offset_left = 64.0
 offset_top = 61.0
 offset_right = 128.0
 offset_bottom = 125.0
+focus_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1681,6 +1767,7 @@ offset_left = 64.0
 offset_top = 61.0
 offset_right = 128.0
 offset_bottom = 125.0
+focus_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1707,6 +1794,7 @@ offset_left = 64.0
 offset_top = 125.0
 offset_right = 128.0
 offset_bottom = 189.0
+focus_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1737,6 +1825,7 @@ offset_left = 128.0
 offset_top = 61.0
 offset_right = 192.0
 offset_bottom = 125.0
+focus_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1868,7 +1957,7 @@ text = "Exit
 "
 metadata/_edit_use_anchors_ = true
 
-[node name="Settings" type="Control" parent="Control/CanvasLayer" unique_id=498215830 node_paths=PackedStringArray("settingText", "pauseMenu", "settingOptions", "shadedGrassNode", "codeText", "codeTextMain", "codeTextSub", "codeTextTimer", "codeInvalidTimer")]
+[node name="Settings" type="Control" parent="Control/CanvasLayer" unique_id=498215830 node_paths=PackedStringArray("settingText", "pauseMenu", "settingOptions", "shadedGrassNode", "codeText", "codeTextMain", "codeTextSub", "codeTextTimer", "codeInvalidTimer", "colorPicker")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1881,7 +1970,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("15_d3uyy")
 settingText = NodePath("Label/AutoSizeRichTextLabel")
 pauseMenu = NodePath("../PauseMenu")
-settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code"), NodePath("Data"), NodePath("Effects")]
+settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code"), NodePath("Data"), NodePath("Effects"), NodePath("Sheep color")]
 shadedGrassNode = NodePath("../../../Background/Floor/GrassesDark")
 codeText = NodePath("Code/Code")
 particle = ExtResource("29_62te2")
@@ -1889,6 +1978,7 @@ codeTextMain = NodePath("CodeTextMain")
 codeTextSub = NodePath("CodeTextMain/CodeSubText")
 codeTextTimer = NodePath("Code/CodeTextTimer")
 codeInvalidTimer = NodePath("Code/InvalidCodeTimer")
+colorPicker = NodePath("Sheep color/ColorPickerButton")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings" unique_id=258928493]
@@ -2192,6 +2282,64 @@ offset_right = 643.0
 offset_bottom = 192.0
 scale = Vector2(4.635, 4.635)
 
+[node name="BorderShade" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Effects" unique_id=670204055]
+clip_contents = false
+layout_mode = 0
+offset_left = 441.0
+offset_top = 290.0
+offset_right = 692.0
+offset_bottom = 350.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 30
+text = "Shading
+Border"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 31
+_current_font_size = 30
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="BorderShadeBox" type="CheckBox" parent="Control/CanvasLayer/Settings/Effects" unique_id=397898892]
+layout_mode = 0
+offset_left = 618.0
+offset_top = 266.0
+offset_right = 642.0
+offset_bottom = 290.0
+scale = Vector2(4.635, 4.635)
+
+[node name="Sheep color" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1100899839]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Control/CanvasLayer/Settings/Sheep color" unique_id=712430710]
+layout_mode = 0
+offset_left = 742.0
+offset_top = 212.0
+offset_right = 817.0
+offset_bottom = 276.0
+color = Color(0.9340804, 0.9340805, 0.93408036, 1)
+
+[node name="ColorText" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Sheep color" unique_id=1838145661]
+layout_mode = 0
+offset_left = 425.0
+offset_top = 216.0
+offset_right = 723.0
+offset_bottom = 270.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 27
+text = "Sheep color"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 27
+_current_font_size = 27
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
 [node name="ArrowButtonLeft" type="Button" parent="Control/CanvasLayer/Settings" unique_id=161299645]
 texture_filter = 1
 layout_mode = 0
@@ -2274,7 +2422,7 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
-[node name="RebirthMenu" type="Control" parent="Control/CanvasLayer" unique_id=1034030294 node_paths=PackedStringArray("textRebirth", "buttonRebirth")]
+[node name="RebirthMenu" type="Control" parent="Control/CanvasLayer" unique_id=1034030294 node_paths=PackedStringArray("textRebirth", "buttonRebirth") groups=["RebirthMenu"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2500,6 +2648,8 @@ anchor_mode = 0
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/InvalidCodeTimer" to="Control/CanvasLayer/Settings" method="_on_invalid_code_timer_timeout"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Data/DeleteData" to="Control/CanvasLayer/Settings" method="_on_delete_data_pressed"]
 [connection signal="toggled" from="Control/CanvasLayer/Settings/Effects/GlitchEffectBox" to="Control/CanvasLayer/Settings" method="_on_glitch_effect_box_toggled"]
+[connection signal="toggled" from="Control/CanvasLayer/Settings/Effects/BorderShadeBox" to="Control/CanvasLayer/Settings" method="_on_border_shade_box_toggled"]
+[connection signal="color_changed" from="Control/CanvasLayer/Settings/Sheep color/ColorPickerButton" to="Control/CanvasLayer/Settings" method="_on_color_picker_button_color_changed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonLeft" to="Control/CanvasLayer/Settings" method="_on_arrow_button_left_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonRight" to="Control/CanvasLayer/Settings" method="_on_arrow_button_right_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Back" to="Control/CanvasLayer/Settings" method="_on_back_pressed"]

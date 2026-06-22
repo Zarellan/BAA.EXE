@@ -56,8 +56,19 @@ func _on_right_pressed() -> void:
 	ChangeSkinPlace(1)
 	pass # Replace with function body.
 
+func PrepSkin():
+	ChangeSkinPlace(0)
+	sheep.get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+
 func ChangeSkinPlace(ind:int):
 	skinClass.ChooseSkin(ind)
-	textSkin.text = skinClass.currentSkin
-	textDescSkin.text = GameHandler.saveDataAchievements.skins[skinClass.index].description
-	textEffectSkin.text = GameHandler.saveDataAchievements.skins[skinClass.index].effectDescription
+	if (GameHandler.saveDataAchievements.skins[skinClass.index].unlocked):
+		textSkin.text = skinClass.currentSkin
+		textDescSkin.text = GameHandler.saveDataAchievements.skins[skinClass.index].description
+		textEffectSkin.text = GameHandler.saveDataAchievements.skins[skinClass.index].effectDescription
+		sheep.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	else:
+		textSkin.text = "???"
+		textDescSkin.text = GameHandler.saveDataAchievements.skins[skinClass.index].achievementTask
+		textEffectSkin.text = "Effect: ???"
+		sheep.modulate = Color(0.0, 0.0, 0.0, 1.0)

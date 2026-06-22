@@ -24,6 +24,15 @@ uniform float glow_intensity : hint_range(1.0, 3.5) = 1.5;
 /// Actual pixel dimensions of a SINGLE frame of your animation.
 uniform vec2 node_size = vec2(64.0, 64.0);
 
+// --- NEW COLOR SWAPPING VARIABLES ---
+/// The specific color on your sprite that you want to target.
+uniform vec4 target_color : source_color = vec4(1.0, 0.0, 0.0, 1.0);
+/// The color that will replace the target color.
+uniform vec4 replace_color : source_color = vec4(0.0, 0.0, 1.0, 1.0);
+/// How closely the sprite color must match the target color to be changed.
+uniform float tolerance : hint_range(0.0, 1.0) = 0.1;
+// ------------------------------------
+
 // Use varying variables to pass localized frame coordinates from vertex to fragment step
 varying vec2 local_uv;
 varying vec4 modulate_color;
@@ -48,6 +57,16 @@ void fragment() {
 	// Sample the original sprite color using the engine's built-in UV (preserves animation frame)
 	vec4 sprite_color = texture(TEXTURE, UV);
 	
+	// --- NEW COLOR SWAP LOGIC ---
+	// Calculate how close the current pixel color is to our target color
+	float color_distance = distance(sprite_color.rgb, target_color.rgb);
+	
+	// If the color matches within our tolerance, swap it out
+	if (color_distance <= tolerance && sprite_color.a > 0.0) {
+		sprite_color.rgb = replace_color.rgb;
+	}
+	// -----------------------------
+	
 	// Convert our local frame UV to relative pixel coordinates
 	vec2 pixel = local_uv * node_size;
 
@@ -57,7 +76,7 @@ void fragment() {
 	float hue   = fract(TIME * speed * 0.25 + phase);
 	vec3 rainbow = hsv_to_rgb(vec3(hue, 1.0, 1.0)) * glow_intensity;
 
-	// Mix the rainbow directly onto the sprite
+	// Mix the rainbow directly onto the sprite (including your newly swapped color)
 	vec3 final_rgb = mix(sprite_color.rgb, rainbow, rainbow_mix);
 
 	// Render using the sprite's alpha mask and modulation colors
@@ -71,6 +90,9 @@ shader_parameter/speed = 1.03900004609262
 shader_parameter/rainbow_mix = 0.0
 shader_parameter/glow_intensity = 1.5
 shader_parameter/node_size = Vector2(256, 256)
+shader_parameter/target_color = Color(1, 1, 1, 1)
+shader_parameter/replace_color = Color(1, 1, 1, 1)
+shader_parameter/tolerance = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vhidr"]
 shader = ExtResource("4_vhidr")
@@ -87,6 +109,8 @@ size = Vector2(116.5, 93.5)
 script = ExtResource("5_ibwm0")
 description = "just thrilling with the originality"
 effectDescription = "Effect: None"
+achievementName = "None"
+achievementTask = "None"
 unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
@@ -95,6 +119,8 @@ script = ExtResource("5_ibwm0")
 name = "Eid"
 description = "the game was suppose to be for eid, but then I decide to polish it"
 effectDescription = "Effect: collect multiplier x1.4"
+achievementName = "Code"
+achievementTask = "Type \"eid mubarak\" in code settings"
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Animation" id="Animation_0r47l"]

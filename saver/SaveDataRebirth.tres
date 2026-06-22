@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://66enwrno5ixb"]
+[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://chxv22bme7pmx"]
 
 [ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_4uhcc"]
+[ext_resource type="Script" uid="uid://dgrns36cuqs6e" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="1_kb3vv"]
 [ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_862cu"]
 [ext_resource type="Texture2D" uid="uid://ionxinhbf4ew" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="3_urp6s"]
 [ext_resource type="Texture2D" uid="uid://bp6g5leu2mpjr" path="res://Sprites/ShopImages/Rebirth/SheepJump.png" id="4_35u3r"]
@@ -12,14 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://y43oxeypu0kt" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="10_nwlfp"]
 [ext_resource type="Texture2D" uid="uid://ccixfei6apqku" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="11_4ctki"]
 [ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="12_tyo4l"]
-[ext_resource type="Script" uid="uid://dgrns36cuqs6e" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="13_qy0dg"]
 
 [sub_resource type="Resource" id="Resource_hotcp"]
 script = ExtResource("1_4uhcc")
 title = "Main multiplier"
 image = ExtResource("2_862cu")
 description = "the more you buy it the more the collect doubles (will stay the same multiply even after [rainbow]rebirth[/rainbow])"
-rebirthPrice = 1
+rebirthPrice = 2
+level = 1
 power = 1
 tax = 2.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -130,5 +131,6 @@ items = Array[ExtResource("1_4uhcc")]([SubResource("Resource_hotcp"), SubResourc
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [resource]
-script = ExtResource("13_qy0dg")
+script = ExtResource("1_kb3vv")
 rebirthListData = SubResource("Resource_valao")
+multiplier_reb = 2
