@@ -15,15 +15,26 @@ func _ready() -> void:
 	scaleNodeDef = node.scale
 	if (centerOverride):
 		node.pivot_offset_ratio = Vector2(0.5,0.5)
+	if (is_instance_valid(button)):
+		TweenUtils.tweenAlphaSelf(button,0.7,0.0001,TweenUtils.Ease.OutCirc)
 	pass # Replace with function body.
 
 func MouseEntered():
 	TweenUtils.StopTween(scaleNodeTween)
 	scaleNodeTween = TweenUtils.tweenScale(node,Vector2(scaleVal,scaleVal),0.3,TweenUtils.Ease.OutCirc)
-	
+	AlphaButton(1)
 	pass
 
 func MouseExited():
 	TweenUtils.StopTween(scaleNodeTween)
 	scaleNodeTween = TweenUtils.tweenScale(node,scaleNodeDef,0.3,TweenUtils.Ease.OutCirc)
+	AlphaButton(0.7)
 	pass
+	
+@export var button:Control
+var alphaNodeTween:Tween
+
+func AlphaButton(val:float):
+	if (is_instance_valid(button)):
+		TweenUtils.StopTween(alphaNodeTween)
+		alphaNodeTween = TweenUtils.tweenAlphaSelf(button,val,0.3,TweenUtils.Ease.OutCirc)

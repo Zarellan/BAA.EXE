@@ -62,6 +62,7 @@
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
 [ext_resource type="Texture2D" uid="uid://bbb3h1wamtq6k" path="res://Sprites/OptionUIs/Arrow Sk.png" id="46_v1gif"]
 [ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="51_7yrkc"]
+[ext_resource type="Texture2D" uid="uid://c6ryx3blrq5fx" path="res://Sprites/OptionUIs/ButtonUI.png" id="52_ykfix"]
 [ext_resource type="Texture2D" uid="uid://clfttv2ggs4qt" path="res://Sprites/OptionUIs/WhiteShirt.png" id="54_q14y5"]
 [ext_resource type="Script" uid="uid://bv6wpis75gryx" path="res://Scripts/SkinChanger/SkinChangeMain.gd" id="64_fip8v"]
 [ext_resource type="PackedScene" uid="uid://isevecd4fd6k" path="res://Scenes/SkinChanger.tscn" id="64_qxec0"]
@@ -771,6 +772,7 @@ script = ExtResource("1_5wibg")
 nightBackground = NodePath("night")
 
 [node name="night" type="Sprite2D" parent="Background" unique_id=1603152478]
+light_mask = 0
 scale = Vector2(2.67, 2.67)
 texture = ExtResource("1_6ho1w")
 
@@ -1315,7 +1317,7 @@ texture_filter = 1
 material = SubResource("CanvasItemMaterial_4gutc")
 position = Vector2(131, 584)
 emitting = false
-amount = 5000
+amount = 30
 texture = ExtResource("3_4gutc")
 one_shot = true
 explosiveness = 1.0
@@ -1408,11 +1410,12 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
-[node name="Script" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter" unique_id=1097378439]
+[node name="Script" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter" unique_id=1097378439 node_paths=PackedStringArray("moneyCounterText")]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_5xh03")
+moneyCounterText = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
 [node name="RebirthCount" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=541613207]
@@ -1527,7 +1530,7 @@ tile_scroll_hint = true
 layout_direction = 2
 layout_mode = 2
 
-[node name="Rebirth" type="Control" parent="Control/CanvasLayer" unique_id=1335878176]
+[node name="Rebirth" type="Control" parent="Control/CanvasLayer" unique_id=1335878176 node_paths=PackedStringArray("verticalContainer")]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -1539,6 +1542,7 @@ pivot_offset = Vector2(27, 10)
 script = ExtResource("26_rmoyj")
 listInit = SubResource("Resource_valao")
 rebirthPrefab = ExtResource("27_xkvfg")
+verticalContainer = NodePath("ScrollContainer/VBoxContainer")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -1705,12 +1709,16 @@ moneyText = NodePath("../WoolCounter/TextureRect/MoneyCounter")
 rebirthText = NodePath("../WoolCounter/TextureRect/RebirthCount")
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseButton" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=2086305507]
-layout_mode = 0
+[node name="PauseButton" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=70373911]
+layout_mode = 1
+anchors_preset = -1
 offset_top = 61.0
 offset_right = 64.0
 offset_bottom = 125.0
 focus_mode = 0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1725,19 +1733,23 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("20_5xh03")
 
-[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/PauseButton" unique_id=799126897 node_paths=PackedStringArray("node")]
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/PauseButton" unique_id=799126897 node_paths=PackedStringArray("node", "button")]
 anchors_preset = 0
 script = ExtResource("40_8hf41")
 node = NodePath("../TextureRect")
 scaleVal = 1.1
+button = NodePath("..")
 
-[node name="ShoppingKart" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=749067165]
+[node name="ShoppingKart" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=1298991758]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 61.0
 offset_right = 128.0
 offset_bottom = 125.0
 focus_mode = 0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1758,7 +1770,7 @@ script = ExtResource("40_8hf41")
 node = NodePath("../TextureRect")
 scaleVal = 1.1
 
-[node name="SkinsButton" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=2089612583]
+[node name="SkinsButton" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=1695264490]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.6
@@ -1768,6 +1780,9 @@ offset_top = 61.0
 offset_right = 128.0
 offset_bottom = 125.0
 focus_mode = 0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1788,13 +1803,16 @@ script = ExtResource("40_8hf41")
 node = NodePath("../TextureRect")
 scaleVal = 1.1
 
-[node name="ShoppingKartRebirth" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=1487169588]
+[node name="ShoppingKartRebirth" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=61926416]
 layout_mode = 1
 offset_left = 64.0
 offset_top = 125.0
 offset_right = 128.0
 offset_bottom = 189.0
 focus_mode = 0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -1816,7 +1834,7 @@ script = ExtResource("40_8hf41")
 node = NodePath("../TextureRect")
 scaleVal = 1.1
 
-[node name="RebirthIc" type="Button" parent="Control/CanvasLayer/OptionUI" unique_id=1552804916]
+[node name="RebirthIc" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=358350118]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.6
@@ -1826,6 +1844,9 @@ offset_top = 61.0
 offset_right = 192.0
 offset_bottom = 125.0
 focus_mode = 0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
@@ -2255,6 +2276,7 @@ metadata/_edit_use_anchors_ = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="GlitchEffect" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Effects" unique_id=1730065324]
 clip_contents = false
@@ -2273,6 +2295,7 @@ _max_size = 31
 _current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="GlitchEffectBox" type="CheckBox" parent="Control/CanvasLayer/Settings/Effects" unique_id=1098920819]
 layout_mode = 0
@@ -2281,6 +2304,7 @@ offset_top = 168.0
 offset_right = 643.0
 offset_bottom = 192.0
 scale = Vector2(4.635, 4.635)
+metadata/_edit_use_anchors_ = true
 
 [node name="BorderShade" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Effects" unique_id=670204055]
 clip_contents = false
@@ -2300,6 +2324,7 @@ _max_size = 31
 _current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="BorderShadeBox" type="CheckBox" parent="Control/CanvasLayer/Settings/Effects" unique_id=397898892]
 layout_mode = 0
@@ -2308,6 +2333,7 @@ offset_top = 266.0
 offset_right = 642.0
 offset_bottom = 290.0
 scale = Vector2(4.635, 4.635)
+metadata/_edit_use_anchors_ = true
 
 [node name="Sheep color" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1100899839]
 visible = false
@@ -2479,6 +2505,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_tdfnv")
+metadata/_edit_use_anchors_ = true
 
 [node name="Back" type="Button" parent="Control/CanvasLayer/RebirthMenu/TextureRect" unique_id=909055091]
 layout_mode = 1
@@ -2582,6 +2609,7 @@ offset_bottom = -720.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("64_fip8v")
+metadata/_edit_use_anchors_ = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Control/CanvasLayer/SkinPanel" unique_id=926455685]
 layout_mode = 1
@@ -2595,6 +2623,7 @@ grow_vertical = 2
 scale = Vector2(0.75, 0.75)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 stretch = true
+metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="Control/CanvasLayer/SkinPanel/SubViewportContainer" unique_id=1409458311]
 handle_input_locally = false
@@ -2625,6 +2654,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
+limit_enabled = false
 
 [connection signal="button_down" from="Control/CanvasLayer/ShopHelper/UpAlign/Up" to="Control/CanvasLayer/ShopHelper" method="_on_up_button_down"]
 [connection signal="button_up" from="Control/CanvasLayer/ShopHelper/UpAlign/Up" to="Control/CanvasLayer/ShopHelper" method="_on_up_button_up"]

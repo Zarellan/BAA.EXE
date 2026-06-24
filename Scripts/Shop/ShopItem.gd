@@ -123,10 +123,15 @@ func SetBasedOnLevel():
 func set_item(shopDat:ShopClass):
 	shopData = shopDat
 
+var last_time_update:float = 0.0
+const UPDATE_INTERVAL:float = 0.10
 func _process(_delta: float) -> void:
-	Hovered()
+	last_time_update += _delta
 	Bought()
-	ExceptionalPurchase()
+	if (last_time_update > UPDATE_INTERVAL):
+		Hovered()
+		ExceptionalPurchase()
+		last_time_update = 0
 	pass
 
 var exceptioned := false

@@ -399,6 +399,8 @@ shader_parameter/shake_block_size = 30.0000013775
 shader_parameter/randomization_amount = 1.0
 
 [node name="RebirthItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("randomSpeedTitleShade", "randomSpeedDescriptionShade", "bG", "bG2")]
+light_mask = 0
+clip_contents = true
 custom_minimum_size = Vector2(900, 163)
 layout_mode = 3
 anchors_preset = 1

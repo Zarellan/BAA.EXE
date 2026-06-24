@@ -253,12 +253,16 @@ func SetBasedOnLevel():
 func set_item(rebirthDat:RebirthClass):
 	shopData = rebirthDat
 
+var last_time_update:float = 0.0
+const UPDATE_INTERVAL:float = 0.10
 func _process(_delta: float) -> void:
-	Hovered()
+	last_time_update += _delta
 	Bought()
-	CustomItemText()
-
-	moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [frequencyWavePrice.number,NumberFormat.Format(shopData.rebirthPrice)]
+	if (last_time_update > UPDATE_INTERVAL):
+		Hovered()
+		CustomItemText()
+		moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [frequencyWavePrice.number,NumberFormat.Format(shopData.rebirthPrice)]
+		last_time_update = 0
 	pass
 
 func ExceptionalLock():
