@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://bulp8qn2obimi" path="res://Scripts/Money/RebirthCounter.gd" id="15_210na"]
 [ext_resource type="PackedScene" uid="uid://fa21pp2mjy74" path="res://Prefabs/RainbowStar.tscn" id="15_amxxf"]
 [ext_resource type="Script" uid="uid://dagu34l5k4x0f" path="res://Scripts/Pause/SettingsScript.gd" id="15_d3uyy"]
+[ext_resource type="Texture2D" uid="uid://insaucig1u3h" path="res://Sprites/ShopHandleImage/WoolShop.png" id="15_wnqqd"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="16_joy2m"]
 [ext_resource type="Texture2D" uid="uid://y8lt7autwrv3" path="res://Sprites/OptionUIs/ShoppingKart.png" id="19_jy1oi"]
 [ext_resource type="Texture2D" uid="uid://cviimgyvwihfo" path="res://Sprites/OptionUIs/Pause.png" id="20_5xh03"]
@@ -347,8 +348,6 @@ shader_parameter/node_size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amxxf"]
 size = Vector2(162, 98)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_0r47l"]
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
 script = ExtResource("8_v5bxn")
@@ -1385,7 +1384,7 @@ layout_mode = 1
 offset_right = 283.0
 offset_bottom = 61.0
 pivot_offset = Vector2(20, 20)
-texture = SubResource("CanvasTexture_0r47l")
+texture = ExtResource("15_wnqqd")
 metadata/_edit_use_anchors_ = true
 
 [node name="MoneyCounter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=2131891367]
@@ -1762,13 +1761,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_jy1oi")
 
-[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/ShoppingKart" unique_id=1333941192 node_paths=PackedStringArray("node")]
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/ShoppingKart" unique_id=1333941192 node_paths=PackedStringArray("node", "button")]
 anchors_preset = 0
 offset_left = -64.0
 offset_right = -64.0
 script = ExtResource("40_8hf41")
 node = NodePath("../TextureRect")
 scaleVal = 1.1
+button = NodePath("..")
 
 [node name="SkinsButton" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=1695264490]
 layout_mode = 1
@@ -1795,13 +1795,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("54_q14y5")
 
-[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/SkinsButton" unique_id=1846695674 node_paths=PackedStringArray("node")]
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/SkinsButton" unique_id=1846695674 node_paths=PackedStringArray("node", "button")]
 anchors_preset = 0
 offset_left = -64.0
 offset_right = -64.0
 script = ExtResource("40_8hf41")
 node = NodePath("../TextureRect")
 scaleVal = 1.1
+button = NodePath("..")
 
 [node name="ShoppingKartRebirth" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=61926416]
 layout_mode = 1
@@ -1826,13 +1827,49 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("37_valao")
 
-[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" unique_id=1118718368 node_paths=PackedStringArray("node")]
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" unique_id=1118718368 node_paths=PackedStringArray("node", "button")]
 anchors_preset = 0
 offset_left = -128.0
 offset_right = -128.0
 script = ExtResource("40_8hf41")
 node = NodePath("../TextureRect")
 scaleVal = 1.1
+button = NodePath("..")
+
+[node name="Achievements" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=659669701]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.625
+anchor_right = 1.625
+offset_left = 64.0
+offset_top = 125.0
+offset_right = 128.0
+offset_bottom = 189.0
+focus_mode = 0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/Achievements" unique_id=197940999]
+material = SubResource("ShaderMaterial_1x37o")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("37_valao")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/Achievements" unique_id=915900775 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+offset_left = -128.0
+offset_right = -128.0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+button = NodePath("..")
 
 [node name="RebirthIc" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=358350118]
 layout_mode = 1
@@ -1896,13 +1933,14 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("26_u06jq")
 expand_mode = 1
 
-[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/RebirthIc" unique_id=1301774872 node_paths=PackedStringArray("node")]
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/RebirthIc" unique_id=1301774872 node_paths=PackedStringArray("node", "button")]
 anchors_preset = 0
 offset_left = -192.0
 offset_right = -192.0
 script = ExtResource("40_8hf41")
 node = NodePath("../Holder")
 scaleVal = 1.1
+button = NodePath("..")
 
 [node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
 layout_mode = 3

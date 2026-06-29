@@ -126,6 +126,8 @@ func set_item(shopDat:ShopClass):
 var last_time_update:float = 0.0
 const UPDATE_INTERVAL:float = 0.10
 func _process(_delta: float) -> void:
+	if (DeviceCheckerUtil.IsUsingPhone()):
+		return
 	last_time_update += _delta
 	Bought()
 	if (last_time_update > UPDATE_INTERVAL):
@@ -133,6 +135,20 @@ func _process(_delta: float) -> void:
 		ExceptionalPurchase()
 		last_time_update = 0
 	pass
+
+func _input(event: InputEvent) -> void:
+	if (!DeviceCheckerUtil.IsUsingPhone()):
+		return
+	# Detects both mouse clicks and mobile screen touches
+	if event is InputEventScreenTouch or event is InputEventMouseButton:
+		if event.is_pressed():
+			# The user just tapped the screen / clicked
+			Hovered()
+			Bought()
+			ExceptionalPurchase()
+		elif event.is_released():
+			# The user lifted their finger / mouse button
+			pass
 
 var exceptioned := false
 func ExceptionalPurchase():

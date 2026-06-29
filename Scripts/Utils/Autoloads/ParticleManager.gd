@@ -15,7 +15,7 @@ func PlayParticleWarmup(particle: GPUParticles2D):
 	get_tree().current_scene.add_child.call_deferred(instance)
 
 func PlayParticleOv(particle: GPUParticles2D, count: int, parent:Node = null,force := false):
-	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.Low && !force):
+	if (GameHandler.saveDataSettings.quality != GameHandler.Quality.High && !force):
 		return
 	if (count <= 0): # just don't play it
 		return

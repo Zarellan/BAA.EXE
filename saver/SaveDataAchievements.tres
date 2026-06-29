@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://bhfcmvkt1gaa6"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3]
 
-[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_jdlx1"]
-[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_2yxkc"]
+[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_jdlx1"]
+[ext_resource type="Script" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_2yxkc"]
 
 [sub_resource type="Resource" id="Resource_ykfix"]
 script = ExtResource("2_2yxkc")
@@ -25,5 +25,6 @@ metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 [resource]
 script = ExtResource("1_jdlx1")
 skins = Array[ExtResource("2_2yxkc")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
-skinUsed = "Default"
+skinUsed = "Eid"
+multiplyMoneyAchievement = 1.4
 platformMinigameScore = 30
