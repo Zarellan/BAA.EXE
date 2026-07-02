@@ -51,6 +51,7 @@ func _physics_process(delta: float) -> void:
 			else:
 				sprite.scale = Vector2(defaultScale.x + 0.6,defaultScale.y - 0.5)
 				GlobalAudio.PlayOneShot("res://Sounds/impactStomp.ogg",0,randf_range(0.95,1.05))
+				(camera as CameraShake).add_trauma(0.25)
 			twScaleSprite = TweenUtils.tweenScale(sprite,defaultScale,0.5,TweenUtils.Ease.OutCirc)
 			skewTween = TweenUtils.tweenSkewPingPong(sprite,deg_to_rad(-10),deg_to_rad(10),0.4,TweenUtils.Ease.InOutSine)
 			PlatformMinigame.instance.CameraZoom()

@@ -65,8 +65,11 @@
 [ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="51_7yrkc"]
 [ext_resource type="Texture2D" uid="uid://c6ryx3blrq5fx" path="res://Sprites/OptionUIs/ButtonUI.png" id="52_ykfix"]
 [ext_resource type="Texture2D" uid="uid://clfttv2ggs4qt" path="res://Sprites/OptionUIs/WhiteShirt.png" id="54_q14y5"]
+[ext_resource type="Texture2D" uid="uid://cx4oq5cwfkygh" path="res://Sprites/OptionUIs/trophy.png" id="60_4ghmb"]
 [ext_resource type="Script" uid="uid://bv6wpis75gryx" path="res://Scripts/SkinChanger/SkinChangeMain.gd" id="64_fip8v"]
 [ext_resource type="PackedScene" uid="uid://isevecd4fd6k" path="res://Scenes/SkinChanger.tscn" id="64_qxec0"]
+[ext_resource type="Script" uid="uid://c3fhx3vqoprj3" path="res://Scripts/Achievements/AchievementInit.gd" id="69_l88l1"]
+[ext_resource type="PackedScene" uid="uid://6u1wu3vu1ss7" path="res://Prefabs/achievement.tscn" id="70_etfi4"]
 
 [sub_resource type="Animation" id="Animation_u06jq"]
 length = 0.001
@@ -762,6 +765,8 @@ shader_parameter/only_border = true
 shader_parameter/border_gradient = SubResource("GradientTexture2D_rmap7")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_tdfnv"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_4ghmb"]
 
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
@@ -1860,7 +1865,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("37_valao")
+texture = ExtResource("60_4ghmb")
 
 [node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/Achievements" unique_id=915900775 node_paths=PackedStringArray("node", "button")]
 anchors_preset = 0
@@ -2689,6 +2694,36 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 39
 text = "Back"
 metadata/_edit_use_anchors_ = true
+
+[node name="Achievements" type="Control" parent="Control/CanvasLayer" unique_id=715517]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("69_l88l1")
+achievementPrefab = ExtResource("70_etfi4")
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Achievements" unique_id=590901770]
+self_modulate = Color(0.3019608, 0.3019608, 0.3019608, 0.69411767)
+layout_mode = 0
+offset_left = 194.0
+offset_top = 99.0
+offset_right = 1083.0
+offset_bottom = 621.0
+texture = SubResource("CanvasTexture_4ghmb")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/CanvasLayer/Achievements/TextureRect" unique_id=865857912]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer/Achievements/TextureRect/ScrollContainer" unique_id=84288405]
+layout_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0

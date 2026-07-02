@@ -1,6 +1,7 @@
 extends Camera2D
+class_name CameraShake
 
-@export var decay : float = 0.8 # Time it takes to reach 0% of trauma
+@export var decay : float = 0.5 # Time it takes to reach 0% of trauma
 @export var max_offset : Vector2 = Vector2(100, 75) # Max hor/ver shake in pixels
 @export var max_roll : float = 0.1 # Maximum rotation in radians (use sparingly)
 @export var follow_node : Node2D # Node to follow (assign this to your player)
