@@ -5,3 +5,7 @@
 [resource]
 script = ExtResource("1_qbu3y")
 vSync = false
+<<<<<<< Updated upstream
+=======
+sheepColor = Color(1, 0, 0, 1)
+>>>>>>> Stashed changes
