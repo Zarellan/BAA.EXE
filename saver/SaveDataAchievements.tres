@@ -1,33 +1,33 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://cd7wslhuanfob"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://cagx57dhwtwww"]
 
-[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_jdlx1"]
-[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_2yxkc"]
-[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_2yxkc"]
+[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_2yxkc"]
+[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_h3mo4"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_qa4yv"]
 
 [sub_resource type="Resource" id="Resource_ykfix"]
-script = ExtResource("2_2yxkc")
+script = ExtResource("2_h3mo4")
 description = "just thrilling with the originality"
 effectDescription = "Effect: None"
 achievementName = "None"
 achievementTask = "None"
-achievementImage = ExtResource("3_2yxkc")
+achievementImage = ExtResource("3_qa4yv")
 unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_fip8v"]
-script = ExtResource("2_2yxkc")
+script = ExtResource("2_h3mo4")
 name = "Eid"
 description = "the game was suppose to be for eid, but then I decide to polish it"
 effectDescription = "Effect: collect multiplier x1.4"
 achievementName = "Code"
 achievementTask = "Type \"eid mubarak\" in code settings"
-achievementImage = ExtResource("3_2yxkc")
+achievementImage = ExtResource("3_qa4yv")
 unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [resource]
-script = ExtResource("1_jdlx1")
-skins = Array[ExtResource("2_2yxkc")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
+script = ExtResource("1_2yxkc")
+skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
 skinUsed = "Eid"
 multiplyMoneyAchievement = 1.4
-platformMinigameScore = 67
+platformMinigameScore = 52

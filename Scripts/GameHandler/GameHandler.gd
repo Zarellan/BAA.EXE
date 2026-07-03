@@ -188,7 +188,8 @@ func NowCollect():
 	SaveAllDataGlob()
 
 func GamePausedPartil() -> bool:
-	return PauseScript.paused || RebirthMenu.isRebirthMenu || saveDataRebirth.autoCollectSheepAbility || SkinChanger.isSkinChanging
+	return PauseScript.paused || RebirthMenu.isRebirthMenu || saveDataRebirth.autoCollectSheepAbility || SkinChanger.isSkinChanging || \
+	AchievementHandler.isAchievement
 	
 func AutoCollectSheepActive():
 	return saveData.autoCollectSheepAbility
@@ -238,6 +239,7 @@ func UnlockSkin(strn:String):
 	for i in range(skn.size()):
 		if (skn[i].name == strn):
 			skn[i].unlocked = true
+			AchievementItem.achievementItem[skn[i].achievementName].AchievementUpdate()
 			SaveAllDataGlob()
 			return
 	push_error("no skin found as ",strn)

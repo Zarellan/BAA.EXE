@@ -1,77 +1,68 @@
-<<<<<<< Updated upstream
-[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://dvofew5no2j17"]
-=======
 [gd_resource type="Resource" script_class="GameSaveData" format=3]
->>>>>>> Stashed changes
 
-[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_rscn1"]
-[ext_resource type="Script" path="res://Scripts/Shop/ShopClass.gd" id="2_hantp"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Collector.png" id="3_wh28c"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/WoolAuto.png" id="4_w66ht"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/TimeCollect.png" id="5_gdvw8"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/GoldenWool.png" id="6_hqqsl"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_xdoum"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepCollect.png" id="8_tu810"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepJump.png" id="9_bo316"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepAir.png" id="10_d26l7"]
-[ext_resource type="Script" path="res://Scripts/Shop/ShopList.gd" id="11_tjmsw"]
+[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_hantp"]
+[ext_resource type="Script" path="res://Scripts/Shop/ShopClass.gd" id="2_wh28c"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Collector.png" id="3_w66ht"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/WoolAuto.png" id="4_gdvw8"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/TimeCollect.png" id="5_hqqsl"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/GoldenWool.png" id="6_xdoum"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_tu810"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepCollect.png" id="8_bo316"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepJump.png" id="9_d26l7"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepAir.png" id="10_tjmsw"]
+[ext_resource type="Script" path="res://Scripts/Shop/ShopList.gd" id="11_y80fh"]
 
 [sub_resource type="Resource" id="Resource_v5bxn"]
-script = ExtResource("2_hantp")
+script = ExtResource("2_wh28c")
 title = "Improve Shear"
-image = ExtResource("3_wh28c")
+image = ExtResource("3_w66ht")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-<<<<<<< Updated upstream
-price = 2244
-level = 11
+price = 174
+level = 7
 power = 1
-tax = 2.150000000000001
-=======
-price = 10854
-level = 13
-power = 1
-tax = 2.350000000000001
->>>>>>> Stashed changes
+tax = 1.7500000000000004
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_56xbq"]
-script = ExtResource("2_hantp")
+script = ExtResource("2_wh28c")
 title = "Auto collect"
-image = ExtResource("4_w66ht")
+image = ExtResource("4_gdvw8")
 description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+32[/wave]"
-price = 275
-level = 1
+price = 546
+level = 4
 power = 2
-tax = 1.1800000000000002
+tax = 1.4200000000000004
 taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_410ju"]
-script = ExtResource("2_hantp")
+script = ExtResource("2_wh28c")
 title = "Faster Auto Collect"
-image = ExtResource("5_gdvw8")
+image = ExtResource("5_hqqsl")
 description = "make the auto collector collects faster"
-price = 1250
+price = 1375
+level = 1
 power = 3
-tax = 1.1
+tax = 1.2200000000000002
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_ujam8"]
-script = ExtResource("2_hantp")
+script = ExtResource("2_wh28c")
 title = "Rare Wool"
-image = ExtResource("6_hqqsl")
-price = 2000
+image = ExtResource("6_xdoum")
+price = 2400
+level = 1
 power = 4
-tax = 1.2
+tax = 1.25
 taxInc = 0.05
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_62te2"]
-script = ExtResource("2_hantp")
+script = ExtResource("2_wh28c")
 title = "[rainbow]Multilplier"
-image = ExtResource("7_xdoum")
+image = ExtResource("7_tu810")
 description = "the more you buy it the more the collect doubles"
 price = 7000
 power = 5
@@ -80,9 +71,9 @@ taxInc = 0.3
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_ehq4q"]
-script = ExtResource("2_hantp")
+script = ExtResource("2_wh28c")
 title = "[rainbow]Auto Collect Sheep"
-image = ExtResource("8_tu810")
+image = ExtResource("8_bo316")
 price = 4000
 power = 6
 tax = 1.1
@@ -90,46 +81,37 @@ taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_q3ouh"]
-script = ExtResource("2_hantp")
+script = ExtResource("2_wh28c")
 title = "Jump Power"
-image = ExtResource("9_bo316")
-price = 440
-level = 1
+image = ExtResource("9_d26l7")
+price = 400
 power = 7
-tax = 1.3
+tax = 1.1
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_v1gif"]
-script = ExtResource("2_hantp")
+script = ExtResource("2_wh28c")
 title = "Air acceleration"
-image = ExtResource("10_d26l7")
-price = 870
-level = 1
+image = ExtResource("10_tjmsw")
+price = 725
 power = 8
-tax = 1.45
+tax = 1.2
 taxInc = 0.25
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_pbqe1"]
-script = ExtResource("11_tjmsw")
-items = Array[ExtResource("2_hantp")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh"), SubResource("Resource_v1gif")])
+script = ExtResource("11_y80fh")
+items = Array[ExtResource("2_wh28c")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh"), SubResource("Resource_v1gif")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
-script = ExtResource("1_rscn1")
-<<<<<<< Updated upstream
-money = 4387
-increment = 24
-autoCollect = 32
-=======
-money = 3712
-increment = 28
-autoCollect = 64
-autoCollectSheepAbility = true
->>>>>>> Stashed changes
+script = ExtResource("1_hantp")
+money = 4736
+increment = 16
+autoCollect = 128
+collectSpeed = 2.7
+rareChance = 0.01
 shopListData = SubResource("Resource_pbqe1")
 tutorialed = true
-jumpPower = 25.0
-airAcceleration = 50.0
 checkCodes = Array[Array]([["eid mubarak", true]])

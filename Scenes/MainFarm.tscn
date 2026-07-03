@@ -789,7 +789,7 @@ numberStarsSpawnLow = 12
 
 [node name="Grasses" type="Node2D" parent="Background" unique_id=1343974052]
 
-[node name="Grass" type="Sprite2D" parent="Background/Grasses" unique_id=1236406072 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass" type="Sprite2D" parent="Background/Grasses" unique_id=1236406072 node_paths=PackedStringArray("preShadowObj", "shadowObj", "shadow_grassMain") groups=["Grass"]]
 clip_children = 2
 position = Vector2(-259, 214)
 rotation = -0.11170108
@@ -807,6 +807,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+shadow_grassMain = NodePath("../../Floor/GrassesDark/Grass")
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass" unique_id=1618422654]
@@ -823,7 +824,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass4" type="Sprite2D" parent="Background/Grasses" unique_id=579412499 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass4" type="Sprite2D" parent="Background/Grasses" unique_id=579412499 node_paths=PackedStringArray("preShadowObj", "shadowObj", "shadow_grassMain") groups=["Grass"]]
 clip_children = 2
 position = Vector2(10, 227.00003)
 scale = Vector2(2.415, 3.45)
@@ -840,6 +841,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+shadow_grassMain = NodePath("../../Floor/GrassesDark/Grass4")
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass4" unique_id=1732593893]
@@ -856,7 +858,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass2" type="Sprite2D" parent="Background/Grasses" unique_id=136018246 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass2" type="Sprite2D" parent="Background/Grasses" unique_id=136018246 node_paths=PackedStringArray("preShadowObj", "shadowObj", "shadow_grassMain") groups=["Grass"]]
 clip_children = 2
 position = Vector2(-82, 222)
 rotation = 0.22514749
@@ -874,6 +876,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+shadow_grassMain = NodePath("../../Floor/GrassesDark/Grass2")
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass2" unique_id=971856134]
@@ -890,7 +893,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass3" type="Sprite2D" parent="Background/Grasses" unique_id=1757928845 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass3" type="Sprite2D" parent="Background/Grasses" unique_id=1757928845 node_paths=PackedStringArray("preShadowObj", "shadowObj", "shadow_grassMain") groups=["Grass"]]
 clip_children = 2
 position = Vector2(137, 218)
 scale = Vector2(2.22, 2.2199998)
@@ -907,6 +910,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+shadow_grassMain = NodePath("../../Floor/GrassesDark/Grass3")
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass3" unique_id=1644853639]
@@ -923,7 +927,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass5" type="Sprite2D" parent="Background/Grasses" unique_id=285329595 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass5" type="Sprite2D" parent="Background/Grasses" unique_id=285329595 node_paths=PackedStringArray("preShadowObj", "shadowObj", "shadow_grassMain") groups=["Grass"]]
 clip_children = 2
 position = Vector2(284, 229)
 rotation = 0.11170108
@@ -941,6 +945,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+shadow_grassMain = NodePath("../../Floor/GrassesDark/Grass5")
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass5" unique_id=453357039]
@@ -957,7 +962,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass6" type="Sprite2D" parent="Background/Grasses" unique_id=1846484363 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass6" type="Sprite2D" parent="Background/Grasses" unique_id=1846484363 node_paths=PackedStringArray("preShadowObj", "shadowObj", "shadow_grassMain") groups=["Grass"]]
 clip_children = 2
 position = Vector2(634, 240)
 scale = Vector2(2.98, 2.745)
@@ -974,6 +979,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+shadow_grassMain = NodePath("../../Floor/GrassesDark/Grass6")
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass6" unique_id=192585547]
@@ -990,7 +996,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass7" type="Sprite2D" parent="Background/Grasses" unique_id=1402012822 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass7" type="Sprite2D" parent="Background/Grasses" unique_id=1402012822 node_paths=PackedStringArray("preShadowObj", "shadowObj", "shadow_grassMain") groups=["Grass"]]
 clip_children = 2
 position = Vector2(460, 244)
 rotation = 0.11344639
@@ -1008,6 +1014,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+shadow_grassMain = NodePath("../../Floor/GrassesDark/Grass7")
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass7" unique_id=1671188593]
@@ -1045,7 +1052,7 @@ frame = 1
 position = Vector2(0.5238495, 0)
 scale = Vector2(0.37418145, 0.3745318)
 
-[node name="Grass" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1741385557 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1741385557 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(-258, 202)
 rotation = 3.0298915
@@ -1063,6 +1070,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass" unique_id=1991698147]
@@ -1079,7 +1087,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass2" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=365473052 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass2" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=365473052 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(-65, 205.00003)
 rotation = 3.668682
@@ -1097,6 +1105,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass2" unique_id=1193154490]
@@ -1113,7 +1122,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass3" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=305983324 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass3" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=305983324 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(147, 205.00003)
 rotation = 2.994985
@@ -1131,6 +1140,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass3" unique_id=166641515]
@@ -1147,7 +1157,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass4" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1737907857 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass4" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1737907857 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13333334)
 position = Vector2(14, 210.00003)
 rotation = 2.9164453
@@ -1166,6 +1176,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass4" unique_id=622585440]
@@ -1182,7 +1193,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass5" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1838971499 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass5" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1838971499 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(291, 222.00003)
 rotation = 3.39292
@@ -1200,6 +1211,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass5" unique_id=113141260]
@@ -1216,7 +1228,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass6" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=526289981 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass6" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=526289981 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(627, 233.00003)
 rotation = -2.804744
@@ -1234,6 +1246,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass6" unique_id=154477811]
@@ -1250,7 +1263,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass7" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1312174220 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass7" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1312174220 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(460, 217.00003)
 rotation = 3.063053
@@ -1268,6 +1281,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass7" unique_id=1550068507]
@@ -2700,6 +2714,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1280.0
+offset_bottom = -1280.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("69_l88l1")
@@ -2711,7 +2727,7 @@ layout_mode = 0
 offset_left = 194.0
 offset_top = 99.0
 offset_right = 1083.0
-offset_bottom = 621.0
+offset_bottom = 579.0
 texture = SubResource("CanvasTexture_4ghmb")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/CanvasLayer/Achievements/TextureRect" unique_id=865857912]
@@ -2725,8 +2741,17 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer/Achievements/TextureRect/ScrollContainer" unique_id=84288405]
 layout_mode = 2
 
+[node name="Button" type="Button" parent="Control/CanvasLayer/Achievements" unique_id=1206291248]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 584.0
+offset_right = 943.0
+offset_bottom = 675.0
+text = "Back"
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
+process_callback = 0
 limit_enabled = false
 
 [connection signal="button_down" from="Control/CanvasLayer/ShopHelper/UpAlign/Up" to="Control/CanvasLayer/ShopHelper" method="_on_up_button_down"]
@@ -2737,6 +2762,7 @@ limit_enabled = false
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/ShoppingKart" to="Control/CanvasLayer/OptionUI" method="_on_shopping_kart_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/SkinsButton" to="Control/CanvasLayer/SkinPanel" method="_on_skins_button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" to="Control/CanvasLayer/OptionUI" method="_on_shopping_kart_rebirth_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/OptionUI/Achievements" to="Control/CanvasLayer/Achievements" method="_on_achievements_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/RebirthIc" to="Control/CanvasLayer/RebirthMenu" method="_on_rebirth_ic_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Resume" to="Control/CanvasLayer/PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Settings" to="Control/CanvasLayer/PauseMenu" method="_on_settings_pressed"]
@@ -2760,3 +2786,4 @@ limit_enabled = false
 [connection signal="pressed" from="Control/CanvasLayer/RebirthMenu/TextureRect/Back" to="Control/CanvasLayer/RebirthMenu" method="_on_back_pressed"]
 [connection signal="timeout" from="Control/CanvasLayer/RebirthMenu/SquareRootCalculate" to="Control/CanvasLayer/RebirthMenu" method="_on_square_root_calculate_timeout"]
 [connection signal="pressed" from="Control/CanvasLayer/SkinPanel/Back" to="Control/CanvasLayer/SkinPanel" method="_on_back_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Achievements/Button" to="Control/CanvasLayer/Achievements" method="_on_button_pressed"]

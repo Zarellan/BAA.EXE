@@ -211,6 +211,9 @@ func _on_quality_option_item_selected(index: int) -> void:
 	await RenderingServer.frame_post_draw #StarSpawner won't load in first frame reload so waiting is the solution
 	var starSpawner = get_tree().get_first_node_in_group("StarSpawner")
 	(starSpawner as StarSpawner).SpawnStars.call_deferred()
+	var grasses = get_tree().get_nodes_in_group("Grass")
+	for i in range(grasses.size()):
+		grasses[i].SetGrassBasedQuality()
 	pass
 
 func BasedOnQuality():
@@ -283,6 +286,7 @@ func DeleteData():
 
 
 func _on_glitch_effect_box_toggled(toggled_on: bool) -> void:
+	await RenderingServer.frame_post_draw
 	var keys = ShopItem.shopItems.keys()
 	var keysRebirth = RebirthItem.rebirthItems.keys()
 	GameHandler.saveDataSettings.glitchEffect = toggled_on
@@ -301,7 +305,7 @@ func _on_color_picker_button_color_changed(color: Color) -> void:
 
 
 func _on_border_shade_box_pressed() -> void:
-	pass # Replace with function body.
+	pass
 
 
 func _on_border_shade_box_toggled(toggled_on: bool) -> void:
