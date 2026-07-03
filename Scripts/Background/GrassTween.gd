@@ -66,6 +66,8 @@ func SkewByMath(obj, st, en, delta):
 var lastMousePos:Vector2;
 
 var grassSpeedTween:Tween
+
+var cooldown:float = 0;
 func _process(delta: float) -> void:
 	if (GameHandler.saveDataSettings.quality != GameHandler.Quality.High):
 		return
@@ -73,15 +75,19 @@ func _process(delta: float) -> void:
 	var global_mouse = get_global_mouse_position()
 	var distance_mouse = global_mouse.distance_to(lastMousePos)
 	if (get_rect().has_point(local_mouse) && !isShadow &&\
-	distance_mouse > 60):
+	distance_mouse > 60 && cooldown <= 0):
 		TweenUtils.StopTween(grassSpeedTween)
 		grassSpeedTween = TweenUtils.tweenCustom(self,20,1,2,TweenUtils.Ease.linear,func(val):
 			speedExt = val
 			if (is_instance_valid(shadow_grassMain)):
 				shadow_grassMain.speedExt = val
 			)
+		GlobalAudio.PlayOneShot("res://Sounds/grass.ogg",-4,randf_range(0.90,1.20))
+		cooldown = 0.9
 	lastMousePos = global_mouse
-
+	
 	SkewByMath(self, deg_to_rad(start), deg_to_rad(end), delta)
 	SkewByMath(preShadowObj, deg_to_rad(start_preShadow), deg_to_rad(end_preShadow), delta)
 	SkewByMath(shadowObj, deg_to_rad(start_shadow), deg_to_rad(end_shadow), delta)
+	if (cooldown >= 0.0):
+		cooldown -= delta

@@ -107,7 +107,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_hantp")
-money = 4736
+money = 22312
 increment = 16
 autoCollect = 128
 collectSpeed = 2.7

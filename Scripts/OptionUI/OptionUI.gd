@@ -21,6 +21,7 @@ static var isRebirth = false;
 func _ready() -> void:
 	isShop = true;
 	isRebirth = false;
+	rebirthPanel.visible = false
 	rebirthPanel.position.x = 2480
 	goldKartValue = ValueSaver.new()
 	GoldenTweens()
@@ -53,6 +54,8 @@ func _on_shopping_kart_pressed() -> void:
 		TweenUtils.StopTween(tweenRebirthPanel)
 		tweenRebirthPanel = TweenUtils.tweenX(rebirthPanel,2480.0,0.3,TweenUtils.Ease.OutCirc)
 		isRebirth = false
+		tweenRebirthPanel.finished.connect(func():
+			rebirthPanel.visible = false)
 	if (!isShop):
 		TweenUtils.StopTween(tweenShopPanel)
 		tweenShopPanel = TweenUtils.tweenX(shopPanel,1240.0,0.3,TweenUtils.Ease.OutCirc)
@@ -61,6 +64,7 @@ func _on_shopping_kart_pressed() -> void:
 		TweenUtils.StopTween(tweenDownScroll)
 		tweenDownScroll = TweenUtils.tweenAlpha(downScroll,1,0.3,TweenUtils.Ease.OutCirc)
 		isShop = true
+		shopPanel.visible = true
 	else:
 		TweenUtils.StopTween(tweenShopPanel)
 		tweenShopPanel = TweenUtils.tweenX(shopPanel,2480.0,0.3,TweenUtils.Ease.InSine)
@@ -69,6 +73,8 @@ func _on_shopping_kart_pressed() -> void:
 		TweenUtils.StopTween(tweenDownScroll)
 		tweenDownScroll = TweenUtils.tweenAlpha(downScroll,0,0.3,TweenUtils.Ease.OutCirc)
 		isShop = false
+		tweenShopPanel.finished.connect(func():
+			shopPanel.visible = false)
 	EnsureTextChange()
 	pass # Replace with function body.
 
@@ -80,6 +86,9 @@ func _on_shopping_kart_rebirth_pressed() -> void:
 		TweenUtils.StopTween(tweenShopPanel)
 		tweenShopPanel = TweenUtils.tweenX(shopPanel,2480.0,0.3,TweenUtils.Ease.OutCirc)
 		isShop = false
+		tweenShopPanel.finished.connect(func():
+			shopPanel.visible = false)
+
 	if (!isRebirth):
 		TweenUtils.StopTween(tweenRebirthPanel)
 		tweenRebirthPanel = TweenUtils.tweenX(rebirthPanel,1240.0,0.3,TweenUtils.Ease.OutCirc)
@@ -88,6 +97,7 @@ func _on_shopping_kart_rebirth_pressed() -> void:
 		TweenUtils.StopTween(tweenDownScroll)
 		tweenDownScroll = TweenUtils.tweenAlpha(downScroll,1,0.3,TweenUtils.Ease.OutCirc)
 		isRebirth = true
+		rebirthPanel.visible = true
 	else:
 		TweenUtils.StopTween(tweenRebirthPanel)
 		tweenRebirthPanel = TweenUtils.tweenX(rebirthPanel,2480.0,0.3,TweenUtils.Ease.InSine)
@@ -96,6 +106,8 @@ func _on_shopping_kart_rebirth_pressed() -> void:
 		TweenUtils.StopTween(tweenDownScroll)
 		tweenDownScroll = TweenUtils.tweenAlpha(downScroll,0,0.3,TweenUtils.Ease.OutCirc)
 		isRebirth = false
+		tweenRebirthPanel.finished.connect(func():
+			rebirthPanel.visible = false)
 	EnsureTextChange()
 	pass # Replace with function body.
 

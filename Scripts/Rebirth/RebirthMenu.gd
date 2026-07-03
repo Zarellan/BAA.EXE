@@ -18,6 +18,7 @@ func _ready() -> void:
 	textureRebirth = (get_node("TextureRect/Rebirth/TextureRect") as TextureRect)
 	textureRebirthMain = (get_node("TextureRect") as TextureRect)
 	InitializeShader()
+	visible = false
 	#SetShader(false)
 	pass # Replace with function body.
 
@@ -52,11 +53,14 @@ func BringRebirth():
 		tweenRebirth = TweenUtils.tweenY(self,0.0,0.3,TweenUtils.Ease.OutCirc)
 		CalculateRebirth()
 		isRebirthMenu = true
+		visible = true
 func ExitRebirth():
 	if isRebirthMenu:
 		TweenUtils.StopTween(tweenRebirth)
 		tweenRebirth = TweenUtils.tweenY(self,-get_rect().size.y,0.3,TweenUtils.Ease.InSine)
 		isRebirthMenu = false
+		tweenRebirth.finished.connect(func():
+			visible = false)
 
 func _on_back_pressed() -> void:
 	ExitRebirth()

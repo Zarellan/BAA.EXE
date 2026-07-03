@@ -7,6 +7,7 @@ static var paused = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	paused = false
+	visible = false
 	pass # Replace with function body.
 
 var tweenPause:Tween
@@ -33,10 +34,13 @@ func BringPause():
 		TweenUtils.StopTween(tweenPause)
 		tweenPause = TweenUtils.tweenY(self,0.0,0.3,TweenUtils.Ease.OutCirc)
 		paused = true
+		visible = true
 func ExitPause():
 	if paused:
 		TweenUtils.StopTween(tweenPause)
 		tweenPause = TweenUtils.tweenY(self,-get_rect().size.y,0.3,TweenUtils.Ease.InSine)
+		tweenPause.finished.connect(func():
+			visible = false)
 		paused = false
 func _on_resume_pressed() -> void:
 	ExitPause()

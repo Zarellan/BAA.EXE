@@ -2,6 +2,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	visible = false
 	pass # Replace with function body.
 
 
@@ -20,11 +21,14 @@ func BringSkinChanger():
 	skinChangeTween = TweenUtils.tweenY(self,0,0.3,TweenUtils.Ease.OutCirc)
 	get_node("SubViewportContainer/SubViewport/SkinChanger").PrepSkin()
 	SkinChanger.isSkinChanging = true
+	visible = true
 
 func ExitSkinChanger():
 	TweenUtils.StopTween(skinChangeTween)
 	skinChangeTween = TweenUtils.tweenY(self,-720.0,0.3,TweenUtils.Ease.InSine)
 	SkinChanger.isSkinChanging = false
+	skinChangeTween.finished.connect(func():
+		visible = false)
 
 
 func _on_skins_button_pressed() -> void:

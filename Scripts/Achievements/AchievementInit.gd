@@ -14,6 +14,7 @@ func _ready() -> void:
 		(pref as AchievementItem).SetAchieve(ls)
 	
 	position.y = -get_rect().size.y
+	visible = false
 	pass # Replace with function body.
 
 
@@ -29,11 +30,14 @@ func BringAchievement():
 		TweenUtils.StopTween(achieveTween)
 		achieveTween = TweenUtils.tweenY(self,0.0,0.3,TweenUtils.Ease.OutCirc)
 		isAchievement = true
+		visible = true
 func ExitAchievement():
 	if isAchievement:
 		TweenUtils.StopTween(achieveTween)
 		achieveTween = TweenUtils.tweenY(self,-get_rect().size.y,0.3,TweenUtils.Ease.InSine)
 		isAchievement = false
+		achieveTween.finished.connect(func():
+			visible = false)
 
 func _on_achievements_pressed() -> void:
 	BringAchievement()

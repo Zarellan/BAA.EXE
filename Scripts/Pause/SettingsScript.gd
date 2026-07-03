@@ -44,6 +44,8 @@ func _ready() -> void:
 	InitializeSettings()
 	get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
 	colorPicker.color = GameHandler.saveDataSettings.sheepColor
+
+	visible = false
 	pass # Replace with function body.
 
 func InitializeSettings():
@@ -154,11 +156,14 @@ func BringSettings():
 		settings = true
 		if (indexSettings == 2):
 			SetCodeMode(true)
+		visible = true
 
 func ExitSettings():
 	if settings:
 		TweenUtils.StopTween(tweenSettings)
 		tweenSettings = TweenUtils.tweenY(self,-get_rect().size.y,0.3,TweenUtils.Ease.InSine)
+		tweenSettings.finished.connect(func():
+			visible = false)
 		settings = false
 		SetCodeMode(false)
 
