@@ -274,8 +274,9 @@ func _input(event: InputEvent) -> void:
 		if event.is_pressed():
 			# The user just tapped the screen / clicked
 			Hovered()
-			Bought()
 			CustomItemText()
+		elif event.is_released() && ShopHelper.totalSwipe < 50:
+			Bought()
 			pass
 
 func ExceptionalLock():
@@ -305,7 +306,7 @@ func Unlock():
 
 func Hovered():
 	var mouse_pos = get_global_mouse_position()
-	if (get_global_rect().has_point(mouse_pos) && !isInside) && !GameHandler.GamePausedPartil():
+	if (get_global_rect().has_point(mouse_pos) && !isInside) && !GameHandler.GamePausedPartil() && ShopHelper.totalSwipe < 50:
 		TweenUtils.StopTween(tweenAlpha)
 		TweenUtils.StopTween(tweenHolder)
 		TweenUtils.StopTween(tweenRotationImage)
@@ -313,7 +314,7 @@ func Hovered():
 		tweenHolder = TweenUtils.tweenScale(get_node("Holder"),Vector2(1.02,1.02),0.2,TweenUtils.Ease.OutCirc)
 		tweenRotationImage = TweenUtils.tweenRotation(get_node("Holder/ItemImage"),-5,0.2,TweenUtils.Ease.OutCirc)
 		isInside = true
-	elif (!get_global_rect().has_point(mouse_pos) && isInside) || GameHandler.GamePausedPartil():
+	elif (!get_global_rect().has_point(mouse_pos) && isInside) || GameHandler.GamePausedPartil() || ShopHelper.totalSwipe >= 50:
 		TweenUtils.StopTween(tweenAlpha)
 		TweenUtils.StopTween(tweenHolder)
 		TweenUtils.StopTween(tweenRotationImage)
@@ -409,7 +410,7 @@ var tweenXtextLevel:Tween
 var tweenXLock:Tween
 
 func Bought():
-	if isInside && Input.is_action_just_pressed("LeftMouse"):
+	if isInside && (Input.is_action_just_pressed("LeftMouse") || DeviceCheckerUtil.IsUsingPhone()):
 		if (shopData.power == Powers.none):
 			push_error("no power added")
 			return

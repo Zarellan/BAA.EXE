@@ -21,12 +21,12 @@ static var isRebirth = false;
 func _ready() -> void:
 	isShop = true;
 	isRebirth = false;
-	rebirthPanel.visible = false
-	rebirthPanel.position.x = 2480
 	goldKartValue = ValueSaver.new()
 	GoldenTweens()
 	GoldKart()
 	InitializeShader()
+	rebirthPanel.position.x = 2480
+	rebirthPanel.set_visible.call_deferred(false)
 	pass # Replace with function body.
 
 
