@@ -461,6 +461,7 @@ expand_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Holder" unique_id=1387889320]
 material = SubResource("ShaderMaterial_gjpg2")
+clip_contents = true
 layout_mode = 0
 offset_left = 193.0
 offset_top = 24.0
@@ -468,6 +469,8 @@ offset_right = 705.0
 offset_bottom = 78.0
 
 [node name="SubViewport" type="SubViewport" parent="Holder/SubViewportContainer" unique_id=163992961]
+process_mode = 4
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(512, 54)
@@ -495,6 +498,7 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="SubViewportContainerDesc" type="SubViewportContainer" parent="Holder" unique_id=1884118040]
 material = SubResource("ShaderMaterial_tejl3")
+clip_contents = true
 layout_mode = 0
 offset_left = 194.0
 offset_top = 80.0
@@ -502,6 +506,8 @@ offset_right = 707.0
 offset_bottom = 147.0
 
 [node name="SubViewport" type="SubViewport" parent="Holder/SubViewportContainerDesc" unique_id=292138394]
+process_mode = 4
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(512, 54)

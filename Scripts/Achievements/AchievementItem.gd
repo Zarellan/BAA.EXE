@@ -12,12 +12,10 @@ var itemAchive:SkinItem
 func _ready() -> void:
 	
 	achievementItem[itemAchive.achievementName] = self
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func SetAchieve(item:SkinItem):
 	title.text = item.achievementName

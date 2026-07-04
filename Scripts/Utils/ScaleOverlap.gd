@@ -17,6 +17,8 @@ func _ready() -> void:
 		node.pivot_offset_ratio = Vector2(0.5,0.5)
 	if (is_instance_valid(button)):
 		TweenUtils.tweenAlphaSelf(button,0.7,0.0001,TweenUtils.Ease.OutCirc)
+	set_process(false)
+	set_physics_process(false)
 	pass # Replace with function body.
 
 func MouseEntered():

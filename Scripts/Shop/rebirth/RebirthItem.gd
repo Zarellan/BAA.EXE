@@ -46,8 +46,6 @@ var levelNode:Control
 var itemImage:Control
 var originalPosXMoney
 
-var frequencyWavePrice:ValueSaver = ValueSaver.new()
-
 var centerYdef = 53.0
 var centerYdefLevel = 28.0
 
@@ -61,7 +59,6 @@ var possibleBought = true
 
 
 func _ready() -> void:
-	frequencyWavePrice.number = 0
 	originalPosXMoney = get_node("Holder/Prce").position.x
 	moneyNode = get_node("Holder/Prce/Price")
 	moneyNodePos = get_node("Holder/Prce")
@@ -256,14 +253,30 @@ func set_item(rebirthDat:RebirthClass):
 var last_time_update:float = 0.0
 const UPDATE_INTERVAL:float = 0.10
 func _process(_delta: float) -> void:
+	if (DeviceCheckerUtil.IsUsingPhone()):
+		return
 	last_time_update += _delta
 	Bought()
 	if (last_time_update > UPDATE_INTERVAL):
-		Hovered()
-		CustomItemText()
-		moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [frequencyWavePrice.number,NumberFormat.Format(shopData.rebirthPrice)]
+		PurchaseProcessFunction()
 		last_time_update = 0
 	pass
+
+func PurchaseProcessFunction():
+	Hovered()
+	CustomItemText()
+
+func _input(event: InputEvent) -> void:
+	if (!DeviceCheckerUtil.IsUsingPhone()):
+		return
+	# Detects both mouse clicks and mobile screen touches
+	if event is InputEventScreenTouch:
+		if event.is_pressed():
+			# The user just tapped the screen / clicked
+			Hovered()
+			Bought()
+			CustomItemText()
+			pass
 
 func ExceptionalLock():
 	match (shopData.power):
@@ -276,7 +289,8 @@ func ExceptionalLock():
 		moneyNodePos.modulate.a = 0
 	else:
 		get_node("Holder/Lock").self_modulate.a = 0
-		moneyNodePos.modulate.a = 1
+		if (shopData.canBuy):
+			moneyNodePos.modulate.a = 1
 
 func BoughtUnlock():
 	match (shopData.power):
@@ -291,7 +305,6 @@ func Unlock():
 
 func Hovered():
 	var mouse_pos = get_global_mouse_position()
-	
 	if (get_global_rect().has_point(mouse_pos) && !isInside) && !GameHandler.GamePausedPartil():
 		TweenUtils.StopTween(tweenAlpha)
 		TweenUtils.StopTween(tweenHolder)
@@ -310,8 +323,8 @@ func Hovered():
 		isInside = false
 
 func ModifyTexts():
+	moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [0,NumberFormat.Format(shopData.rebirthPrice)]
 	#moneyNode.text = "$" + str(shopData.price)
-	moneyNode.text = "[wave amp=%d freq=5]%s%d[/wave]" % [frequencyWavePrice.number, "$",shopData.rebirthPrice]
 	if (shopData.canBuy):
 		levelNode.text = "lv:"+ str(shopData.level)
 	else:
@@ -421,14 +434,18 @@ func Bought():
 			shopData.rebirthPrice = int(floor(shopData.rebirthPrice * shopData.tax))
 			shopData.tax += shopData.taxInc
 			TweenColor(Color(0.0, 0.905, 0.2))
-			frequencyWavePrice.number = 40
-			TweenUtils.tweenNumber(self,frequencyWavePrice,0,0.2,TweenUtils.Ease.linear)
+			TweenUtils.tweenCustom(self,40,0,0.2,TweenUtils.Ease.linear,func(val):
+					moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [val,NumberFormat.Format(shopData.rebirthPrice)])
 			if shopData.level == 0:
 				TweenUtils.tweenY(moneyNodePos,priceLevelYdef,0.3,TweenUtils.Ease.OutCirc)
 				TweenUtils.tweenScale(moneyNodePos,Vector2(0.8,0.8),0.3,TweenUtils.Ease.OutCirc)
 				TweenUtils.tweenAlpha(levelNode,1,0.3,TweenUtils.Ease.linear)
 			shopData.level += 1
 			ModifyTexts()
+			var priceTotal:String = NumberFormat.Format(shopData.rebirthPrice)
+			TweenUtils.tweenCustom(self,40,0,0.2,TweenUtils.Ease.linear,func(val):
+					moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [val,priceTotal])
+
 			#ResourceUtil.SaveResource(GameHandler.saveData,"ShopList.tres","saver")
 			var partic = InstantiateUtil.Instantiate(particle,get_tree().get_first_node_in_group("UI"))
 			partic.global_position = get_node("Holder/ParticlePlace").global_position

@@ -16,6 +16,8 @@ class_name GrassTween
 @export var shadow_grassMain:GrassTween
 
 @export var isShadow:bool = false
+@export var skipShake:bool = false
+
 var speedExt:float = 1.0;
 
 var touchedGrass:bool = false # I do need to touch grass thought
@@ -42,6 +44,7 @@ func SetGrassBasedQuality():
 		TweenUtils.StopTween(grasstwShadow)
 		TweenUtils.StopTween(grasstwPre)
 		TweenUtils.StopTween(grassSpeedTween)
+		set_process(true)
 	else:
 		TweenUtils.StopTween(grasstw)
 		TweenUtils.StopTween(grasstwShadow)
@@ -50,6 +53,7 @@ func SetGrassBasedQuality():
 		grasstw = TweenUtils.tweenSkewPingPong(self,deg_to_rad(end),deg_to_rad(start),duration,TweenUtils.Ease.InOutSine)
 		grasstwPre = TweenUtils.tweenSkewPingPong(preShadowObj,deg_to_rad(end_preShadow),deg_to_rad(start_preShadow),duration,TweenUtils.Ease.InOutSine)
 		grasstwShadow = TweenUtils.tweenSkewPingPong(shadowObj,deg_to_rad(end_shadow),deg_to_rad(start_shadow),duration,TweenUtils.Ease.InOutSine)
+		set_process(false)
 
 var time_passed = 0;
 var wavePhase:float = 0;
@@ -74,8 +78,8 @@ func _process(delta: float) -> void:
 	var local_mouse = get_local_mouse_position()
 	var global_mouse = get_global_mouse_position()
 	var distance_mouse = global_mouse.distance_to(lastMousePos)
-	if (get_rect().has_point(local_mouse) && !isShadow &&\
-	distance_mouse > 60 && cooldown <= 0):
+	if (!GameHandler.GamePausedPartil() && get_rect().has_point(local_mouse) && !isShadow &&\
+	distance_mouse > 60 && cooldown <= 0 && !skipShake):
 		TweenUtils.StopTween(grassSpeedTween)
 		grassSpeedTween = TweenUtils.tweenCustom(self,20,1,2,TweenUtils.Ease.linear,func(val):
 			speedExt = val

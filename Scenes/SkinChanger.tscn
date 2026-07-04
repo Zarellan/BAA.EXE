@@ -42,7 +42,7 @@ numberStarsSpawnLow = 12
 
 [node name="Grasses" type="Node2D" parent="Background" unique_id=1838897625]
 
-[node name="Grass" type="Sprite2D" parent="Background/Grasses" unique_id=1408842367 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass" type="Sprite2D" parent="Background/Grasses" unique_id=1408842367 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 clip_children = 2
 position = Vector2(-259, 214)
 rotation = -0.11170108
@@ -60,6 +60,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+skipShake = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass" unique_id=1725311445]
@@ -76,7 +77,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass4" type="Sprite2D" parent="Background/Grasses" unique_id=1621411169 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass4" type="Sprite2D" parent="Background/Grasses" unique_id=1621411169 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 clip_children = 2
 position = Vector2(10, 227.00003)
 scale = Vector2(2.415, 3.45)
@@ -93,6 +94,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+skipShake = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass4" unique_id=1838058971]
@@ -109,7 +111,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass2" type="Sprite2D" parent="Background/Grasses" unique_id=217046372 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass2" type="Sprite2D" parent="Background/Grasses" unique_id=217046372 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 clip_children = 2
 position = Vector2(-82, 222)
 rotation = 0.22514749
@@ -127,6 +129,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+skipShake = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass2" unique_id=1320862733]
@@ -143,7 +146,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass3" type="Sprite2D" parent="Background/Grasses" unique_id=721589684 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass3" type="Sprite2D" parent="Background/Grasses" unique_id=721589684 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 clip_children = 2
 position = Vector2(137, 218)
 scale = Vector2(2.22, 2.2199998)
@@ -160,6 +163,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+skipShake = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass3" unique_id=1593309404]
@@ -176,7 +180,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass5" type="Sprite2D" parent="Background/Grasses" unique_id=1551071907 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass5" type="Sprite2D" parent="Background/Grasses" unique_id=1551071907 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 clip_children = 2
 position = Vector2(284, 229)
 rotation = 0.11170108
@@ -194,6 +198,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+skipShake = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass5" unique_id=592179569]
@@ -210,7 +215,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass6" type="Sprite2D" parent="Background/Grasses" unique_id=863002832 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass6" type="Sprite2D" parent="Background/Grasses" unique_id=863002832 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 clip_children = 2
 position = Vector2(634, 240)
 scale = Vector2(2.98, 2.745)
@@ -227,6 +232,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+skipShake = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass6" unique_id=149433100]
@@ -243,7 +249,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass7" type="Sprite2D" parent="Background/Grasses" unique_id=2041718372 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass7" type="Sprite2D" parent="Background/Grasses" unique_id=2041718372 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 clip_children = 2
 position = Vector2(460, 244)
 rotation = 0.11344639
@@ -261,6 +267,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+skipShake = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass7" unique_id=1499547076]
@@ -286,7 +293,7 @@ texture = ExtResource("8_ibc7c")
 [node name="SheepShadow" type="Sprite2D" parent="Background/Floor" unique_id=1431314661]
 self_modulate = Color(0, 0, 0, 0.3529412)
 texture_filter = 1
-position = Vector2(48.999893, 110.23534)
+position = Vector2(81.34702, 110.861435)
 scale = Vector2(0.8089888, 0.8089888)
 skew = 0.43807757
 texture = ExtResource("8_6lplx")
@@ -294,11 +301,11 @@ offset = Vector2(3.2407265, -63.759247)
 hframes = 2
 frame = 1
 
-[node name="GrassesDark" type="Node2D" parent="Background/Floor" unique_id=1102190099]
+[node name="GrassesDark" type="Node2D" parent="Background/Floor" unique_id=1102190099 groups=["GrassDark"]]
 position = Vector2(0.5238495, 0)
 scale = Vector2(0.37418145, 0.3745318)
 
-[node name="Grass" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=424493993 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=424493993 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(-258, 202)
 rotation = 3.0298915
@@ -316,6 +323,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass" unique_id=1854531867]
@@ -332,7 +340,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass2" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1149864404 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass2" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1149864404 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(-65, 205.00003)
 rotation = 3.668682
@@ -350,6 +358,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass2" unique_id=2047992946]
@@ -366,7 +375,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass3" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=151956576 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass3" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=151956576 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(147, 205.00003)
 rotation = 2.994985
@@ -384,6 +393,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass3" unique_id=1316245008]
@@ -400,7 +410,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass4" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1820540732 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass4" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1820540732 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13333334)
 position = Vector2(14, 210.00003)
 rotation = 2.9164453
@@ -419,6 +429,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass4" unique_id=755724178]
@@ -435,7 +446,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass5" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=6533927 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass5" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=6533927 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(291, 222.00003)
 rotation = 3.39292
@@ -453,6 +464,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass5" unique_id=955238770]
@@ -469,7 +481,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass6" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1856985571 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass6" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1856985571 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(627, 233.00003)
 rotation = -2.804744
@@ -487,6 +499,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass6" unique_id=229380361]
@@ -503,7 +516,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("6_77y01")
 offset = Vector2(0, -31.835205)
 
-[node name="Grass7" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1032359054 node_paths=PackedStringArray("preShadowObj", "shadowObj")]
+[node name="Grass7" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1032359054 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
 self_modulate = Color(0, 0, 0, 0.13725491)
 position = Vector2(460, 217.00003)
 rotation = 3.063053
@@ -521,6 +534,7 @@ end_preShadow = 1.585
 shadowObj = NodePath("GrassShadow2")
 start_shadow = -5.35
 end_shadow = 3.335
+isShadow = true
 metadata/_edit_group_ = true
 
 [node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass7" unique_id=165018484]
@@ -682,9 +696,10 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("11_b1oa7")
 flip_v = true
 
-[node name="Sheep2" parent="." unique_id=1343371003 instance=ExtResource("2_x5u6f")]
+[node name="Sheep2" parent="." unique_id=1343371003 node_paths=PackedStringArray("sheepShadow") instance=ExtResource("2_x5u6f")]
 position = Vector2(467.99997, 668)
 scale = Vector2(3.055, 3.055)
+sheepShadow = NodePath("../Background/Floor/SheepShadow")
 
 [connection signal="pressed" from="Control/CanvasLayer/ApplySkin" to="." method="_on_apply_skin_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Left" to="." method="_on_left_pressed"]

@@ -140,14 +140,12 @@ func _input(event: InputEvent) -> void:
 	if (!DeviceCheckerUtil.IsUsingPhone()):
 		return
 	# Detects both mouse clicks and mobile screen touches
-	if event is InputEventScreenTouch or event is InputEventMouseButton:
+	if event is InputEventScreenTouch:
 		if event.is_pressed():
 			# The user just tapped the screen / clicked
 			Hovered()
 			Bought()
 			ExceptionalPurchase()
-		elif event.is_released():
-			# The user lifted their finger / mouse button
 			pass
 
 var exceptioned := false

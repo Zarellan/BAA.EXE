@@ -1048,7 +1048,7 @@ offset = Vector2(3.2407265, -63.759247)
 hframes = 2
 frame = 1
 
-[node name="GrassesDark" type="Node2D" parent="Background/Floor" unique_id=1617953732]
+[node name="GrassesDark" type="Node2D" parent="Background/Floor" unique_id=1617953732 groups=["GrassDark"]]
 position = Vector2(0.5238495, 0)
 scale = Vector2(0.37418145, 0.3745318)
 
@@ -1607,11 +1607,14 @@ offset_right = 38.0
 offset_bottom = 31.0
 metadata/_edit_use_anchors_ = true
 
-[node name="Up" type="Button" parent="Control/CanvasLayer/ShopHelper/UpAlign" unique_id=1361574283]
+[node name="Up" type="TextureButton" parent="Control/CanvasLayer/ShopHelper/UpAlign" unique_id=113460648]
 layout_mode = 0
 offset_left = 283.0
 offset_right = 370.0
 offset_bottom = 90.0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/ShopHelper/UpAlign/Up" unique_id=117767300]
@@ -1625,6 +1628,14 @@ grow_vertical = 2
 texture = ExtResource("46_v1gif")
 metadata/_edit_use_anchors_ = true
 
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/ShopHelper/UpAlign" unique_id=148781762 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../Up/TextureRect")
+scaleVal = 1.1
+button = NodePath("../Up")
+metadata/_edit_use_anchors_ = true
+
 [node name="DownAlign" type="Control" parent="Control/CanvasLayer/ShopHelper" unique_id=1696989066]
 layout_mode = 1
 anchors_preset = 2
@@ -1635,7 +1646,7 @@ offset_right = 40.0
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Down" type="Button" parent="Control/CanvasLayer/ShopHelper/DownAlign" unique_id=117179256]
+[node name="Down" type="TextureButton" parent="Control/CanvasLayer/ShopHelper/DownAlign" unique_id=1071671071]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = -0.225
@@ -1644,6 +1655,9 @@ offset_left = 282.0
 offset_top = -50.0
 offset_right = 369.0
 offset_bottom = 40.0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/ShopHelper/DownAlign/Down" unique_id=1519295224]
@@ -1657,6 +1671,14 @@ grow_vertical = 2
 rotation = -3.1415927
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("46_v1gif")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/ShopHelper/DownAlign" unique_id=718912160 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../Down/TextureRect")
+scaleVal = 1.1
+button = NodePath("../Down")
 metadata/_edit_use_anchors_ = true
 
 [node name="Mouse" type="Control" parent="Control/CanvasLayer" unique_id=1630782413]

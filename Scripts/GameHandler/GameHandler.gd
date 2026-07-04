@@ -188,7 +188,7 @@ func NowCollect():
 	SaveAllDataGlob()
 
 func GamePausedPartil() -> bool:
-	return PauseScript.paused || RebirthMenu.isRebirthMenu || saveDataRebirth.autoCollectSheepAbility || SkinChanger.isSkinChanging || \
+	return PauseScript.paused || RebirthMenu.isRebirthMenu || SkinChanger.isSkinChanging || \
 	AchievementHandler.isAchievement
 	
 func AutoCollectSheepActive():

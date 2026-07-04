@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 func PlayRainbowStarParticle():
-	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.Low):
+	if (GameHandler.saveDataSettings.quality != GameHandler.Quality.High):
 		return
 	for i in range(randi_range(3,8)):
 		if (added >= maxStars):

@@ -26,6 +26,7 @@ func _ready() -> void:
 	goldKartValue = ValueSaver.new()
 	GoldenTweens()
 	GoldKart()
+	InitializeShader()
 	pass # Replace with function body.
 
 
@@ -55,7 +56,8 @@ func _on_shopping_kart_pressed() -> void:
 		tweenRebirthPanel = TweenUtils.tweenX(rebirthPanel,2480.0,0.3,TweenUtils.Ease.OutCirc)
 		isRebirth = false
 		tweenRebirthPanel.finished.connect(func():
-			rebirthPanel.visible = false)
+			rebirthPanel.visible = false
+			ActiveRebirth(false))
 	if (!isShop):
 		TweenUtils.StopTween(tweenShopPanel)
 		tweenShopPanel = TweenUtils.tweenX(shopPanel,1240.0,0.3,TweenUtils.Ease.OutCirc)
@@ -65,6 +67,7 @@ func _on_shopping_kart_pressed() -> void:
 		tweenDownScroll = TweenUtils.tweenAlpha(downScroll,1,0.3,TweenUtils.Ease.OutCirc)
 		isShop = true
 		shopPanel.visible = true
+		ActiveShopItems(true)
 	else:
 		TweenUtils.StopTween(tweenShopPanel)
 		tweenShopPanel = TweenUtils.tweenX(shopPanel,2480.0,0.3,TweenUtils.Ease.InSine)
@@ -74,7 +77,8 @@ func _on_shopping_kart_pressed() -> void:
 		tweenDownScroll = TweenUtils.tweenAlpha(downScroll,0,0.3,TweenUtils.Ease.OutCirc)
 		isShop = false
 		tweenShopPanel.finished.connect(func():
-			shopPanel.visible = false)
+			shopPanel.visible = false
+			ActiveShopItems(false))
 	EnsureTextChange()
 	pass # Replace with function body.
 
@@ -87,7 +91,8 @@ func _on_shopping_kart_rebirth_pressed() -> void:
 		tweenShopPanel = TweenUtils.tweenX(shopPanel,2480.0,0.3,TweenUtils.Ease.OutCirc)
 		isShop = false
 		tweenShopPanel.finished.connect(func():
-			shopPanel.visible = false)
+			shopPanel.visible = false
+			ActiveShopItems(false))
 
 	if (!isRebirth):
 		TweenUtils.StopTween(tweenRebirthPanel)
@@ -98,6 +103,7 @@ func _on_shopping_kart_rebirth_pressed() -> void:
 		tweenDownScroll = TweenUtils.tweenAlpha(downScroll,1,0.3,TweenUtils.Ease.OutCirc)
 		isRebirth = true
 		rebirthPanel.visible = true
+		ActiveRebirth(true)
 	else:
 		TweenUtils.StopTween(tweenRebirthPanel)
 		tweenRebirthPanel = TweenUtils.tweenX(rebirthPanel,2480.0,0.3,TweenUtils.Ease.InSine)
@@ -107,9 +113,20 @@ func _on_shopping_kart_rebirth_pressed() -> void:
 		tweenDownScroll = TweenUtils.tweenAlpha(downScroll,0,0.3,TweenUtils.Ease.OutCirc)
 		isRebirth = false
 		tweenRebirthPanel.finished.connect(func():
-			rebirthPanel.visible = false)
+			rebirthPanel.visible = false
+			ActiveRebirth(false))
 	EnsureTextChange()
 	pass # Replace with function body.
+
+func ActiveRebirth(act:bool = true):
+	var keysRebirth = RebirthItem.rebirthItems.keys()
+	for i in range(keysRebirth.size()):
+		RebirthItem.rebirthItems[keysRebirth[i]].set_process(act)
+
+func ActiveShopItems(act:bool = true):
+	var keysShop = ShopItem.shopItems.keys()
+	for i in range(keysShop.size()):
+		ShopItem.shopItems[keysShop[i]].set_process(act)
 
 var goldRebirth1Tween:Tween
 var goldRebirth2Tween:Tween
@@ -172,10 +189,12 @@ func SetShader(isShading:bool):
 		EmptyShade(refresh1)
 		EmptyShade(refresh2)
 		EmptyShade(shoppingKart)
+		print("non-set")
 	else:
 		SetShaderFromVariable(refresh1, goldRebirthShader)
 		SetShaderFromVariable(refresh2, goldRebirthShader2)
 		SetShaderFromVariable(shoppingKart, goldKartShader)
+		print("set")
 	pass
 
 func SetVariableInitialize(objShader: CanvasItem):

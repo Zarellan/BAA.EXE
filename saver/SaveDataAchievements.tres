@@ -30,4 +30,4 @@ script = ExtResource("1_2yxkc")
 skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
 skinUsed = "Eid"
 multiplyMoneyAchievement = 1.4
-platformMinigameScore = 52
+platformMinigameScore = 87

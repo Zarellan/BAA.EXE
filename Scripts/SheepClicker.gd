@@ -31,9 +31,9 @@ func _ready() -> void:
 
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
 	defaultScale = scale
-	
-	if (isMain):
+	if (is_instance_valid(sheepShadow)):
 		TweenUtils.tweenSkewPingPong(sheepShadow,deg_to_rad(18),deg_to_rad(29),1,TweenUtils.Ease.InOutSine)
+	if (isMain):
 		ParticleManager.PlayParticleWarmup(part)
 		ParticleManager.PlayParticleWarmup(partRare)
 		ParticleManager.PlayParticleWarmup(partRainbow)

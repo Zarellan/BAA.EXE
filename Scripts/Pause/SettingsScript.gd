@@ -219,8 +219,13 @@ func _on_quality_option_item_selected(index: int) -> void:
 	var grasses = get_tree().get_nodes_in_group("Grass")
 	for i in range(grasses.size()):
 		grasses[i].SetGrassBasedQuality()
+	SetGrassDark(shadedGrassNode.visible)
 	pass
 
+func SetGrassDark(vis:bool = true):
+	var grassDarks:Array[Node] = get_tree().get_nodes_in_group("GrassDark")
+	for i in range(grassDarks.size()):
+		grassDarks[i].visible = vis
 func BasedOnQuality():
 	match(GameHandler.saveDataSettings.quality):
 		GameHandler.Quality.High:

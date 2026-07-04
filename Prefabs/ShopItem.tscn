@@ -62,7 +62,6 @@ grow_horizontal = 0
 pivot_offset = Vector2(900, 0)
 script = ExtResource("1_vpf6l")
 particle = SubResource("PackedScene_x4kgh")
-coins = null
 title = NodePath("Holder/Title")
 descriptionNode = NodePath("Holder/Description")
 textureImage = NodePath("Holder/ItemImage")
