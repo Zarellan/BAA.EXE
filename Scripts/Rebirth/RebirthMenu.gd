@@ -69,6 +69,7 @@ func _on_back_pressed() -> void:
 
 func _on_rebirth_ic_pressed() -> void:
 	BringRebirth()
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 

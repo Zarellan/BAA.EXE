@@ -28,6 +28,5 @@ metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 [resource]
 script = ExtResource("1_2yxkc")
 skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
-skinUsed = "Eid"
-multiplyMoneyAchievement = 1.4
+skinUsed = "Default"
 platformMinigameScore = 87

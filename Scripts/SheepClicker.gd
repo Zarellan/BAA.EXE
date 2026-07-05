@@ -101,6 +101,7 @@ func Pressed():
 		if (randf_range(0.0,1.0) < GameHandler.saveDataRebirth.rainbowWoolChance):
 			GameHandler.AddMoneyRainbow()
 			RainbowWool()
+			GlobalAudio.PlayOneShot("res://Sounds/RareWool.mp3", 0,randf_range(0.99,1.01))
 		elif (randf_range(0.0,1.0) < GameHandler.saveData.rareChance):
 			ParticleManager.PlayParticleOv(partRare,1)
 			GameHandler.AddMoneyRare()

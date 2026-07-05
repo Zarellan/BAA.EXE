@@ -41,6 +41,7 @@ func ExitAchievement():
 
 func _on_achievements_pressed() -> void:
 	BringAchievement()
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 

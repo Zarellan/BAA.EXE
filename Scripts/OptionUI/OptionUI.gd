@@ -80,6 +80,7 @@ func _on_shopping_kart_pressed() -> void:
 			shopPanel.visible = false
 			ActiveShopItems(false))
 	EnsureTextChange()
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 var tweenRebirthPanel:Tween
@@ -116,6 +117,7 @@ func _on_shopping_kart_rebirth_pressed() -> void:
 			rebirthPanel.visible = false
 			ActiveRebirth(false))
 	EnsureTextChange()
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 func ActiveRebirth(act:bool = true):

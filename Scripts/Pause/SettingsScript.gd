@@ -2,7 +2,8 @@ extends Control
 class_name SettingsScript
 static var settings = false
 
-
+@export var natureAudio:AudioStreamPlayer
+@export var natureDB:float
 var indexSettings = 0
 @export var settingText:Control
 @export var pauseMenu:Control
@@ -23,18 +24,23 @@ var tweenSettings:Tween
 
 var audioText:Control
 var soundtrackText:Control
+@export var natureText:Control
 
 static var isCode:bool = false
 #@export var audioText:AutoSizeRichTextLabel
 #@export var soundtrackText:AutoSizeRichTextLabel
 # Called when the node enters the scene tree for the first time.
+var init = false
+var tempAudio:float = 0
 func _ready() -> void:
+	init = false
 	settings = false
 	SetCodeMode(false)
 	audioText = get_node("Volume/AudioVolume")
 	soundtrackText = get_node("Volume/SoundtrackVolume")
-	(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveDataSettings.soundtrackVolume
 	(get_node("Volume/AudioSlider") as HSlider).value = GameHandler.saveDataSettings.audioVolume
+	(get_node("Volume/SoundtrackSlider") as HSlider).value = GameHandler.saveDataSettings.soundtrackVolume
+	(get_node("Volume/NaturalSlider") as HSlider).value = GameHandler.saveDataSettings.natureVolume
 	(get_node("Performance/QualityOptions") as OptionButton).select(BasedOnQuality())
 	(get_node("Performance/FPSOption") as OptionButton).select(BasedOnFPS())
 	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.vSync
@@ -44,8 +50,11 @@ func _ready() -> void:
 	InitializeSettings()
 	get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
 	colorPicker.color = GameHandler.saveDataSettings.sheepColor
-
 	visible = false
+	await RenderingServer.frame_post_draw
+	(func():
+		(func():
+			init = true).call_deferred()).call_deferred()
 	pass # Replace with function body.
 
 func InitializeSettings():
@@ -166,6 +175,7 @@ func ExitSettings():
 			visible = false)
 		settings = false
 		SetCodeMode(false)
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 
 
 func _on_h_slider_value_changed(value: float) -> void:
@@ -180,6 +190,22 @@ func _on_audio_slider_value_changed(value: float) -> void:
 	ChangeText()
 	pass # Replace with function body.
 
+func _on_natural_slider_value_changed(value: float) -> void:
+	GameHandler.saveDataSettings.natureVolume = value
+	natureAudio.volume_db = VolumeSettings(natureDB)
+	ChangeText()
+	pass # Replace with function body.
+	
+func VolumeSettings(volumeDB):
+	var soundVol = clamp(GameHandler.saveDataSettings.natureVolume,0,100)
+	
+	if (soundVol == 0):
+		return -80
+	else:
+		return volumeDB + 20.0 * log10M(soundVol/100.0)
+
+func log10M(value):
+	return log(value) / log(10)
 
 func _on_back_pressed() -> void:
 	(pauseMenu as PauseScript).BringPauseFromSettings()
@@ -189,16 +215,21 @@ func _on_back_pressed() -> void:
 func ChangeText():
 	(audioText as AutoSizeRichTextLabel).text = "Audio Volume:"+str(GameHandler.saveDataSettings.audioVolume) +"%"
 	(soundtrackText as AutoSizeRichTextLabel).text = "Track Volume:"+str(GameHandler.saveDataSettings.soundtrackVolume) +"%"
+	(natureText as AutoSizeRichTextLabel).text = "Nature Volume:"+str(GameHandler.saveDataSettings.natureVolume) +"%"
 	pass
 
 
 func _on_arrow_button_left_pressed() -> void:
 	ChangeSetting(-1)
+	if (init):
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 
 func _on_arrow_button_right_pressed() -> void:
 	ChangeSetting(1)
+	if (init):
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 
@@ -267,11 +298,15 @@ func SetVSync():
 func _on_v_sync_box_toggled(toggled_on: bool) -> void:
 	GameHandler.saveDataSettings.vSync = toggled_on
 	SetVSync()
+	if (init):
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 
 func _on_code_submit_pressed() -> void:
 	CodeRewards()
+	if (init):
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 
@@ -304,6 +339,8 @@ func _on_glitch_effect_box_toggled(toggled_on: bool) -> void:
 		ShopItem.shopItems[keys[i]].GlitchApply()
 	for i in range(keysRebirth.size()):
 		RebirthItem.rebirthItems[keysRebirth[i]].GlitchApply()
+	if (init):
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 
@@ -326,4 +363,6 @@ func _on_border_shade_box_toggled(toggled_on: bool) -> void:
 		RebirthItem.rebirthItems[keysRebirth[i]].SetShader(GameHandler.saveDataSettings.shadingBorders)
 	get_tree().get_first_node_in_group("RebirthMenu").SetShader(GameHandler.saveDataSettings.shadingBorders)
 	get_tree().get_first_node_in_group("OptionUI").SetShader(GameHandler.saveDataSettings.shadingBorders)
+	if (init):
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.

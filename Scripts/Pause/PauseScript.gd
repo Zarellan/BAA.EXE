@@ -35,6 +35,7 @@ func BringPause():
 		tweenPause = TweenUtils.tweenY(self,0.0,0.3,TweenUtils.Ease.OutCirc)
 		paused = true
 		visible = true
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 func ExitPause():
 	if paused:
 		TweenUtils.StopTween(tweenPause)
@@ -42,6 +43,7 @@ func ExitPause():
 		tweenPause.finished.connect(func():
 			visible = false)
 		paused = false
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 func _on_resume_pressed() -> void:
 	ExitPause()
 	pass # Replace with function body.
@@ -49,10 +51,12 @@ func _on_resume_pressed() -> void:
 
 func _on_save_pressed() -> void:
 	GameHandler.SaveAllDataGlob()
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 
 func _on_exit_pressed() -> void:
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	get_tree().quit()
 	pass # Replace with function body.
 
@@ -62,6 +66,7 @@ func _on_settings_pressed() -> void:
 		TweenUtils.StopTween(tweenPause)
 		TweenUtils.tweenY(self,-get_rect().size.y,0.3,TweenUtils.Ease.InSine)
 		(settings as SettingsScript).BringSettings()
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 

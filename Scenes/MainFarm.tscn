@@ -70,6 +70,7 @@
 [ext_resource type="PackedScene" uid="uid://isevecd4fd6k" path="res://Scenes/SkinChanger.tscn" id="64_qxec0"]
 [ext_resource type="Script" uid="uid://c3fhx3vqoprj3" path="res://Scripts/Achievements/AchievementInit.gd" id="69_l88l1"]
 [ext_resource type="PackedScene" uid="uid://6u1wu3vu1ss7" path="res://Prefabs/achievement.tscn" id="70_etfi4"]
+[ext_resource type="AudioStream" uid="uid://7rvfotxmcbx4" path="res://Soundtrack/Calm rural forest.mp3" id="71_l88l1"]
 
 [sub_resource type="Animation" id="Animation_u06jq"]
 length = 0.001
@@ -2057,7 +2058,7 @@ text = "Exit
 "
 metadata/_edit_use_anchors_ = true
 
-[node name="Settings" type="Control" parent="Control/CanvasLayer" unique_id=498215830 node_paths=PackedStringArray("settingText", "pauseMenu", "settingOptions", "shadedGrassNode", "codeText", "codeTextMain", "codeTextSub", "codeTextTimer", "codeInvalidTimer", "colorPicker")]
+[node name="Settings" type="Control" parent="Control/CanvasLayer" unique_id=498215830 node_paths=PackedStringArray("natureAudio", "settingText", "pauseMenu", "settingOptions", "shadedGrassNode", "codeText", "codeTextMain", "codeTextSub", "codeTextTimer", "codeInvalidTimer", "colorPicker", "natureText")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2068,6 +2069,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("15_d3uyy")
+natureAudio = NodePath("../../NaturalNoise")
 settingText = NodePath("Label/AutoSizeRichTextLabel")
 pauseMenu = NodePath("../PauseMenu")
 settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code"), NodePath("Data"), NodePath("Effects"), NodePath("Sheep color")]
@@ -2079,6 +2081,7 @@ codeTextSub = NodePath("CodeTextMain/CodeSubText")
 codeTextTimer = NodePath("Code/CodeTextTimer")
 codeInvalidTimer = NodePath("Code/InvalidCodeTimer")
 colorPicker = NodePath("Sheep color/ColorPickerButton")
+natureText = NodePath("Volume/NatureVolume")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings" unique_id=258928493]
@@ -2124,7 +2127,6 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
 [node name="Volume" type="Control" parent="Control/CanvasLayer/Settings" unique_id=772165797]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2133,27 +2135,36 @@ offset_bottom = 40.0
 texture_filter = 2
 layout_mode = 0
 offset_left = 410.0
-offset_top = 223.0
+offset_top = 187.0
 offset_right = 587.336
-offset_bottom = 259.0
+offset_bottom = 223.0
 scale = Vector2(2.515, 2.515)
 
 [node name="AudioSlider" type="HSlider" parent="Control/CanvasLayer/Settings/Volume" unique_id=806989973]
 texture_filter = 2
 layout_mode = 0
 offset_left = 410.0
-offset_top = 338.48
+offset_top = 285.48
 offset_right = 587.336
-offset_bottom = 374.48007
+offset_bottom = 321.48007
+scale = Vector2(2.515, 2.515)
+
+[node name="NaturalSlider" type="HSlider" parent="Control/CanvasLayer/Settings/Volume" unique_id=368222400]
+texture_filter = 2
+layout_mode = 0
+offset_left = 410.0
+offset_top = 389.48
+offset_right = 587.336
+offset_bottom = 425.48007
 scale = Vector2(2.515, 2.515)
 
 [node name="SoundtrackVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Volume" unique_id=1987295276]
 clip_contents = false
 layout_mode = 0
 offset_left = 424.0
-offset_top = 184.0
+offset_top = 148.0
 offset_right = 821.0
-offset_bottom = 244.0
+offset_bottom = 208.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 30
@@ -2170,9 +2181,9 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 clip_contents = false
 layout_mode = 0
 offset_left = 426.0
-offset_top = 296.0
+offset_top = 243.0
 offset_right = 823.0
-offset_bottom = 356.0
+offset_bottom = 303.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 30
@@ -2182,6 +2193,25 @@ vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
 _current_font_size = 30
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="NatureVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Volume" unique_id=312986235]
+clip_contents = false
+layout_mode = 0
+offset_left = 426.0
+offset_top = 347.0
+offset_right = 823.0
+offset_bottom = 407.0
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 28
+text = "Nature Volume:"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 28
+_current_font_size = 28
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2352,6 +2382,7 @@ text = "Deleta All Data"
 metadata/_edit_use_anchors_ = true
 
 [node name="Effects" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1518168345]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2679,6 +2710,7 @@ one_shot = true
 autostart = true
 
 [node name="SkinPanel" type="Control" parent="Control/CanvasLayer" unique_id=1936878502]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2710,7 +2742,7 @@ canvas_item_default_texture_filter = 0
 sdf_oversize = 0
 sdf_scale = 2
 size = Vector2i(900, 720)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="SkinChanger" parent="Control/CanvasLayer/SkinPanel/SubViewportContainer/SubViewport" unique_id=336374009 instance=ExtResource("64_qxec0")]
 
@@ -2771,6 +2803,11 @@ offset_right = 943.0
 offset_bottom = 675.0
 text = "Back"
 
+[node name="NaturalNoise" type="AudioStreamPlayer" parent="Control" unique_id=1621144205]
+stream = ExtResource("71_l88l1")
+volume_db = 20.0
+autoplay = true
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1093701948]
 anchor_mode = 0
 process_callback = 0
@@ -2792,6 +2829,7 @@ limit_enabled = false
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Exit" to="Control/CanvasLayer/PauseMenu" method="_on_exit_pressed"]
 [connection signal="value_changed" from="Control/CanvasLayer/Settings/Volume/SoundtrackSlider" to="Control/CanvasLayer/Settings" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="Control/CanvasLayer/Settings/Volume/AudioSlider" to="Control/CanvasLayer/Settings" method="_on_audio_slider_value_changed"]
+[connection signal="value_changed" from="Control/CanvasLayer/Settings/Volume/NaturalSlider" to="Control/CanvasLayer/Settings" method="_on_natural_slider_value_changed"]
 [connection signal="item_selected" from="Control/CanvasLayer/Settings/Performance/QualityOptions" to="Control/CanvasLayer/Settings" method="_on_quality_option_item_selected"]
 [connection signal="toggled" from="Control/CanvasLayer/Settings/Performance/VSyncBox" to="Control/CanvasLayer/Settings" method="_on_v_sync_box_toggled"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Code/CodeSubmit" to="Control/CanvasLayer/Settings" method="_on_code_submit_pressed"]

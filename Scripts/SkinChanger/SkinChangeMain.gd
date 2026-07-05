@@ -34,6 +34,7 @@ func ExitSkinChanger():
 func _on_skins_button_pressed() -> void:
 	if (!SkinChanger.isSkinChanging):
 		BringSkinChanger()
+		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	else:
 		ExitSkinChanger()
 	pass # Replace with function body.

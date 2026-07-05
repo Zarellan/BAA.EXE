@@ -25,6 +25,7 @@ func MouseEntered():
 	TweenUtils.StopTween(scaleNodeTween)
 	scaleNodeTween = TweenUtils.tweenScale(node,Vector2(scaleVal,scaleVal),0.3,TweenUtils.Ease.OutCirc)
 	AlphaButton(1)
+	GlobalAudio.PlayOneShot("res://Sounds/menuHover.wav",5,randf_range(0.95,1.15))
 	pass
 
 func MouseExited():

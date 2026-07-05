@@ -170,6 +170,7 @@ func Hovered():
 		tweenAlpha = TweenUtils.tweenAlpha(get_node("BG"),170/255.0,0.2,TweenUtils.Ease.OutCirc)
 		tweenHolder = TweenUtils.tweenScale(get_node("Holder"),Vector2(1.02,1.02),0.2,TweenUtils.Ease.OutCirc)
 		tweenRotationImage = TweenUtils.tweenRotation(get_node("Holder/ItemImage"),-5,0.2,TweenUtils.Ease.OutCirc)
+		GlobalAudio.PlayOneShot("res://Sounds/menuHover.wav",5,randf_range(0.95,1.15))
 		isInside = true
 	elif (!get_global_rect().has_point(mouse_pos) && isInside) || GameHandler.GamePausedPartil() || ShopHelper.totalSwipe >= 50:
 		TweenUtils.StopTween(tweenAlpha)

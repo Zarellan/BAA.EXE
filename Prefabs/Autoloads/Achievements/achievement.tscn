@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://t7wlwjpi4a52"]
+
+[ext_resource type="Script" uid="uid://ba63jmhvbmn8a" path="res://Prefabs/Autoloads/Achievements/AcievementSystem.gd" id="1_vu58k"]
+[ext_resource type="Texture2D" uid="uid://insaucig1u3h" path="res://Sprites/ShopHandleImage/WoolShop.png" id="2_bmm64"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_wrv8a"]
+[ext_resource type="Shader" uid="uid://c07l5cruts3ep" path="res://Shaders/WhiteSprite.gdshader" id="5_5dfpu"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="5_cthkv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nqa4g"]
+shader = ExtResource("5_5dfpu")
+shader_parameter/mix_weight = 1.0
+
+[node name="Achievement" type="Control" unique_id=974839077 node_paths=PackedStringArray("holder", "BG", "BG2")]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_vu58k")
+holder = NodePath("CanvasLayer/Hold")
+BG = NodePath("CanvasLayer/Hold/BG")
+BG2 = NodePath("CanvasLayer/Hold/BG2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=295486567]
+
+[node name="Hold" type="Control" parent="CanvasLayer" unique_id=419921041]
+custom_minimum_size = Vector2(889, 150)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 140.0
+offset_top = 516.0
+offset_right = 1074.0
+offset_bottom = 666.0
+pivot_offset = Vector2(484, 73)
+size_flags_horizontal = 8
+
+[node name="BG" type="TextureRect" parent="CanvasLayer/Hold" unique_id=556411333]
+self_modulate = Color(1, 1, 1, 0.5882353)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bmm64")
+
+[node name="Holder" type="Control" parent="CanvasLayer/Hold/BG" unique_id=1706563175]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/Hold/BG/Holder" unique_id=1837156790]
+clip_contents = false
+layout_mode = 0
+offset_left = 37.0
+offset_top = 22.0
+offset_right = 731.0
+offset_bottom = 64.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 35
+text = "Achievement named"
+scroll_active = false
+script = ExtResource("3_wrv8a")
+_max_size = 35
+_outline_ratio = 0.18
+_current_font_size = 35
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Desc" type="RichTextLabel" parent="CanvasLayer/Hold/BG/Holder" unique_id=617964332]
+clip_contents = false
+layout_mode = 0
+offset_left = 36.0
+offset_top = 70.0
+offset_right = 731.0
+offset_bottom = 124.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 22
+text = "Achievement task"
+scroll_active = false
+script = ExtResource("3_wrv8a")
+_max_size = 22
+_outline_ratio = 0.18
+_current_font_size = 22
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Image" type="TextureRect" parent="CanvasLayer/Hold/BG/Holder" unique_id=589953957]
+layout_mode = 0
+offset_left = 777.0
+offset_top = 14.0
+offset_right = 907.0
+offset_bottom = 138.0
+texture = ExtResource("5_cthkv")
+expand_mode = 1
+
+[node name="BG2" type="TextureRect" parent="CanvasLayer/Hold" unique_id=1614905735]
+material = SubResource("ShaderMaterial_nqa4g")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bmm64")
+
+[node name="WhenWhiteAlpha" type="Timer" parent="." unique_id=1332728736]
+
+[connection signal="timeout" from="WhenWhiteAlpha" to="." method="_on_when_white_alpha_timeout"]

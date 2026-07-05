@@ -36,8 +36,8 @@ func _ready() -> void:
 	timerAutoCollector = CreateTimer(saveData.collectSpeed, NowCollect, false)
 	timerAutoCollector.start()
 	timerAutoCollectorSheep = CreateTimer(saveData.autoCollectSheep, CollectSheep, false)
-	timerAutoCollectorSheep.start()
 	timerAutoCollectorSheep.wait_time = AutoCollectSheepTotalParse()
+	timerAutoCollectorSheep.start()
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
 	set_process(false)
 	set_physics_process(false)
@@ -46,7 +46,7 @@ func _ready() -> void:
 func CollectSheep():
 	if (AutoCollectSheepActive() && is_instance_valid(get_sheep())):
 		get_sheep().Pressed()
-		timerAutoCollectorSheep.wait_time = AutoCollectSheepTotalParse()
+	timerAutoCollectorSheep.wait_time = AutoCollectSheepTotalParse()
 
 func get_sheep():
 	return get_tree().get_first_node_in_group("Sheep")
@@ -192,7 +192,7 @@ func GamePausedPartil() -> bool:
 	AchievementHandler.isAchievement
 	
 func AutoCollectSheepActive():
-	return saveData.autoCollectSheepAbility
+	return saveData.autoCollectSheepAbility || saveDataRebirth.autoCollectSheepAbility
 
 func AutoCollectSheepTotal():
 	return saveData.autoCollectSheep + saveDataRebirth.autoCollectSheep
