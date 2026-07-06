@@ -58,6 +58,10 @@ func SheepShaderCondition():
 		get_node("StaticBody2D/Sprite2D/SheepBright").queue_free()
 		get_node("StaticBody2D/Skins/Eid/EidCap/SheepBright").material = null
 		get_node("StaticBody2D/Skins/Eid/EidCap/SheepBright").queue_free()
+		get_node("StaticBody2D/Skins/Jump/Helmet/SheepBright").material = null
+		get_node("StaticBody2D/Skins/Jump/Helmet/SheepBright").queue_free()
+		get_node("StaticBody2D/Skins/Jump/Sprite2D/SheepBright").material = null
+		get_node("StaticBody2D/Skins/Jump/Sprite2D/SheepBright").queue_free()
 var twTutorial:Tween
 func StartTutorial():
 	twTutorial = TweenUtils.tweenAlpha(tutorial,1,2,TweenUtils.Ease.linear)

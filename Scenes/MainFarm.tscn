@@ -2070,6 +2070,7 @@ grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 script = ExtResource("15_d3uyy")
 natureAudio = NodePath("../../NaturalNoise")
+natureDB = 20.0
 settingText = NodePath("Label/AutoSizeRichTextLabel")
 pauseMenu = NodePath("../PauseMenu")
 settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code"), NodePath("Data"), NodePath("Effects"), NodePath("Sheep color")]

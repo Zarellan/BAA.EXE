@@ -238,8 +238,12 @@ func UnlockSkin(strn:String):
 	var skn:Array[SkinItem] = saveDataAchievements.skins
 	for i in range(skn.size()):
 		if (skn[i].name == strn):
+			if (skn[i].unlocked):
+				return
 			skn[i].unlocked = true
-			AchievementItem.achievementItem[skn[i].achievementName].AchievementUpdate()
+			if (AchievementItem.achievementItem.size() > 0 && AchievementItem.achievementItem != null):
+				AchievementItem.achievementItem[skn[i].achievementName].AchievementUpdate()
+			Achievement.PlayAchievement(skn[i].achievementName,skn[i].achievementTask,skn[i].achievementImage)
 			SaveAllDataGlob()
 			return
 	push_error("no skin found as ",strn)

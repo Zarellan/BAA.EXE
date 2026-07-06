@@ -1,26 +1,25 @@
-[gd_resource type="Resource" script_class="GameSaveRebirth" format=3]
+[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://cols4nrdbtuwm"]
 
-[ext_resource type="Script" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_4uhcc"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_862cu"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="3_urp6s"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/SheepJump.png" id="4_35u3r"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Stomp.png" id="5_toumy"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="6_3yqr6"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="7_4hq2p"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="8_4y6oi"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="9_lkks2"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="10_nwlfp"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="11_4ctki"]
-[ext_resource type="Script" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="12_tyo4l"]
-[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="13_qy0dg"]
+[ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_4uhcc"]
+[ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_862cu"]
+[ext_resource type="Texture2D" uid="uid://ionxinhbf4ew" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="3_urp6s"]
+[ext_resource type="Texture2D" uid="uid://bp6g5leu2mpjr" path="res://Sprites/ShopImages/Rebirth/SheepJump.png" id="4_35u3r"]
+[ext_resource type="Texture2D" uid="uid://ba5uas4gtk2g4" path="res://Sprites/ShopImages/Rebirth/Stomp.png" id="5_toumy"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="6_3yqr6"]
+[ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="7_4hq2p"]
+[ext_resource type="Texture2D" uid="uid://db5l4xqd4h51u" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="8_4y6oi"]
+[ext_resource type="Texture2D" uid="uid://dti18jjl0ek7o" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="9_lkks2"]
+[ext_resource type="Texture2D" uid="uid://y43oxeypu0kt" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="10_nwlfp"]
+[ext_resource type="Texture2D" uid="uid://ccixfei6apqku" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="11_4ctki"]
+[ext_resource type="Script" uid="uid://b6bpycct3x2he" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="12_tyo4l"]
+[ext_resource type="Script" uid="uid://dgrns36cuqs6e" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="13_qy0dg"]
 
 [sub_resource type="Resource" id="Resource_hotcp"]
 script = ExtResource("1_4uhcc")
 title = "Main multiplier"
 image = ExtResource("2_862cu")
 description = "the more you buy it the more the collect doubles (will stay the same multiply even after [rainbow]rebirth[/rainbow])"
-rebirthPrice = 137438953472
-level = 37
+rebirthPrice = 1
 power = 1
 tax = 2.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -29,10 +28,9 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_4uhcc")
 title = "Shop offer"
 image = ExtResource("3_urp6s")
-rebirthPrice = 24608316642587
-level = 31
+rebirthPrice = 1
 power = 2
-tax = 3.5499999999999945
+tax = 2.0
 taxInc = 0.05
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -40,12 +38,10 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_4uhcc")
 title = "More jump power"
 image = ExtResource("4_35u3r")
-rebirthPrice = 9
-level = 4
+rebirthPrice = 2
 power = 3
-tax = 1.62
+tax = 1.5
 taxInc = 0.03
-canBuy = false
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_wcncl"]
@@ -56,20 +52,17 @@ description = "are you tired of ending up losing on unpredictable direction ?
 well this power is for you :)
 press down once you jump to stomp in predictable way"
 rebirthPrice = 10
-level = 1
 power = 9
 tax = 1.0
-canBuy = false
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_q14y5"]
 script = ExtResource("1_4uhcc")
 title = "Longer curve"
 image = ExtResource("6_3yqr6")
-rebirthPrice = 445
-level = 14
+rebirthPrice = 6
 power = 10
-tax = 1.62
+tax = 1.2
 taxInc = 0.03
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -77,22 +70,19 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_4uhcc")
 title = "Super Auto Collect"
 image = ExtResource("7_4hq2p")
-rebirthPrice = 781889140
-level = 19
+rebirthPrice = 2
 power = 4
-tax = 3.9000000000000017
+tax = 2.0
 taxInc = 0.1
-canBuy = false
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_tdfnv"]
 script = ExtResource("1_4uhcc")
 title = "Gold wool multiplier"
 image = ExtResource("8_4y6oi")
-rebirthPrice = 735324
-level = 16
+rebirthPrice = 3
 power = 5
-tax = 3.1000000000000014
+tax = 1.5
 taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -100,10 +90,9 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_4uhcc")
 title = "Rainbow wool"
 image = ExtResource("9_lkks2")
-rebirthPrice = 165401692479833
-level = 37
+rebirthPrice = 4
 power = 6
-tax = 3.3499999999999956
+tax = 1.5
 taxInc = 0.05
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -111,10 +100,9 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_4uhcc")
 title = "Rainbow wool multiplier"
 image = ExtResource("10_nwlfp")
-rebirthPrice = 172472553
-level = 27
+rebirthPrice = 2
 power = 7
-tax = 2.580000000000001
+tax = 1.5
 taxInc = 0.04
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -122,10 +110,9 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_4uhcc")
 title = "Cheaper rebirth"
 image = ExtResource("11_4ctki")
-rebirthPrice = 135659
-level = 14
+rebirthPrice = 3
 power = 8
-tax = 3.0000000000000013
+tax = 1.6
 taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -144,16 +131,6 @@ metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [resource]
 script = ExtResource("13_qy0dg")
-rebirth = 18043209371726
 rebirthListData = SubResource("Resource_valao")
-multiplier_reb = 38
-offer = 4.100000000000002
-powerJump = 1000.0
-curveDistance = 80000.0
-powerStomp = true
-autoCollectSheepAbility = true
-autoCollectSheep = -2.85
-goldWoolMultiplier = 80
-rainbowWoolChance = 0.37000000000000016
-rainbowWoolMultiplier = 2800.0
-cheaperRebirth = 2.4000000000000012
+powerJump = 1500.0
+airAcceleration = 1500.0

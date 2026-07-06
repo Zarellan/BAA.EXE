@@ -7,6 +7,8 @@
 [ext_resource type="Shader" uid="uid://bwj0by7csk3cm" path="res://Shaders/BrightSprite.gdshader" id="4_vhidr"]
 [ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="5_ibwm0"]
 [ext_resource type="Texture2D" uid="uid://bg6hskasnpygv" path="res://Sprites/Sheep/EidCap.png" id="6_vt7wm"]
+[ext_resource type="Texture2D" uid="uid://bpnwkowpfyd2m" path="res://Sprites/Sheep/helmet.png" id="8_m7uoi"]
+[ext_resource type="Texture2D" uid="uid://dyp0gw4466eum" path="res://Sprites/Sheep/plumber.png" id="9_sbckw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pwu8p"]
 shader = ExtResource("4_vhidr")
@@ -121,6 +123,15 @@ description = "the game was suppose to be for eid, but then I decide to polish i
 effectDescription = "Effect: collect multiplier x1.4"
 achievementName = "Code"
 achievementTask = "Type \"eid mubarak\" in code settings"
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
+[sub_resource type="Resource" id="Resource_vhidr"]
+script = ExtResource("5_ibwm0")
+name = "Jump"
+description = "hmm...he looks like someone...but ninjas might haunt me if I mentioned it ;)"
+effectDescription = "effect: increase your jump by +200"
+achievementName = "Jump sheep"
+achievementTask = "Reach 20 score in platform minigame"
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Animation" id="Animation_0r47l"]
@@ -254,10 +265,11 @@ shape = SubResource("RectangleShape2D_0r47l")
 [node name="Skins" type="Node2D" parent="StaticBody2D" unique_id=1683950373 node_paths=PackedStringArray("sheep", "skinUses")]
 script = ExtResource("4_sbckw")
 sheep = NodePath("../..")
-skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v")])
-skinUses = [NodePath("Eid")]
+skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr")])
+skinUses = [NodePath("Eid"), NodePath("Jump")]
 
 [node name="Eid" type="Node2D" parent="StaticBody2D/Skins" unique_id=242466799]
+visible = false
 
 [node name="EidCap" type="Sprite2D" parent="StaticBody2D/Skins/Eid" unique_id=825859892]
 clip_children = 2
@@ -279,6 +291,55 @@ offset_left = -27.418617
 offset_top = -58.50894
 offset_right = 18.643295
 offset_bottom = 8.643677
+mouse_filter = 2
+
+[node name="Jump" type="Node2D" parent="StaticBody2D/Skins" unique_id=1250008535]
+
+[node name="Helmet" type="Sprite2D" parent="StaticBody2D/Skins/Jump" unique_id=1884522975]
+clip_children = 2
+position = Vector2(-2.314815, 15.51852)
+rotation = 0.1877621
+scale = Vector2(1, 0.942)
+texture = ExtResource("8_m7uoi")
+offset = Vector2(-7.9341125, -25.322632)
+
+[node name="Shadow" type="Sprite2D" parent="StaticBody2D/Skins/Jump/Helmet" unique_id=1219183248]
+self_modulate = Color(0, 0, 0, 0.44705883)
+position = Vector2(2.6197991, 1.4726329)
+texture = ExtResource("8_m7uoi")
+offset = Vector2(-7.9341125, -25.322632)
+
+[node name="SheepBright" type="ColorRect" parent="StaticBody2D/Skins/Jump/Helmet" unique_id=1760839829]
+material = SubResource("ShaderMaterial_m7uoi")
+offset_left = -72.02172
+offset_top = -68.0163
+offset_right = -25.959808
+offset_bottom = -22.801811
+mouse_filter = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/Skins/Jump" unique_id=1716750695]
+clip_children = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_xyweb")
+position = Vector2(-0.9259262, -0.46298218)
+texture = ExtResource("9_sbckw")
+offset = Vector2(0, -17)
+
+[node name="Shadow" type="Sprite2D" parent="StaticBody2D/Skins/Jump/Sprite2D" unique_id=615523373]
+self_modulate = Color(0, 0, 0, 0.42745098)
+texture_filter = 1
+material = SubResource("ShaderMaterial_vhidr")
+use_parent_material = true
+position = Vector2(1.8518496, 2.5555985)
+texture = ExtResource("9_sbckw")
+offset = Vector2(0, -17)
+
+[node name="SheepBright" type="ColorRect" parent="StaticBody2D/Skins/Jump/Sprite2D" unique_id=1464915634]
+material = SubResource("ShaderMaterial_m7uoi")
+offset_left = -63.888885
+offset_top = -76.61109
+offset_right = 58.33333
+offset_bottom = 47.92592
 mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1748554935]

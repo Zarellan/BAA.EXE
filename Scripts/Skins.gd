@@ -48,8 +48,12 @@ func LoadSkin():
 			skinUses[i].visible = true
 		else:
 			skinUses[i].visible = false
+	
 	pass
-
+#func ExceptionalSkins(name): # will do later for Font
+	#match (name):
+		#"Font":
+			#
 func SaveSkin():
 	GameHandler.saveDataAchievements.skinUsed = currentSkin
 func FindSkinIndex(nameStr:String):

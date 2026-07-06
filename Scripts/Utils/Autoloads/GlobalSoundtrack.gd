@@ -2,6 +2,7 @@ extends AudioStreamPlayer
 
 
 var current_DB = 0
+var audioDiv = 1
 func PlaySoundtrack(audio_path: String, vol_DB = 0.0,pit = 1.0):
 	var audio = load(audio_path)
 	if audio == null:
@@ -17,7 +18,7 @@ func ChangeVolumeSettings():
 	volume_db = VolumeSettings(current_DB)
 
 func VolumeSettings(volumeDB):
-	var soundVol = clamp(GameHandler.saveDataSettings.soundtrackVolume,0,100)
+	var soundVol = clamp(GameHandler.saveDataSettings.soundtrackVolume / audioDiv,0,100)
 	
 	if (soundVol == 0):
 		return -80

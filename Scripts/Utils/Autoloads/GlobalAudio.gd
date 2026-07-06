@@ -1,7 +1,6 @@
 extends AudioStreamPlayer
 
 var current_DB = 0
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -19,6 +18,7 @@ func PlayOneShot(audio_path: String, vol_DB = 0.0,pit = 1.0):
 	pl.volume_db = VolumeSettings(vol_DB)
 	pl.finished.connect(pl.queue_free)
 	pl.play()
+	return pl
 
 func VolumeSettings(vol_DB):
 	var soundVol = clamp(GameHandler.saveDataSettings.audioVolume,0,100)

@@ -171,6 +171,8 @@ static func IncScore():
 		instance.textScore.text = str(score-1) + " + 1"
 	else:
 		instance.textScore.text = str(score)
+	if (score >= 20):
+		GameHandler.UnlockSkin("Jump")
 	instance.textScore.scale = Vector2(randf_range(0.6,1.5),randf_range(0.6,1.5))
 	TweenUtils.tweenScale(instance.textScore,Vector2.ONE,0.3,TweenUtils.Ease.OutCirc)
 	pass
