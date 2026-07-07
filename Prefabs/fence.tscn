@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bqfl0mhpfbbix"]
+
+[ext_resource type="Texture2D" uid="uid://d1vdnoqbxfrnd" path="res://Sprites/Minigames/fence.png" id="1_12lsl"]
+[ext_resource type="Script" uid="uid://0cpn2ff6ee66" path="res://Scripts/MainMenu/Fence.gd" id="1_m3vlb"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_12lsl"]
+
+[node name="Fence" type="TextureRect" unique_id=1780993350 node_paths=PackedStringArray("collision")]
+offset_left = 447.0
+offset_top = -40.0
+offset_right = 487.0
+offset_bottom = 3.0
+pivot_offset_ratio = Vector2(0, 1)
+texture = ExtResource("1_12lsl")
+script = ExtResource("1_m3vlb")
+collision = NodePath("Collision")
+
+[node name="Collision" type="TextureRect" parent="." unique_id=901841720]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 15.0
+offset_right = 25.0
+offset_bottom = 40.0
+texture = SubResource("CanvasTexture_12lsl")

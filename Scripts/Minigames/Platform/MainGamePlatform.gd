@@ -21,6 +21,7 @@ var tweenScaleWool2:Tween
 
 @export var max_difficulty_height: float = -10000.0
 
+@export var phoneButtons:Array[Control]
 var died = false
 
 # Called when the node enters the scene tree for the first time.
@@ -36,8 +37,13 @@ func _ready() -> void:
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/PlatformMinigame.mp3")
 	
 	modify_curve_domain()
+	isPhone()
 	pass
 
+func isPhone():
+	if (!DeviceCheckerUtil.IsUsingPhone()):
+		for i in range(phoneButtons.size()):
+			phoneButtons[i].visible = false
 func modify_curve_domain():
 	if not curveDistance:
 		push_error("curveDistance is not assigned!")

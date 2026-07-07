@@ -40,20 +40,24 @@ func SuperPower():
 	BringToDefault()
 	match (GameHandler.saveDataAchievements.skinUsed):
 		"Eid":GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.4
-	
+		"Jump":GameHandler.saveDataAchievements.increaseJumpAchievement = 200
+		"Font":GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.9
+
 	
 func LoadSkin():
+	sheep.get_node("StaticBody2D/Sprite2D").texture = load("res://Sprites/Sheep/sheep sprite.png")
 	for i in range(skinUses.size()):
 		if (currentSkin == skinUses[i].name):
 			skinUses[i].visible = true
 		else:
 			skinUses[i].visible = false
-	
+	ExceptionalSkins(currentSkin)
 	pass
-#func ExceptionalSkins(name): # will do later for Font
-	#match (name):
-		#"Font":
-			#
+
+func ExceptionalSkins(name):
+	match (name):
+		"Font":sheep.get_node("StaticBody2D/Sprite2D").texture = load("res://Sprites/Sheep/sheep u.png")
+
 func SaveSkin():
 	GameHandler.saveDataAchievements.skinUsed = currentSkin
 func FindSkinIndex(nameStr:String):
@@ -85,3 +89,4 @@ func IndexRangeLimit(indexMax:Array):
 
 func BringToDefault():
 	GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.0
+	GameHandler.saveDataAchievements.increaseJumpAchievement = 0

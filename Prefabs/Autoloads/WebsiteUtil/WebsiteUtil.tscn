@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ss7ohaxsw2c3"]
+
+[ext_resource type="Script" uid="uid://ckns2g57kj0c7" path="res://Prefabs/Autoloads/WebsiteUtil/WebsiteUtil.gd" id="1_ulbps"]
+
+[node name="WebsiteUtil" type="Node" unique_id=1607071490]
+script = ExtResource("1_ulbps")

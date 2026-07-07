@@ -66,11 +66,16 @@
 [ext_resource type="Texture2D" uid="uid://c6ryx3blrq5fx" path="res://Sprites/OptionUIs/ButtonUI.png" id="52_ykfix"]
 [ext_resource type="Texture2D" uid="uid://clfttv2ggs4qt" path="res://Sprites/OptionUIs/WhiteShirt.png" id="54_q14y5"]
 [ext_resource type="Texture2D" uid="uid://cx4oq5cwfkygh" path="res://Sprites/OptionUIs/trophy.png" id="60_4ghmb"]
+[ext_resource type="Texture2D" uid="uid://j3622u0du1nv" path="res://Sprites/OptionUIs/controller.png" id="61_bvqys"]
 [ext_resource type="Script" uid="uid://bv6wpis75gryx" path="res://Scripts/SkinChanger/SkinChangeMain.gd" id="64_fip8v"]
 [ext_resource type="PackedScene" uid="uid://isevecd4fd6k" path="res://Scenes/SkinChanger.tscn" id="64_qxec0"]
 [ext_resource type="Script" uid="uid://c3fhx3vqoprj3" path="res://Scripts/Achievements/AchievementInit.gd" id="69_l88l1"]
 [ext_resource type="PackedScene" uid="uid://6u1wu3vu1ss7" path="res://Prefabs/achievement.tscn" id="70_etfi4"]
 [ext_resource type="AudioStream" uid="uid://7rvfotxmcbx4" path="res://Soundtrack/Calm rural forest.mp3" id="71_l88l1"]
+[ext_resource type="Script" uid="uid://cxmg43g4nrw3" path="res://Scripts/MinigamesMenu/MinigamesMenu.gd" id="72_hrdhe"]
+[ext_resource type="Script" uid="uid://c4mcef0fg5c8w" path="res://Scripts/MinigamesMenu/MinigameType.gd" id="73_hmk78"]
+[ext_resource type="Texture2D" uid="uid://c67a42cfpmceq" path="res://Sprites/MinigamesImages/Platform minigame.png" id="74_2f1ge"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="74_tymc6"]
 
 [sub_resource type="Animation" id="Animation_u06jq"]
 length = 0.001
@@ -768,6 +773,14 @@ shader_parameter/border_gradient = SubResource("GradientTexture2D_rmap7")
 [sub_resource type="CanvasTexture" id="CanvasTexture_tdfnv"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_4ghmb"]
+
+[sub_resource type="Resource" id="Resource_tymc6"]
+script = ExtResource("73_hmk78")
+name = "Platform Minigame"
+description = "Jump anywhere around on the platforms and have fun watching the sheep jump. Don't get too comfy though, these platforms prefer your demise. ;)"
+image = ExtResource("74_2f1ge")
+sceneMinigame = "res://Scenes/Minigames/PlaformMinigame.tscn"
+metadata/_custom_type_script = "uid://c4mcef0fg5c8w"
 
 [node name="main_world" type="Node2D" unique_id=1031348240]
 
@@ -1913,6 +1926,40 @@ node = NodePath("../TextureRect")
 scaleVal = 1.1
 button = NodePath("..")
 
+[node name="Minigames" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=957910219]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 3.225
+anchor_right = 3.225
+offset_left = 64.0
+offset_top = 125.0
+offset_right = 128.0
+offset_bottom = 189.0
+focus_mode = 0
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/Minigames" unique_id=1562411613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("61_bvqys")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/Minigames" unique_id=499548629 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+offset_left = -128.0
+offset_right = -128.0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+button = NodePath("..")
+
 [node name="RebirthIc" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=358350118]
 layout_mode = 1
 anchors_preset = -1
@@ -2804,6 +2851,133 @@ offset_right = 943.0
 offset_bottom = 675.0
 text = "Back"
 
+[node name="Minigames" type="Control" parent="Control/CanvasLayer" unique_id=750604673 node_paths=PackedStringArray("title", "desc", "image", "multi", "gameButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1280.0
+offset_bottom = -1280.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("72_hrdhe")
+minigames = Array[ExtResource("73_hmk78")]([SubResource("Resource_tymc6")])
+title = NodePath("TextureRect/Title")
+desc = NodePath("TextureRect/Description")
+image = NodePath("TextureRect/Image")
+multi = NodePath("TextureRect/MinigameMulti/MultiplierNum")
+gameButton = NodePath("TextureRect/TextureButton")
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Minigames" unique_id=54836026]
+self_modulate = Color(0.3019608, 0.3019608, 0.3019608, 0.69411767)
+layout_mode = 0
+offset_left = 194.0
+offset_top = 99.0
+offset_right = 1083.0
+offset_bottom = 579.0
+texture = SubResource("CanvasTexture_4ghmb")
+
+[node name="MinigameMulti" type="RichTextLabel" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=94668135]
+clip_contents = false
+layout_mode = 0
+offset_left = 52.0
+offset_top = 395.0
+offset_right = 262.0
+offset_bottom = 450.0
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 21
+text = "Minigame
+Multiplier"
+scroll_active = false
+script = ExtResource("16_joy2m")
+_max_size = 21
+_current_font_size = 21
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="MultiplierNum" type="RichTextLabel" parent="Control/CanvasLayer/Minigames/TextureRect/MinigameMulti" unique_id=1533463810]
+layout_mode = 0
+offset_left = 212.0
+offset_top = -8.0
+offset_right = 452.0
+offset_bottom = 47.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 24
+text = ":1x"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 24
+_current_font_size = 24
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Image" type="TextureRect" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=1578196834]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 39.0
+offset_right = 385.0
+offset_bottom = 362.0
+texture = ExtResource("74_tymc6")
+expand_mode = 1
+
+[node name="Title" type="RichTextLabel" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=619770597]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 53.0
+offset_right = 843.0
+offset_bottom = 146.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 41
+text = "Platform Minigame"
+scroll_active = false
+script = ExtResource("16_joy2m")
+_max_size = 41
+_current_font_size = 41
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Description" type="RichTextLabel" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=1032648251]
+clip_contents = false
+layout_mode = 0
+offset_left = 409.0
+offset_top = 163.0
+offset_right = 876.0
+offset_bottom = 350.0
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 22
+text = "a minigame were you can jump anywhere around"
+scroll_active = false
+script = ExtResource("16_joy2m")
+_max_size = 22
+_outline_ratio = 0.42
+_current_font_size = 22
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="TextureButton" type="TextureButton" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=455275286]
+layout_mode = 0
+offset_left = 505.0
+offset_top = 362.0
+offset_right = 763.0
+offset_bottom = 460.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("15_wnqqd")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ButtonImg" type="TextureRect" parent="Control/CanvasLayer/Minigames/TextureRect/TextureButton" unique_id=1925965200]
+layout_mode = 0
+offset_left = 71.0
+offset_top = -11.0
+offset_right = 188.0
+offset_bottom = 111.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("29_pxlk8")
+expand_mode = 1
+flip_h = true
+
 [node name="NaturalNoise" type="AudioStreamPlayer" parent="Control" unique_id=1621144205]
 stream = ExtResource("71_l88l1")
 volume_db = 20.0
@@ -2823,6 +2997,7 @@ limit_enabled = false
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/SkinsButton" to="Control/CanvasLayer/SkinPanel" method="_on_skins_button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" to="Control/CanvasLayer/OptionUI" method="_on_shopping_kart_rebirth_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/Achievements" to="Control/CanvasLayer/Achievements" method="_on_achievements_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/OptionUI/Minigames" to="Control/CanvasLayer/Minigames" method="_on_minigames_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/RebirthIc" to="Control/CanvasLayer/RebirthMenu" method="_on_rebirth_ic_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Resume" to="Control/CanvasLayer/PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Settings" to="Control/CanvasLayer/PauseMenu" method="_on_settings_pressed"]
@@ -2848,3 +3023,6 @@ limit_enabled = false
 [connection signal="timeout" from="Control/CanvasLayer/RebirthMenu/SquareRootCalculate" to="Control/CanvasLayer/RebirthMenu" method="_on_square_root_calculate_timeout"]
 [connection signal="pressed" from="Control/CanvasLayer/SkinPanel/Back" to="Control/CanvasLayer/SkinPanel" method="_on_back_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Achievements/Button" to="Control/CanvasLayer/Achievements" method="_on_button_pressed"]
+[connection signal="mouse_entered" from="Control/CanvasLayer/Minigames/TextureRect/TextureButton" to="Control/CanvasLayer/Minigames" method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/CanvasLayer/Minigames/TextureRect/TextureButton" to="Control/CanvasLayer/Minigames" method="_on_texture_button_mouse_exited"]
+[connection signal="pressed" from="Control/CanvasLayer/Minigames/TextureRect/TextureButton" to="Control/CanvasLayer/Minigames" method="_on_texture_button_pressed"]

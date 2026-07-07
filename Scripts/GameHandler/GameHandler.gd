@@ -23,6 +23,7 @@ var dirtySave := false
 var timerAutoCollector:Timer
 var timerAutoCollectorSheep:Timer
 
+var fontSkinCondition
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if (OS.has_feature("editor")):
@@ -39,9 +40,26 @@ func _ready() -> void:
 	timerAutoCollectorSheep.wait_time = AutoCollectSheepTotalParse()
 	timerAutoCollectorSheep.start()
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
-	set_process(false)
+	#set_process(false)
 	set_physics_process(false)
+	fontSkinCondition = FindSkinByName("Font")
 	pass # Replace with function body.
+
+var del:float = 0
+func _process(delta: float) -> void:
+	if (fontSkinCondition.unlocked):
+		return
+	del += delta
+	if (Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) || Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)\
+	|| Input.is_action_just_pressed("zoom-in") || Input.is_action_just_pressed("zoom-out")):
+		del = 0
+	if (del >= 30.0):
+		UnlockSkin("Font")
+	pass
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+			if event.pressed and not event.echo:
+				del = 0
 
 func CollectSheep():
 	if (AutoCollectSheepActive() && is_instance_valid(get_sheep())):
@@ -50,8 +68,6 @@ func CollectSheep():
 
 func get_sheep():
 	return get_tree().get_first_node_in_group("Sheep")
-func _process(delta: float) -> void:
-	globalDelta = delta
 
 func CreateTimer(duration, delegate, oneshot = true) -> Timer:
 	var tim = Timer.new()
@@ -189,7 +205,7 @@ func NowCollect():
 
 func GamePausedPartil() -> bool:
 	return PauseScript.paused || RebirthMenu.isRebirthMenu || SkinChanger.isSkinChanging || \
-	AchievementHandler.isAchievement
+	AchievementHandler.isAchievement || MinigamesMenu.isMinigame
 	
 func AutoCollectSheepActive():
 	return saveData.autoCollectSheepAbility || saveDataRebirth.autoCollectSheepAbility
@@ -209,7 +225,7 @@ func RainbowWoolMultiplierTotal():
 	return saveDataRebirth.rainbowWoolMultiplier
 
 func TotalJumpPower():
-	return saveData.jumpPower + saveDataRebirth.powerJump
+	return saveData.jumpPower + saveDataRebirth.powerJump + saveDataAchievements.increaseJumpAchievement
 
 func TotalAirAcceleration():
 	return saveData.airAcceleration + saveDataRebirth.airAcceleration
@@ -247,3 +263,9 @@ func UnlockSkin(strn:String):
 			SaveAllDataGlob()
 			return
 	push_error("no skin found as ",strn)
+
+func FindSkinByName(strn:String):
+	var skn:Array[SkinItem] = saveDataAchievements.skins
+	for i in range(skn.size()):
+		if (skn[i].name == strn):
+			return skn[i]

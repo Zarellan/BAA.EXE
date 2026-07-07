@@ -134,6 +134,15 @@ achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
+[sub_resource type="Resource" id="Resource_sbckw"]
+script = ExtResource("5_ibwm0")
+name = "Font"
+description = "you gonna have a Baaaa'd clock"
+effectDescription = "Effect: collect multiplier x1.9"
+achievementName = "Font"
+achievementTask = "don't click tap anything for whole 30 seconds"
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
 [sub_resource type="Animation" id="Animation_0r47l"]
 resource_name = "Idle"
 length = 1.0000033
@@ -265,7 +274,7 @@ shape = SubResource("RectangleShape2D_0r47l")
 [node name="Skins" type="Node2D" parent="StaticBody2D" unique_id=1683950373 node_paths=PackedStringArray("sheep", "skinUses")]
 script = ExtResource("4_sbckw")
 sheep = NodePath("../..")
-skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr")])
+skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw")])
 skinUses = [NodePath("Eid"), NodePath("Jump")]
 
 [node name="Eid" type="Node2D" parent="StaticBody2D/Skins" unique_id=242466799]

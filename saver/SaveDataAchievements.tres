@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://dvvwke8wjww8t"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3]
 
-[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_2yxkc"]
-[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_h3mo4"]
-[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_qa4yv"]
+[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_2yxkc"]
+[ext_resource type="Script" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_h3mo4"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_qa4yv"]
 
 [sub_resource type="Resource" id="Resource_ykfix"]
 script = ExtResource("2_h3mo4")
@@ -22,22 +22,31 @@ effectDescription = "Effect: collect multiplier x1.4"
 achievementName = "Code"
 achievementTask = "Type \"eid mubarak\" in code settings"
 achievementImage = ExtResource("3_qa4yv")
-unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_vhidr"]
 script = ExtResource("2_h3mo4")
 name = "Jump"
 description = "hmm...he looks like someone...but ninjas might haunt me if I mentioned it ;)"
-effectDescription = "increase your jump by +200"
+effectDescription = "effect: increase your jump by +200"
 achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
 achievementImage = ExtResource("3_qa4yv")
 unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
+[sub_resource type="Resource" id="Resource_sbckw"]
+script = ExtResource("2_h3mo4")
+name = "Font"
+description = "you gonna have a Baaaa'd clock"
+effectDescription = "Effect: collect multiplier x1.9"
+achievementName = "Font"
+achievementTask = "don't click tap anything for whole 30 seconds"
+achievementImage = ExtResource("3_qa4yv")
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
 [resource]
 script = ExtResource("1_2yxkc")
-skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr")])
-skinUsed = "Jump"
-platformMinigameScore = 19
+skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw")])
+skinUsed = "Default"
+platformMinigameScore = 35

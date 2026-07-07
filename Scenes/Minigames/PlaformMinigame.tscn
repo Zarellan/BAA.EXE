@@ -276,7 +276,7 @@ _data = {
 &"RESET": SubResource("Animation_jmhar")
 }
 
-[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle", "textScore", "player", "camera")]
+[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle", "textScore", "player", "camera", "phoneButtons")]
 rotation = -0.0002622433
 script = ExtResource("1_kk0mp")
 platformPrefab = ExtResource("5_tks0h")
@@ -288,6 +288,7 @@ textScore = NodePath("Control/CanvasLayer/UpAlign/AutoSizeRichTextLabel")
 curveDistance = SubResource("Curve_vyqy7")
 player = NodePath("CharacterBody2D")
 camera = NodePath("Camera2D")
+phoneButtons = [NodePath("Control/CanvasLayer/TextureButton"), NodePath("Control/CanvasLayer/Left")]
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1320418300 node_paths=PackedStringArray("visibleNotifier")]
 position = Vector2(612, 579)

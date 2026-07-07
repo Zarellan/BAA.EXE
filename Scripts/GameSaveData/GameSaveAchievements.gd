@@ -9,6 +9,7 @@ class_name GameSaveAchievements
 
 #super powers
 @export var multiplyMoneyAchievement:float = 1
+@export var increaseJumpAchievement:float = 0
 
 #minigames score
 @export var platformMinigameScore:int = 0

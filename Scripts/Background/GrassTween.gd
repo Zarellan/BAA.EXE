@@ -78,7 +78,7 @@ func _process(delta: float) -> void:
 	var local_mouse = get_local_mouse_position()
 	var global_mouse = get_global_mouse_position()
 	var distance_mouse = global_mouse.distance_to(lastMousePos)
-	if (!GameHandler.GamePausedPartil() && get_rect().has_point(local_mouse) && !isShadow &&\
+	if (!OptionUI.isRebirth && !OptionUI.isShop && !GameHandler.GamePausedPartil() && get_rect().has_point(local_mouse) && !isShadow &&\
 	distance_mouse > 60 && cooldown <= 0 && !skipShake):
 		TweenUtils.StopTween(grassSpeedTween)
 		grassSpeedTween = TweenUtils.tweenCustom(self,20,1,2,TweenUtils.Ease.linear,func(val):

@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://de0glwjx8ijw2" path="res://Sprites/MainMenu/WoolLoading.png" id="2_853f1"]
 [ext_resource type="Texture2D" uid="uid://cas2w37hq0pib" path="res://Sprites/ImageHelpers/sheep sprite thumbnail.png" id="3_df05h"]
 [ext_resource type="Texture2D" uid="uid://d27p28s6le23k" path="res://Sprites/ImageHelpers/Text.png" id="4_ghw46"]
+[ext_resource type="Script" uid="uid://c7sygc5qljkr3" path="res://Scripts/MainMenu/SheepLoading.gd" id="5_8um5k"]
+[ext_resource type="Texture2D" uid="uid://c62w7uw8a8pm0" path="res://Sprites/Sheep/SheepPixel16.tres" id="5_koqhg"]
+[ext_resource type="PackedScene" uid="uid://bqfl0mhpfbbix" path="res://Prefabs/fence.tscn" id="6_xim88"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tt5f1"]
 load_path = "res://.godot/imported/WoolShop.png-9da679179632e38494b1f49203b45ceb.ctex"
@@ -71,6 +74,18 @@ offset_bottom = 701.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_853f1")
 texture_progress = SubResource("CompressedTexture2D_tt5f1")
+
+[node name="Sheep" type="TextureRect" parent="CanvasLayer/TextureProgressBar" unique_id=1182659591]
+texture_filter = 1
+layout_mode = 0
+offset_left = 85.0
+offset_top = -36.0
+offset_right = 125.0
+offset_bottom = 4.0
+pivot_offset_ratio = Vector2(0, 1)
+texture = ExtResource("5_koqhg")
+script = ExtResource("5_8um5k")
+fence = ExtResource("6_xim88")
 
 [node name="Text" type="TextureRect" parent="CanvasLayer" unique_id=553133399]
 anchors_preset = 5
