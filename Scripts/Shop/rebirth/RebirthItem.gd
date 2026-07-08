@@ -14,7 +14,8 @@ enum Powers{
 	rainbowWoolMultiply,
 	cheaperRebirth,
 	stomp,
-	longerCurve
+	longerCurve,
+	powerCurve
 }
 
 @export var particle:PackedScene
@@ -153,7 +154,7 @@ func ExceptionalItems():
 			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
 			get_node("Holder/SubViewportContainer").material = GameHandler.emptyShader
 			get_node("Holder/SubViewportContainerDesc").material = GameHandler.emptyShader
-		Powers.jumpPower , Powers.stomp , Powers.longerCurve:
+		Powers.jumpPower , Powers.stomp , Powers.longerCurve, Powers.powerCurve:
 			bG.material.set_shader_parameter("border_gradient", borderGradient)
 			bG2.visible = false
 			if (!isDuplicatedException):
@@ -233,7 +234,9 @@ func CustomItemText():
 		Powers.longerCurve:
 			descriptionNode.text = "the curve of platform minigame difficulty will be longer\n(meaning the game will get easier)\n"+\
 			"current curve length:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveDistance)))
-
+		Powers.powerCurve:
+			descriptionNode.text = "the curve of platform minigame difficulty power will get less\nand makes the game easier to manage.\n"+\
+			"current curve power:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveValue)))
 #endregion
 
 func SetBasedOnLevel():
@@ -257,7 +260,7 @@ func _process(_delta: float) -> void:
 		return
 	last_time_update += _delta
 	Bought()
-	if (last_time_update > UPDATE_INTERVAL):
+	if (last_time_update > GameHandler.saveDataSettings.updateInterval):
 		PurchaseProcessFunction()
 		last_time_update = 0
 	pass
@@ -371,7 +374,8 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 		Powers.jumpPower:
 			GameHandler.saveDataRebirth.powerJump += 100
-			if (GameHandler.saveDataRebirth.powerJump > 10000 || is_equal_approx(GameHandler.saveDataRebirth.powerJump,1000)):
+			var maxAllowedValue:float = 10000
+			if (GameHandler.saveDataRebirth.powerJump > maxAllowedValue || is_equal_approx(GameHandler.saveDataRebirth.powerJump,maxAllowedValue)):
 				TweenLevelMax()
 				shopData.canBuy = false
 		Powers.autoCollect:
@@ -399,6 +403,15 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			shopData.canBuy = false
 		Powers.longerCurve:
 			GameHandler.saveDataRebirth.curveDistance += 5000
+			var maxLev:float = 90000
+			if (GameHandler.saveDataRebirth.curveDistance > maxLev || is_equal_approx(GameHandler.saveDataRebirth.curveDistance,maxLev)):
+				TweenLevelMax()
+				shopData.canBuy = false
+		Powers.powerCurve:
+			GameHandler.saveDataRebirth.curveValue -= 1
+			if (GameHandler.saveDataRebirth.curveValue < 9 || is_equal_approx(GameHandler.saveDataRebirth.curveValue,9)):
+				TweenLevelMax()
+				shopData.canBuy = false
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

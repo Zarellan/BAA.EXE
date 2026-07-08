@@ -124,13 +124,13 @@ func set_item(shopDat:ShopClass):
 	shopData = shopDat
 
 var last_time_update:float = 0.0
-const UPDATE_INTERVAL:float = 0.10
+const UPDATE_INTERVAL:float = 0.01
 func _process(_delta: float) -> void:
 	if (DeviceCheckerUtil.IsUsingPhone()):
 		return
 	last_time_update += _delta
 	Bought()
-	if (last_time_update > UPDATE_INTERVAL):
+	if (last_time_update > GameHandler.saveDataSettings.updateInterval):
 		Hovered()
 		ExceptionalPurchase()
 		last_time_update = 0

@@ -12,6 +12,8 @@ var canInteract:bool = true
 
 @export var gameButton:Control
 var index = 0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	ChangeMinigame(0)
@@ -36,7 +38,7 @@ func ExitMinigame():
 			visible = false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (!canInteract):
 		return
 	if (isMinigame && Input.is_action_just_pressed("ui_cancel")):
@@ -57,6 +59,7 @@ func ChangeMinigame(ind:int):
 		title.text = "Coming Soon"
 		desc.text = ""
 		multi.text = "???"
+		image.texture = load("res://Sprites/MinigamesImages/wholeBlack.png")
 func IndexRangeLimit(indexMax:Array):
 	if (indexMax.size() < index):
 		index = 0
@@ -69,27 +72,33 @@ func _on_texture_button_pressed() -> void:
 	pass # Replace with function body.
 
 func GoToMinigame():
-	TransitionScript.ChangeScene(minigames[index].sceneMinigame)
-	canInteract = false
+	if (index < minigames.size()):
+		TransitionScript.ChangeScene(minigames[index].sceneMinigame)
+		canInteract = false
 
 func MultiplierInfo(nam:String):
 	match (nam):
 		"Platform Minigame": return "%.2f" % (1 + (((GameHandler.saveDataAchievements.platformMinigameScore / 30.0))))
 		_: return "???"
 
-var scaleTw:Tween
-func _on_texture_button_mouse_entered() -> void:
-	TweenUtils.StopTween(scaleTw)
-	scaleTw = TweenUtils.tweenScale(gameButton.get_node("ButtonImg"),Vector2(1.15,1.15),0.3,TweenUtils.Ease.OutCirc)
-	pass # Replace with function body.
-
-
-func _on_texture_button_mouse_exited() -> void:
-	TweenUtils.StopTween(scaleTw)
-	scaleTw = TweenUtils.tweenScale(gameButton.get_node("ButtonImg"),Vector2.ONE,0.3,TweenUtils.Ease.OutCirc)
-	pass # Replace with function body.
-
 
 func _on_minigames_pressed() -> void:
 	BringMinigame()
+	pass # Replace with function body.
+
+
+func _on_exit_button_pressed() -> void:
+	ExitMinigame()
+	pass # Replace with function body.
+
+func _on_left_button_pressed() -> void:
+	ChangeMinigame(-1)
+	pass # Replace with function body.
+
+func _on_right_button_pressed() -> void:
+	ChangeMinigame(1)
+	pass # Replace with function body.
+
+
+func _on_tutorial_help_pressed() -> void:
 	pass # Replace with function body.

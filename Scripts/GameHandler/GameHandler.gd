@@ -189,10 +189,10 @@ func _on_save_timer_timeout():
 	canSave = true
 
 func IncrementTotal() -> int:
-	return saveData.increment * saveData.clickMultiply\
+	return (saveData.increment * saveData.clickMultiply\
 	* saveDataRebirth.multiplier_reb\
 	* saveDataAchievements.multiplyMoneyAchievement\
-	* 1 + (((saveDataAchievements.platformMinigameScore / 30.0)))
+	* (1 + (((saveDataAchievements.platformMinigameScore / 30.0)))))
 
 func NowCollect():
 	if (saveData.autoCollect <= 0):
@@ -257,8 +257,10 @@ func UnlockSkin(strn:String):
 			if (skn[i].unlocked):
 				return
 			skn[i].unlocked = true
-			if (AchievementItem.achievementItem.size() > 0 && AchievementItem.achievementItem != null):
-				AchievementItem.achievementItem[skn[i].achievementName].AchievementUpdate()
+			if (is_instance_valid(AchievementItem.achievementItem) || AchievementItem.achievementItem.size() > 0 && AchievementItem.achievementItem != null):
+				var item = AchievementItem.achievementItem.get(skn[i].achievementName)
+				if (is_instance_valid(item)):
+					AchievementItem.achievementItem[skn[i].achievementName].AchievementUpdate()
 			Achievement.PlayAchievement(skn[i].achievementName,skn[i].achievementTask,skn[i].achievementImage)
 			SaveAllDataGlob()
 			return

@@ -27,9 +27,7 @@ var soundtrackText:Control
 @export var natureText:Control
 
 static var isCode:bool = false
-#@export var audioText:AutoSizeRichTextLabel
-#@export var soundtrackText:AutoSizeRichTextLabel
-# Called when the node enters the scene tree for the first time.
+
 var init = false
 var tempAudio:float = 0
 func _ready() -> void:
@@ -43,6 +41,7 @@ func _ready() -> void:
 	(get_node("Volume/NaturalSlider") as HSlider).value = GameHandler.saveDataSettings.natureVolume
 	(get_node("Performance/QualityOptions") as OptionButton).select(BasedOnQuality())
 	(get_node("Performance/FPSOption") as OptionButton).select(BasedOnFPS())
+	get_node("Performance-2/UpdateIntervalsText").text = "Update Intervals:%.2f" % GameHandler.saveDataSettings.updateInterval
 	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.vSync
 	(get_node("Effects/GlitchEffectBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.glitchEffect
 	(get_node("Effects/BorderShadeBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.shadingBorders
@@ -365,4 +364,13 @@ func _on_border_shade_box_toggled(toggled_on: bool) -> void:
 	get_tree().get_first_node_in_group("OptionUI").SetShader(GameHandler.saveDataSettings.shadingBorders)
 	if (init):
 		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
+	pass # Replace with function body.
+
+
+func _on_update_intervals_slider_value_changed(value: float) -> void:
+	if (value <= 0.07 && value >= 0.03):
+		GameHandler.saveDataSettings.updateInterval = 0.05
+	else:
+		GameHandler.saveDataSettings.updateInterval = value
+	get_node("Performance-2/UpdateIntervalsText").text = "Update Intervals:%.2f" % GameHandler.saveDataSettings.updateInterval
 	pass # Replace with function body.

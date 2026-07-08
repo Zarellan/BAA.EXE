@@ -42,6 +42,7 @@ func _physics_process(delta: float) -> void:
 		HitBarrier2()
 	else:
 		velocity.x = 0
+		jumpVector.x = 0
 		anchorArrow.visible = true
 		if (jumped):
 			camTween = TweenUtils.tweenY(camera,position.y - 100,0.5,TweenUtils.Ease.OutCirc)

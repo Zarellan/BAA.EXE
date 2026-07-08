@@ -76,6 +76,9 @@
 [ext_resource type="Script" uid="uid://c4mcef0fg5c8w" path="res://Scripts/MinigamesMenu/MinigameType.gd" id="73_hmk78"]
 [ext_resource type="Texture2D" uid="uid://c67a42cfpmceq" path="res://Sprites/MinigamesImages/Platform minigame.png" id="74_2f1ge"]
 [ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="74_tymc6"]
+[ext_resource type="Texture2D" uid="uid://ur8hde5qx5fq" path="res://Sprites/OptionUIs/exit door.png" id="76_3xwj6"]
+[ext_resource type="Texture2D" uid="uid://cmq6mhs8xxqlb" path="res://Sprites/OptionUIs/Arrow3.png" id="77_y7kse"]
+[ext_resource type="Texture2D" uid="uid://dqks1kt5m5ks3" path="res://Sprites/OptionUIs/questionMark.png" id="78_ueu3d"]
 
 [sub_resource type="Animation" id="Animation_u06jq"]
 length = 0.001
@@ -498,6 +501,15 @@ tax = 1.2
 taxInc = 0.03
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
+[sub_resource type="Resource" id="Resource_ueu3d"]
+script = ExtResource("27_phtv5")
+title = "Less power curve"
+rebirthPrice = 8
+power = 11
+tax = 1.25
+taxInc = 0.1
+metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
+
 [sub_resource type="Resource" id="Resource_8hf41"]
 script = ExtResource("27_phtv5")
 title = "Super Auto Collect"
@@ -557,7 +569,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_valao"]
 script = ExtResource("28_hotcp")
-items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_17bn8"), SubResource("Resource_wcncl"), SubResource("Resource_q14y5"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
+items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_17bn8"), SubResource("Resource_wcncl"), SubResource("Resource_q14y5"), SubResource("Resource_ueu3d"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [sub_resource type="Gradient" id="Gradient_iwha0"]
@@ -1626,6 +1638,7 @@ layout_mode = 0
 offset_left = 283.0
 offset_right = 370.0
 offset_bottom = 90.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1669,6 +1682,7 @@ offset_left = 282.0
 offset_top = -50.0
 offset_right = 369.0
 offset_bottom = 40.0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1770,6 +1784,7 @@ offset_top = 61.0
 offset_right = 64.0
 offset_bottom = 125.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1801,6 +1816,7 @@ offset_top = 61.0
 offset_right = 128.0
 offset_bottom = 125.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1835,6 +1851,7 @@ offset_top = 61.0
 offset_right = 128.0
 offset_bottom = 125.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1866,6 +1883,7 @@ offset_top = 125.0
 offset_right = 128.0
 offset_bottom = 189.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1901,6 +1919,7 @@ offset_top = 125.0
 offset_right = 128.0
 offset_bottom = 189.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1936,6 +1955,7 @@ offset_top = 125.0
 offset_right = 128.0
 offset_bottom = 189.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -1970,6 +1990,7 @@ offset_top = 61.0
 offset_right = 192.0
 offset_bottom = 125.0
 focus_mode = 0
+mouse_default_cursor_shape = 2
 texture_normal = ExtResource("52_ykfix")
 ignore_texture_size = true
 stretch_mode = 0
@@ -2120,7 +2141,7 @@ natureAudio = NodePath("../../NaturalNoise")
 natureDB = 20.0
 settingText = NodePath("Label/AutoSizeRichTextLabel")
 pauseMenu = NodePath("../PauseMenu")
-settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Code"), NodePath("Data"), NodePath("Effects"), NodePath("Sheep color")]
+settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Performance-2"), NodePath("Code"), NodePath("Data"), NodePath("Effects"), NodePath("Sheep color")]
 shadedGrassNode = NodePath("../../../Background/Floor/GrassesDark")
 codeText = NodePath("Code/Code")
 particle = ExtResource("29_62te2")
@@ -2175,6 +2196,7 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
 [node name="Volume" type="Control" parent="Control/CanvasLayer/Settings" unique_id=772165797]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2371,6 +2393,43 @@ offset_top = 329.0
 offset_right = 684.00006
 offset_bottom = 353.0
 scale = Vector2(4.635, 4.635)
+
+[node name="Performance-2" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1403566493]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UpdateIntervalsSlider" type="HSlider" parent="Control/CanvasLayer/Settings/Performance-2" unique_id=1755704333]
+texture_filter = 2
+layout_mode = 0
+offset_left = 410.0
+offset_top = 220.0
+offset_right = 587.336
+offset_bottom = 256.0
+scale = Vector2(2.515, 2.515)
+min_value = 0.01
+max_value = 0.1
+step = 0.05
+value = 0.01
+
+[node name="UpdateIntervalsText" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Performance-2" unique_id=286108635]
+clip_contents = false
+layout_mode = 0
+offset_left = 424.0
+offset_top = 181.0
+offset_right = 821.0
+offset_bottom = 241.0
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 30
+text = "Update Intervals:31"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 31
+_current_font_size = 30
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="Code" type="Control" parent="Control/CanvasLayer/Settings" unique_id=744997745]
 visible = false
@@ -2758,7 +2817,6 @@ one_shot = true
 autostart = true
 
 [node name="SkinPanel" type="Control" parent="Control/CanvasLayer" unique_id=1936878502]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2790,11 +2848,11 @@ canvas_item_default_texture_filter = 0
 sdf_oversize = 0
 sdf_scale = 2
 size = Vector2i(900, 720)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="SkinChanger" parent="Control/CanvasLayer/SkinPanel/SubViewportContainer/SubViewport" unique_id=336374009 instance=ExtResource("64_qxec0")]
 
-[node name="Back" type="Button" parent="Control/CanvasLayer/SkinPanel" unique_id=1446037317]
+[node name="Back" type="TextureButton" parent="Control/CanvasLayer/SkinPanel" unique_id=210731741]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2807,9 +2865,53 @@ offset_right = 150.0
 offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 39
-text = "Back"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("15_wnqqd")
+stretch_mode = 0
 metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="Control/CanvasLayer/SkinPanel/Back" unique_id=1925842575]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.46875
+offset_top = -50.78125
+offset_right = 230.46875
+offset_bottom = 50.78125
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.64, 0.64)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+
+[node name="Door" type="TextureRect" parent="Control/CanvasLayer/SkinPanel/Back/Control" unique_id=138604687]
+layout_mode = 0
+offset_left = 228.98149
+offset_right = 326.9815
+offset_bottom = 97.0
+mouse_filter = 2
+texture = ExtResource("76_3xwj6")
+
+[node name="Arrow" type="TextureRect" parent="Control/CanvasLayer/SkinPanel/Back/Control" unique_id=272545852]
+layout_mode = 0
+offset_left = 253.98149
+offset_top = 17.999996
+offset_right = 324.43524
+offset_bottom = 120.41901
+rotation = 1.5707964
+mouse_filter = 2
+texture = ExtResource("77_y7kse")
+expand_mode = 1
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/SkinPanel/Back" unique_id=1847274305 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../Control")
+scaleVal = 0.78
+button = NodePath("..")
 
 [node name="Achievements" type="Control" parent="Control/CanvasLayer" unique_id=715517]
 layout_mode = 3
@@ -2957,9 +3059,9 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="TextureButton" type="TextureButton" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=455275286]
 layout_mode = 0
-offset_left = 505.0
+offset_left = 445.0
 offset_top = 362.0
-offset_right = 763.0
+offset_right = 605.0
 offset_bottom = 460.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("15_wnqqd")
@@ -2967,16 +3069,208 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="ButtonImg" type="TextureRect" parent="Control/CanvasLayer/Minigames/TextureRect/TextureButton" unique_id=1925965200]
-layout_mode = 0
-offset_left = 71.0
-offset_top = -11.0
-offset_right = 188.0
-offset_bottom = 111.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -61.0
+offset_right = 58.5
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("29_pxlk8")
 expand_mode = 1
 flip_h = true
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Minigames/TextureRect/TextureButton" unique_id=2105781685 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../ButtonImg")
+scaleVal = 1.1
+useScalingSingle = true
+useDefaultScale = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="TutorialHelp" type="TextureButton" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=1128960447]
+layout_mode = 0
+offset_left = 663.0
+offset_top = 362.0
+offset_right = 823.0
+offset_bottom = 460.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("15_wnqqd")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ButtonImg" type="TextureRect" parent="Control/CanvasLayer/Minigames/TextureRect/TutorialHelp" unique_id=1380435644]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -61.0
+offset_right = 58.5
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.68, 0.68)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("78_ueu3d")
+expand_mode = 1
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Minigames/TextureRect/TutorialHelp" unique_id=618660498 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../ButtonImg")
+scaleVal = 0.75
+useScalingSingle = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="ExitButton" type="TextureButton" parent="Control/CanvasLayer/Minigames" unique_id=145759784]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 586.0
+offset_right = 833.0
+offset_bottom = 682.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("15_wnqqd")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Control" type="Control" parent="Control/CanvasLayer/Minigames/ExitButton" unique_id=310403250]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+
+[node name="Door" type="TextureRect" parent="Control/CanvasLayer/Minigames/ExitButton/Control" unique_id=2046673536]
+layout_mode = 0
+offset_left = 11.419006
+offset_top = -29.0
+offset_right = 109.41901
+offset_bottom = 68.0
+mouse_filter = 2
+texture = ExtResource("76_3xwj6")
+
+[node name="Arrow" type="TextureRect" parent="Control/CanvasLayer/Minigames/ExitButton/Control" unique_id=715826830]
+layout_mode = 0
+offset_left = 36.419006
+offset_top = -11.0
+offset_right = 106.87274
+offset_bottom = 91.41901
+rotation = 1.5707964
+mouse_filter = 2
+texture = ExtResource("77_y7kse")
+expand_mode = 1
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Minigames/ExitButton" unique_id=2016844900 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../Control")
+scaleVal = 1.1
+useScalingSingle = true
+useDefaultScale = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="LeftButton" type="TextureButton" parent="Control/CanvasLayer/Minigames" unique_id=920878064]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 586.0
+offset_right = 350.0
+offset_bottom = 682.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Minigames/LeftButton" unique_id=338737467]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+scale = Vector2(1.5441122, 1.9841123)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("77_y7kse")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Minigames/LeftButton" unique_id=1873257938 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+useScalingSingle = true
+useDefaultScale = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="RightButton" type="TextureButton" parent="Control/CanvasLayer/Minigames" unique_id=161299936]
+layout_mode = 0
+offset_left = 933.0
+offset_top = 586.0
+offset_right = 1079.0
+offset_bottom = 682.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("52_ykfix")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Minigames/RightButton" unique_id=953065628]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -32.0
+offset_right = 43.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+scale = Vector2(1.5441122, 1.9841123)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("77_y7kse")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Minigames/RightButton" unique_id=2078713816 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+useScalingSingle = true
+useDefaultScale = true
+dependOnButton = true
+button = NodePath("..")
 
 [node name="NaturalNoise" type="AudioStreamPlayer" parent="Control" unique_id=1621144205]
 stream = ExtResource("71_l88l1")
@@ -3008,6 +3302,7 @@ limit_enabled = false
 [connection signal="value_changed" from="Control/CanvasLayer/Settings/Volume/NaturalSlider" to="Control/CanvasLayer/Settings" method="_on_natural_slider_value_changed"]
 [connection signal="item_selected" from="Control/CanvasLayer/Settings/Performance/QualityOptions" to="Control/CanvasLayer/Settings" method="_on_quality_option_item_selected"]
 [connection signal="toggled" from="Control/CanvasLayer/Settings/Performance/VSyncBox" to="Control/CanvasLayer/Settings" method="_on_v_sync_box_toggled"]
+[connection signal="value_changed" from="Control/CanvasLayer/Settings/Performance-2/UpdateIntervalsSlider" to="Control/CanvasLayer/Settings" method="_on_update_intervals_slider_value_changed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Code/CodeSubmit" to="Control/CanvasLayer/Settings" method="_on_code_submit_pressed"]
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/CodeTextTimer" to="Control/CanvasLayer/Settings" method="_on_code_text_timer_timeout"]
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/InvalidCodeTimer" to="Control/CanvasLayer/Settings" method="_on_invalid_code_timer_timeout"]
@@ -3023,6 +3318,10 @@ limit_enabled = false
 [connection signal="timeout" from="Control/CanvasLayer/RebirthMenu/SquareRootCalculate" to="Control/CanvasLayer/RebirthMenu" method="_on_square_root_calculate_timeout"]
 [connection signal="pressed" from="Control/CanvasLayer/SkinPanel/Back" to="Control/CanvasLayer/SkinPanel" method="_on_back_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Achievements/Button" to="Control/CanvasLayer/Achievements" method="_on_button_pressed"]
-[connection signal="mouse_entered" from="Control/CanvasLayer/Minigames/TextureRect/TextureButton" to="Control/CanvasLayer/Minigames" method="_on_texture_button_mouse_entered"]
-[connection signal="mouse_exited" from="Control/CanvasLayer/Minigames/TextureRect/TextureButton" to="Control/CanvasLayer/Minigames" method="_on_texture_button_mouse_exited"]
 [connection signal="pressed" from="Control/CanvasLayer/Minigames/TextureRect/TextureButton" to="Control/CanvasLayer/Minigames" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Minigames/TextureRect/TutorialHelp" to="Control/CanvasLayer/Minigames" method="_on_tutorial_help_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Minigames/ExitButton" to="Control/CanvasLayer/Minigames" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Minigames/LeftButton" to="Control/CanvasLayer/Minigames" method="_on_left_button_pressed"]
+[connection signal="mouse_entered" from="Control/CanvasLayer/Minigames/RightButton" to="Control/CanvasLayer/Minigames" method="_on_right_button_mouse_entered"]
+[connection signal="mouse_exited" from="Control/CanvasLayer/Minigames/RightButton" to="Control/CanvasLayer/Minigames" method="_on_right_button_mouse_exited"]
+[connection signal="pressed" from="Control/CanvasLayer/Minigames/RightButton" to="Control/CanvasLayer/Minigames" method="_on_right_button_pressed"]

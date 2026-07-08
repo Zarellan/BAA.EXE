@@ -54,8 +54,8 @@ func LoadSkin():
 	ExceptionalSkins(currentSkin)
 	pass
 
-func ExceptionalSkins(name):
-	match (name):
+func ExceptionalSkins(nam):
+	match (nam):
 		"Font":sheep.get_node("StaticBody2D/Sprite2D").texture = load("res://Sprites/Sheep/sheep u.png")
 
 func SaveSkin():
