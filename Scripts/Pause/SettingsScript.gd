@@ -269,23 +269,27 @@ func BasedOnQuality():
 
 func _on_fps_option_item_selected(index: int) -> void:
 	match (index):
-		0: GameHandler.saveDataSettings.fps = 30
-		1: GameHandler.saveDataSettings.fps = 60
-		2: GameHandler.saveDataSettings.fps = 120
-		3: GameHandler.saveDataSettings.fps = 0
+		0:GameHandler.saveDataSettings.fps = 24
+		1: GameHandler.saveDataSettings.fps = 30
+		2: GameHandler.saveDataSettings.fps = 60
+		3: GameHandler.saveDataSettings.fps = 120
+		4: GameHandler.saveDataSettings.fps = 0
 	Engine.max_fps = GameHandler.saveDataSettings.fps
+	print(Engine.max_fps)
 	pass # Replace with function body.
 
 func BasedOnFPS():
 	match (GameHandler.saveDataSettings.fps):
-		30: 
+		24: 
 			return 0
-		60: 
+		30: 
 			return 1
-		120: 
+		60: 
 			return 2
-		0: 
+		120: 
 			return 3
+		0:
+			return 4
 
 func SetVSync():
 	if (GameHandler.saveDataSettings.vSync):

@@ -191,12 +191,10 @@ func SetShader(isShading:bool):
 		EmptyShade(refresh1)
 		EmptyShade(refresh2)
 		EmptyShade(shoppingKart)
-		print("non-set")
 	else:
 		SetShaderFromVariable(refresh1, goldRebirthShader)
 		SetShaderFromVariable(refresh2, goldRebirthShader2)
 		SetShaderFromVariable(shoppingKart, goldKartShader)
-		print("set")
 	pass
 
 func SetVariableInitialize(objShader: CanvasItem):

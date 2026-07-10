@@ -32,6 +32,7 @@ effectDescription = "effect: increase your jump by +200"
 achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
 achievementImage = ExtResource("3_qa4yv")
+unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_sbckw"]
@@ -48,4 +49,4 @@ metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 script = ExtResource("1_2yxkc")
 skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw")])
 skinUsed = "Default"
-platformMinigameScore = 10
+platformMinigameScore = 23

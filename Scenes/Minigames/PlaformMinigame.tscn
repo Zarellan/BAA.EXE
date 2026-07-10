@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="11_vyqy7"]
 [ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="12_jmhar"]
 [ext_resource type="PackedScene" uid="uid://d1fnkwoonwspi" path="res://Prefabs/Utils/OverlapTouch/OverlapTouch.tscn" id="14_5yvr5"]
-[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="15_pyr1d"]
+[ext_resource type="Texture2D" uid="uid://duql6qlgcyj62" path="res://ScreenShotPictures/image2.png" id="15_pyr1d"]
 
 [sub_resource type="Curve" id="Curve_vyqy7"]
 _limits = [3.0, 15.0, 0.0, 10000.0]
@@ -276,6 +276,8 @@ _data = {
 &"Idle": SubResource("Animation_7olyu"),
 &"RESET": SubResource("Animation_jmhar")
 }
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_pyr1d"]
 
 [node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle", "textScore", "player", "camera", "phoneButtons")]
 rotation = -0.0002622433
@@ -568,16 +570,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/GameOver" unique_id=1050785345]
+[node name="imageWh" type="TextureRect" parent="Control/CanvasLayer/GameOver" unique_id=993882933]
 visible = false
 layout_mode = 0
-offset_left = 449.0
-offset_top = 52.0
-offset_right = 832.0
-offset_bottom = 421.0
+offset_left = 436.0
+offset_top = 62.0
+offset_right = 865.0
+offset_bottom = 351.0
+texture = SubResource("CanvasTexture_pyr1d")
+
+[node name="Image" type="TextureRect" parent="Control/CanvasLayer/GameOver/imageWh" unique_id=1050785345]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034965035
+anchor_top = 0.04152249
+anchor_right = 0.969697
+anchor_bottom = 0.9653979
+grow_horizontal = 2
+grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("15_pyr1d")
 expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_entered"]
 [connection signal="body_exited" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_exited"]
