@@ -38,7 +38,40 @@ func _ready() -> void:
 	
 	modify_curve_domain()
 	isPhone()
+	ScreenShotGame()
 	pass
+
+func ScreenShotGame():
+	var playero = get_tree().get_first_node_in_group("PlayerPlatform")
+	var sizeRect = Vector2(750,550)
+	var randomSmallPosition = Vector2(randf_range(-20,20),randf_range(-20,20))
+	var player_screen_pos = playero.get_global_transform_with_canvas().origin
+	var screenSize = get_viewport().get_visible_rect().size
+	var targetVec:Vector2 = Vector2((randomSmallPosition.x + player_screen_pos.x) - (sizeRect.x/2), (randomSmallPosition.y + player_screen_pos.y)- (sizeRect.y/2))
+	var clampedVec:Vector2 = Vector2(clamp(targetVec.x, 0, screenSize.x - sizeRect.x),clamp(targetVec.y, 0, screenSize.y - sizeRect.y))
+	var region = Rect2i(int(clampedVec.x), int(clampedVec.y), sizeRect.x, sizeRect.y)
+
+	var ui_canvas: CanvasLayer = $Control/CanvasLayer
+	var original_canvas_rid = ui_canvas.get_canvas()
+	
+	RenderingServer.viewport_remove_canvas(get_viewport().get_viewport_rid(), original_canvas_rid)
+	
+	RenderingServer.force_draw(false) # false means don't swap buffers (player won't see it)
+	
+	var image = get_viewport().get_texture().get_image()
+	var cropped_image = image.get_region(region)
+	
+	RenderingServer.viewport_attach_canvas(get_viewport().get_viewport_rid(), original_canvas_rid)
+	RenderingServer.viewport_set_canvas_stacking(get_viewport().get_viewport_rid(), original_canvas_rid, ui_canvas.layer, 0)
+	return cropped_image
+	#var save_dir = "res://ScreenShotPictures/"
+	#DirAccess.make_dir_absolute(save_dir)
+	#var error = cropped_image.save_png(save_dir + "image2.png")
+	#
+	#if error == OK:
+		#print("Screenshot saved via RenderingServer successfully!")
+	#else:
+		#print("Error saving screenshot: ", error)
 
 func isPhone():
 	if (!DeviceCheckerUtil.IsUsingPhone()):
@@ -83,7 +116,8 @@ func _process(_delta: float) -> void:
 	if (maxSpawnY > get_tree().get_first_node_in_group("PlayerPlatform").position.y - 1000):
 		maxSpawnY = currentYspawn - 500
 		PlatformSpawner()
-	
+	#if (Input.is_action_just_pressed("ui_down")):
+		#ScreenShotGame()
 	pass
 
 

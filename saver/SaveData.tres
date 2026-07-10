@@ -103,5 +103,6 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_hantp")
-money = 4
+money = 50
 shopListData = SubResource("Resource_pbqe1")
+tutorialed = true

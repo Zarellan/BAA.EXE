@@ -28,7 +28,6 @@ var defaultScale
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
 	defaultScale = scale
 	if (is_instance_valid(sheepShadow)):
@@ -129,6 +128,7 @@ func Pressed():
 			TweenUtils.StopTween(twTutorial)
 			TweenUtils.tweenAlpha(tutorial,0,0.3,TweenUtils.Ease.linear)
 			GameHandler.saveData.tutorialed = true
+			GameHandler.SaveAllDataGlob()
 		canPress = false
 		await get_tree().create_timer(0.01).timeout
 		canPress = true

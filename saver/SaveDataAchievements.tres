@@ -48,3 +48,4 @@ metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 script = ExtResource("1_2yxkc")
 skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw")])
 skinUsed = "Default"
+platformMinigameScore = 10

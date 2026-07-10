@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="11_vyqy7"]
 [ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="12_jmhar"]
 [ext_resource type="PackedScene" uid="uid://d1fnkwoonwspi" path="res://Prefabs/Utils/OverlapTouch/OverlapTouch.tscn" id="14_5yvr5"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="15_pyr1d"]
 
 [sub_resource type="Curve" id="Curve_vyqy7"]
 _limits = [3.0, 15.0, 0.0, 10000.0]
@@ -557,6 +558,26 @@ offset_bottom = -38.23998
 rotation = 1.5707964
 scale = Vector2(3.372, 3.372)
 rawMath = true
+
+[node name="GameOver" type="Control" parent="Control/CanvasLayer" unique_id=732763659]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/GameOver" unique_id=1050785345]
+visible = false
+layout_mode = 0
+offset_left = 449.0
+offset_top = 52.0
+offset_right = 832.0
+offset_bottom = 421.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("15_pyr1d")
+expand_mode = 1
 
 [connection signal="body_entered" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_entered"]
 [connection signal="body_exited" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_exited"]

@@ -42,12 +42,11 @@ func _ready() -> void:
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
 	#set_process(false)
 	set_physics_process(false)
-	fontSkinCondition = FindSkinByName("Font")
 	pass # Replace with function body.
 
 var del:float = 0
 func _process(delta: float) -> void:
-	if (fontSkinCondition.unlocked):
+	if (is_instance_valid(FindSkinByName("Font")) && FindSkinByName("Font").unlocked):
 		return
 	del += delta
 	if (Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) || Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)\

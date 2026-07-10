@@ -4,11 +4,14 @@ signal touched
 signal untouched
 
 @export var rawMath = false
+@export var phoneOnly = true
 func _ready() -> void:
 	pass
 
 
 func _process(_delta: float) -> void:
+	if (phoneOnly && !DeviceCheckerUtil.IsUsingPhone()):
+		return
 	if (!rawMath && !DeviceCheckerUtil.IsUsingPhone()):
 		BuiltIn()
 	else:
@@ -33,10 +36,14 @@ func RawMath():
 
 var enteredMouse = false
 func _on_mouse_entered() -> void:
+	if (phoneOnly && !DeviceCheckerUtil.IsUsingPhone()):
+		return
 	enteredMouse = true
 	pass
 
 
 func _on_mouse_exited() -> void:
+	if (phoneOnly && !DeviceCheckerUtil.IsUsingPhone()):
+		return
 	enteredMouse = false
 	pass
