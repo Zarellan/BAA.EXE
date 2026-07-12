@@ -592,19 +592,19 @@ shader_parameter/random_start = 0.0
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_r1qcv"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ueu3d"]
 gradient = SubResource("Gradient_26u1s")
 fill_from = Vector2(0, 0.9273504)
 fill_to = Vector2(1, 0.6111111)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_26u1s"]
 shader = ExtResource("9_26u1s")
-shader_parameter/gradient = SubResource("GradientTexture2D_r1qcv")
+shader_parameter/gradient = SubResource("GradientTexture2D_ueu3d")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/progress = 0.0
 shader_parameter/random_start = 0.0
 
-[sub_resource type="Shader" id="Shader_q3ouh"]
+[sub_resource type="Shader" id="Shader_x45b6"]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -653,14 +653,14 @@ void fragment() {
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_17bn8"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wpcgh"]
 gradient = SubResource("Gradient_1x37o")
 fill_from = Vector2(0, 0.9273504)
 fill_to = Vector2(1, 0.6111111)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iwha0"]
-shader = SubResource("Shader_q3ouh")
-shader_parameter/gradient = SubResource("GradientTexture2D_17bn8")
+shader = SubResource("Shader_x45b6")
+shader_parameter/gradient = SubResource("GradientTexture2D_wpcgh")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/progress = 0.0
 shader_parameter/random_start = 0.0
@@ -2237,13 +2237,13 @@ offset_right = 821.0
 offset_bottom = 208.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2256,13 +2256,13 @@ offset_right = 823.0
 offset_bottom = 303.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2423,13 +2423,13 @@ offset_right = 821.0
 offset_bottom = 241.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Update Intervals:31"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2505,13 +2505,13 @@ offset_top = 192.0
 offset_right = 693.0
 offset_bottom = 252.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Glitch Effect"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -2533,14 +2533,14 @@ offset_top = 290.0
 offset_right = 692.0
 offset_bottom = 350.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Shading
 Border"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true

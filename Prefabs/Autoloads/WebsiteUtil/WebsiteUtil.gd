@@ -1,11 +1,25 @@
-extends Node
-class_name WebsiteUtil # responsible for SDK websites
+extends Node # responsible for SDK websites
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var gameStarted:bool = false
+## Called when the node enters the scene tree for the first time.
+#func _ready() -> void:
+	#pass # Replace with function body.
+#
+#
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta: float) -> void:
+	#pass
+
+func StartSDK():
+	if (gameStarted):
+		return
+	print("start")
+	gameStarted = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+func StopSDK():
+	if (!gameStarted):
+		return
+	print("stop")
+	gameStarted = false

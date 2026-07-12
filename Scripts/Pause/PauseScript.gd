@@ -36,6 +36,7 @@ func BringPause():
 		paused = true
 		visible = true
 		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
+		WebsiteUtil.StopSDK()
 func ExitPause():
 	if paused:
 		TweenUtils.StopTween(tweenPause)
@@ -43,6 +44,7 @@ func ExitPause():
 		tweenPause.finished.connect(func():
 			visible = false)
 		paused = false
+		WebsiteUtil.StartSDK()
 		GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 func _on_resume_pressed() -> void:
 	ExitPause()

@@ -15,6 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="12_jmhar"]
 [ext_resource type="PackedScene" uid="uid://d1fnkwoonwspi" path="res://Prefabs/Utils/OverlapTouch/OverlapTouch.tscn" id="14_5yvr5"]
 [ext_resource type="Texture2D" uid="uid://duql6qlgcyj62" path="res://ScreenShotPictures/image2.png" id="15_pyr1d"]
+[ext_resource type="Texture2D" uid="uid://c6ryx3blrq5fx" path="res://Sprites/OptionUIs/ButtonUI.png" id="16_1er1d"]
+[ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/Rebirth1.png" id="18_r1fok"]
+[ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="18_vf3s3"]
+[ext_resource type="Texture2D" uid="uid://ur8hde5qx5fq" path="res://Sprites/OptionUIs/exit door.png" id="20_r1fok"]
+[ext_resource type="Texture2D" uid="uid://cmq6mhs8xxqlb" path="res://Sprites/OptionUIs/Arrow3.png" id="21_6b8ww"]
 
 [sub_resource type="Curve" id="Curve_vyqy7"]
 _limits = [3.0, 15.0, 0.0, 10000.0]
@@ -277,9 +282,11 @@ _data = {
 &"RESET": SubResource("Animation_jmhar")
 }
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_4nel2"]
+
 [sub_resource type="CanvasTexture" id="CanvasTexture_pyr1d"]
 
-[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle", "textScore", "player", "camera", "phoneButtons")]
+[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle", "textScore", "player", "camera", "phoneButtons", "gameoverUI", "loseTexture", "blackoutTexture", "retryButton", "quitButton", "gameOverScreenTimer")]
 rotation = -0.0002622433
 script = ExtResource("1_kk0mp")
 platformPrefab = ExtResource("5_tks0h")
@@ -292,6 +299,12 @@ curveDistance = SubResource("Curve_vyqy7")
 player = NodePath("CharacterBody2D")
 camera = NodePath("Camera2D")
 phoneButtons = [NodePath("Control/CanvasLayer/TextureButton"), NodePath("Control/CanvasLayer/Left")]
+gameoverUI = NodePath("Control/CanvasLayer/GameOver")
+loseTexture = NodePath("Control/CanvasLayer/GameOver/imageWh/Image")
+blackoutTexture = NodePath("Control/CanvasLayer/GameOver/BlackOut")
+retryButton = NodePath("Control/CanvasLayer/GameOver/Buttons/Retry")
+quitButton = NodePath("Control/CanvasLayer/GameOver/Buttons/Quit")
+gameOverScreenTimer = NodePath("Control/CanvasLayer/GameOver/GameOverScreen")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1320418300 node_paths=PackedStringArray("visibleNotifier")]
 position = Vector2(612, 579)
@@ -318,7 +331,7 @@ shape = SubResource("RectangleShape2D_pw4da")
 rect = Rect2(-63.980244, -65, 127.96048, 130)
 show_rect = false
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1094306386 node_paths=PackedStringArray("anchorArrow", "camera", "sprite", "dirtParticle") groups=["PlayerPlatform"]]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1094306386 node_paths=PackedStringArray("anchorArrow", "camera", "sprite", "dirtParticle", "takeImageTimer") groups=["PlayerPlatform"]]
 position = Vector2(609, 435)
 scale = Vector2(0.7503374, 0.61309457)
 script = ExtResource("2_tp4em")
@@ -326,6 +339,7 @@ anchorArrow = NodePath("Marker2D")
 camera = NodePath("../Camera2D")
 sprite = NodePath("Sprite2D")
 dirtParticle = NodePath("DirtParticle")
+takeImageTimer = NodePath("TakeImage")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1250934136]
@@ -379,6 +393,9 @@ lifetime = 4.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_5yvr5")
+
+[node name="TakeImage" type="Timer" parent="CharacterBody2D" unique_id=1788592366]
+one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1411528697]
 position = Vector2(640, 362)
@@ -488,41 +505,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=884886200]
 
-[node name="UpAlign" type="Control" parent="Control/CanvasLayer" unique_id=408426199]
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
-grow_horizontal = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="AutoSizeRichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer/UpAlign" unique_id=1666883950]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -111.0
-offset_right = 111.0
-offset_bottom = 75.0
-grow_horizontal = 2
-pivot_offset_ratio = Vector2(0.5, 0.5)
-theme_override_constants/outline_size = 11
-theme_override_font_sizes/normal_font_size = 40
-text = "0"
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("11_vyqy7")
-_max_size = 40
-_outline_ratio = 0.28
-_current_font_size = 40
-_editor_defaults_set = true
-metadata/_custom_type_script = "uid://co0lo02vnu10n"
-metadata/_edit_use_anchors_ = true
-
 [node name="TextureButton" type="TextureButton" parent="Control/CanvasLayer" unique_id=1755211308]
 offset_left = 1128.0
 offset_top = 545.0
@@ -562,6 +544,7 @@ scale = Vector2(3.372, 3.372)
 rawMath = true
 
 [node name="GameOver" type="Control" parent="Control/CanvasLayer" unique_id=732763659]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -570,13 +553,23 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="BlackOut" type="TextureRect" parent="Control/CanvasLayer/GameOver" unique_id=1868265351]
+self_modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_4nel2")
+
 [node name="imageWh" type="TextureRect" parent="Control/CanvasLayer/GameOver" unique_id=993882933]
-visible = false
 layout_mode = 0
-offset_left = 436.0
-offset_top = 62.0
-offset_right = 865.0
-offset_bottom = 351.0
+offset_left = 1366.0
+offset_top = 41.0
+offset_right = 1897.0
+offset_bottom = 389.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("CanvasTexture_pyr1d")
 
 [node name="Image" type="TextureRect" parent="Control/CanvasLayer/GameOver/imageWh" unique_id=1050785345]
@@ -593,6 +586,194 @@ texture = ExtResource("15_pyr1d")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="Buttons" type="Control" parent="Control/CanvasLayer/GameOver" unique_id=1341466073]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Retry" type="TextureButton" parent="Control/CanvasLayer/GameOver/Buttons" unique_id=2042934653]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.54765624
+anchor_top = 0.7347222
+anchor_right = 0.6890625
+anchor_bottom = 0.9777778
+offset_top = 232.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("16_1er1d")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Holder" type="Control" parent="Control/CanvasLayer/GameOver/Buttons/Retry" unique_id=531082188]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/GameOver/Buttons/Retry/Holder" unique_id=868322671]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.031000001
+anchor_top = 0.172
+anchor_right = 1.031
+anchor_bottom = 0.95300007
+offset_left = 0.015999913
+offset_top = -0.008000374
+offset_right = 0.01599884
+offset_bottom = 0.0079956055
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("18_r1fok")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Control/CanvasLayer/GameOver/Buttons/Retry/Holder" unique_id=966352256]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.031000001
+anchor_top = 0.031000001
+anchor_right = 0.96900004
+anchor_bottom = 0.74500006
+offset_left = -0.015999913
+offset_top = 0.015999913
+offset_right = -0.015995026
+offset_bottom = 0.016002655
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.1415927
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("18_r1fok")
+expand_mode = 1
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/GameOver/Buttons/Retry" unique_id=1692705131 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("18_vf3s3")
+node = NodePath("../Holder")
+scaleVal = 1.1
+useScalingSingle = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="Quit" type="TextureButton" parent="Control/CanvasLayer/GameOver/Buttons" unique_id=847932745]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.31875
+anchor_top = 0.7347222
+anchor_right = 0.46015626
+anchor_bottom = 0.9777778
+offset_top = 232.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+focus_mode = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("16_1er1d")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_group_ = true
+
+[node name="Control" type="Control" parent="Control/CanvasLayer/GameOver/Buttons/Quit" unique_id=1701355489]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -45.5
+offset_right = 67.6875
+offset_bottom = 56.0625
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.155, 1.155)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+
+[node name="Door" type="TextureRect" parent="Control/CanvasLayer/GameOver/Buttons/Quit/Control" unique_id=2099264798]
+layout_mode = 0
+offset_left = 47.585007
+offset_top = -2.0019531
+offset_right = 145.58502
+offset_bottom = 94.99805
+mouse_filter = 2
+texture = ExtResource("20_r1fok")
+
+[node name="Arrow" type="TextureRect" parent="Control/CanvasLayer/GameOver/Buttons/Quit/Control" unique_id=1913682584]
+layout_mode = 0
+offset_left = 72.58501
+offset_top = 15.998043
+offset_right = 143.03876
+offset_bottom = 118.41705
+rotation = 1.5707964
+mouse_filter = 2
+texture = ExtResource("21_6b8ww")
+expand_mode = 1
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/GameOver/Buttons/Quit" unique_id=977818269 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("18_vf3s3")
+node = NodePath("../Control")
+scaleVal = 1.25
+useScalingSingle = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="GameOverScreen" type="Timer" parent="Control/CanvasLayer/GameOver" unique_id=1157375123]
+wait_time = 1.6999999999999997
+one_shot = true
+
+[node name="UpAlign" type="Control" parent="Control/CanvasLayer" unique_id=408426199]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AutoSizeRichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer/UpAlign" unique_id=1666883950]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -111.0
+offset_right = 111.0
+offset_bottom = 75.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/normal_font_size = 40
+text = "0"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_vyqy7")
+_max_size = 40
+_outline_ratio = 0.28
+_current_font_size = 40
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="body_entered" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_entered"]
 [connection signal="body_exited" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_exited"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="." method="_on_wool_barrier_collision_body_entered"]
@@ -607,3 +788,5 @@ metadata/_edit_use_anchors_ = true
 [connection signal="untouched" from="Control/CanvasLayer/Left/LeftTouch" to="CharacterBody2D" method="_on_left_touch_untouched"]
 [connection signal="touched" from="Control/CanvasLayer/Left/RightTouch" to="CharacterBody2D" method="_on_right_touch_touched"]
 [connection signal="untouched" from="Control/CanvasLayer/Left/RightTouch" to="CharacterBody2D" method="_on_right_touch_untouched"]
+[connection signal="pressed" from="Control/CanvasLayer/GameOver/Buttons/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/GameOver/Buttons/Quit" to="." method="_on_quit_pressed"]

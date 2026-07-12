@@ -9,6 +9,7 @@ extends Control
 var progress : Array[float] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	WebsiteUtil.StopSDK()
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/MainMenu.mp3")
 	#ResourceLoader.load_threaded_request(scenePath)
 	TweenUtils.tweenScalePingPong(background,Vector2(1,1.05),Vector2(1,1),2,TweenUtils.Ease.InOutSine)
@@ -18,11 +19,10 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	ResourceLoader.load_threaded_request(scenePath)
 	bar.visible = true
-	pass # Replace with function body.
+	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var status = ResourceLoader.load_threaded_get_status(scenePath, progress)
 	
 	match status:

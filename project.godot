@@ -25,6 +25,7 @@ GlobalAudio="*uid://cmt4egsoyxyif"
 GlobalSoundtrack="*uid://yqykenhxav3"
 TransitionScript="*uid://xo3bp4rhumjk"
 Achievement="*uid://t7wlwjpi4a52"
+WebsiteUtil="*uid://ss7ohaxsw2c3"
 
 [display]
 
@@ -32,6 +33,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
+
+[editor]
+
+run/main_run_args="--rendering-driver opengl3"
 
 [editor_plugins]
 

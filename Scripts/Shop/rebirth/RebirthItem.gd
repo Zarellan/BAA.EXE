@@ -173,6 +173,10 @@ func ExceptionalItems():
 				if (shopData.power == Powers.stomp):
 					SetUniqueShader(get_node("BackBufferCopy/GlitchingEffect"))
 					get_node("BackBufferCopy/GlitchingEffect").material.set_shader_parameter("shake_power",0.0015)
+				if (shopData.power == Powers.powerCurve):
+					SetUniqueShader(get_node("BackBufferCopy/GlitchingEffect"))
+					get_node("BackBufferCopy/GlitchingEffect").material.set_shader_parameter("shake_power",0.0010)
+
 			else:
 				get_node("BackBufferCopy/GlitchingEffect").visible = false
 		pass
@@ -233,10 +237,10 @@ func CustomItemText():
 				"current required rebirth:" + str(NumberFormat.Format(int(RebirthMenu.base_rebirth_total)))
 		Powers.longerCurve:
 			descriptionNode.text = "the curve of platform minigame difficulty will be longer\n(meaning the game will get easier)\n"+\
-			"current curve length:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveDistance)))
+			"current curve minigame length:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveDistance)))
 		Powers.powerCurve:
 			descriptionNode.text = "the curve of platform minigame difficulty power will get less\nand makes the game easier to manage.\n"+\
-			"current curve power:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveValue)))
+			"current curve minigame power:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveValue)))
 #endregion
 
 func SetBasedOnLevel():

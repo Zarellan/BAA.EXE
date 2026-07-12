@@ -22,8 +22,10 @@ var tweenScaleWool2:Tween
 @export var max_difficulty_height: float = -10000.0
 
 @export var phoneButtons:Array[Control]
+
 var died = false
 
+var imgLose:Image
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#if (instance == null):
@@ -34,6 +36,8 @@ func _ready() -> void:
 	ParticleManager.PlayParticleWarmup(woolBarrier2Particle)
 	PlatformSpawner()
 	died = false
+	score = 0
+	gameOverScreenTimer.timeout.connect(BringGameOverScreen)
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/PlatformMinigame.mp3")
 	
 	modify_curve_domain()
@@ -56,14 +60,14 @@ func ScreenShotGame():
 	
 	RenderingServer.viewport_remove_canvas(get_viewport().get_viewport_rid(), original_canvas_rid)
 	
-	RenderingServer.force_draw(false) # false means don't swap buffers (player won't see it)
 	
+	RenderingServer.force_draw(false)
 	var image = get_viewport().get_texture().get_image()
 	var cropped_image = image.get_region(region)
 	
 	RenderingServer.viewport_attach_canvas(get_viewport().get_viewport_rid(), original_canvas_rid)
 	RenderingServer.viewport_set_canvas_stacking(get_viewport().get_viewport_rid(), original_canvas_rid, ui_canvas.layer, 0)
-	return cropped_image
+	imgLose =  cropped_image
 	#var save_dir = "res://ScreenShotPictures/"
 	#DirAccess.make_dir_absolute(save_dir)
 	#var error = cropped_image.save_png(save_dir + "image2.png")
@@ -218,15 +222,81 @@ static func IncScore():
 	pass
 
 var twVolume:Tween
+
+var twVolWp:Tween
+
+@export var gameoverUI:Control
+@export var loseTexture:TextureRect
+@export var blackoutTexture:TextureRect
+@export var retryButton:Control
+@export var quitButton:Control
+@export var gameOverScreenTimer:Timer
+
 func GameOver():
 	if (died):
 		return
-	TweenUtils.tweenCustom(self, 1, 0.3, 2, TweenUtils.Ease.linear, func(val): 
-		GlobalSoundtrack.pitch_scale = val).finished.connect(func():
-			TweenUtils.tweenCustom(self, 0, -80, 4, TweenUtils.Ease.linear, func(val): 
+	WebsiteUtil.StopSDK()
+	gameoverUI.visible = true
+	if (DeviceCheckerUtil.IsUsingPhone()):
+		for i in range(phoneButtons.size()):
+			TweenUtils.tweenAlphaSelf(phoneButtons,0,0.3,TweenUtils.Ease.linear)
+	twVolWp = TweenUtils.tweenCustom(self, 1, 0.3, 2, TweenUtils.Ease.linear, func(val): 
+		GlobalSoundtrack.pitch_scale = val)
+	twVolWp.finished.connect(func():
+			twVolWp = TweenUtils.tweenCustom(self, 0, -80, 4, TweenUtils.Ease.linear, func(val): 
 				GlobalSoundtrack.volume_db = val))
 	if (GameHandler.saveDataAchievements.platformMinigameScore < score):
 		GameHandler.saveDataAchievements.platformMinigameScore = score
+	gameOverScreenTimer.start()
+	
 	GameHandler.SaveAllDataGlob()
 	died = true
 	pass
+func BringGameOverScreen():
+	TweenUtils.tweenAlphaSelf(blackoutTexture,0.4,0.3,TweenUtils.Ease.linear)
+	StartPositionTextureGameOver(loseTexture.get_parent())
+	var durationPos:float = randf_range(0.7,1.3)
+	TweenUtils.tweenX(loseTexture.get_parent(),randf_range(312.0,417.0),durationPos,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenY(loseTexture.get_parent(),randf_range(32.0,113.0),durationPos,TweenUtils.Ease.OutCirc)
+	var rotMost:float = randf_range(-15,15)
+	while (rotMost < 9 && rotMost > -9):
+		rotMost = randf_range(-15,15)
+	TweenUtils.tweenRotation(loseTexture.get_parent(),rotMost,durationPos,TweenUtils.Ease.OutCirc)
+	loseTexture.texture = ImageTexture.create_from_image(imgLose)
+	TweenUtils.tweenY(textScore,462,1.1,TweenUtils.Ease.OutCirc)
+	retryButton.rotation_degrees = ReturnRandomWithLimit(-25,25,-12,-12)
+	quitButton.rotation_degrees = ReturnRandomWithLimit(-25,25,-12,-12)
+	TweenUtils.tweenY(retryButton,529.0,0.6,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenY(quitButton,529.0,0.6,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenRotation(retryButton,0,0.6,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenRotation(quitButton,0,0.6,TweenUtils.Ease.OutCirc)
+func ReturnRandomWithLimit(min,max,minLimit,maxLimit):
+	var num:float = randf_range(min,max)
+	while (num < maxLimit && num > minLimit):
+		num = randf_range(min,max)
+	return num
+func StartPositionTextureGameOver(textureNode:Control):
+	if randi_range(1,2) == 1:
+		textureNode.position.x = randf_range(-612.0,-569.0)
+	else:
+		textureNode.position.x = randf_range(1306.0,1420.0)
+	textureNode.position.y = randf_range(27.0,112.0)
+
+
+func _on_retry_pressed() -> void:
+	TransitionScript.ReloadScene()
+	Changing()
+	pass # Replace with function body.
+
+
+func _on_quit_pressed() -> void:
+	TransitionScript.ChangeScene("res://Scenes/MainFarm.tscn",SceneChangedFromMinigame)
+	Changing()
+	pass # Replace with function body.
+
+func Changing():
+	TweenUtils.StopTween(twVolWp)
+
+func SceneChangedFromMinigame():
+	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
+	GlobalSoundtrack.pitch_scale = 1

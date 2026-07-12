@@ -14,7 +14,7 @@ var jumped = true
 @export var camera:Camera2D
 @export var sprite:Sprite2D
 @export var dirtParticle:GPUParticles2D
-
+@export var takeImageTimer:Timer
 var stomped = false
 var skewTween:Tween
 
@@ -29,6 +29,8 @@ func _ready() -> void:
 	JUMP_VELOCITY = -GameHandler.TotalJumpPower()
 	defaultScale = sprite.scale
 	ParticleManager.PlayParticleWarmup(dirtParticle)
+	takeImageTimer.timeout.connect(func():
+		PlatformMinigame.instance.ScreenShotGame())
 func _physics_process(delta: float) -> void:
 	anchorArrow.position = $Sprite2D/Nodo.global_position
 
@@ -74,6 +76,7 @@ func _physics_process(delta: float) -> void:
 		TweenUtils.StopTween(skewTween)
 		TweenUtils.tweenSkew(sprite,deg_to_rad(0),0.4,TweenUtils.Ease.OutCirc)
 		GlobalAudio.PlayOneShot("res://Sounds/jump.mp3",-6)
+		takeImageTimer.start(randf_range(0.4,1.3))
 		touchedUp = false
 	Stomping()
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -117,6 +120,8 @@ func Stomping():
 		sprite.scale = Vector2(defaultScale.x * 0.7,defaultScale.y * 1.3)
 		GlobalAudio.PlayOneShot("res://Sounds/droppingSound.ogg",0,randf_range(0.90,0.99))
 		GlobalAudio.PlayOneShot("res://Sounds/droppingSound.ogg",0,randf_range(1.03,1.15))
+		takeImageTimer.stop()
+		takeImageTimer.start(randf_range(0.1,0.3))
 		stomped = true
 		while (stomped):
 			var obj = get_node("Sprite2D").duplicate()

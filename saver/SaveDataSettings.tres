@@ -4,5 +4,4 @@
 
 [resource]
 script = ExtResource("1_qbu3y")
-fps = 30
 vSync = false
