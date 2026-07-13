@@ -66,6 +66,7 @@ func Gravity(delta):
 		motion.y += 5000 * delta
 	else:
 		motion.y = 0
+		position.y = -36
 		jumped = false
 
 var animationFrames:float = 0

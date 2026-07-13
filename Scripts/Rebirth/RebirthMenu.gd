@@ -80,9 +80,9 @@ func _on_rebirth_pressed() -> void:
 func Rebirthed():
 	ResourceUtil.RemoveResources("SaveData","saver")
 	GameHandler.saveData = GameSaveData.new()
+	GameHandler.StaticReset()
 	GameHandler.saveDataRebirth.rebirth += int(totalRebirth)
 	GameHandler.SaveAllDataRebirth()
-	GameHandler.StaticReset()
 
 
 func _on_square_root_calculate_timeout() -> void:

@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://j7267v7xbyjc" path="res://Sprites/OptionUIs/Rebirth1.png" id="12_43yl2"]
 [ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="13_a2kqi"]
 [ext_resource type="Texture2D" uid="uid://we0uv8gbuk5x" path="res://Sprites/Minigames/Platformer/Floors/Platform.png" id="14_4gbwn"]
+[ext_resource type="Texture2D" uid="uid://xgk2k201gy8y" path="res://Sprites/ImageHelpers/curve image.png" id="16_g8amr"]
 [ext_resource type="Texture2D" uid="uid://dbgvnhkper0ea" path="res://Sprites/OptionUIs/StompParticle.png" id="16_qe1ba"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_id86e"]
@@ -975,6 +976,7 @@ offset_bottom = 254.0
 texture = ExtResource("4_6wd5m")
 
 [node name="SheepStomp" type="Control" parent="SubViewportContainer/SubViewport" unique_id=151066371]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -1072,6 +1074,58 @@ offset_right = 351.0
 offset_bottom = 585.0
 texture = ExtResource("16_qe1ba")
 flip_h = true
+
+[node name="CurveLong" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1236387512]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/CurveLong" unique_id=914039610]
+texture_filter = 1
+layout_mode = 0
+offset_left = 57.0
+offset_top = 25.0
+offset_right = 593.0
+offset_bottom = 561.0
+texture = ExtResource("16_g8amr")
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/CurveLong" unique_id=1451618812]
+texture_filter = 1
+layout_mode = 0
+offset_left = 595.261
+offset_top = 524.0
+offset_right = 685.2191
+offset_bottom = 1051.617
+rotation = 1.5707964
+texture = ExtResource("4_6wd5m")
+
+[node name="CurvePower" type="Control" parent="SubViewportContainer/SubViewport" unique_id=852970913]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/CurvePower" unique_id=743199151]
+texture_filter = 1
+layout_mode = 0
+offset_left = 116.0
+offset_top = 41.0
+offset_right = 652.0
+offset_bottom = 577.0
+texture = ExtResource("16_g8amr")
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/CurvePower" unique_id=646223091]
+texture_filter = 1
+layout_mode = 0
+offset_left = 134.0
+offset_top = 592.0
+offset_right = 223.95813
+offset_bottom = 1119.617
+rotation = 3.1415927
+texture = ExtResource("4_6wd5m")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1655893819]
 position = Vector2(355, 400.99997)

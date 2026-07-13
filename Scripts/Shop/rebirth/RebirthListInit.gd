@@ -16,5 +16,7 @@ func _ready() -> void:
 func loadSystem():
 	GameHandler.LoadAllDataRebirth()
 	if (GameHandler.saveDataRebirth.rebirthListData == null):
+		if listInit != null:
+			listInit = listInit.duplicate(true)
 		return
-	listInit = GameHandler.saveDataRebirth.rebirthListData
+	listInit = GameHandler.saveDataRebirth.rebirthListData.duplicate(true)

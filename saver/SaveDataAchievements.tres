@@ -41,12 +41,14 @@ name = "Font"
 description = "you gonna have a Baaaa'd clock"
 effectDescription = "Effect: collect multiplier x1.9"
 achievementName = "Font"
-achievementTask = "don't click tap anything for whole 30 seconds"
+achievementTask = "don't click/tap anything for whole 30 seconds"
 achievementImage = ExtResource("3_qa4yv")
+unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [resource]
 script = ExtResource("1_2yxkc")
 skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw")])
-skinUsed = "Default"
-platformMinigameScore = 23
+skinUsed = "Font"
+multiplyMoneyAchievement = 1.9
+platformMinigameScore = 51

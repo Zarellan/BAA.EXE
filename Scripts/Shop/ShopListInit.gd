@@ -17,5 +17,7 @@ func _ready() -> void:
 func loadSystem():
 	GameHandler.LoadAllData()
 	if (GameHandler.saveData.shopListData == null):
+		if listInit != null:
+			listInit = listInit.duplicate(true)
 		return
-	listInit = GameHandler.saveData.shopListData
+	listInit = GameHandler.saveData.shopListData.duplicate(true)

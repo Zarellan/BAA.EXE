@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://33bljhcysagw" path="res://Scripts/Money/TextMoneyRev.gd" id="4_4g1jp"]
 [ext_resource type="Script" uid="uid://dxmag42v53qiw" path="res://Scripts/Background/GrassTween.gd" id="4_ovrjx"]
 [ext_resource type="Script" uid="uid://d8n5p6oxk47t" path="res://Scripts/Money/MoneyCounter.gd" id="5_5xh03"]
-[ext_resource type="PackedScene" uid="uid://cc2lvqg4m2iyj" path="res://Prefabs/ShopItem.tscn" id="6_2js75"]
 [ext_resource type="PackedScene" uid="uid://v16m5xg2k4dk" path="res://Prefabs/money_reveal.tscn" id="6_4gutc"]
 [ext_resource type="Script" uid="uid://b5fcg5dm7vrvn" path="res://Scripts/Background/StarSpawner.gd" id="6_aw8uy"]
 [ext_resource type="Script" uid="uid://crrxb5hi3hyws" path="res://Scripts/Shop/ShopListInit.gd" id="7_m14hk"]
@@ -51,15 +50,22 @@
 [ext_resource type="Texture2D" uid="uid://b7d4vmpf0u52i" path="res://Sprites/OptionUIs/Arrow2.png" id="31_hotcp"]
 [ext_resource type="Texture2D" uid="uid://bjb5u8r2etxs7" path="res://Sprites/ShopImages/SheepAir.png" id="31_v1gif"]
 [ext_resource type="Texture2D" uid="uid://bhag672nd2w5a" path="res://Sprites/ShopImages/Rebirth/Auto Collect.png" id="32_iwha0"]
+[ext_resource type="Script" uid="uid://cwxcmuxj4cp8" path="res://Scripts/Shop/ShopItem.gd" id="33_dunvt"]
+[ext_resource type="Script" uid="uid://p7ewib8kpsso" path="res://Scripts/Particles/ShopParticle.gd" id="34_gnh6p"]
 [ext_resource type="Texture2D" uid="uid://ionxinhbf4ew" path="res://Sprites/ShopImages/Rebirth/Cheaper items.png" id="35_r1qcv"]
+[ext_resource type="Shader" uid="uid://cqvdx3wwpr46h" path="res://Shaders/KeepBlack.gdshader" id="35_tgjpn"]
 [ext_resource type="Texture2D" uid="uid://db5l4xqd4h51u" path="res://Sprites/ShopImages/Rebirth/GoldWoolMulti.png" id="36_p5ocn"]
 [ext_resource type="Texture2D" uid="uid://dti18jjl0ek7o" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="37_ovgwv"]
+[ext_resource type="Script" uid="uid://dqhkgfy2b1oo7" path="res://Scripts/TextEffects/FadeColor.gd" id="37_s0s3s"]
 [ext_resource type="Texture2D" uid="uid://bgwt3qsuxxs47" path="res://Sprites/OptionUIs/ShoppingKartYellow.png" id="37_valao"]
 [ext_resource type="Texture2D" uid="uid://bp6g5leu2mpjr" path="res://Sprites/ShopImages/Rebirth/SheepJump.png" id="37_wcncl"]
 [ext_resource type="Texture2D" uid="uid://y43oxeypu0kt" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="38_ebyxy"]
+[ext_resource type="Shader" uid="uid://l51dbb1f302e" path="res://Shaders/Glitching.gdshader" id="38_ruovs"]
 [ext_resource type="Texture2D" uid="uid://ba5uas4gtk2g4" path="res://Sprites/ShopImages/Rebirth/Stomp.png" id="39_q14y5"]
 [ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="40_8hf41"]
 [ext_resource type="Texture2D" uid="uid://ccixfei6apqku" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="40_q3ouh"]
+[ext_resource type="Texture2D" uid="uid://brk3c54n4ehfu" path="res://Sprites/ShopImages/Rebirth/LongerCurve.png" id="40_x45b6"]
+[ext_resource type="Texture2D" uid="uid://b84qv4umfnbws" path="res://Sprites/ShopImages/Rebirth/PowerCurve.png" id="41_wpcgh"]
 [ext_resource type="Script" uid="uid://cok8xyelvrsgf" path="res://Scripts/Rebirth/RebirthMenu.gd" id="44_6560t"]
 [ext_resource type="Texture2D" uid="uid://bbb3h1wamtq6k" path="res://Sprites/OptionUIs/Arrow Sk.png" id="46_v1gif"]
 [ext_resource type="Shader" uid="uid://uf58r7p5sqhf" path="res://Shaders/ColorBorder.gdshader" id="51_7yrkc"]
@@ -361,7 +367,7 @@ shader_parameter/node_size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amxxf"]
 size = Vector2(162, 98)
 
-[sub_resource type="Resource" id="Resource_v5bxn"]
+[sub_resource type="Resource" id="Resource_q8clr"]
 script = ExtResource("8_v5bxn")
 title = "Improve Shear"
 image = ExtResource("9_cxla1")
@@ -372,7 +378,7 @@ tax = 1.05
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
-[sub_resource type="Resource" id="Resource_56xbq"]
+[sub_resource type="Resource" id="Resource_4db3b"]
 script = ExtResource("8_v5bxn")
 title = "Auto collect"
 image = ExtResource("10_ujam8")
@@ -383,7 +389,7 @@ tax = 1.1
 taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
-[sub_resource type="Resource" id="Resource_410ju"]
+[sub_resource type="Resource" id="Resource_kdc4j"]
 script = ExtResource("8_v5bxn")
 title = "Faster Auto Collect"
 image = ExtResource("10_rg6ea")
@@ -394,7 +400,7 @@ tax = 1.1
 taxInc = 0.12
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
-[sub_resource type="Resource" id="Resource_ujam8"]
+[sub_resource type="Resource" id="Resource_dunvt"]
 script = ExtResource("8_v5bxn")
 title = "Rare Wool"
 image = ExtResource("20_ehq4q")
@@ -404,7 +410,7 @@ tax = 1.2
 taxInc = 0.05
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
-[sub_resource type="Resource" id="Resource_62te2"]
+[sub_resource type="Resource" id="Resource_gnh6p"]
 script = ExtResource("8_v5bxn")
 title = "[rainbow]Multilplier"
 image = ExtResource("21_bhny3")
@@ -415,7 +421,7 @@ tax = 1.5
 taxInc = 0.3
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
-[sub_resource type="Resource" id="Resource_ehq4q"]
+[sub_resource type="Resource" id="Resource_tgjpn"]
 script = ExtResource("8_v5bxn")
 title = "[rainbow]Auto Collect Sheep"
 image = ExtResource("21_edtci")
@@ -425,7 +431,7 @@ tax = 1.1
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
-[sub_resource type="Resource" id="Resource_q3ouh"]
+[sub_resource type="Resource" id="Resource_s0s3s"]
 script = ExtResource("8_v5bxn")
 title = "Jump Power"
 image = ExtResource("30_17bn8")
@@ -435,7 +441,7 @@ tax = 1.1
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
-[sub_resource type="Resource" id="Resource_v1gif"]
+[sub_resource type="Resource" id="Resource_ruovs"]
 script = ExtResource("8_v5bxn")
 title = "Air acceleration"
 image = ExtResource("31_v1gif")
@@ -445,10 +451,65 @@ tax = 1.2
 taxInc = 0.25
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
-[sub_resource type="Resource" id="Resource_pbqe1"]
+[sub_resource type="Resource" id="Resource_wpcgh"]
 script = ExtResource("9_56xbq")
-items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_v5bxn"), SubResource("Resource_56xbq"), SubResource("Resource_410ju"), SubResource("Resource_ujam8"), SubResource("Resource_62te2"), SubResource("Resource_ehq4q"), SubResource("Resource_q3ouh"), SubResource("Resource_v1gif")])
+items = Array[ExtResource("8_v5bxn")]([SubResource("Resource_q8clr"), SubResource("Resource_4db3b"), SubResource("Resource_kdc4j"), SubResource("Resource_dunvt"), SubResource("Resource_gnh6p"), SubResource("Resource_tgjpn"), SubResource("Resource_s0s3s"), SubResource("Resource_ruovs")])
 metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
+
+[sub_resource type="Gradient" id="Gradient_f7n8r"]
+offsets = PackedFloat32Array(0, 0.9351351, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wq2pi"]
+offsets = PackedFloat32Array(0, 0.34170854, 0.80904526, 1)
+colors = PackedColorArray(0.85953, 0.77638775, 1.540184e-06, 1, 0.8199614, 0.16096592, 0.7236853, 1, 0.2194601, 0.7722057, 0.9104029, 1, 1, 1, 1, 1)
+
+[sub_resource type="PackedScene" id="PackedScene_x4kgh"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741825, 1073741824, 19, 18, 2, 0, 0),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("CPUParticles2D", "CPUParticles2D", "visibility_layer", "emitting", "amount", "lifetime", "one_shot", "explosiveness", "emission_shape", "emission_sphere_radius", "particle_flag_align_y", "spread", "initial_velocity_max", "scale_amount_min", "scale_amount_max", "color_ramp", "color_initial_ramp", "script", "_on_finished", "finished"),
+"node_count": 1,
+"node_ids": PackedInt32Array(1003065689),
+"node_paths": [NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 16, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 12, 10, 13, 11, 14, 12, 15, 13, 16, 14, 17, 15, 0),
+"variants": [2, false, 30, 2.0, true, 1.0, 1, 16.6, true, 180.0, 1000.0, 0.0, 8.93, SubResource("Gradient_f7n8r"), SubResource("Gradient_wq2pi"), ExtResource("34_gnh6p")],
+"version": 3
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqwli"]
+shader = ExtResource("35_tgjpn")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_x4kgh"]
+script = ExtResource("37_s0s3s")
+metadata/_custom_type_script = "uid://dqhkgfy2b1oo7"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2vdq"]
+shader = ExtResource("38_ruovs")
+shader_parameter/is_active = true
+shader_parameter/shake_power = 0.002000000095
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 3.750000178125
+shader_parameter/shake_block_size = 30.0000013775
+shader_parameter/randomization_amount = 1.0
+
+[sub_resource type="PackedScene" id="PackedScene_iqarj"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("ShopItem", "Control", "light_mask", "clip_contents", "custom_minimum_size", "layout_mode", "anchors_preset", "anchor_left", "anchor_right", "offset_left", "offset_bottom", "grow_horizontal", "pivot_offset", "script", "particle", "title", "descriptionNode", "textureImage", "moneyNode", "levelNode", "glitchNode", "BG", "TextureRect", "modulate", "material", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "texture", "Holder", "TextureRect", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "pivot_offset", "ItemImage", "TextureRect", "texture_filter", "layout_mode", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical", "pivot_offset", "texture", "expand_mode", "Description", "RichTextLabel", "texture_filter", "clip_contents", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_constants/outline_size", "theme_override_font_sizes/normal_font_size", "bbcode_enabled", "text", "scroll_active", "custom_effects", "script", "_max_size", "_outline_ratio", "_current_font_size", "_editor_defaults_set", "metadata/_custom_type_script", "Price", "RichTextLabel", "texture_filter", "clip_contents", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "pivot_offset", "theme_override_constants/outline_size", "theme_override_font_sizes/normal_font_size", "bbcode_enabled", "text", "scroll_active", "vertical_alignment", "script", "_max_size", "_current_font_size", "_editor_defaults_set", "metadata/_custom_type_script", "Level", "RichTextLabel", "modulate", "texture_filter", "clip_contents", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "scale", "pivot_offset", "theme_override_constants/outline_size", "theme_override_font_sizes/normal_font_size", "bbcode_enabled", "text", "scroll_active", "vertical_alignment", "script", "_max_size", "_current_font_size", "_editor_defaults_set", "metadata/_custom_type_script", "ParticlePlace", "Control", "anchors_preset", "offset_left", "offset_top", "offset_right", "offset_bottom", "Title", "RichTextLabel", "texture_filter", "clip_contents", "layout_mode", "offset_left", "offset_top", "offset_right", "offset_bottom", "theme_override_constants/outline_size", "theme_override_font_sizes/normal_font_size", "bbcode_enabled", "text", "scroll_active", "script", "_max_size", "_current_font_size", "_editor_defaults_set", "metadata/_custom_type_script", "BackBufferCopy", "BackBufferCopy", "position", "scale", "copy_mode", "GlitchingEffect", "ColorRect", "visible", "material", "anchors_preset", "anchor_right", "anchor_bottom", "offset_left", "offset_top", "offset_right", "offset_bottom", "grow_horizontal", "grow_vertical"),
+"node_count": 11,
+"node_ids": PackedInt32Array(2083889885, 175554439, 302152906, 172852597, 1277112873, 1602445355, 1208071378, 1111193086, 102797527, 551579502, 462549386),
+"node_paths": [NodePath("."), NodePath("."), NodePath("./Holder"), NodePath("./Holder"), NodePath("./Holder"), NodePath("./Holder"), NodePath("./Holder"), NodePath("./Holder"), NodePath("."), NodePath("./BackBufferCopy")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 19, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 12, 10, 13, 11, 14, 12, 1073741839, 13, 1073741840, 14, 1073741841, 15, 1073741842, 16, 1073741843, 17, 1073741844, 18, 0, 1073741824, 0, 22, 21, -1, 9, 23, 19, 24, 20, 25, 21, 26, 22, 27, 23, 28, 24, 29, 25, 30, 26, 31, 27, 0, 1073741825, 0, 33, 32, -1, 7, 34, 28, 35, 29, 36, 30, 37, 31, 38, 32, 39, 33, 40, 34, 0, 1073741826, 0, 42, 41, -1, 16, 43, 35, 44, 36, 45, 37, 46, 38, 47, 39, 48, 40, 49, 41, 50, 42, 51, 43, 52, 44, 53, 45, 54, 46, 55, 47, 56, 48, 57, 49, 58, 50, 0, 1073741827, 0, 60, 59, -1, 19, 61, 51, 62, 52, 63, 53, 64, 54, 65, 55, 66, 56, 67, 57, 68, 58, 69, 59, 70, 60, 71, 61, 72, 62, 73, 63, 74, 64, 75, 65, 76, 66, 77, 67, 78, 68, 79, 69, 0, 1073741828, 0, 81, 80, -1, 19, 82, 70, 83, 71, 84, 72, 85, 73, 86, 74, 87, 75, 88, 76, 89, 77, 90, 78, 91, 79, 92, 80, 93, 81, 94, 82, 95, 83, 96, 84, 97, 85, 98, 86, 99, 87, 100, 88, 0, 1073741829, 0, 102, 101, -1, 21, 103, 89, 104, 90, 105, 91, 106, 92, 107, 93, 108, 94, 109, 95, 110, 96, 111, 97, 112, 98, 113, 99, 114, 100, 115, 101, 116, 102, 117, 103, 118, 104, 119, 105, 120, 106, 121, 107, 122, 108, 123, 109, 0, 1073741830, 0, 125, 124, -1, 5, 126, 110, 127, 111, 128, 112, 129, 113, 130, 114, 0, 1073741831, 0, 132, 131, -1, 17, 133, 115, 134, 116, 135, 117, 136, 118, 137, 119, 138, 120, 139, 121, 140, 122, 141, 123, 142, 124, 143, 125, 144, 126, 145, 127, 146, 128, 147, 129, 148, 130, 149, 131, 0, 1073741832, 0, 151, 150, -1, 3, 152, 132, 153, 133, 154, 134, 0, 1073741833, 0, 156, 155, -1, 11, 157, 135, 158, 136, 159, 137, 160, 138, 161, 139, 162, 140, 163, 141, 164, 142, 165, 143, 166, 144, 167, 145, 0),
+"variants": [0, true, Vector2(900, 163), 3, 1, 1.0, 1.0, -900.0, 163.0, 0, Vector2(900, 0), ExtResource("33_dunvt"), SubResource("PackedScene_x4kgh"), NodePath("Holder/Title"), NodePath("Holder/Description"), NodePath("Holder/ItemImage"), NodePath("Holder/Price"), NodePath("Holder/Level"), NodePath("BackBufferCopy/GlitchingEffect"), Color(1, 1, 1, 0.37254903), SubResource("ShaderMaterial_sqwli"), 1, 15, 1.0, 1.0, 2, 2, ExtResource("15_wnqqd"), 1, 15, 1.0, 1.0, 2, 2, Vector2(450, 81.5), 2, 1, -1, 1.0, 0.5, 1.0, 0.5, -167.0, -63.5, -41.0, 65.5, 2, 2, Vector2(60, 67), ExtResource("74_tymc6"), 1, 1, false, 0, 193.0, 82.0, 688.0, 145.0, 3, 26, true, "this is placeHolder", false, [SubResource("RichTextEffect_x4kgh")], ExtResource("16_joy2m"), 26, 0.1, 26, true, "uid://co0lo02vnu10n", 1, false, 0, 13.0, 53.0, 179.0, 107.0, Vector2(83, 30.215), 11, 54, true, "$431.31k
+", false, 1, ExtResource("16_joy2m"), 54, 54, true, "uid://co0lo02vnu10n", Color(1, 1, 1, 0), 1, false, 0, 5.000001, 17.0, 189.25, 64.625, Vector2(0.8, 0.8), Vector2(83, 26.4), 16, 81, true, "lv:1", false, 1, ExtResource("16_joy2m"), 81, 81, true, "uid://co0lo02vnu10n", 0, 95.0, 82.0, 135.0, 122.0, 1, false, 0, 193.0, 22.0, 696.0, 77.0, 8, 41, true, "place holder", false, ExtResource("16_joy2m"), 41, 41, true, "uid://co0lo02vnu10n", Vector2(449.5, 81), Vector2(4.495, 0.81), 2, false, SubResource("ShaderMaterial_h2vdq"), 15, 1.0, 1.0, -100.0, -100.0, -100.0, -100.0, 2, 2],
+"version": 3
+}
 
 [sub_resource type="Resource" id="Resource_hotcp"]
 script = ExtResource("27_phtv5")
@@ -495,6 +556,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_q14y5"]
 script = ExtResource("27_phtv5")
 title = "Longer curve"
+image = ExtResource("40_x45b6")
 rebirthPrice = 6
 power = 10
 tax = 1.2
@@ -504,6 +566,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 [sub_resource type="Resource" id="Resource_ueu3d"]
 script = ExtResource("27_phtv5")
 title = "Less power curve"
+image = ExtResource("41_wpcgh")
 rebirthPrice = 8
 power = 11
 tax = 1.25
@@ -1552,8 +1615,8 @@ offset_bottom = 40.0
 grow_horizontal = 0
 pivot_offset = Vector2(27, 10)
 script = ExtResource("7_m14hk")
-listInit = SubResource("Resource_pbqe1")
-shopPrefab = ExtResource("6_2js75")
+listInit = SubResource("Resource_wpcgh")
+shopPrefab = SubResource("PackedScene_iqarj")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -2237,13 +2300,13 @@ offset_right = 821.0
 offset_bottom = 208.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2256,13 +2319,13 @@ offset_right = 823.0
 offset_bottom = 303.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2423,13 +2486,13 @@ offset_right = 821.0
 offset_bottom = 241.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Update Intervals:31"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2505,13 +2568,13 @@ offset_top = 192.0
 offset_right = 693.0
 offset_bottom = 252.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Glitch Effect"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -2533,14 +2596,14 @@ offset_top = 290.0
 offset_right = 692.0
 offset_bottom = 350.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Shading
 Border"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true

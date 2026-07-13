@@ -43,6 +43,8 @@ func _process(_delta: float) -> void:
 		return
 	if (isMinigame && Input.is_action_just_pressed("ui_cancel")):
 		ExitMinigame()
+	if Input.is_action_just_pressed("ui_left"):
+		ChangeMinigame(-1)
 	if Input.is_action_just_pressed("ui_right"):
 		ChangeMinigame(1)
 	pass
@@ -69,6 +71,7 @@ func IndexRangeLimit(indexMax:Array):
 
 func _on_texture_button_pressed() -> void:
 	GoToMinigame()
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 func GoToMinigame():
@@ -84,21 +87,27 @@ func MultiplierInfo(nam:String):
 
 func _on_minigames_pressed() -> void:
 	BringMinigame()
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 
 func _on_exit_button_pressed() -> void:
 	ExitMinigame()
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 func _on_left_button_pressed() -> void:
 	ChangeMinigame(-1)
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 func _on_right_button_pressed() -> void:
 	ChangeMinigame(1)
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
 
 func _on_tutorial_help_pressed() -> void:
+	
+	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.

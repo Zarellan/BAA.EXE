@@ -140,7 +140,7 @@ name = "Font"
 description = "you gonna have a Baaaa'd clock"
 effectDescription = "Effect: collect multiplier x1.9"
 achievementName = "Font"
-achievementTask = "don't click tap anything for whole 30 seconds"
+achievementTask = "don't click/tap anything for whole 30 seconds"
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Animation" id="Animation_0r47l"]
