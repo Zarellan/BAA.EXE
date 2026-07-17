@@ -26,21 +26,19 @@ GlobalSoundtrack="*uid://yqykenhxav3"
 TransitionScript="*uid://xo3bp4rhumjk"
 Achievement="*uid://t7wlwjpi4a52"
 WebsiteUtil="*uid://ss7ohaxsw2c3"
+CrazyGamesBridge="*uid://27gwoulmadaf"
+CrazyGames="*uid://bfr587jfvj6f4"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
-
-[editor]
-
-run/main_run_args="--rendering-driver opengl3"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/font_auto_size_labels/plugin.cfg", "res://addons/indentationsupport/plugin.cfg", "res://addons/linux_driver_plugins/plugin.cfg", "res://addons/minimize_html_build/plugin.cfg", "res://addons/simple_event_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/crazygames/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/indentationsupport/plugin.cfg", "res://addons/linux_driver_plugins/plugin.cfg", "res://addons/minimize_html_build/plugin.cfg", "res://addons/simple_event_system/plugin.cfg")
 
 [global_group]
 

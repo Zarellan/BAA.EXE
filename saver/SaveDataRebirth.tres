@@ -147,7 +147,7 @@ metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [resource]
 script = ExtResource("13_qy0dg")
-rebirth = 28
+rebirth = 29
 rebirthListData = SubResource("Resource_gx00u")
 multiplier_reb = 6
 offer = 1.1
