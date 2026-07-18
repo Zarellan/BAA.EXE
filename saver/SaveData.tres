@@ -105,7 +105,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_hantp")
-money = 61707
+money = 62027
 increment = 12
 autoCollect = 32
 shopListData = SubResource("Resource_d26l7")

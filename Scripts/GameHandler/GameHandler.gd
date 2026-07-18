@@ -28,7 +28,6 @@ var fontSkinCondition
 func _ready() -> void:
 	if (OS.has_feature("editor")):
 		get_tree().reload_current_scene.call_deferred() # reloading early to face early crash rather that being surprised
-	WebsiteUtil.Initializer()
 	saveData = GameSaveData.new()
 	saveDataRebirth = GameSaveRebirth.new()
 	saveDataSettings = GameSaveSettings.new()

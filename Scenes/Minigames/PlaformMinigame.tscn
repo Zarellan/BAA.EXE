@@ -544,7 +544,6 @@ scale = Vector2(3.372, 3.372)
 rawMath = true
 
 [node name="GameOver" type="Control" parent="Control/CanvasLayer" unique_id=732763659]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
