@@ -60,8 +60,11 @@ func _on_right_pressed() -> void:
 
 func PrepSkin():
 	ChangeSkinPlace(0)
-	sheep.get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
-
+	if (GameHandler.saveDataAchievements.canColorWool):
+		get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	else:
+		get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", Color(1,1,1))
+		
 func ChangeSkinPlace(ind:int):
 	skinClass.ChooseSkin(ind)
 	if (GameHandler.saveDataAchievements.skins[skinClass.index].unlocked):

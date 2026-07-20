@@ -4,7 +4,7 @@ class_name GameSaveAchievements
 @export var skins:Array[SkinItem]
 
 @export var skinUsed:String = "def"
-
+@export var canColorWool:bool = true
 
 
 #super powers

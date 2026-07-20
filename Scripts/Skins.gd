@@ -41,9 +41,10 @@ func SuperPower():
 	match (GameHandler.saveDataAchievements.skinUsed):
 		"Eid":GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.4
 		"Jump":GameHandler.saveDataAchievements.increaseJumpAchievement = 200
-		"Font":GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.9
-
-	
+		"Font":
+			GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.9
+			GameHandler.saveDataAchievements.canColorWool = false
+			get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", Color(1,1,1))
 func LoadSkin():
 	sheep.get_node("StaticBody2D/Sprite2D").texture = load("res://Sprites/Sheep/sheep sprite.png")
 	for i in range(skinUses.size()):
@@ -55,9 +56,11 @@ func LoadSkin():
 	pass
 
 func ExceptionalSkins(nam):
+	sheep.get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
 	match (nam):
-		"Font":sheep.get_node("StaticBody2D/Sprite2D").texture = load("res://Sprites/Sheep/sheep u.png")
-
+		"Font":
+			sheep.get_node("StaticBody2D/Sprite2D").texture = load("res://Sprites/Sheep/sheep u.png")
+			sheep.get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", Color(1,1,1))
 func SaveSkin():
 	GameHandler.saveDataAchievements.skinUsed = currentSkin
 func FindSkinIndex(nameStr:String):
@@ -88,5 +91,7 @@ func IndexRangeLimit(indexMax:Array):
 		index = indexMax.size() - 1
 
 func BringToDefault():
+	GameHandler.saveDataAchievements.canColorWool = true
+	get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
 	GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.0
 	GameHandler.saveDataAchievements.increaseJumpAchievement = 0

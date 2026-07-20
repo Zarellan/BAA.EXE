@@ -31,6 +31,7 @@ static var isCode:bool = false
 var init = false
 var tempAudio:float = 0
 func _ready() -> void:
+	print(GameHandler.saveDataAchievements.canColorWool)
 	init = false
 	settings = false
 	SetCodeMode(false)
@@ -47,7 +48,10 @@ func _ready() -> void:
 	(get_node("Effects/BorderShadeBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.shadingBorders
 	codeText.add_theme_color_override("font_placeholder_color", Color(0.658, 0.658, 0.658, 1.0))
 	InitializeSettings()
-	get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	if (GameHandler.saveDataAchievements.canColorWool):
+		get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	else:
+		get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", Color(1,1,1))
 	colorPicker.color = GameHandler.saveDataSettings.sheepColor
 	visible = false
 	await RenderingServer.frame_post_draw
@@ -350,7 +354,10 @@ func _on_glitch_effect_box_toggled(toggled_on: bool) -> void:
 func _on_color_picker_button_color_changed(color: Color) -> void:
 	colorPicker.color = Color(color.r,color.g,color.b,1.0)
 	GameHandler.saveDataSettings.sheepColor = colorPicker.color
-	get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	if (GameHandler.saveDataAchievements.canColorWool):
+		get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	else:
+		get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", Color(1,1,1))
 	pass # Replace with function body.
 
 

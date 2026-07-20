@@ -4,3 +4,5 @@
 
 [resource]
 script = ExtResource("1_qbu3y")
+vSync = false
+sheepColor = Color(0.70703125, 0.70703125, 0.70703125, 1)

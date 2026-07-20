@@ -2951,6 +2951,7 @@ grow_vertical = 2
 scale = Vector2(0.64, 0.64)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 mouse_filter = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Door" type="TextureRect" parent="Control/CanvasLayer/SkinPanel/Back/Control" unique_id=138604687]
 layout_mode = 0
@@ -2959,6 +2960,7 @@ offset_right = 326.9815
 offset_bottom = 97.0
 mouse_filter = 2
 texture = ExtResource("76_3xwj6")
+metadata/_edit_use_anchors_ = true
 
 [node name="Arrow" type="TextureRect" parent="Control/CanvasLayer/SkinPanel/Back/Control" unique_id=272545852]
 layout_mode = 0
@@ -2978,6 +2980,7 @@ script = ExtResource("40_8hf41")
 node = NodePath("../Control")
 scaleVal = 0.78
 button = NodePath("..")
+metadata/_edit_use_anchors_ = true
 
 [node name="Achievements" type="Control" parent="Control/CanvasLayer" unique_id=715517]
 layout_mode = 3

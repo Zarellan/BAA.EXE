@@ -15,7 +15,7 @@ static func isAlive(twen:Tween):
 
 static func StopTween(twen:Tween):
 	if (twen != null && twen.is_valid()):
-		twen.stop()
+		twen.kill()
 
 
 static func EasingType(tween, easing:Ease):
