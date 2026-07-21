@@ -1,6 +1,13 @@
 class_name BasePlatform
 extends Node
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	pass
+
+func _process(delta: float) -> void:
+	pass
+
 func Initializer() -> void:
 	pass
 

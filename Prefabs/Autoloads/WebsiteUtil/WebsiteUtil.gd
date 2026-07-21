@@ -15,6 +15,10 @@ var rewardBased:bool = false
 var platformType:Platform = Platform.none
 
 var platformMain
+
+var adSucceed
+
+var caughtError:bool = false
 func _ready() -> void:
 	BuildType()
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -32,6 +36,7 @@ func BuildType():
 	else:
 		platformType = Platform.none
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/BasePlatform.gd").new()
+	platformMain.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(platformMain)
 
 func Initializer():
@@ -58,6 +63,7 @@ func StopSDK():
 func RequestMidgameAd() -> void:
 	if (platformType == Platform.none):
 		return
+	caughtError = false
 	platformMain.RequestMidgameAd()
 
 # =============================================================================
@@ -72,14 +78,16 @@ func play_ad_award(funct: Callable) -> void:
 	# Save the function reference so we can call it when the ad completes
 	_current_reward_callback = funct
 	rewardBased = true
+	caughtError = false
 	platformMain.play_ad_award()
 
 func _on_ad_started() -> void:
-	print("🎬 Ad started rendering. Freezing gameplay loops.")
+	if (caughtError):
+		print("error found, don't play the ad without reason")
+		return
 	
 	# Mute all game sound instantly
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
-	
 	# Pause the entire game tree
 	get_tree().paused = true
 
@@ -87,17 +95,18 @@ func _on_ad_started() -> void:
 func _on_ad_finished() -> void:
 	print("✅ Ad completed successfully.")
 	_resume_game()
-	
-	if (rewardBased):
-		_current_reward_callback.call()
-		rewardBased = false
-	_current_reward_callback = Callable()
+	#
+	#if (rewardBased):
+		#if (adSucceed == "finished"):
+			#_current_reward_callback.call()
+		#rewardBased = false
+	#_current_reward_callback = Callable()
 
 
-func _on_ad_error(error_code: String) -> void:
-	rewardBased = false
-	_current_reward_callback = Callable()
-	# CRITICAL: Always resume the game even if an ad fails, otherwise players lock up
+func _on_ad_error(error_code) -> void:
+	#_current_reward_callback = Callable()
+	get_tree().paused = false
+	caughtError = true
 	_resume_game()
 
 

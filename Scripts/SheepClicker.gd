@@ -72,6 +72,9 @@ func BringEidCap():
 func _process(_delta: float) -> void:
 	if (isInside && (Input.is_action_just_pressed("LeftMouse") || Input.is_action_just_pressed("ui_accept")) && isMain):
 		Pressed()
+	if (Input.is_action_just_pressed("ui_accept") && isMain):
+		WebsiteUtil.play_ad_award(func():
+			GameHandler.AddMoneyForce(10000))
 	pass
 
 func ReInitializeParticle(partic):
