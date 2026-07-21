@@ -36,6 +36,10 @@ window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 
+[editor]
+
+run/main_run_args="--rendering-driver opengl3"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/crazygames/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/indentationsupport/plugin.cfg", "res://addons/linux_driver_plugins/plugin.cfg", "res://addons/minimize_html_build/plugin.cfg", "res://addons/simple_event_system/plugin.cfg")
