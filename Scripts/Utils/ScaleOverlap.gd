@@ -1,5 +1,7 @@
 extends Node
+class_name ScaleOverlap
 
+static var scaleOverlapsDicts:Dictionary = {}
 @export var node:Control
 @export var scaleVal = 1.0
 @export var centerOverride = true
@@ -27,6 +29,7 @@ func _ready() -> void:
 		TweenUtils.tweenAlphaSelf(button,0.7,0.0001,TweenUtils.Ease.OutCirc)
 	set_process(false)
 	set_physics_process(false)
+	scaleOverlapsDicts[get_parent().name] = self
 	pass # Replace with function body.
 
 func MouseEntered():
@@ -56,3 +59,15 @@ func AlphaButton(val:float):
 	if (is_instance_valid(button)):
 		TweenUtils.StopTween(alphaNodeTween)
 		alphaNodeTween = TweenUtils.tweenAlphaSelf(button,val,0.3,TweenUtils.Ease.OutCirc)
+
+func ShineTheButton():
+	if (!useScalingSingle):
+		scaleNodeTween = TweenUtils.tweenScalePingPong(node,Vector2(scaleVal,scaleVal),Vector2(scaleNodeDef),0.3,TweenUtils.Ease.InOutSine)
+	else:
+		scaleNodeTween = TweenUtils.tweenScalePingPong(node,ScaleDepend() * scaleVal,Vector2(scaleNodeDef),0.3,TweenUtils.Ease.InOutSine)
+	alphaNodeTween =  TweenUtils.tweenAlphaSelfPingPong(button,1,0.7,0.3,TweenUtils.Ease.InOutSine)
+	pass
+
+
+
+	

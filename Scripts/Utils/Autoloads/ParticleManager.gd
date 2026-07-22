@@ -11,6 +11,7 @@ func PlayParticleWarmup(particle: GPUParticles2D):
 	instance.amount = 1
 	instance.speed_scale = 10.0
 	instance.emitting = true
+	instance.modulate = Color(1,1,1,0)
 	instance.finished.connect(instance.queue_free)
 	get_tree().current_scene.add_child.call_deferred(instance)
 

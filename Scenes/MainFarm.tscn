@@ -85,6 +85,8 @@
 [ext_resource type="Texture2D" uid="uid://ur8hde5qx5fq" path="res://Sprites/OptionUIs/exit door.png" id="76_3xwj6"]
 [ext_resource type="Texture2D" uid="uid://cmq6mhs8xxqlb" path="res://Sprites/OptionUIs/Arrow3.png" id="77_y7kse"]
 [ext_resource type="Texture2D" uid="uid://dqks1kt5m5ks3" path="res://Sprites/OptionUIs/questionMark.png" id="78_ueu3d"]
+[ext_resource type="Texture2D" uid="uid://me6utmnqir7i" path="res://Sprites/OptionUIs/UICorner.png" id="85_gnh6p"]
+[ext_resource type="Script" uid="uid://cift52ay7a3ox" path="res://tips/Tips.gd" id="85_tgjpn"]
 
 [sub_resource type="Animation" id="Animation_u06jq"]
 length = 0.001
@@ -2008,7 +2010,7 @@ node = NodePath("../TextureRect")
 scaleVal = 1.1
 button = NodePath("..")
 
-[node name="Minigames" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=957910219]
+[node name="Minigames-UI" type="TextureButton" parent="Control/CanvasLayer/OptionUI" unique_id=957910219]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 3.225
@@ -2025,7 +2027,7 @@ stretch_mode = 0
 metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/Minigames" unique_id=1562411613]
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/OptionUI/Minigames-UI" unique_id=1562411613]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2034,7 +2036,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("61_bvqys")
 
-[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/Minigames" unique_id=499548629 node_paths=PackedStringArray("node", "button")]
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/OptionUI/Minigames-UI" unique_id=499548629 node_paths=PackedStringArray("node", "button")]
 anchors_preset = 0
 offset_left = -128.0
 offset_right = -128.0
@@ -2300,13 +2302,13 @@ offset_right = 821.0
 offset_bottom = 208.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2319,13 +2321,13 @@ offset_right = 823.0
 offset_bottom = 303.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2486,13 +2488,13 @@ offset_right = 821.0
 offset_bottom = 241.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Update Intervals:31"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2568,13 +2570,13 @@ offset_top = 192.0
 offset_right = 693.0
 offset_bottom = 252.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Glitch Effect"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -2596,14 +2598,14 @@ offset_top = 290.0
 offset_right = 692.0
 offset_bottom = 350.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 31
 text = "Shading
 Border"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 30
+_current_font_size = 31
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -3341,6 +3343,66 @@ useDefaultScale = true
 dependOnButton = true
 button = NodePath("..")
 
+[node name="Tips" type="Control" parent="Control/CanvasLayer" unique_id=211993548 node_paths=PackedStringArray("texr", "tipFinishTimer")]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("85_tgjpn")
+texr = NodePath("TextureRect/Text")
+tipFinishTimer = NodePath("TipFinished")
+
+[node name="TextureRect" type="NinePatchRect" parent="Control/CanvasLayer/Tips" unique_id=1771305609]
+self_modulate = Color(1, 1, 1, 0.5058824)
+layout_mode = 0
+offset_left = 269.0
+offset_top = 599.0
+offset_right = 1090.0
+offset_bottom = 673.0
+texture = ExtResource("85_gnh6p")
+region_rect = Rect2(1, 1, 62, 62)
+patch_margin_left = 16
+patch_margin_top = 17
+patch_margin_right = 16
+patch_margin_bottom = 15
+
+[node name="Text" type="RichTextLabel" parent="Control/CanvasLayer/Tips/TextureRect" unique_id=19125904]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 6.0
+offset_right = -21.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 21
+bbcode_enabled = true
+text = "tired of grinding ?
+Try playing a [rainbow]minigame[/rainbow] to boost your grinding! :]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 26
+_outline_ratio = 0.4
+_current_font_size = 21
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="TipFinished" type="Timer" parent="Control/CanvasLayer/Tips" unique_id=2105367586]
+wait_time = 2.5
+one_shot = true
+
 [node name="NaturalNoise" type="AudioStreamPlayer" parent="Control" unique_id=1621144205]
 stream = ExtResource("71_l88l1")
 volume_db = 20.0
@@ -3360,7 +3422,7 @@ limit_enabled = false
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/SkinsButton" to="Control/CanvasLayer/SkinPanel" method="_on_skins_button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/ShoppingKartRebirth" to="Control/CanvasLayer/OptionUI" method="_on_shopping_kart_rebirth_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/Achievements" to="Control/CanvasLayer/Achievements" method="_on_achievements_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/OptionUI/Minigames" to="Control/CanvasLayer/Minigames" method="_on_minigames_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/OptionUI/Minigames-UI" to="Control/CanvasLayer/Minigames" method="_on_minigames_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/RebirthIc" to="Control/CanvasLayer/RebirthMenu" method="_on_rebirth_ic_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Resume" to="Control/CanvasLayer/PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Settings" to="Control/CanvasLayer/PauseMenu" method="_on_settings_pressed"]
@@ -3395,3 +3457,4 @@ limit_enabled = false
 [connection signal="mouse_entered" from="Control/CanvasLayer/Minigames/RightButton" to="Control/CanvasLayer/Minigames" method="_on_right_button_mouse_entered"]
 [connection signal="mouse_exited" from="Control/CanvasLayer/Minigames/RightButton" to="Control/CanvasLayer/Minigames" method="_on_right_button_mouse_exited"]
 [connection signal="pressed" from="Control/CanvasLayer/Minigames/RightButton" to="Control/CanvasLayer/Minigames" method="_on_right_button_pressed"]
+[connection signal="timeout" from="Control/CanvasLayer/Tips/TipFinished" to="Control/CanvasLayer/Tips" method="_on_tip_finished_timeout"]

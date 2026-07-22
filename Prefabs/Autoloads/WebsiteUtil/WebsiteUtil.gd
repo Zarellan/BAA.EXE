@@ -102,7 +102,7 @@ func _on_ad_finished() -> void:
 		#rewardBased = false
 	#_current_reward_callback = Callable()
 
-
+@warning_ignore("unused_parameter")
 func _on_ad_error(error_code) -> void:
 	#_current_reward_callback = Callable()
 	get_tree().paused = false

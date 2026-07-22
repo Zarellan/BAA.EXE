@@ -270,3 +270,24 @@ func FindSkinByName(strn:String):
 	for i in range(skn.size()):
 		if (skn[i].name == strn):
 			return skn[i]
+
+func ClicksAct():
+	saveDataAchievements.playerClicks += 1
+	ClicksActivate()
+func ClicksActivate():
+	if (saveDataAchievements.playerClicks >= 25 \
+		&& GiveTip("minigame_1", "you can play the minigame\n to make the grinding faster :]")):
+		GetScaleOverlap("Minigames-UI").ShineTheButton()
+
+func GetScaleOverlap(nam:String):
+	if (!ScaleOverlap || ScaleOverlap.scaleOverlapsDicts.is_empty()):
+		return null
+	
+	var dict: Dictionary = ScaleOverlap.scaleOverlapsDicts
+	return dict.get(nam, dict.get("PauseButton", null))
+func GiveTip(tipName:String, tipText:String):
+	if (is_instance_valid(Tips.instance) && !saveDataAchievements.tips[tipName]):
+		Tips.instance.PrepareTip(tipText)
+		GameHandler.saveDataAchievements.tips[tipName] = true
+		return true
+	return false

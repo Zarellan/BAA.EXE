@@ -105,10 +105,35 @@ static func tweenAlpha(object,position,duration,eas):
 	var step = tween.tween_property(object, "modulate:a", position, duration)
 	EasingType(step, eas)
 	return tween
+	
+static func tweenAlphaPingPong(object,startValue,endValue,duration,eas, instant = false):
+	var tween = object.create_tween().set_loops(-1)
+	
+	if (instant):
+		object.scale = startValue
+	var step1 = tween.tween_property(object, "alpha", startValue, duration)
+	EasingType(step1, eas)
+
+	var step2 = tween.tween_property(object, "alpha", endValue, duration)
+	EasingType(step2, eas)
+
+	return tween
 static func tweenAlphaSelf(object,position,duration,eas):
 	var tween = object.create_tween()
 	var step = tween.tween_property(object, "self_modulate:a", position, duration)
 	EasingType(step, eas)
+	return tween
+static func tweenAlphaSelfPingPong(object,startValue,endValue,duration,eas, instant = false):
+	var tween = object.create_tween().set_loops(-1)
+	
+	if (instant):
+		object.scale = startValue
+	var step1 = tween.tween_property(object, "self_modulate:a", startValue, duration)
+	EasingType(step1, eas)
+
+	var step2 = tween.tween_property(object, "self_modulate:a", endValue, duration)
+	EasingType(step2, eas)
+
 	return tween
 static func tweenNumber(owner, objectValue:ValueSaver,value,duration,eas):
 	var tween = owner.create_tween()

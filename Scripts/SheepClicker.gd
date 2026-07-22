@@ -42,7 +42,6 @@ func _ready() -> void:
 			tutorialTimer.timeout.connect(StartTutorial)
 	else:
 		SetUniqueShader(get_node("StaticBody2D/Sprite2D"))
-		
 	SheepShaderCondition()
 	pass # Replace with function body.
 	
@@ -132,6 +131,7 @@ func Pressed():
 			TweenUtils.tweenAlpha(tutorial,0,0.3,TweenUtils.Ease.linear)
 			GameHandler.saveData.tutorialed = true
 			GameHandler.SaveAllDataGlob()
+		GameHandler.ClicksAct()
 		canPress = false
 		await get_tree().create_timer(0.01).timeout
 		canPress = true
