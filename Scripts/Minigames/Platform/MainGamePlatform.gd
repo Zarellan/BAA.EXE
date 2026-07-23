@@ -216,7 +216,7 @@ static func IncScore():
 	else:
 		instance.textScore.text = str(score)
 	if (score >= 20):
-		GameHandler.UnlockSkin("Jump")
+		GameHandler.UnlockSkin("Jump sheep")
 	instance.textScore.scale = Vector2(randf_range(0.6,1.5),randf_range(0.6,1.5))
 	TweenUtils.tweenScale(instance.textScore,Vector2.ONE,0.3,TweenUtils.Ease.OutCirc)
 	pass
@@ -270,11 +270,13 @@ func BringGameOverScreen():
 	TweenUtils.tweenY(quitButton,529.0,0.6,TweenUtils.Ease.OutCirc)
 	TweenUtils.tweenRotation(retryButton,0,0.6,TweenUtils.Ease.OutCirc)
 	TweenUtils.tweenRotation(quitButton,0,0.6,TweenUtils.Ease.OutCirc)
+
 func ReturnRandomWithLimit(min,max,minLimit,maxLimit):
 	var num:float = randf_range(min,max)
 	while (num < maxLimit && num > minLimit):
 		num = randf_range(min,max)
 	return num
+
 func StartPositionTextureGameOver(textureNode:Control):
 	if randi_range(1,2) == 1:
 		textureNode.position.x = randf_range(-612.0,-569.0)
@@ -291,6 +293,9 @@ func _on_retry_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	TransitionScript.ChangeScene("res://Scenes/MainFarm.tscn",SceneChangedFromMinigame)
+	if (GameHandler.saveDataAchievements.platformMinigameScore < score):
+		GameHandler.saveDataAchievements.platformMinigameScore = score
+	GameHandler.SaveAllDataGlob()
 	Changing()
 	pass # Replace with function body.
 

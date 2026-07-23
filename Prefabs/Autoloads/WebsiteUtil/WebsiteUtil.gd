@@ -45,7 +45,6 @@ func Initializer():
 func StartSDK():
 	if (gameStarted):
 		return
-	print("start")
 	platformMain.StartSDK()
 	gameStarted = true
 

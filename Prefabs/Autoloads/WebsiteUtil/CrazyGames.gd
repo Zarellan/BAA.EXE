@@ -5,7 +5,7 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _process(delta: float):
-	print("pr")
+	pass
 func Initializer():
 	await CrazyGames.is_initialised_async()
 	if (WebsiteUtil.platformType == WebsiteUtil.Platform.crazyGames):

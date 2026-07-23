@@ -2302,13 +2302,13 @@ offset_right = 821.0
 offset_bottom = 208.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2321,13 +2321,13 @@ offset_right = 823.0
 offset_bottom = 303.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2488,13 +2488,13 @@ offset_right = 821.0
 offset_bottom = 241.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Update Intervals:31"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -2570,13 +2570,13 @@ offset_top = 192.0
 offset_right = 693.0
 offset_bottom = 252.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Glitch Effect"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -2598,14 +2598,14 @@ offset_top = 290.0
 offset_right = 692.0
 offset_bottom = 350.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Shading
 Border"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -3130,9 +3130,9 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="TextureButton" type="TextureButton" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=455275286]
 layout_mode = 0
-offset_left = 445.0
+offset_left = 559.0
 offset_top = 362.0
-offset_right = 605.0
+offset_right = 719.0
 offset_bottom = 460.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("15_wnqqd")
@@ -3169,6 +3169,7 @@ dependOnButton = true
 button = NodePath("..")
 
 [node name="TutorialHelp" type="TextureButton" parent="Control/CanvasLayer/Minigames/TextureRect" unique_id=1128960447]
+visible = false
 layout_mode = 0
 offset_left = 663.0
 offset_top = 362.0
@@ -3356,6 +3357,7 @@ mouse_filter = 2
 script = ExtResource("85_tgjpn")
 texr = NodePath("TextureRect/Text")
 tipFinishTimer = NodePath("TipFinished")
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="NinePatchRect" parent="Control/CanvasLayer/Tips" unique_id=1771305609]
 self_modulate = Color(1, 1, 1, 0.5058824)
@@ -3370,6 +3372,7 @@ patch_margin_left = 16
 patch_margin_top = 17
 patch_margin_right = 16
 patch_margin_bottom = 15
+metadata/_edit_use_anchors_ = true
 
 [node name="Text" type="RichTextLabel" parent="Control/CanvasLayer/Tips/TextureRect" unique_id=19125904]
 clip_contents = false
@@ -3398,6 +3401,7 @@ _outline_ratio = 0.4
 _current_font_size = 21
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="TipFinished" type="Timer" parent="Control/CanvasLayer/Tips" unique_id=2105367586]
 wait_time = 2.5

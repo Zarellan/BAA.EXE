@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://dngoefhb0qcm3" path="res://Sprites/emojies/Party.png" id="17_g8amr"]
 [ext_resource type="Texture2D" uid="uid://cwjhen12jboy7" path="res://Sprites/ImageHelpers/baa sleep.png" id="18_a4mcc"]
 [ext_resource type="Texture2D" uid="uid://38cbw7l861qq" path="res://Sprites/ImageHelpers/Z letter.png" id="19_8y6ra"]
+[ext_resource type="Texture2D" uid="uid://wnk0scnna26v" path="res://Sprites/ImageHelpers/question box.png" id="20_kjbxo"]
+[ext_resource type="Texture2D" uid="uid://dj776vx4wvw5y" path="res://Sprites/ImageHelpers/wrench.png" id="21_qneym"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_id86e"]
 
@@ -514,13 +516,13 @@ offset_top = 24.0
 offset_right = 236.0
 offset_bottom = 193.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 109
+theme_override_font_sizes/normal_font_size = 112
 bbcode_enabled = true
 text = "X5"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 109
+_current_font_size = 112
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -570,13 +572,13 @@ offset_top = 24.0
 offset_right = 236.0
 offset_bottom = 193.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 109
+theme_override_font_sizes/normal_font_size = 112
 bbcode_enabled = true
 text = "X5"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 109
+_current_font_size = 112
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -768,13 +770,13 @@ offset_top = -1.0
 offset_right = 227.0
 offset_bottom = 168.0
 theme_override_constants/outline_size = 22
-theme_override_font_sizes/normal_font_size = 109
+theme_override_font_sizes/normal_font_size = 112
 bbcode_enabled = true
 text = "X2"
 scroll_active = false
 script = ExtResource("4_yopb8")
 _max_size = 112
-_current_font_size = 109
+_current_font_size = 112
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -1211,6 +1213,7 @@ offset_bottom = 627.0
 texture = ExtResource("17_g8amr")
 
 [node name="font Achievemet" type="Control" parent="SubViewportContainer/SubViewport" unique_id=193168273]
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
@@ -1252,6 +1255,31 @@ offset_top = -17.0
 offset_right = 656.0
 offset_bottom = 120.0
 texture = ExtResource("19_8y6ra")
+
+[node name="Jump Achievement" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1821567323]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Jump Achievement" unique_id=547191051]
+texture_filter = 1
+layout_mode = 0
+offset_left = 53.0
+offset_top = 36.0
+offset_right = 597.0
+offset_bottom = 570.0
+texture = ExtResource("20_kjbxo")
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport/Jump Achievement" unique_id=1367442074]
+texture_filter = 1
+layout_mode = 0
+offset_left = -172.0
+offset_top = -40.0
+offset_right = 675.0
+offset_bottom = 763.0
+texture = ExtResource("21_qneym")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1655893819]
 position = Vector2(355, 400.99997)

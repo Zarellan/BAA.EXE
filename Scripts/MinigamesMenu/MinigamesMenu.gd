@@ -71,6 +71,7 @@ func IndexRangeLimit(indexMax:Array):
 
 func _on_texture_button_pressed() -> void:
 	GoToMinigame()
+	GameHandler.saveDataAchievements.tips["minigame_1"] = true
 	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 

@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="5_ibwm0"]
 [ext_resource type="Texture2D" uid="uid://bg6hskasnpygv" path="res://Sprites/Sheep/EidCap.png" id="6_vt7wm"]
 [ext_resource type="Texture2D" uid="uid://cb4tdhf3rwt47" path="res://Sprites/AchievementImages/Eid.png" id="7_ibwm0"]
+[ext_resource type="Texture2D" uid="uid://qmvgd4igr5y5" path="res://Sprites/AchievementImages/Jump.png" id="8_1vh0c"]
 [ext_resource type="Texture2D" uid="uid://bpnwkowpfyd2m" path="res://Sprites/Sheep/helmet.png" id="8_m7uoi"]
 [ext_resource type="Texture2D" uid="uid://dhx0xyysxy81i" path="res://Sprites/AchievementImages/Font.png" id="8_vt7wm"]
 [ext_resource type="Texture2D" uid="uid://dyp0gw4466eum" path="res://Sprites/Sheep/plumber.png" id="9_sbckw"]
@@ -135,6 +136,7 @@ description = "hmm...he looks like someone...but ninjas might haunt me if I ment
 effectDescription = "effect: increase your jump by +200"
 achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
+achievementImage = ExtResource("8_1vh0c")
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_sbckw"]
