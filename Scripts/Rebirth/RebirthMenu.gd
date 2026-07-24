@@ -84,7 +84,6 @@ func Rebirthed():
 	GameHandler.saveDataRebirth.rebirth += int(totalRebirth)
 	GameHandler.SaveAllDataRebirth()
 
-
 func _on_square_root_calculate_timeout() -> void:
 	CalculateRebirth()
 	pass # Replace with function body.

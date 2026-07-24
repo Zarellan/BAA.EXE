@@ -77,12 +77,25 @@
 [ext_resource type="PackedScene" uid="uid://isevecd4fd6k" path="res://Scenes/SkinChanger.tscn" id="64_qxec0"]
 [ext_resource type="Script" uid="uid://c3fhx3vqoprj3" path="res://Scripts/Achievements/AchievementInit.gd" id="69_l88l1"]
 [ext_resource type="PackedScene" uid="uid://6u1wu3vu1ss7" path="res://Prefabs/achievement.tscn" id="70_etfi4"]
+[ext_resource type="Texture2D" uid="uid://bqnxqa7h53u2m" path="res://Sprites/ButtonSprites/Button.png" id="71_dwm4h"]
 [ext_resource type="AudioStream" uid="uid://7rvfotxmcbx4" path="res://Soundtrack/Calm rural forest.mp3" id="71_l88l1"]
+[ext_resource type="Texture2D" uid="uid://b1m3muy70c8cg" path="res://Sprites/SliderSprites/Grab.png" id="72_5kpi6"]
+[ext_resource type="Texture2D" uid="uid://dcr8psxns5jbc" path="res://Sprites/ButtonSprites/ButtonPressed.png" id="72_5w07k"]
+[ext_resource type="Texture2D" uid="uid://bj1alcwg1g3gh" path="res://Sprites/ButtonSprites/ButtonNon.png" id="72_341u3"]
 [ext_resource type="Script" uid="uid://cxmg43g4nrw3" path="res://Scripts/MinigamesMenu/MinigamesMenu.gd" id="72_hrdhe"]
+[ext_resource type="Texture2D" uid="uid://bu36yqbdnwpxo" path="res://Sprites/SliderSprites/Grab Hovered.png" id="72_iqarj"]
+[ext_resource type="Texture2D" uid="uid://vp5ef8fopd45" path="res://Sprites/OptionUIs/Settings BG.png" id="72_p8hnc"]
+[ext_resource type="Texture2D" uid="uid://botglygb1lesf" path="res://Sprites/CheckboxSprites/true.png" id="72_ruovs"]
 [ext_resource type="Script" uid="uid://c4mcef0fg5c8w" path="res://Scripts/MinigamesMenu/MinigameType.gd" id="73_hmk78"]
+[ext_resource type="Texture2D" uid="uid://dlown4un1udio" path="res://Sprites/CheckboxSprites/false.png" id="73_iqarj"]
+[ext_resource type="Texture2D" uid="uid://dyrhuwlihtfea" path="res://Sprites/OptionUIs/Settings name.png" id="73_podnr"]
 [ext_resource type="Texture2D" uid="uid://c67a42cfpmceq" path="res://Sprites/MinigamesImages/Platform minigame.png" id="74_2f1ge"]
+[ext_resource type="Texture2D" uid="uid://jfdrnbtlerd" path="res://Sprites/SliderSprites/Grab Dis.png" id="74_jkgwy"]
 [ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="74_tymc6"]
+[ext_resource type="Texture2D" uid="uid://ctslntehlal3w" path="res://Sprites/SliderSprites/Slider.png" id="75_jgr3s"]
 [ext_resource type="Texture2D" uid="uid://ur8hde5qx5fq" path="res://Sprites/OptionUIs/exit door.png" id="76_3xwj6"]
+[ext_resource type="Texture2D" uid="uid://u8qhnaw3o4ac" path="res://Sprites/SliderSprites/Slider2.png" id="76_p8hnc"]
+[ext_resource type="Texture2D" uid="uid://dmamboig1wdci" path="res://Sprites/SliderSprites/SliderWhite2.png" id="76_uf4u3"]
 [ext_resource type="Texture2D" uid="uid://cmq6mhs8xxqlb" path="res://Sprites/OptionUIs/Arrow3.png" id="77_y7kse"]
 [ext_resource type="Texture2D" uid="uid://dqks1kt5m5ks3" path="res://Sprites/OptionUIs/questionMark.png" id="78_ueu3d"]
 [ext_resource type="Texture2D" uid="uid://me6utmnqir7i" path="res://Sprites/OptionUIs/UICorner.png" id="85_gnh6p"]
@@ -730,9 +743,44 @@ shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/progress = 0.0
 shader_parameter/random_start = 0.0
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_410ju"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5w07k"]
+texture = ExtResource("71_dwm4h")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_67qwo"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_341u3"]
+texture = ExtResource("72_341u3")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nme7v"]
+texture = ExtResource("72_5w07k")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jgr3s"]
+texture = ExtResource("76_p8hnc")
+texture_margin_left = 1.0
+texture_margin_top = 16.0
+texture_margin_right = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uf4u3"]
+texture = ExtResource("76_uf4u3")
+texture_margin_left = 1.0
+texture_margin_top = 16.0
+texture_margin_right = 1.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jjpmr"]
+texture = ExtResource("76_uf4u3")
+texture_margin_left = 1.0
+texture_margin_top = 16.0
+texture_margin_right = 1.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_62te2"]
 
@@ -828,6 +876,8 @@ shader_parameter/border_px = 2.0
 shader_parameter/speed = 0.9
 shader_parameter/glow_intensity = 2.0
 shader_parameter/node_size = Vector2(64, 64)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_410ju"]
 
 [sub_resource type="Gradient" id="Gradient_7yrkc"]
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
@@ -2118,6 +2168,7 @@ scaleVal = 1.1
 button = NodePath("..")
 
 [node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2132,61 +2183,89 @@ settings = NodePath("../Settings")
 metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/PauseMenu" unique_id=305637214]
-modulate = Color(0.5803922, 0.5803922, 0.5803922, 0.93333334)
+modulate = Color(0.62967473, 0.62967473, 0.6296747, 1)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.499
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.499
 anchor_bottom = 0.5
-offset_left = -195.49988
-offset_top = -236.0
-offset_right = 195.49988
-offset_bottom = 236.0
+offset_left = -249.72003
+offset_top = -276.0
+offset_right = 250.27997
+offset_bottom = 275.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = SubResource("CanvasTexture_410ju")
+texture = ExtResource("72_p8hnc")
 metadata/_edit_use_anchors_ = true
 
 [node name="Resume" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=1396689202]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00703125
+anchor_right = 0.01171875
 offset_left = 506.0
 offset_top = 190.0
 offset_right = 772.0
 offset_bottom = 274.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 43
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
 text = "Resume"
 metadata/_edit_use_anchors_ = true
 
 [node name="Settings" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=1477876223]
 layout_mode = 0
-offset_left = 507.0
+offset_left = 497.0
 offset_top = 284.0
-offset_right = 773.0
+offset_right = 787.0
 offset_bottom = 368.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
 text = "Settings"
 metadata/_edit_use_anchors_ = true
 
 [node name="Save" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=991866533]
 layout_mode = 0
-offset_left = 505.0
+offset_left = 497.0
 offset_top = 378.0
-offset_right = 776.0
+offset_right = 790.0
 offset_bottom = 462.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 29
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
 text = "Save Data
 "
 metadata/_edit_use_anchors_ = true
 
 [node name="Exit" type="Button" parent="Control/CanvasLayer/PauseMenu" unique_id=1618380337]
 layout_mode = 0
-offset_left = 503.0
+offset_left = 497.0
 offset_top = 481.0
-offset_right = 774.0
-offset_bottom = 565.0
+offset_right = 787.0
+offset_bottom = 568.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 55
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
 text = "Exit
 "
 metadata/_edit_use_anchors_ = true
@@ -2206,7 +2285,7 @@ natureAudio = NodePath("../../NaturalNoise")
 natureDB = 20.0
 settingText = NodePath("Label/AutoSizeRichTextLabel")
 pauseMenu = NodePath("../PauseMenu")
-settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Performance-2"), NodePath("Code"), NodePath("Data"), NodePath("Effects"), NodePath("Sheep color")]
+settingOptions = [NodePath("Volume"), NodePath("Performance"), NodePath("Performance-2"), NodePath("Gameplays"), NodePath("Code"), NodePath("Data"), NodePath("Effects"), NodePath("Sheep color")]
 shadedGrassNode = NodePath("../../../Background/Floor/GrassesDark")
 codeText = NodePath("Code/Code")
 particle = ExtResource("29_62te2")
@@ -2218,31 +2297,101 @@ colorPicker = NodePath("Sheep color/ColorPickerButton")
 natureText = NodePath("Volume/NatureVolume")
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings" unique_id=258928493]
-self_modulate = Color(0.50980395, 0.50980395, 0.50980395, 0.8745098)
-layout_mode = 0
-offset_left = 393.0
-offset_top = 151.0
-offset_right = 881.0
+[node name="ArrowButtonLeft" type="TextureButton" parent="Control/CanvasLayer/Settings" unique_id=1366036735]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0140625
+anchor_top = -0.0013888889
+anchor_right = 0.0140625
+anchor_bottom = -0.0013888889
+offset_left = 257.0
+offset_top = 452.0
+offset_right = 393.0
 offset_bottom = 581.0
-texture = SubResource("CanvasTexture_67qwo")
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("52_ykfix")
+stretch_mode = 0
+metadata/_edit_group_ = true
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings/ArrowButtonLeft" unique_id=1770094727]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_pxlk8")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Settings/ArrowButtonLeft" unique_id=1062194851 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+useScalingSingle = true
+useDefaultScale = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="ArrowButtonRight" type="TextureButton" parent="Control/CanvasLayer/Settings" unique_id=1636509096]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0171875
+anchor_top = -0.0027777778
+anchor_right = -0.0171875
+anchor_bottom = -0.0027777778
+offset_left = 881.0
+offset_top = 452.0
+offset_right = 1017.0
+offset_bottom = 581.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("52_ykfix")
+stretch_mode = 0
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings/ArrowButtonRight" unique_id=271479300]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("29_pxlk8")
+flip_h = true
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Settings/ArrowButtonRight" unique_id=830589985 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+useScalingSingle = true
+useDefaultScale = true
+dependOnButton = true
+button = NodePath("..")
+
 [node name="Label" type="TextureRect" parent="Control/CanvasLayer/Settings" unique_id=1967682611]
-self_modulate = Color(0.21568628, 0.21568628, 0.21568628, 0.7607843)
-layout_mode = 0
-offset_left = 393.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.008333334
+anchor_bottom = -0.008333334
+offset_left = 387.0
 offset_top = 40.0
 offset_right = 881.0
-offset_bottom = 151.0
-texture = SubResource("CanvasTexture_67qwo")
+offset_bottom = 177.0
+texture = ExtResource("73_podnr")
 metadata/_edit_use_anchors_ = true
 
 [node name="AutoSizeRichTextLabel" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Label" unique_id=260997671]
+clip_contents = false
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.892
+anchor_left = 0.02631579
+anchor_top = 0.14598519
+anchor_right = 0.9736842
+anchor_bottom = 0.8249049
 offset_left = 1.0
 offset_right = 1.0
 offset_bottom = 1.987999
@@ -2260,38 +2409,74 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings" unique_id=258928493]
+self_modulate = Color(0.601223, 0.601223, 0.60122293, 1)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 340.0
+offset_top = 120.0
+offset_right = 927.0
+offset_bottom = 613.0
+mouse_filter = 2
+texture = ExtResource("72_p8hnc")
+metadata/_edit_use_anchors_ = true
+
 [node name="Volume" type="Control" parent="Control/CanvasLayer/Settings" unique_id=772165797]
 visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="SoundtrackSlider" type="HSlider" parent="Control/CanvasLayer/Settings/Volume" unique_id=1990043020]
-texture_filter = 2
+texture_filter = 1
 layout_mode = 0
 offset_left = 410.0
 offset_top = 187.0
 offset_right = 587.336
 offset_bottom = 223.0
 scale = Vector2(2.515, 2.515)
+theme_override_icons/grabber = ExtResource("72_5kpi6")
+theme_override_icons/grabber_highlight = ExtResource("72_iqarj")
+theme_override_icons/grabber_disabled = ExtResource("74_jkgwy")
+theme_override_styles/slider = SubResource("StyleBoxTexture_jgr3s")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_uf4u3")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_jjpmr")
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioSlider" type="HSlider" parent="Control/CanvasLayer/Settings/Volume" unique_id=806989973]
-texture_filter = 2
+texture_filter = 1
 layout_mode = 0
 offset_left = 410.0
 offset_top = 285.48
 offset_right = 587.336
 offset_bottom = 321.48007
 scale = Vector2(2.515, 2.515)
+theme_override_icons/grabber = ExtResource("72_5kpi6")
+theme_override_icons/grabber_highlight = ExtResource("72_iqarj")
+theme_override_icons/grabber_disabled = ExtResource("74_jkgwy")
+theme_override_icons/tick = ExtResource("75_jgr3s")
+theme_override_styles/slider = SubResource("StyleBoxTexture_jgr3s")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_uf4u3")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_jjpmr")
+value = 53.0
+metadata/_edit_use_anchors_ = true
 
 [node name="NaturalSlider" type="HSlider" parent="Control/CanvasLayer/Settings/Volume" unique_id=368222400]
-texture_filter = 2
+texture_filter = 1
 layout_mode = 0
 offset_left = 410.0
 offset_top = 389.48
 offset_right = 587.336
 offset_bottom = 425.48007
 scale = Vector2(2.515, 2.515)
+theme_override_icons/grabber = ExtResource("72_5kpi6")
+theme_override_icons/grabber_highlight = ExtResource("72_iqarj")
+theme_override_icons/grabber_disabled = ExtResource("74_jkgwy")
+theme_override_styles/slider = SubResource("StyleBoxTexture_jgr3s")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_uf4u3")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_jjpmr")
+metadata/_edit_use_anchors_ = true
 
 [node name="SoundtrackVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Volume" unique_id=1987295276]
 clip_contents = false
@@ -2311,6 +2496,7 @@ _max_size = 31
 _current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Volume" unique_id=1888958600]
 clip_contents = false
@@ -2330,6 +2516,7 @@ _max_size = 31
 _current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="NatureVolume" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Volume" unique_id=312986235]
 clip_contents = false
@@ -2349,6 +2536,7 @@ _max_size = 28
 _current_font_size = 28
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="Performance" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1093421879]
 visible = false
@@ -2375,6 +2563,7 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
 [node name="QualityOptions" type="OptionButton" parent="Control/CanvasLayer/Settings/Performance" unique_id=1394801746]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 9.699
@@ -2460,20 +2649,29 @@ offset_top = 329.0
 offset_right = 684.00006
 offset_bottom = 353.0
 scale = Vector2(4.635, 4.635)
+theme_override_icons/checked = ExtResource("72_ruovs")
+theme_override_icons/unchecked = ExtResource("73_iqarj")
 
 [node name="Performance-2" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1403566493]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="UpdateIntervalsSlider" type="HSlider" parent="Control/CanvasLayer/Settings/Performance-2" unique_id=1755704333]
-texture_filter = 2
+texture_filter = 1
 layout_mode = 0
 offset_left = 410.0
 offset_top = 220.0
 offset_right = 587.336
 offset_bottom = 256.0
 scale = Vector2(2.515, 2.515)
+theme_override_icons/grabber = ExtResource("72_5kpi6")
+theme_override_icons/grabber_highlight = ExtResource("72_iqarj")
+theme_override_icons/grabber_disabled = ExtResource("74_jkgwy")
+theme_override_styles/slider = SubResource("StyleBoxTexture_jgr3s")
+theme_override_styles/grabber_area = SubResource("StyleBoxTexture_uf4u3")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_jjpmr")
 min_value = 0.01
 max_value = 0.1
 step = 0.05
@@ -2498,8 +2696,49 @@ _current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
-[node name="Code" type="Control" parent="Control/CanvasLayer/Settings" unique_id=744997745]
+[node name="Gameplays" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1657097715]
 visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Tips" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Gameplays" unique_id=1440160387]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+offset_left = 442.0
+offset_top = 192.0
+offset_right = 602.0
+offset_bottom = 252.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 31
+text = "Tips:"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 31
+_current_font_size = 31
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
+
+[node name="Tips2" type="CheckBox" parent="Control/CanvasLayer/Settings/Gameplays" unique_id=16403349]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.85
+anchor_top = 0.025
+anchor_right = -0.85
+anchor_bottom = 0.025
+offset_left = 619.0
+offset_top = 168.0
+offset_right = 643.0
+offset_bottom = 192.0
+scale = Vector2(4.635, 4.635)
+theme_override_icons/checked = ExtResource("72_ruovs")
+theme_override_icons/unchecked = ExtResource("73_iqarj")
+metadata/_edit_use_anchors_ = true
+
+[node name="Code" type="Control" parent="Control/CanvasLayer/Settings" unique_id=744997745]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -2521,7 +2760,12 @@ offset_left = 480.0
 offset_top = 354.0
 offset_right = 799.99945
 offset_bottom = 447.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 41
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
 text = "Submit"
 
 [node name="ParticlePosition" type="Control" parent="Control/CanvasLayer/Settings/Code" unique_id=1828831202]
@@ -2551,7 +2795,12 @@ offset_left = 475.0
 offset_top = 280.0
 offset_right = 803.0
 offset_bottom = 364.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
 text = "Deleta All Data"
 metadata/_edit_use_anchors_ = true
 
@@ -2564,10 +2813,11 @@ metadata/_edit_use_anchors_ = true
 
 [node name="GlitchEffect" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Effects" unique_id=1730065324]
 clip_contents = false
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 offset_left = 442.0
 offset_top = 192.0
-offset_right = 693.0
+offset_right = 634.0
 offset_bottom = 252.0
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 30
@@ -2588,6 +2838,8 @@ offset_top = 168.0
 offset_right = 643.0
 offset_bottom = 192.0
 scale = Vector2(4.635, 4.635)
+theme_override_icons/checked = ExtResource("72_ruovs")
+theme_override_icons/unchecked = ExtResource("73_iqarj")
 metadata/_edit_use_anchors_ = true
 
 [node name="BorderShade" type="RichTextLabel" parent="Control/CanvasLayer/Settings/Effects" unique_id=670204055]
@@ -2611,12 +2863,17 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
 [node name="BorderShadeBox" type="CheckBox" parent="Control/CanvasLayer/Settings/Effects" unique_id=397898892]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.875
+anchor_right = 0.875
 offset_left = 618.0
 offset_top = 266.0
 offset_right = 642.0
 offset_bottom = 290.0
 scale = Vector2(4.635, 4.635)
+theme_override_icons/checked = ExtResource("72_ruovs")
+theme_override_icons/unchecked = ExtResource("73_iqarj")
 metadata/_edit_use_anchors_ = true
 
 [node name="Sheep color" type="Control" parent="Control/CanvasLayer/Settings" unique_id=1100899839]
@@ -2650,45 +2907,6 @@ _current_font_size = 27
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
-[node name="ArrowButtonLeft" type="Button" parent="Control/CanvasLayer/Settings" unique_id=161299645]
-texture_filter = 1
-layout_mode = 0
-offset_left = 257.0
-offset_top = 452.0
-offset_right = 393.0
-offset_bottom = 581.0
-metadata/_edit_group_ = true
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings/ArrowButtonLeft" unique_id=1770094727]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("29_pxlk8")
-
-[node name="ArrowButtonRight" type="Button" parent="Control/CanvasLayer/Settings" unique_id=1781575961]
-texture_filter = 1
-layout_mode = 0
-offset_left = 881.0
-offset_top = 452.0
-offset_right = 1017.0
-offset_bottom = 581.0
-metadata/_edit_group_ = true
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Settings/ArrowButtonRight" unique_id=271479300]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("29_pxlk8")
-flip_h = true
-
 [node name="Back" type="Button" parent="Control/CanvasLayer/Settings" unique_id=1770219669]
 texture_filter = 1
 layout_mode = 0
@@ -2696,7 +2914,13 @@ offset_left = 505.0
 offset_top = 470.0
 offset_right = 779.0
 offset_bottom = 544.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_constants/h_separation = 4
 theme_override_font_sizes/font_size = 51
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
 text = "Back"
 metadata/_edit_use_anchors_ = true
 
@@ -2733,6 +2957,7 @@ metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
 [node name="RebirthMenu" type="Control" parent="Control/CanvasLayer" unique_id=1034030294 node_paths=PackedStringArray("textRebirth", "buttonRebirth") groups=["RebirthMenu"]]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2884,6 +3109,7 @@ one_shot = true
 autostart = true
 
 [node name="SkinPanel" type="Control" parent="Control/CanvasLayer" unique_id=1936878502]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2915,7 +3141,7 @@ canvas_item_default_texture_filter = 0
 sdf_oversize = 0
 sdf_scale = 2
 size = Vector2i(900, 720)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="SkinChanger" parent="Control/CanvasLayer/SkinPanel/SubViewportContainer/SubViewport" unique_id=336374009 instance=ExtResource("64_qxec0")]
 
@@ -2985,6 +3211,7 @@ button = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
 [node name="Achievements" type="Control" parent="Control/CanvasLayer" unique_id=715517]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -3025,6 +3252,7 @@ offset_bottom = 675.0
 text = "Back"
 
 [node name="Minigames" type="Control" parent="Control/CanvasLayer" unique_id=750604673 node_paths=PackedStringArray("title", "desc", "image", "multi", "gameButton")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -3432,6 +3660,8 @@ limit_enabled = false
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Settings" to="Control/CanvasLayer/PauseMenu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Save" to="Control/CanvasLayer/PauseMenu" method="_on_save_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Exit" to="Control/CanvasLayer/PauseMenu" method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonLeft" to="Control/CanvasLayer/Settings" method="_on_arrow_button_left_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonRight" to="Control/CanvasLayer/Settings" method="_on_arrow_button_right_pressed"]
 [connection signal="value_changed" from="Control/CanvasLayer/Settings/Volume/SoundtrackSlider" to="Control/CanvasLayer/Settings" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="Control/CanvasLayer/Settings/Volume/AudioSlider" to="Control/CanvasLayer/Settings" method="_on_audio_slider_value_changed"]
 [connection signal="value_changed" from="Control/CanvasLayer/Settings/Volume/NaturalSlider" to="Control/CanvasLayer/Settings" method="_on_natural_slider_value_changed"]
@@ -3439,6 +3669,7 @@ limit_enabled = false
 [connection signal="item_selected" from="Control/CanvasLayer/Settings/Performance/FPSOption" to="Control/CanvasLayer/Settings" method="_on_fps_option_item_selected"]
 [connection signal="toggled" from="Control/CanvasLayer/Settings/Performance/VSyncBox" to="Control/CanvasLayer/Settings" method="_on_v_sync_box_toggled"]
 [connection signal="value_changed" from="Control/CanvasLayer/Settings/Performance-2/UpdateIntervalsSlider" to="Control/CanvasLayer/Settings" method="_on_update_intervals_slider_value_changed"]
+[connection signal="toggled" from="Control/CanvasLayer/Settings/Gameplays/Tips2" to="Control/CanvasLayer/Settings" method="_on_tips_2_toggled"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Code/CodeSubmit" to="Control/CanvasLayer/Settings" method="_on_code_submit_pressed"]
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/CodeTextTimer" to="Control/CanvasLayer/Settings" method="_on_code_text_timer_timeout"]
 [connection signal="timeout" from="Control/CanvasLayer/Settings/Code/InvalidCodeTimer" to="Control/CanvasLayer/Settings" method="_on_invalid_code_timer_timeout"]
@@ -3446,8 +3677,6 @@ limit_enabled = false
 [connection signal="toggled" from="Control/CanvasLayer/Settings/Effects/GlitchEffectBox" to="Control/CanvasLayer/Settings" method="_on_glitch_effect_box_toggled"]
 [connection signal="toggled" from="Control/CanvasLayer/Settings/Effects/BorderShadeBox" to="Control/CanvasLayer/Settings" method="_on_border_shade_box_toggled"]
 [connection signal="color_changed" from="Control/CanvasLayer/Settings/Sheep color/ColorPickerButton" to="Control/CanvasLayer/Settings" method="_on_color_picker_button_color_changed"]
-[connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonLeft" to="Control/CanvasLayer/Settings" method="_on_arrow_button_left_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/Settings/ArrowButtonRight" to="Control/CanvasLayer/Settings" method="_on_arrow_button_right_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Settings/Back" to="Control/CanvasLayer/Settings" method="_on_back_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/RebirthMenu/TextureRect/Rebirth" to="Control/CanvasLayer/RebirthMenu" method="_on_rebirth_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/RebirthMenu/TextureRect/Back" to="Control/CanvasLayer/RebirthMenu" method="_on_back_pressed"]

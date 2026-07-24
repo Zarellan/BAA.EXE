@@ -1,25 +1,26 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3]
+[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://b216x6vv83ktj"]
 
-[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_hantp"]
-[ext_resource type="Script" path="res://Scripts/Shop/ShopClass.gd" id="2_wh28c"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Collector.png" id="3_w66ht"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/WoolAuto.png" id="4_gdvw8"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/TimeCollect.png" id="5_hqqsl"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/GoldenWool.png" id="6_xdoum"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_tu810"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepCollect.png" id="8_bo316"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepJump.png" id="9_d26l7"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/SheepAir.png" id="10_tjmsw"]
-[ext_resource type="Script" path="res://Scripts/Shop/ShopList.gd" id="11_y80fh"]
+[ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_hantp"]
+[ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_wh28c"]
+[ext_resource type="Texture2D" uid="uid://b1n06dwv4onld" path="res://Sprites/ShopImages/Collector.png" id="3_w66ht"]
+[ext_resource type="Texture2D" uid="uid://cteo1kqra804x" path="res://Sprites/ShopImages/WoolAuto.png" id="4_gdvw8"]
+[ext_resource type="Texture2D" uid="uid://cgsc0honxniju" path="res://Sprites/ShopImages/TimeCollect.png" id="5_hqqsl"]
+[ext_resource type="Texture2D" uid="uid://daxuoqvor3uhv" path="res://Sprites/ShopImages/GoldenWool.png" id="6_xdoum"]
+[ext_resource type="Texture2D" uid="uid://bonny1fk1tevv" path="res://Sprites/ShopImages/DoubleCollect.png" id="7_tu810"]
+[ext_resource type="Texture2D" uid="uid://8v40eu5pnywd" path="res://Sprites/ShopImages/SheepCollect.png" id="8_bo316"]
+[ext_resource type="Texture2D" uid="uid://b6hlvftej0og2" path="res://Sprites/ShopImages/SheepJump.png" id="9_d26l7"]
+[ext_resource type="Texture2D" uid="uid://bjb5u8r2etxs7" path="res://Sprites/ShopImages/SheepAir.png" id="10_tjmsw"]
+[ext_resource type="Script" uid="uid://cwsi8g3ox6y7a" path="res://Scripts/Shop/ShopList.gd" id="11_y80fh"]
 
 [sub_resource type="Resource" id="Resource_hantp"]
 script = ExtResource("2_wh28c")
 title = "Improve Shear"
 image = ExtResource("3_w66ht")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-price = 25
+price = 69
+level = 5
 power = 1
-tax = 1.05
+tax = 1.5500000000000005
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -103,6 +104,7 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_hantp")
-money = 32
+money = 88
+increment = 12
 shopListData = SubResource("Resource_d26l7")
 tutorialed = true

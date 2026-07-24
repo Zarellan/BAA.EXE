@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="GameSaveSettings" format=3]
+[gd_resource type="Resource" script_class="GameSaveSettings" format=3 uid="uid://btf70apdk6r8y"]
 
-[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveSettings.gd" id="1_qbu3y"]
+[ext_resource type="Script" uid="uid://3y84e71dd58u" path="res://Scripts/GameSaveData/GameSaveSettings.gd" id="1_qbu3y"]
 
 [resource]
 script = ExtResource("1_qbu3y")
 fps = 30
 vSync = false
+giveTips = false

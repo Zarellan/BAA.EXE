@@ -43,6 +43,9 @@ func _ready() -> void:
 	else:
 		SetUniqueShader(get_node("StaticBody2D/Sprite2D"))
 	SheepShaderCondition()
+	await RenderingServer.frame_post_draw
+	if (GameHandler.saveDataRebirth.rebirth >= 1 && GameHandler.GiveTip("rebirth_2", "since you rebirthed successfully, try to buy rebirth items to make the grinding faster :]",10)):
+		GameHandler.GetScaleOverlap("ShoppingKartRebirth").ShineTheButton()
 	pass # Replace with function body.
 	
 func SetUniqueShader(obj:Node):
@@ -71,9 +74,9 @@ func BringEidCap():
 func _process(_delta: float) -> void:
 	if (isInside && (Input.is_action_just_pressed("LeftMouse") || Input.is_action_just_pressed("ui_accept")) && isMain):
 		Pressed()
-	if (Input.is_action_just_pressed("ui_accept") && isMain):
-		WebsiteUtil.play_ad_award(func():
-			GameHandler.AddMoneyForce(10000))
+	#if (Input.is_action_just_pressed("ui_accept") && isMain):
+		#WebsiteUtil.play_ad_award(func():
+			#GameHandler.AddMoneyForce(10000))
 	pass
 
 func ReInitializeParticle(partic):

@@ -17,5 +17,9 @@ class_name GameSaveAchievements
 
 #tips (in case the player is missing a detail)
 @export var tips:Dictionary[String, bool] = {
-	"minigame_1": false
+	"minigame_1": false,
+	"choose_wise": false,
+	"minigame_2": false,
+	"rebirth_1": false,
+	"rebirth_2": false
 }

@@ -46,6 +46,7 @@ func _ready() -> void:
 	(get_node("Performance/VSyncBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.vSync
 	(get_node("Effects/GlitchEffectBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.glitchEffect
 	(get_node("Effects/BorderShadeBox") as CheckBox).button_pressed = GameHandler.saveDataSettings.shadingBorders
+	(get_node("Gameplays/Tips2") as CheckBox).button_pressed = GameHandler.saveDataSettings.giveTips
 	codeText.add_theme_color_override("font_placeholder_color", Color(0.658, 0.658, 0.658, 1.0))
 	InitializeSettings()
 	if (GameHandler.saveDataAchievements.canColorWool):
@@ -384,4 +385,9 @@ func _on_update_intervals_slider_value_changed(value: float) -> void:
 	else:
 		GameHandler.saveDataSettings.updateInterval = value
 	get_node("Performance-2/UpdateIntervalsText").text = "Update Intervals:%.2f" % GameHandler.saveDataSettings.updateInterval
+	pass # Replace with function body.
+
+
+func _on_tips_2_toggled(toggled_on: bool) -> void:
+	GameHandler.saveDataSettings.giveTips = toggled_on
 	pass # Replace with function body.

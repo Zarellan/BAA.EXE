@@ -11,3 +11,4 @@ class_name GameSaveSettings
 @export var shadingBorders:bool = true
 @export var sheepColor:Color = Color(1,1,1,1)
 @export var updateInterval:float = 0.01
+@export var giveTips:bool = true

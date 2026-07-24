@@ -274,10 +274,23 @@ func FindSkinByName(strn:String):
 func ClicksAct():
 	saveDataAchievements.playerClicks += 1
 	ClicksActivate()
+
 func ClicksActivate():
 	if (saveDataAchievements.playerClicks >= 25 \
 		&& GiveTip("minigame_1", "you can play the minigame\n to make the grinding faster :]")):
 		GetScaleOverlap("Minigames-UI").ShineTheButton()
+	if (saveDataAchievements.playerClicks >= 100 \
+		&& GiveTip("choose_wise", "pro tip: try to manage the item purchases correctly instead of buying it always in sequential order")):
+		pass
+	if (saveDataAchievements.playerClicks >= 400 \
+		&& GiveTip("minigame_2", "tired of grinding ?, try minigame to enjoy and reduce your grinding too :]")):
+		GetScaleOverlap("Minigames-UI").ShineTheButton()
+		pass
+	if (saveData.money >= 15000 \
+		&& GiveTip("rebirth_1", "woah, you reached your rebirth requirement, try to rebirth to gain rebirth points :]")):
+		GetScaleOverlap("RebirthIc").ShineTheButton()
+		pass
+	pass
 
 func GetScaleOverlap(nam:String):
 	if (!ScaleOverlap || ScaleOverlap.scaleOverlapsDicts.is_empty()):
@@ -285,9 +298,11 @@ func GetScaleOverlap(nam:String):
 	
 	var dict: Dictionary = ScaleOverlap.scaleOverlapsDicts
 	return dict.get(nam, dict.get("PauseButton", null))
-func GiveTip(tipName:String, tipText:String):
+
+func GiveTip(tipName:String, tipText:String, time:float = 5):
 	if (is_instance_valid(Tips.instance) && !saveDataAchievements.tips[tipName]):
-		Tips.instance.PrepareTip(tipText)
+		if (saveDataSettings.giveTips):
+			Tips.instance.PrepareTip(tipText, time)
 		GameHandler.saveDataAchievements.tips[tipName] = true
-		return true
+		return saveDataSettings.giveTips
 	return false
