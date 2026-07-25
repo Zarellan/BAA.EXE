@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://dp81lhb65khrq"]
+
+[ext_resource type="Script" uid="uid://8iamigekrpxh" path="res://Scripts/Ending/EndingScore.gd" id="1_keknu"]
+[ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="2_cbapr"]
+[ext_resource type="Texture2D" uid="uid://cas2w37hq0pib" path="res://Sprites/ImageHelpers/sheep sprite thumbnail.png" id="3_4p1x5"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="5_5lsk1"]
+[ext_resource type="Texture2D" uid="uid://d27p28s6le23k" path="res://Sprites/ImageHelpers/Text.png" id="8_hsdwk"]
+
+[node name="Ending" type="Control" unique_id=246279159 node_paths=PackedStringArray("background", "sheep", "textTitle")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_keknu")
+background = NodePath("CanvasLayer/TextureRect")
+sheep = NodePath("CanvasLayer/Control/Sheep")
+textTitle = NodePath("CanvasLayer/Title")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1951249456]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1139512918]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.5
+offset_top = -360.5
+offset_right = 640.5
+offset_bottom = 360.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("2_cbapr")
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=275115062]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_right = 24.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Sheep" type="Sprite2D" parent="CanvasLayer/Control" unique_id=572679202]
+clip_children = 2
+scale = Vector2(4.73, 4.73)
+texture = ExtResource("3_4p1x5")
+offset = Vector2(-0.21139526, -63.424934)
+
+[node name="Shadow" type="Sprite2D" parent="CanvasLayer/Control/Sheep" unique_id=441388734]
+self_modulate = Color(0, 0, 0, 0.4)
+position = Vector2(3.3826766, 0.42283297)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("3_4p1x5")
+offset = Vector2(-0.21139526, -63.424934)
+
+[node name="Text" type="TextureRect" parent="CanvasLayer" unique_id=553133399]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -291.0
+offset_top = -305.895
+offset_right = 295.0
+offset_bottom = -12.894989
+grow_horizontal = 2
+texture = ExtResource("8_hsdwk")
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer" unique_id=942627688]
+offset_left = 118.0
+offset_top = 32.0
+offset_right = 1198.0
+offset_bottom = 107.0
+pivot_offset_ratio = Vector2(0.5, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 45
+text = "You Beated the GAME :]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_5lsk1")
+_max_size = 45
+_current_font_size = 45
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"

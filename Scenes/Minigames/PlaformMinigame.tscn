@@ -505,15 +505,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=884886200]
 
-[node name="TextureButton" type="TextureButton" parent="Control/CanvasLayer" unique_id=1755211308]
-offset_left = 1128.0
-offset_top = 545.0
-offset_right = 1192.0
-offset_bottom = 609.0
-scale = Vector2(3.235, 3.235)
-pivot_offset_ratio = Vector2(0.5, 0.5)
-texture_normal = ExtResource("3_ilidr")
-
 [node name="Left" type="Control" parent="Control/CanvasLayer" unique_id=1797993946]
 layout_mode = 3
 anchors_preset = 2
@@ -773,6 +764,15 @@ _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureButton" type="TextureButton" parent="Control/CanvasLayer" unique_id=1755211308]
+offset_left = 1128.0
+offset_top = 545.0
+offset_right = 1192.0
+offset_bottom = 609.0
+scale = Vector2(3.235, 3.235)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture_normal = ExtResource("3_ilidr")
+
 [node name="Retry" type="TextureButton" parent="Control/CanvasLayer" unique_id=618608266]
 anchors_preset = -1
 anchor_left = 0.54765624
@@ -924,13 +924,13 @@ button = NodePath("..")
 [connection signal="body_entered" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="." method="_on_wool_barrier_collision_2_body_entered"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="CharacterBody2D" method="_on_wool_barrier_collision_2_body_entered"]
 [connection signal="body_exited" from="Camera2D/WoolBarrier2/WoolBarrierCollision2" to="CharacterBody2D" method="_on_wool_barrier_collision_2_body_exited"]
-[connection signal="button_down" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_down"]
-[connection signal="button_up" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_up"]
 [connection signal="touched" from="Control/CanvasLayer/Left/LeftTouch" to="CharacterBody2D" method="_on_left_touch_touched"]
 [connection signal="untouched" from="Control/CanvasLayer/Left/LeftTouch" to="CharacterBody2D" method="_on_left_touch_untouched"]
 [connection signal="touched" from="Control/CanvasLayer/Left/RightTouch" to="CharacterBody2D" method="_on_right_touch_touched"]
 [connection signal="untouched" from="Control/CanvasLayer/Left/RightTouch" to="CharacterBody2D" method="_on_right_touch_untouched"]
 [connection signal="pressed" from="Control/CanvasLayer/GameOver/Buttons/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/GameOver/Buttons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="button_down" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_down"]
+[connection signal="button_up" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_up"]
 [connection signal="pressed" from="Control/CanvasLayer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Quit" to="." method="_on_quit_pressed"]
