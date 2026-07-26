@@ -3,16 +3,30 @@
 [ext_resource type="Script" uid="uid://8iamigekrpxh" path="res://Scripts/Ending/EndingScore.gd" id="1_keknu"]
 [ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="2_cbapr"]
 [ext_resource type="Texture2D" uid="uid://cas2w37hq0pib" path="res://Sprites/ImageHelpers/sheep sprite thumbnail.png" id="3_4p1x5"]
+[ext_resource type="Texture2D" uid="uid://duakhtlquvg18" path="res://Sprites/Background/Star.png" id="4_m0wyw"]
+[ext_resource type="Script" uid="uid://cmso33wpddc3" path="res://Scripts/Star/StarTrail.gd" id="5_3puwj"]
 [ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="5_5lsk1"]
-[ext_resource type="Texture2D" uid="uid://d27p28s6le23k" path="res://Sprites/ImageHelpers/Text.png" id="8_hsdwk"]
+[ext_resource type="Texture2D" uid="uid://vp5ef8fopd45" path="res://Sprites/OptionUIs/Settings BG.png" id="7_3puwj"]
 
-[node name="Ending" type="Control" unique_id=246279159 node_paths=PackedStringArray("background", "sheep", "textTitle")]
+[sub_resource type="Curve" id="Curve_3puwj"]
+_data = [Vector2(0, 0.8876405), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3puwj"]
+content_margin_left = 4.0
+
+[sub_resource type="Theme" id="Theme_keknu"]
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_3puwj")
+
+[node name="Ending" type="Control" unique_id=246279159 node_paths=PackedStringArray("background", "sheep", "textTitle", "stars", "richTextStat")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_keknu")
 background = NodePath("CanvasLayer/TextureRect")
-sheep = NodePath("CanvasLayer/Control/Sheep")
+sheep = NodePath("CanvasLayer/Control/SheepHolder/Sheep")
 textTitle = NodePath("CanvasLayer/Title")
+stars = [NodePath("CanvasLayer/Control/SheepHolder/Star"), NodePath("CanvasLayer/Control/SheepHolder/Star2"), NodePath("CanvasLayer/Control/SheepHolder/Star3"), NodePath("CanvasLayer/Control/SheepHolder/Star/Trail"), NodePath("CanvasLayer/Control/SheepHolder/Star2/Trail"), NodePath("CanvasLayer/Control/SheepHolder/Star3/Trail")]
+richTextStat = NodePath("CanvasLayer/RichTextUuuhLabel/Stats")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1951249456]
 
@@ -44,29 +58,61 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Sheep" type="Sprite2D" parent="CanvasLayer/Control" unique_id=572679202]
+[node name="SheepHolder" type="Node2D" parent="CanvasLayer/Control" unique_id=1303166202]
+
+[node name="Sheep" type="Sprite2D" parent="CanvasLayer/Control/SheepHolder" unique_id=572679202]
 clip_children = 2
 scale = Vector2(4.73, 4.73)
 texture = ExtResource("3_4p1x5")
 offset = Vector2(-0.21139526, -63.424934)
 
-[node name="Shadow" type="Sprite2D" parent="CanvasLayer/Control/Sheep" unique_id=441388734]
+[node name="Shadow" type="Sprite2D" parent="CanvasLayer/Control/SheepHolder/Sheep" unique_id=441388734]
 self_modulate = Color(0, 0, 0, 0.4)
 position = Vector2(3.3826766, 0.42283297)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("3_4p1x5")
 offset = Vector2(-0.21139526, -63.424934)
 
-[node name="Text" type="TextureRect" parent="CanvasLayer" unique_id=553133399]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -291.0
-offset_top = -305.895
-offset_right = 295.0
-offset_bottom = -12.894989
-grow_horizontal = 2
-texture = ExtResource("8_hsdwk")
+[node name="Star" type="Sprite2D" parent="CanvasLayer/Control/SheepHolder" unique_id=1350739660]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+position = Vector2(-4, -427)
+scale = Vector2(3.635, 3.635)
+texture = ExtResource("4_m0wyw")
+script = ExtResource("5_3puwj")
+
+[node name="Trail" type="Line2D" parent="CanvasLayer/Control/SheepHolder/Star" unique_id=1892922577]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+width_curve = SubResource("Curve_3puwj")
+
+[node name="Star2" type="Sprite2D" parent="CanvasLayer/Control/SheepHolder" unique_id=572289152]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+position = Vector2(-4, -427)
+scale = Vector2(3.635, 3.635)
+texture = ExtResource("4_m0wyw")
+script = ExtResource("5_3puwj")
+startFrom = 400.0
+
+[node name="Trail" type="Line2D" parent="CanvasLayer/Control/SheepHolder/Star2" unique_id=924774358]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+width_curve = SubResource("Curve_3puwj")
+
+[node name="Star3" type="Sprite2D" parent="CanvasLayer/Control/SheepHolder" unique_id=47005667]
+modulate = Color(1, 1, 1, 0)
+z_index = 1
+position = Vector2(-4, -427)
+scale = Vector2(3.635, 3.635)
+texture = ExtResource("4_m0wyw")
+script = ExtResource("5_3puwj")
+startFrom = 800.0
+
+[node name="Trail" type="Line2D" parent="CanvasLayer/Control/SheepHolder/Star3" unique_id=1293312029]
+modulate = Color(1, 1, 1, 0)
+top_level = true
+width_curve = SubResource("Curve_3puwj")
 
 [node name="Title" type="RichTextLabel" parent="CanvasLayer" unique_id=942627688]
 offset_left = 118.0
@@ -85,3 +131,78 @@ _max_size = 45
 _current_font_size = 45
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="RichTextUuuhLabel" type="TextureRect" parent="CanvasLayer" unique_id=1495592012]
+clip_children = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 107.0
+offset_top = -569.0
+offset_right = -542.0
+offset_bottom = -750.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_3puwj")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/RichTextUuuhLabel" unique_id=472867594]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13800001
+anchor_top = 0.11800001
+anchor_right = 0.87900007
+anchor_bottom = 0.90200007
+offset_left = -0.07801056
+offset_top = -10.60199
+offset_right = -0.2810669
+offset_bottom = -341.90002
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center][font_size=70]STATS[/font_size][/center]"
+
+[node name="Stats" type="RichTextLabel" parent="CanvasLayer/RichTextUuuhLabel" unique_id=316298250]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.13800001
+anchor_top = 0.26900002
+anchor_right = 0.87900007
+anchor_bottom = 0.90200007
+offset_left = -3.0780106
+offset_top = 0.009002686
+offset_right = -0.25708008
+offset_bottom = 51.67993
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_keknu")
+theme_override_constants/line_separation = 19
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Click:20
+Clicks 2:21
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fds
+
+"
+
+[connection signal="mouse_entered" from="CanvasLayer/RichTextUuuhLabel/Stats" to="." method="_on_stats_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/RichTextUuuhLabel/Stats" to="." method="_on_stats_mouse_exited"]

@@ -8,6 +8,8 @@ class_name GameSaveAchievements
 
 # player progress
 @export var playerClicks = 0
+@export var moneyCollected = 0
+@export var rebirthCollected = 0
 #super powers
 @export var multiplyMoneyAchievement:float = 1
 @export var increaseJumpAchievement:float = 0

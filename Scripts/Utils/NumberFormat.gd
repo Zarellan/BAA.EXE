@@ -8,6 +8,10 @@ static func Format(num:int):
 	@warning_ignore("integer_division")
 	return str(floor(num / (1 * pow(1000,(str(abs(num)).length()-1)/3)) * 100) / 100) + symbolHelp(int((str(abs(num)).length()-1)/3));
 
+static func FormatInt(num:int):
+	@warning_ignore("integer_division")
+	return "%0.0f" % (floor(num / (1 * pow(1000,(str(abs(num)).length()-1)/3)) * 100) / 100) + symbolHelp(int((str(abs(num)).length()-1)/3));
+
 static func symbolHelp(index:int):
 	@warning_ignore("integer_division")
 	var symbol1 = char(97 + floor((index - 5) / 26))

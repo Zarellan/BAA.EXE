@@ -227,3 +227,9 @@ static func tweenScrollY(object,position,duration,eas):
 	var step = tween.tween_property(object, "scroll_vertical", position, duration)
 	EasingType(step, eas)
 	return tween
+
+static func tweenScrollYRichText(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "scroll_vertical", position, duration)
+	EasingType(step, eas)
+	return tween

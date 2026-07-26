@@ -145,6 +145,7 @@ func AddMoney():
 	if (IncrementTotal() < 0):
 		return
 	saveData.money += IncrementTotal()
+	saveDataAchievements.moneyCollected += IncrementTotal()
 	dirtySave = true
 	if (canSave):
 		SaveAllDataGlob()
@@ -155,6 +156,7 @@ func AddMoneyForce(quant:int):
 	if (quant < 0):
 		return
 	saveData.money += quant
+	saveDataAchievements.moneyCollected += quant
 	if (get_sheep() != null):
 		get_sheep().MoneyCollectedText()
 	dirtySave = true
@@ -167,6 +169,7 @@ func AddMoneyRare():
 	if (IncrementTotal() < 0):
 		return
 	saveData.money += IncrementTotal() * GoldWoolMultiplierTotal()
+	saveDataAchievements.moneyCollected += IncrementTotal() * GoldWoolMultiplierTotal()
 	dirtySave = true
 	if (canSave):
 		SaveAllDataGlob()
@@ -176,6 +179,7 @@ func AddMoneyRainbow():
 	if (IncrementTotal() < 0):
 		return
 	saveData.money += IncrementTotal() * RainbowWoolMultiplierTotal()
+	saveDataAchievements.moneyCollected += IncrementTotal() * RainbowWoolMultiplierTotal()
 	dirtySave = true
 	if (canSave):
 		SaveAllDataGlob()
@@ -199,6 +203,7 @@ func NowCollect():
 	if (get_sheep() != null):
 		get_sheep().MoneyCollectedText()
 	saveData.money += saveData.autoCollect
+	saveDataAchievements.moneyCollected += saveData.autoCollect
 	timerAutoCollector.wait_time = saveData.collectSpeed
 	SaveAllDataGlob()
 

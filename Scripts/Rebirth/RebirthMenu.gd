@@ -82,6 +82,7 @@ func Rebirthed():
 	GameHandler.saveData = GameSaveData.new()
 	GameHandler.StaticReset()
 	GameHandler.saveDataRebirth.rebirth += int(totalRebirth)
+	GameHandler.saveDataAchievements.rebirthCollected += int(totalRebirth)
 	GameHandler.SaveAllDataRebirth()
 
 func _on_square_root_calculate_timeout() -> void:
