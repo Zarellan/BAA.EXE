@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://b3s0pt8fcevux"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://d3u7emnxyaqng"]
 
 [ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_unm2u"]
 [ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_p7hsg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cb4tdhf3rwt47" path="res://Sprites/AchievementImages/Eid.png" id="4_gj7pw"]
 [ext_resource type="Texture2D" uid="uid://qmvgd4igr5y5" path="res://Sprites/AchievementImages/Jump.png" id="5_tvj3r"]
 [ext_resource type="Texture2D" uid="uid://dhx0xyysxy81i" path="res://Sprites/AchievementImages/Font.png" id="6_r8lss"]
+[ext_resource type="Texture2D" uid="uid://tk73uyx0108s" path="res://Sprites/ShopImages/Rebirth/Glory.png" id="7_p7hsg"]
 
 [sub_resource type="Resource" id="Resource_ykfix"]
 script = ExtResource("2_p7hsg")
@@ -47,16 +48,29 @@ achievementTask = "don't click/tap anything for whole 30 seconds"
 achievementImage = ExtResource("6_r8lss")
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
+[sub_resource type="Resource" id="Resource_1vh0c"]
+script = ExtResource("2_p7hsg")
+name = "Glorious sheep"
+description = "The loyalty looks too glorious (even thought he is a sheep)"
+effectDescription = "Effect: collect multiplier x15"
+achievementName = "King sheep"
+achievementTask = "Beat the game"
+achievementImage = ExtResource("7_p7hsg")
+unlocked = true
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
 [resource]
 script = ExtResource("1_unm2u")
-skins = Array[ExtResource("2_p7hsg")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw")])
-skinUsed = "Default"
-playerClicks = 244
-moneyCollected = 2584
+skins = Array[ExtResource("2_p7hsg")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
+skinUsed = "Glorious sheep"
+playerClicks = 32
+moneyCollected = 992
+multiplyMoneyAchievement = 15.0
 tips = Dictionary[String, bool]({
-"choose_wise": true,
+"choose_wise": false,
 "minigame_1": true,
 "minigame_2": false,
 "rebirth_1": false,
 "rebirth_2": false
 })
+beatedTheGame = true

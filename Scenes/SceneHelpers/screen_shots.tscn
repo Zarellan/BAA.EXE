@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://38cbw7l861qq" path="res://Sprites/ImageHelpers/Z letter.png" id="19_8y6ra"]
 [ext_resource type="Texture2D" uid="uid://wnk0scnna26v" path="res://Sprites/ImageHelpers/question box.png" id="20_kjbxo"]
 [ext_resource type="Texture2D" uid="uid://dj776vx4wvw5y" path="res://Sprites/ImageHelpers/wrench.png" id="21_qneym"]
+[ext_resource type="Texture2D" uid="uid://dipdeix8qipxo" path="res://Sprites/Sheep/Crown.png" id="22_20eau"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_id86e"]
 
@@ -259,6 +260,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("CanvasTexture_itva4")
 
 [node name="TextureRectAchievement" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1316919056]
+visible = false
 self_modulate = Color(0, 0.49717718, 0.92716724, 0.8235294)
 offset_right = 637.0
 offset_bottom = 636.0
@@ -309,6 +311,67 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("CanvasTexture_itva4")
 
 [node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRectAchievement/Control" unique_id=1780789935]
+self_modulate = Color(1, 1, 1, 0.47058824)
+layout_mode = 0
+offset_left = 6.0
+offset_top = -6.0
+offset_right = 86.0
+offset_bottom = 911.0
+rotation = -0.6258072
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("CanvasTexture_itva4")
+
+[node name="TextureRectAchievementGlory" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=573342112]
+self_modulate = Color(1.4369954, 0.84358025, 0, 0.77254903)
+offset_right = 637.0
+offset_bottom = 636.0
+texture = SubResource("CanvasTexture_id86e")
+
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport/TextureRectAchievementGlory" unique_id=1553785904]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.1171074
+pivot_offset_ratio = Vector2(0.5, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRectAchievementGlory/Control" unique_id=1793945759]
+self_modulate = Color(1, 1, 1, 0.47058824)
+layout_mode = 0
+offset_left = 493.0
+offset_top = -312.0
+offset_right = 573.0
+offset_bottom = 605.0
+rotation = -0.6258072
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("CanvasTexture_itva4")
+
+[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRectAchievementGlory/Control" unique_id=426229895]
+self_modulate = Color(1, 1, 1, 0.47058824)
+layout_mode = 0
+offset_left = 361.0
+offset_top = -198.99998
+offset_right = 441.0
+offset_bottom = 718.0
+rotation = -0.6258072
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("CanvasTexture_itva4")
+
+[node name="TextureRect5" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRectAchievementGlory/Control" unique_id=1850506331]
+self_modulate = Color(1, 1, 1, 0.47058824)
+layout_mode = 0
+offset_left = 176.0
+offset_top = -98.0
+offset_right = 256.0
+offset_bottom = 819.0
+rotation = -0.6258072
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("CanvasTexture_itva4")
+
+[node name="TextureRect6" type="TextureRect" parent="SubViewportContainer/SubViewport/TextureRectAchievementGlory/Control" unique_id=23942565]
 self_modulate = Color(1, 1, 1, 0.47058824)
 layout_mode = 0
 offset_left = 6.0
@@ -1257,6 +1320,7 @@ offset_bottom = 120.0
 texture = ExtResource("19_8y6ra")
 
 [node name="Jump Achievement" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1821567323]
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
@@ -1280,6 +1344,22 @@ offset_top = -40.0
 offset_right = 675.0
 offset_bottom = 763.0
 texture = ExtResource("21_qneym")
+
+[node name="Glory Achievement" type="Control" parent="SubViewportContainer/SubViewport" unique_id=132176463]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Glory Achievement" unique_id=1045407127]
+texture_filter = 1
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 755.9326
+offset_bottom = 742.0
+texture = ExtResource("22_20eau")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1655893819]
 position = Vector2(355, 400.99997)

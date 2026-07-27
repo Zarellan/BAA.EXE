@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow Wool.png" id="10_tyo4l"]
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Rainbow wool multi.png" id="11_qy0dg"]
 [ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Cheaper rebirth.png" id="12_tw7iy"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="13_gx00u"]
+[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Glory.png" id="13_urp6s"]
 [ext_resource type="Script" path="res://Scripts/Shop/rebirth/RebirthList.gd" id="14_fb4cu"]
 [ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveRebirth.gd" id="15_8mocp"]
 
@@ -130,9 +130,10 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_tw7iy"]
 script = ExtResource("1_urp6s")
-title = "Free the sheep (ending)"
-image = ExtResource("13_gx00u")
+title = "Reach the Glory (ending)"
+image = ExtResource("13_urp6s")
 rebirthPrice = 5000
+power = 12
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 

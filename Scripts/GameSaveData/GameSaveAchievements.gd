@@ -25,3 +25,6 @@ class_name GameSaveAchievements
 	"rebirth_1": false,
 	"rebirth_2": false
 }
+
+# beated the game
+@export var beatedTheGame:bool = false

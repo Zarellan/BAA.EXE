@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://bpnwkowpfyd2m" path="res://Sprites/Sheep/helmet.png" id="8_m7uoi"]
 [ext_resource type="Texture2D" uid="uid://dhx0xyysxy81i" path="res://Sprites/AchievementImages/Font.png" id="8_vt7wm"]
 [ext_resource type="Texture2D" uid="uid://dyp0gw4466eum" path="res://Sprites/Sheep/plumber.png" id="9_sbckw"]
+[ext_resource type="Texture2D" uid="uid://tk73uyx0108s" path="res://Sprites/ShopImages/Rebirth/Glory.png" id="10_0dnco"]
+[ext_resource type="Texture2D" uid="uid://dipdeix8qipxo" path="res://Sprites/Sheep/Crown.png" id="13_6ttsc"]
+[ext_resource type="Shader" uid="uid://b52nbl1qabtvu" path="res://Shaders/ShinyTexture.gdshader" id="13_uxlox"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pwu8p"]
 shader = ExtResource("4_vhidr")
@@ -149,6 +152,32 @@ achievementTask = "don't click/tap anything for whole 30 seconds"
 achievementImage = ExtResource("8_vt7wm")
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
+[sub_resource type="Resource" id="Resource_1vh0c"]
+script = ExtResource("5_ibwm0")
+name = "Glorious sheep"
+description = "The loyalty looks too glorious (even thought he is a sheep)"
+effectDescription = "Effect: collect multiplier x15"
+achievementName = "King sheep"
+achievementTask = "Beat the game"
+achievementImage = ExtResource("10_0dnco")
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
+[sub_resource type="Gradient" id="Gradient_uxlox"]
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0dnco"]
+gradient = SubResource("Gradient_uxlox")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0dnco"]
+shader = ExtResource("13_uxlox")
+shader_parameter/color_gradient = SubResource("GradientTexture2D_0dnco")
+shader_parameter/size_effect = 0.75
+shader_parameter/speed = 2.0
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = true
+shader_parameter/pause_duration = 7.0
+
 [sub_resource type="Animation" id="Animation_0r47l"]
 resource_name = "Idle"
 length = 1.0000033
@@ -280,8 +309,8 @@ shape = SubResource("RectangleShape2D_0r47l")
 [node name="Skins" type="Node2D" parent="StaticBody2D" unique_id=1683950373 node_paths=PackedStringArray("sheep", "skinUses")]
 script = ExtResource("4_sbckw")
 sheep = NodePath("../..")
-skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw")])
-skinUses = [NodePath("Eid"), NodePath("Jump sheep")]
+skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
+skinUses = [NodePath("Eid"), NodePath("Jump sheep"), NodePath("Glorious sheep")]
 
 [node name="Eid" type="Node2D" parent="StaticBody2D/Skins" unique_id=242466799]
 visible = false
@@ -309,6 +338,7 @@ offset_bottom = 8.643677
 mouse_filter = 2
 
 [node name="Jump sheep" type="Node2D" parent="StaticBody2D/Skins" unique_id=1250008535]
+visible = false
 
 [node name="Helmet" type="Sprite2D" parent="StaticBody2D/Skins/Jump sheep" unique_id=1884522975]
 clip_children = 2
@@ -355,6 +385,30 @@ offset_left = -63.888885
 offset_top = -76.61109
 offset_right = 58.33333
 offset_bottom = 47.92592
+mouse_filter = 2
+
+[node name="Glorious sheep" type="Node2D" parent="StaticBody2D/Skins" unique_id=354183321]
+
+[node name="Crown" type="Sprite2D" parent="StaticBody2D/Skins/Glorious sheep" unique_id=1551123688]
+clip_children = 2
+material = SubResource("ShaderMaterial_0dnco")
+position = Vector2(-31.48148, -21.518513)
+scale = Vector2(0.6406252, 0.6044561)
+texture = ExtResource("13_6ttsc")
+offset = Vector2(-7.9341125, -25.322632)
+
+[node name="Shadow" type="Sprite2D" parent="StaticBody2D/Skins/Glorious sheep/Crown" unique_id=1872902859]
+self_modulate = Color(0, 0, 0, 0.44705883)
+position = Vector2(1.445348, 2.2977533)
+texture = ExtResource("13_6ttsc")
+offset = Vector2(-7.9341125, -25.322632)
+
+[node name="SheepBright" type="ColorRect" parent="StaticBody2D/Skins/Glorious sheep/Crown" unique_id=1491264516]
+material = SubResource("ShaderMaterial_m7uoi")
+offset_left = -40.469727
+offset_top = -58.50894
+offset_right = 18.643295
+offset_bottom = 8.643677
 mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1748554935]

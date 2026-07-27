@@ -15,7 +15,8 @@ enum Powers{
 	cheaperRebirth,
 	stomp,
 	longerCurve,
-	powerCurve
+	powerCurve,
+	win
 }
 
 @export var particle:PackedScene
@@ -27,8 +28,10 @@ enum Powers{
 
 @export var rainbowShaderMaterial:Shader
 @export var rainbowShaderMaterialMask:Shader
+@export var shinyShaderMaterialMask:Shader
 
 @export var borderGradient:Texture2D
+@export var shinyTextureGradient:Texture2D
 
 @export var bG:Control
 @export var bG2:Control
@@ -179,6 +182,11 @@ func ExceptionalItems():
 
 			else:
 				get_node("BackBufferCopy/GlitchingEffect").visible = false
+		Powers.win:
+			var shadeMater2:ShaderMaterial = ShaderMaterial.new()
+			shadeMater2.shader = shinyShaderMaterialMask
+			get_node("Holder/ItemImage").material = shadeMater2.duplicate()
+			get_node("Holder/ItemImage").material.set_shader_parameter("color_gradient",shinyTextureGradient)
 		pass
 	isDuplicatedException = true
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -416,6 +424,8 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 			if (GameHandler.saveDataRebirth.curveValue < 9 || is_equal_approx(GameHandler.saveDataRebirth.curveValue,9)):
 				TweenLevelMax()
 				shopData.canBuy = false
+		Powers.win:
+			TransitionScript.ChangeScene("res://Scenes/Ending.tscn")
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

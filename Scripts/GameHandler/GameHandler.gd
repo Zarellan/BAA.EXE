@@ -254,7 +254,7 @@ func StaticReset():
 	SettingsScript.settings = false
 	SettingsScript.isCode = false
 
-func UnlockSkin(strn:String):
+func UnlockSkin(strn:String, playAchievement:bool = true):
 	var skn:Array[SkinItem] = saveDataAchievements.skins
 	for i in range(skn.size()):
 		if (skn[i].name == strn):
@@ -265,7 +265,8 @@ func UnlockSkin(strn:String):
 				var item = AchievementItem.achievementItem.get(skn[i].achievementName)
 				if (is_instance_valid(item)):
 					AchievementItem.achievementItem[skn[i].achievementName].AchievementUpdate()
-			Achievement.PlayAchievement(skn[i].achievementName,skn[i].achievementTask,skn[i].achievementImage)
+			if (playAchievement):
+				Achievement.PlayAchievement(skn[i].achievementName,skn[i].achievementTask,skn[i].achievementImage)
 			SaveAllDataGlob()
 			return
 	push_error("no skin found as ",strn)

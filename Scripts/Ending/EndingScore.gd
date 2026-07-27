@@ -5,6 +5,8 @@ extends Control
 @export var textTitle: Control
 @export var stars:Array[Node2D]
 @export var richTextStat:Control
+@export var buttonToFarm:Control
+
 var twTextScale1:Tween
 var twTextScale2:Tween
 
@@ -28,9 +30,12 @@ func _ready() -> void:
 	skewSheepTween = TweenUtils.tweenSkewPingPong(sheep,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
 	TweenTextJump()
 	ListOfStats()
+	GameHandler.UnlockSkin("Glorious sheep", false)
+	GameHandler.saveDataAchievements.beatedTheGame = true
+	GameHandler.SaveAllDataGlob()
 	#richTextStat.get_v_scroll_bar().value_changed.connect(func(_val):
 		#TweenUtils.StopTween(twScrollStats))
-	pass # Replace with function body.
+	pass
 
 var statList:Array = []
 func ListOfStats():
@@ -38,7 +43,8 @@ func ListOfStats():
 	["Clicks",NumberFormat.FormatInt(GameHandler.saveDataAchievements.playerClicks)],
 	["money collect","\n" + NumberFormat.FormatInt(GameHandler.saveDataAchievements.moneyCollected)],
 	["rebirth collect","\n" + NumberFormat.FormatInt(GameHandler.saveDataAchievements.rebirthCollected)],
-	["Platform minigame score","\n" + NumberFormat.FormatInt(GameHandler.saveDataAchievements.platformMinigameScore)]
+	["Platform minigame score","\n" + NumberFormat.FormatInt(GameHandler.saveDataAchievements.platformMinigameScore)],
+	["Total Achievements","\n" + str(GameHandler.saveDataAchievements.skins.filter(func(skin): return skin.unlocked).size() - 1)]
 	]
 	richTextStat.text = ""
 	for i in range(statList.size()):
@@ -47,6 +53,7 @@ func ListOfStats():
 			richTextStat.text += "[hr color=black height=6]\n"
 		else:
 			richTextStat.text += "\n"
+
 func TweenTextJump():
 	if leftForFall <= 2: # keep jumping
 		twTextY1 = TweenUtils.tweenY(textTitle, currentTextY + 20, 0.3,TweenUtils.Ease.InSine)
@@ -76,12 +83,13 @@ func TweenTextJump():
 					await get_tree().create_timer(1.5).timeout
 					TweenUtils.tweenX(get_node("CanvasLayer/Control/SheepHolder"),419,1,TweenUtils.Ease.OutCirc)
 					TweenUtils.tweenY(get_node("CanvasLayer/RichTextUuuhLabel"),99.0,1,TweenUtils.Ease.OutCirc)
-					twScrollStats = TweenUtils.tweenCustom(self,richTextStat.get_v_scroll_bar().value,richTextStat.get_v_scroll_bar().max_value - richTextStat.get_v_scroll_bar().page,4,TweenUtils.Ease.linear,func(val):
-						richTextStat.get_v_scroll_bar().value = val)))
+					twScrollStats = TweenUtils.tweenCustom(self,richTextStat.get_v_scroll_bar().value,richTextStat.get_v_scroll_bar().max_value - richTextStat.get_v_scroll_bar().page,4,TweenUtils.Ease.InOutSine,func(val):
+						richTextStat.get_v_scroll_bar().value = val)
+					TweenUtils.tweenX(buttonToFarm,1130.0,1.2,TweenUtils.Ease.OutCirc)))
 					
 
 var isMouseInside:bool = false
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (isMouseInside && (Input.is_action_just_pressed("zoom-in") || Input.is_action_just_pressed("zoom-out"))):
 		TweenUtils.StopTween(twScrollStats)
 
@@ -113,3 +121,8 @@ func ScrollBySwipe():
 	elif !dragging:
 		last_mouse_position = Vector2.ZERO
 		totalSwipe = 0
+
+
+func _on_back_to_farm_pressed() -> void:
+	TransitionScript.ChangeScene("res://Scenes/MainFarm.tscn")
+	pass # Replace with function body.

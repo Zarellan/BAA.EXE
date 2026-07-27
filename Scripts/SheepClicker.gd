@@ -42,6 +42,7 @@ func _ready() -> void:
 			tutorialTimer.timeout.connect(StartTutorial)
 	else:
 		SetUniqueShader(get_node("StaticBody2D/Sprite2D"))
+	
 	SheepShaderCondition()
 	await RenderingServer.frame_post_draw
 	if (GameHandler.saveDataRebirth.rebirth >= 1 && GameHandler.GiveTip("rebirth_2", "since you rebirthed successfully, try to buy rebirth items to make the grinding faster :]",10)):
@@ -63,6 +64,8 @@ func SheepShaderCondition():
 		get_node("StaticBody2D/Skins/Jump sheep/Helmet/SheepBright").queue_free()
 		get_node("StaticBody2D/Skins/Jump sheep/Sprite2D/SheepBright").material = null
 		get_node("StaticBody2D/Skins/Jump sheep/Sprite2D/SheepBright").queue_free()
+		get_node("StaticBody2D/Skins/Glorious sheep/Crown/SheepBright").material = null
+		get_node("StaticBody2D/Skins/Glorious sheep/Crown/SheepBright").queue_free()
 var twTutorial:Tween
 func StartTutorial():
 	twTutorial = TweenUtils.tweenAlpha(tutorial,1,2,TweenUtils.Ease.linear)
