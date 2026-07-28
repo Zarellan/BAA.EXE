@@ -1,0 +1,218 @@
+[gd_scene format=3 uid="uid://cc2lvqg4m2iyj"]
+
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="1_s46mk"]
+[ext_resource type="Script" uid="uid://cwxcmuxj4cp8" path="res://Scripts/Shop/ShopItem.gd" id="1_vpf6l"]
+[ext_resource type="Script" uid="uid://p7ewib8kpsso" path="res://Scripts/Particles/ShopParticle.gd" id="2_f75f0"]
+[ext_resource type="Shader" uid="uid://cqvdx3wwpr46h" path="res://Shaders/KeepBlack.gdshader" id="3_8ieqa"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_f7n8r"]
+[ext_resource type="Texture2D" uid="uid://insaucig1u3h" path="res://Sprites/ShopHandleImage/WoolShop.png" id="3_x4kgh"]
+[ext_resource type="Script" uid="uid://dqhkgfy2b1oo7" path="res://Scripts/TextEffects/FadeColor.gd" id="5_f75f0"]
+[ext_resource type="Shader" uid="uid://l51dbb1f302e" path="res://Shaders/Glitching.gdshader" id="8_sqwli"]
+
+[sub_resource type="Gradient" id="Gradient_f7n8r"]
+offsets = PackedFloat32Array(0, 0.9351351, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wq2pi"]
+offsets = PackedFloat32Array(0, 0.34170854, 0.80904526, 1)
+colors = PackedColorArray(0.85953, 0.77638775, 1.540184e-06, 1, 0.8199614, 0.16096592, 0.7236853, 1, 0.2194601, 0.7722057, 0.9104029, 1, 1, 1, 1, 1)
+
+[sub_resource type="PackedScene" id="PackedScene_x4kgh"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1073741825, 1073741824, 19, 18, 2, 0, 0),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("CPUParticles2D", "CPUParticles2D", "visibility_layer", "emitting", "amount", "lifetime", "one_shot", "explosiveness", "emission_shape", "emission_sphere_radius", "particle_flag_align_y", "spread", "initial_velocity_max", "scale_amount_min", "scale_amount_max", "color_ramp", "color_initial_ramp", "script", "_on_finished", "finished"),
+"node_count": 1,
+"node_ids": PackedInt32Array(1003065689),
+"node_paths": [NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 16, 2, 0, 3, 1, 4, 2, 5, 3, 6, 4, 7, 5, 8, 6, 9, 7, 10, 8, 11, 9, 12, 10, 13, 11, 14, 12, 15, 13, 16, 14, 17, 15, 0),
+"variants": [2, false, 30, 2.0, true, 1.0, 1, 16.6, true, 180.0, 1000.0, 0.0, 8.93, SubResource("Gradient_f7n8r"), SubResource("Gradient_wq2pi"), ExtResource("2_f75f0")],
+"version": 3
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqwli"]
+shader = ExtResource("3_8ieqa")
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_x4kgh"]
+script = ExtResource("5_f75f0")
+metadata/_custom_type_script = "uid://dqhkgfy2b1oo7"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h2vdq"]
+shader = ExtResource("8_sqwli")
+shader_parameter/is_active = true
+shader_parameter/shake_power = 0.002000000095
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 3.750000178125
+shader_parameter/shake_block_size = 30.0000013775
+shader_parameter/randomization_amount = 1.0
+
+[node name="ShopItem" type="Control" unique_id=2083889885 node_paths=PackedStringArray("title", "descriptionNode", "textureImage", "moneyNode", "levelNode", "glitchNode")]
+light_mask = 0
+clip_contents = true
+custom_minimum_size = Vector2(900, 163)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -900.0
+offset_bottom = 163.0
+grow_horizontal = 0
+pivot_offset = Vector2(900, 0)
+script = ExtResource("1_vpf6l")
+particle = SubResource("PackedScene_x4kgh")
+title = NodePath("Holder/Title")
+descriptionNode = NodePath("Holder/Description")
+textureImage = NodePath("Holder/ItemImage")
+moneyNode = NodePath("Holder/Price")
+levelNode = NodePath("Holder/Level")
+glitchNode = NodePath("BackBufferCopy/GlitchingEffect")
+
+[node name="BG" type="TextureRect" parent="." unique_id=175554439]
+modulate = Color(1, 1, 1, 0.37254903)
+material = SubResource("ShaderMaterial_sqwli")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_x4kgh")
+
+[node name="Holder" type="TextureRect" parent="." unique_id=302152906]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(450, 81.5)
+
+[node name="ItemImage" type="TextureRect" parent="Holder" unique_id=172852597]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -63.5
+offset_right = -41.0
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(60, 67)
+texture = ExtResource("1_s46mk")
+expand_mode = 1
+
+[node name="Description" type="RichTextLabel" parent="Holder" unique_id=1277112873]
+texture_filter = 1
+clip_contents = false
+layout_mode = 0
+offset_left = 193.0
+offset_top = 82.0
+offset_right = 688.0
+offset_bottom = 145.0
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "this is placeHolder"
+scroll_active = false
+custom_effects = [SubResource("RichTextEffect_x4kgh")]
+script = ExtResource("3_f7n8r")
+_max_size = 26
+_outline_ratio = 0.1
+_current_font_size = 26
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Price" type="RichTextLabel" parent="Holder" unique_id=1602445355]
+texture_filter = 1
+clip_contents = false
+layout_mode = 0
+offset_left = 13.0
+offset_top = 53.0
+offset_right = 179.0
+offset_bottom = 107.0
+pivot_offset = Vector2(83, 30.215)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 27
+bbcode_enabled = true
+text = "$431.31k
+"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("3_f7n8r")
+_max_size = 54
+_current_font_size = 27
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Level" type="RichTextLabel" parent="Holder" unique_id=1208071378]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+clip_contents = false
+layout_mode = 0
+offset_left = 5.000001
+offset_top = 17.0
+offset_right = 189.25
+offset_bottom = 64.625
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(83, 26.4)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 46
+bbcode_enabled = true
+text = "lv:1"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("3_f7n8r")
+_max_size = 81
+_current_font_size = 46
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="ParticlePlace" type="Control" parent="Holder" unique_id=1111193086]
+anchors_preset = 0
+offset_left = 95.0
+offset_top = 82.0
+offset_right = 135.0
+offset_bottom = 122.0
+
+[node name="Title" type="RichTextLabel" parent="Holder" unique_id=102797527]
+texture_filter = 1
+clip_contents = false
+layout_mode = 0
+offset_left = 193.0
+offset_top = 22.0
+offset_right = 696.0
+offset_bottom = 77.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 41
+bbcode_enabled = true
+text = "place holder"
+scroll_active = false
+script = ExtResource("3_f7n8r")
+_max_size = 41
+_current_font_size = 41
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="." unique_id=551579502]
+position = Vector2(449.5, 81)
+scale = Vector2(4.495, 0.81)
+copy_mode = 2
+
+[node name="GlitchingEffect" type="ColorRect" parent="BackBufferCopy" unique_id=462549386]
+visible = false
+material = SubResource("ShaderMaterial_h2vdq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2

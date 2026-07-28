@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://xlvoesewx06k"]
+
+[ext_resource type="Script" uid="uid://p7ewib8kpsso" path="res://Scripts/Particles/ShopParticle.gd" id="1_wq2pi"]
+
+[sub_resource type="Gradient" id="Gradient_f7n8r"]
+offsets = PackedFloat32Array(0, 0.9351351, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_wq2pi"]
+offsets = PackedFloat32Array(0, 0.34170854, 0.80904526, 1)
+colors = PackedColorArray(0.85953, 0.77638775, 1.540184e-06, 1, 0.8199614, 0.16096592, 0.7236853, 1, 0.2194601, 0.7722057, 0.9104029, 1, 1, 1, 1, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D" unique_id=1003065689]
+visibility_layer = 2
+emitting = false
+amount = 30
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 16.6
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 8.93
+color_ramp = SubResource("Gradient_f7n8r")
+color_initial_ramp = SubResource("Gradient_wq2pi")
+script = ExtResource("1_wq2pi")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

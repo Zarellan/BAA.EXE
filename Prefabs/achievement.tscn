@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://6u1wu3vu1ss7"]
+
+[ext_resource type="Script" uid="uid://br1w4ymym3s23" path="res://Scripts/Achievements/AchievementItem.gd" id="1_ox2eu"]
+[ext_resource type="Texture2D" uid="uid://insaucig1u3h" path="res://Sprites/ShopHandleImage/WoolShop.png" id="2_32gt1"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="3_3ukm8"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="4_eyvci"]
+
+[node name="Achievement" type="Control" unique_id=419921041 node_paths=PackedStringArray("title", "description", "image")]
+custom_minimum_size = Vector2(889, 150)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 8
+script = ExtResource("1_ox2eu")
+title = NodePath("Holder/Title")
+description = NodePath("Holder/Desc")
+image = NodePath("Holder/Image")
+
+[node name="BG" type="TextureRect" parent="." unique_id=556411333]
+self_modulate = Color(1, 1, 1, 0.5882353)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_32gt1")
+
+[node name="Holder" type="Control" parent="." unique_id=1706563175]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="RichTextLabel" parent="Holder" unique_id=1837156790]
+clip_contents = false
+layout_mode = 0
+offset_left = 37.0
+offset_top = 22.0
+offset_right = 731.0
+offset_bottom = 64.0
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 35
+text = "Achievement named"
+scroll_active = false
+script = ExtResource("3_3ukm8")
+_max_size = 35
+_outline_ratio = 0.18
+_current_font_size = 35
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Desc" type="RichTextLabel" parent="Holder" unique_id=617964332]
+clip_contents = false
+layout_mode = 0
+offset_left = 36.0
+offset_top = 70.0
+offset_right = 731.0
+offset_bottom = 124.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 22
+text = "Achievement task"
+scroll_active = false
+script = ExtResource("3_3ukm8")
+_max_size = 22
+_outline_ratio = 0.18
+_current_font_size = 22
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Image" type="TextureRect" parent="Holder" unique_id=589953957]
+layout_mode = 0
+offset_left = 742.0
+offset_top = 12.0
+offset_right = 872.0
+offset_bottom = 136.0
+texture = ExtResource("4_eyvci")
+expand_mode = 1

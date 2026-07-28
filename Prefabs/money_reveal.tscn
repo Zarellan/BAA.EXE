@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://v16m5xg2k4dk"]
+
+[ext_resource type="Script" uid="uid://bd5vgeuedftgb" path="res://Scripts/Money/MoneyRevealObjectExt.gd" id="1_itmgc"]
+[ext_resource type="Shader" uid="uid://duntm4qptf182" path="res://Shaders/RainbowMask.gdshader" id="1_xb2qx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jbpoy"]
+shader = ExtResource("1_xb2qx")
+shader_parameter/speed = 2.9540001370551203
+shader_parameter/rainbow_mix = 0.0
+shader_parameter/glow_intensity = 1.5
+shader_parameter/node_size = Vector2(64, 64)
+
+[node name="MoneyReveal" type="RichTextLabel" unique_id=975418504]
+texture_filter = 1
+material = SubResource("ShaderMaterial_jbpoy")
+offset_left = 69.0
+offset_top = -380.0
+offset_right = 164.0
+offset_bottom = -294.99994
+mouse_filter = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 32
+text = "$40"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_itmgc")
+_max_size = 55
+_outline_ratio = 0.16
+_current_font_size = 32
+_size_just_modified_by_autosizer = true
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Timer" type="Timer" parent="." unique_id=54986603]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

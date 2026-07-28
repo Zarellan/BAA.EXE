@@ -1,0 +1,544 @@
+extends Control
+class_name RebirthItem
+
+static var rebirthItems:Dictionary[String, RebirthItem]
+
+enum Powers{
+	none,
+	multiplier,
+	offer,
+	jumpPower,
+	autoCollect,
+	goldWoolMultiply,
+	rainbowWool,
+	rainbowWoolMultiply,
+	cheaperRebirth,
+	stomp,
+	longerCurve,
+	powerCurve,
+	win
+}
+
+@export var particle:PackedScene
+
+@export var shopData:RebirthClass
+
+@export var randomSpeedTitleShade:Control
+@export var randomSpeedDescriptionShade:Control
+
+@export var rainbowShaderMaterial:Shader
+@export var rainbowShaderMaterialMask:Shader
+@export var shinyShaderMaterialMask:Shader
+
+@export var borderGradient:Texture2D
+@export var shinyTextureGradient:Texture2D
+
+@export var bG:Control
+@export var bG2:Control
+
+#tweens
+var tweenAlpha:Tween
+var tweenHolder:Tween
+var tweenRotationImage:Tween
+
+var isInside = false
+
+var descriptionNode:Control
+var moneyNode:Control
+var moneyNodePos:Control
+var levelNode:Control
+var itemImage:Control
+var originalPosXMoney
+
+var centerYdef = 53.0
+var centerYdefLevel = 28.0
+
+var priceLevelYdef = 87.0
+var levelMaxYdef = 53.0
+
+var goldMaterial1:ShaderMaterial
+var goldMaterial2:ShaderMaterial
+
+var possibleBought = true
+
+
+func _ready() -> void:
+	originalPosXMoney = get_node("Holder/Prce").position.x
+	moneyNode = get_node("Holder/Prce/Price")
+	moneyNodePos = get_node("Holder/Prce")
+	levelNode = get_node("Holder/Level")
+	get_node("Holder/SubViewportContainer/SubViewport/Title").text = shopData.title
+	itemImage = get_node("Holder/ItemImage")
+	itemImage.texture = shopData.image
+	descriptionNode = get_node("Holder/SubViewportContainerDesc/SubViewport/Description")
+	descriptionNode.text = shopData.description
+	ModifyTexts()
+	CustomItemText()
+	SetBasedOnLevel()
+	RandomGradient()
+	goldMaterial1 = bG.material.duplicate()
+	bG.material = goldMaterial1
+	goldMaterial2 = bG2.material.duplicate()
+	bG2.material = goldMaterial2
+	ExceptionalItems()
+	ExceptionalLock()
+	InitializeShader()
+	rebirthItems[shopData.title] = self
+	pass # Replace with function body.
+
+var currentShaderBG:Shader
+var currentShaderBG2:Shader
+var currentShaderImage:Shader
+var currentShaderTitleView:Shader
+var currentShaderDescView:Shader
+var currentShaderTitleText:Shader
+var currentShaderDescText:Shader
+
+func InitializeShader():
+	currentShaderBG = SetVariableInitialize(bG)
+	currentShaderBG2 = SetVariableInitialize(bG2)
+	currentShaderImage = SetVariableInitialize(itemImage)
+	currentShaderTitleView = SetVariableInitialize(get_node("Holder/SubViewportContainer"))
+	currentShaderDescView = SetVariableInitialize(get_node("Holder/SubViewportContainerDesc"))
+	currentShaderTitleText = SetVariableInitialize(get_node("Holder/SubViewportContainer/SubViewport/Title"))
+	currentShaderDescText = SetVariableInitialize(get_node("Holder/SubViewportContainerDesc/SubViewport/Description"))
+
+func SetShader(isShading:bool): # from settings
+	if (!isShading):
+		EmptyShade(bG)
+		EmptyShade(bG2)
+		EmptyShade(itemImage)
+		EmptyShade(get_node("Holder/SubViewportContainer"))
+		EmptyShade(get_node("Holder/SubViewportContainerDesc"))
+		EmptyShade(get_node("Holder/SubViewportContainer/SubViewport/Title"))
+		EmptyShade(get_node("Holder/SubViewportContainerDesc/SubViewport/Description"))
+
+		bG2.visible = false
+	else:
+		SetShaderFromVariable(bG, currentShaderBG)
+		SetShaderFromVariable(bG2, currentShaderBG2)
+		SetShaderFromVariable(itemImage, currentShaderImage)
+		SetShaderFromVariable(get_node("Holder/SubViewportContainer"), currentShaderTitleView)
+		SetShaderFromVariable(get_node("Holder/SubViewportContainerDesc"), currentShaderDescView)
+		SetShaderFromVariable(get_node("Holder/SubViewportContainer/SubViewport/Title"), currentShaderTitleText)
+		SetShaderFromVariable(get_node("Holder/SubViewportContainerDesc/SubViewport/Description"), currentShaderDescText)
+		bG2.visible = true
+		ExceptionalItems()
+	pass
+func SetVariableInitialize(objShader: CanvasItem):
+	if (is_instance_valid(objShader) && objShader.material is ShaderMaterial && is_instance_valid(objShader.material.shader)):
+		return objShader.material.shader
+	return null
+func SetShaderFromVariable(obj:CanvasItem, varShader:Shader):
+	if (varShader != null && is_instance_valid(obj) && obj.material is ShaderMaterial):
+		obj.material.shader = varShader
+func EmptyShade(objShader: CanvasItem):
+	if (is_instance_valid(objShader) && objShader.material is ShaderMaterial && is_instance_valid(objShader.material.shader)):
+		objShader.material.shader = GameHandler.emptyShader
+func GlitchApply():
+	ExceptionalItems()
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+var isDuplicatedException = false
+func ExceptionalItems():
+	match (shopData.power):
+		Powers.rainbowWool, Powers.rainbowWoolMultiply:
+			if (!isDuplicatedException):
+				var shadeMater:ShaderMaterial = ShaderMaterial.new()
+				shadeMater.shader = rainbowShaderMaterial
+				bG.material = shadeMater
+				var shadeMater2:ShaderMaterial = ShaderMaterial.new()
+				shadeMater2.shader = rainbowShaderMaterialMask
+				bG2.material = shadeMater.duplicate()
+				get_node("Holder/SubViewportContainer/SubViewport/Title").material = shadeMater2
+				get_node("Holder/SubViewportContainerDesc/SubViewport/Description").material = shadeMater2
+			bG2.material.set_shader_parameter("border_only", true)
+			get_node("Holder/SubViewportContainer/SubViewport/Title").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			get_node("Holder/SubViewportContainer").material = GameHandler.emptyShader
+			get_node("Holder/SubViewportContainerDesc").material = GameHandler.emptyShader
+		Powers.jumpPower , Powers.stomp , Powers.longerCurve, Powers.powerCurve:
+			bG.material.set_shader_parameter("border_gradient", borderGradient)
+			bG2.visible = false
+			if (!isDuplicatedException):
+				SetUniqueShader((get_node("Holder/SubViewportContainer") as Control))
+			(get_node("Holder/SubViewportContainer") as Control).material.set_shader_parameter("gradient",borderGradient)
+			if (!isDuplicatedException):
+				SetUniqueShader((get_node("Holder/SubViewportContainerDesc") as Control))
+			(get_node("Holder/SubViewportContainerDesc") as Control).material.set_shader_parameter("gradient",Texture2D.new())
+			get_node("Holder/SubViewportContainer/SubViewport/Title").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			get_node("Holder/SubViewportContainerDesc/SubViewport/Description").self_modulate = Color(1.0, 1.0, 1.0, 1.0)
+			#if (itemImage.material != null):
+			SetUniqueShader(itemImage)
+			itemImage.material.shader = GameHandler.emptyShader
+			if (GameHandler.saveDataSettings.glitchEffect):
+				get_node("BackBufferCopy/GlitchingEffect").visible = true
+				if (shopData.power == Powers.stomp):
+					SetUniqueShader(get_node("BackBufferCopy/GlitchingEffect"))
+					get_node("BackBufferCopy/GlitchingEffect").material.set_shader_parameter("shake_power",0.0015)
+				if (shopData.power == Powers.powerCurve):
+					SetUniqueShader(get_node("BackBufferCopy/GlitchingEffect"))
+					get_node("BackBufferCopy/GlitchingEffect").material.set_shader_parameter("shake_power",0.0010)
+
+			else:
+				get_node("BackBufferCopy/GlitchingEffect").visible = false
+		Powers.win:
+			var shadeMater2:ShaderMaterial = ShaderMaterial.new()
+			shadeMater2.shader = shinyShaderMaterialMask
+			get_node("Holder/ItemImage").material = shadeMater2.duplicate()
+			get_node("Holder/ItemImage").material.set_shader_parameter("color_gradient",shinyTextureGradient)
+		pass
+	isDuplicatedException = true
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+func SetUniqueShader(obj:Control):
+	var shade = obj.material.duplicate()
+	obj.material = shade
+
+func RandomGradient():
+	var mat = randomSpeedTitleShade.material.duplicate()
+	mat.set_shader_parameter("random_start", randf_range(0.0,1.0))
+	randomSpeedTitleShade.material = mat
+	var mat2 = randomSpeedDescriptionShade.material.duplicate()
+	mat2.set_shader_parameter("random_start", randf_range(0.0,1.0))
+	randomSpeedDescriptionShade.material = mat2
+
+#region Custom Item Text
+
+func CustomItemText():
+	match shopData.power:
+		Powers.none:
+			pass
+		Powers.multiplier:
+			descriptionNode.text = "the more you buy it the more the collect doubles (will stay the same multiply even after [rainbow]rebirth[/rainbow])\n"+\
+			"Current Main Multiplier:" + str(int(GameHandler.saveDataRebirth.multiplier_reb)) + "X"
+		Powers.offer:
+			descriptionNode.text = "you will gain offer on every item (except rebirth items)\n"+\
+			"Current offer:" + str(int((GameHandler.saveDataRebirth.offer-1) * 100)) + "%"
+		Powers.jumpPower:
+			descriptionNode.text = "will increase the power jump of sheep in plaform minigame by +100\n"+\
+			"Current power jump:" + str(GameHandler.TotalJumpPower())
+
+		Powers.autoCollect:
+			if (!GameHandler.saveDataRebirth.autoCollectSheepAbility):
+				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\neven after rebirth"
+			else:
+				descriptionNode.text = "you will auto collect from [rainbow]sheep himself[/rainbow]\neven after rebirth\n"+\
+				"super collector total:" + str(float(GameHandler.saveDataRebirth.autoCollectSheep)) + " seconds\n"+\
+				"collect every:[rainbow][wave amp=25.0 freq=10.0]" + str(float(GameHandler.AutoCollectSheepTotalParse())) + "[/wave] seconds"
+		Powers.goldWoolMultiply:
+			descriptionNode.text = "on each purchase you will gain gold wool multiplier by [wave amp=25.0 freq=10.0]+5[/wave]\n"+\
+			"current gold multiplier:X" + str(GameHandler.GoldWoolMultiplierTotal())
+		Powers.rainbowWool:
+			descriptionNode.text = "the chance of appereance will increase by [wave amp=25.0 freq=10.0]+1%[/wave]\n"+\
+			"Current Rainbow wool chance:" + str(GameHandler.saveDataRebirth.rainbowWoolChance * 100) + "%"
+		Powers.rainbowWoolMultiply:
+			if (GameHandler.saveDataRebirth.rainbowWoolChance <= 0.0):
+				descriptionNode.text = "on each purchase you will gain rainbow wool multiplier by +100\n"+\
+				"[color=red]purchasing [wave amp=25.0 freq=10.0][color=green]Rainbow wool[/color][/wave][color=red] is recommended first"
+			else:
+				descriptionNode.text = "on each purchase you will gain rainbow wool multiplier by +100\n"+\
+				"current rainbow multiplier:X" + str(GameHandler.RainbowWoolMultiplierTotal())
+		Powers.cheaperRebirth:
+				descriptionNode.text = "the rebirth system will be cheaper on every purchase\n"+\
+				"current required rebirth:" + str(NumberFormat.Format(int(RebirthMenu.base_rebirth_total)))
+		Powers.longerCurve:
+			descriptionNode.text = "the curve of platform minigame difficulty will be longer\n(meaning the game will get easier)\n"+\
+			"current curve minigame length:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveDistance)))
+		Powers.powerCurve:
+			descriptionNode.text = "the curve of platform minigame difficulty power will get less\nand makes the game easier to manage.\n"+\
+			"current curve minigame power:" + str(NumberFormat.Format(int(GameHandler.saveDataRebirth.curveValue)))
+		Powers.win:
+			descriptionNode.text = "make the sheep reach his glory and end his ordinary tasks :]"
+			if (shopData.level >= 1):
+				levelNode.text = "Won"
+				levelNode.position.x = 34
+				descriptionNode.text = "congrats, you beated the game, you can go home now and having a victory relief :]\n(unless you want to collect achievements and skins)"
+#endregion
+
+func SetBasedOnLevel():
+	if (shopData.level > 0):
+		moneyNodePos.position.y = priceLevelYdef
+		moneyNodePos.scale = Vector2(0.8,0.8)
+		levelNode.modulate.a = 1
+	if (!shopData.canBuy):
+		levelNode.position.y = levelMaxYdef
+		levelNode.scale = Vector2(1,1)
+		moneyNodePos.modulate.a = 0
+
+
+func set_item(rebirthDat:RebirthClass):
+	shopData = rebirthDat
+
+var last_time_update:float = 0.0
+const UPDATE_INTERVAL:float = 0.10
+func _process(_delta: float) -> void:
+	if (DeviceCheckerUtil.IsUsingPhone()):
+		return
+	last_time_update += _delta
+	Bought()
+	if (last_time_update > GameHandler.saveDataSettings.updateInterval):
+		PurchaseProcessFunction()
+		last_time_update = 0
+	pass
+
+func PurchaseProcessFunction():
+	Hovered()
+	#CustomItemText()
+
+func _input(event: InputEvent) -> void:
+	if (!DeviceCheckerUtil.IsUsingPhone()):
+		return
+	# Detects both mouse clicks and mobile screen touches
+	if event is InputEventScreenTouch:
+		if event.is_pressed():
+			# The user just tapped the screen / clicked
+			Hovered()
+			CustomItemText()
+		elif event.is_released() && ShopHelper.totalSwipe < 50:
+			Bought()
+			pass
+
+func ExceptionalLock():
+	match (shopData.power):
+		Powers.rainbowWoolMultiply:
+			possibleBought = false
+			if GameHandler.saveDataRebirth.rainbowWoolChance > 0.01 || is_equal_approx(GameHandler.saveDataRebirth.rainbowWoolChance, 0.01):
+				possibleBought = true
+	if (!possibleBought):
+		get_node("Holder/Lock").self_modulate.a = 1
+		moneyNodePos.modulate.a = 0
+	else:
+		get_node("Holder/Lock").self_modulate.a = 0
+		if (shopData.canBuy):
+			moneyNodePos.modulate.a = 1
+
+func BoughtUnlock():
+	match (shopData.power):
+		Powers.rainbowWool:
+			if (!rebirthItems["Rainbow wool multiplier"].possibleBought):
+				rebirthItems["Rainbow wool multiplier"].Unlock()
+
+func Unlock():
+	TweenUtils.tweenAlphaSelf(get_node("Holder/Lock"),0,0.3,TweenUtils.Ease.linear)
+	TweenUtils.tweenAlpha(moneyNodePos,1,0.3,TweenUtils.Ease.linear)
+	possibleBought = true
+
+func Hovered():
+	var mouse_pos = get_global_mouse_position()
+	if (get_global_rect().has_point(mouse_pos) && !isInside) && !GameHandler.GamePausedPartil() && ShopHelper.totalSwipe < 50:
+		TweenUtils.StopTween(tweenAlpha)
+		TweenUtils.StopTween(tweenHolder)
+		TweenUtils.StopTween(tweenRotationImage)
+		tweenAlpha = TweenUtils.tweenAlpha(bG,170/255.0,0.2,TweenUtils.Ease.OutCirc)
+		tweenHolder = TweenUtils.tweenScale(get_node("Holder"),Vector2(1.02,1.02),0.2,TweenUtils.Ease.OutCirc)
+		tweenRotationImage = TweenUtils.tweenRotation(get_node("Holder/ItemImage"),-5,0.2,TweenUtils.Ease.OutCirc)
+		GlobalAudio.PlayOneShot("res://Sounds/menuHover.wav",5,randf_range(0.95,1.15))
+		isInside = true
+	elif (!get_global_rect().has_point(mouse_pos) && isInside) || GameHandler.GamePausedPartil() || ShopHelper.totalSwipe >= 50:
+		TweenUtils.StopTween(tweenAlpha)
+		TweenUtils.StopTween(tweenHolder)
+		TweenUtils.StopTween(tweenRotationImage)
+		tweenAlpha = TweenUtils.tweenAlpha(bG,95.0/255.0,0.2,TweenUtils.Ease.OutCirc)
+		tweenHolder = TweenUtils.tweenScale(get_node("Holder"),Vector2(1,1),0.2,TweenUtils.Ease.OutCirc)
+		tweenRotationImage = TweenUtils.tweenRotation(get_node("Holder/ItemImage"),0,0.2,TweenUtils.Ease.OutCirc)
+		isInside = false
+
+func ModifyTexts():
+	moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [0,NumberFormat.Format(shopData.rebirthPrice) if (shopData.rebirthPrice >= 1) else "Free"]
+	#moneyNode.text = "$" + str(shopData.price)
+	if (shopData.canBuy):
+		levelNode.text = "lv:"+ str(shopData.level)
+	else:
+		levelNode.text = "lv:Max"
+	CustomItemText()
+
+var colorTween:Tween
+
+func TweenColor(col:Color):
+	TweenUtils.StopTween(colorTween)
+	moneyNode.modulate = col
+	colorTween = TweenUtils.tweenColorRGB(moneyNode,Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
+
+var colorTweenLevel
+func TweenColorLevel(col:Color):
+	TweenUtils.StopTween(colorTweenLevel)
+	levelNode.modulate = col
+	colorTweenLevel = TweenUtils.tweenColorRGB(levelNode,Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
+
+var colorTweenLock:Tween
+func TweenColorLock(col:Color):
+	TweenUtils.StopTween(colorTweenLock)
+	get_node("Holder/Lock").self_modulate = col
+	colorTweenLock = TweenUtils.tweenColorRGBself(get_node("Holder/Lock"),Color(1.0, 1.0, 1.0, 1.0),0.3,TweenUtils.Ease.linear)
+
+var tweenXtext:Tween
+
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	match shopData.power:
+		Powers.none:
+			pass
+		Powers.multiplier:
+			GameHandler.saveDataRebirth.multiplier_reb += 1
+		Powers.offer:
+			GameHandler.saveDataRebirth.offer += 0.10
+
+			var keys = ShopItem.shopItems.keys()
+			for i in range(keys.size()):
+				ShopItem.shopItems[keys[i]].ModifyTexts()
+
+		Powers.jumpPower:
+			GameHandler.saveDataRebirth.powerJump += 100
+			var maxAllowedValue:float = 10000
+			if (GameHandler.saveDataRebirth.powerJump > maxAllowedValue || is_equal_approx(GameHandler.saveDataRebirth.powerJump,maxAllowedValue)):
+				TweenLevelMax()
+				shopData.canBuy = false
+		Powers.autoCollect:
+			GameHandler.saveDataRebirth.autoCollectSheep -= 0.15
+			if (!GameHandler.saveDataRebirth.autoCollectSheepAbility):
+				GameHandler.saveDataRebirth.autoCollectSheepAbility = true
+			if (GameHandler.saveDataRebirth.autoCollectSheep < (0.15 - 3) || is_equal_approx(GameHandler.saveDataRebirth.autoCollectSheep, (0.15 - 3))):
+				GameHandler.saveDataRebirth.autoCollectSheep = 0.15 - 3
+				TweenLevelMax()
+				shopData.canBuy = false
+		Powers.goldWoolMultiply:
+			GameHandler.saveDataRebirth.goldWoolMultiplier += 5
+		Powers.rainbowWool:
+			GameHandler.saveDataRebirth.rainbowWoolChance += 0.01
+			if (GameHandler.saveDataRebirth.rainbowWoolChance >= 0.70):
+				TweenLevelMax()
+				shopData.canBuy = false
+		Powers.rainbowWoolMultiply:
+			GameHandler.saveDataRebirth.rainbowWoolMultiplier += 100
+		Powers.cheaperRebirth:
+			GameHandler.saveDataRebirth.cheaperRebirth += 0.10
+		Powers.stomp:
+			GameHandler.saveDataRebirth.powerStomp = true
+			TweenLevelMax()
+			shopData.canBuy = false
+		Powers.longerCurve:
+			GameHandler.saveDataRebirth.curveDistance += 5000
+			var maxLev:float = 90000
+			if (GameHandler.saveDataRebirth.curveDistance > maxLev || is_equal_approx(GameHandler.saveDataRebirth.curveDistance,maxLev)):
+				TweenLevelMax()
+				shopData.canBuy = false
+		Powers.powerCurve:
+			GameHandler.saveDataRebirth.curveValue -= 1
+			if (GameHandler.saveDataRebirth.curveValue < 9 || is_equal_approx(GameHandler.saveDataRebirth.curveValue,9)):
+				TweenLevelMax()
+				shopData.canBuy = false
+		Powers.win:
+			TransitionScript.ChangeScene("res://Scenes/Ending.tscn")
+			shopData.rebirthPrice = 0 # yes it's free now since you won
+			shopData.level = 0 # always keep 1 so the player can keep winning (the handler will increment it anyway)
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+func TweenLevelMax():
+	TweenUtils.tweenY(levelNode,centerYdef,0.3,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenScale(levelNode,Vector2(1,1),0.3,TweenUtils.Ease.OutCirc)
+	TweenUtils.tweenAlpha(get_node("Holder/Prce"),0,0.3,TweenUtils.Ease.linear)
+
+var tweenXtextLevel:Tween
+var tweenXLock:Tween
+
+func Bought():
+	if isInside && (Input.is_action_just_pressed("LeftMouse") || DeviceCheckerUtil.IsUsingPhone()):
+		if (shopData.power == Powers.none):
+			push_error("no power added")
+			return
+		if (!possibleBought):
+			get_node("Holder/Lock").position.x = 70.0 - 10
+			TweenColorLock(Color(1,0,0,1))
+			TweenUtils.StopTween(tweenXLock)
+			tweenXLock = TweenUtils.tweenX(get_node("Holder/Lock"),70,0.3,TweenUtils.Ease.OutCirc)
+			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
+			ToShine()
+			return
+		if (!shopData.canBuy):
+			TweenColorLevel(Color(1,0,0,1))
+			levelNode.position.x = 10 - 7
+			TweenUtils.StopTween(tweenXtextLevel)
+			tweenXtextLevel = TweenUtils.tweenX(levelNode,10,0.3,TweenUtils.Ease.OutCirc)
+			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
+			return
+		if (GameHandler.saveDataRebirth.rebirth >= shopData.rebirthPrice):
+			PowersAct()
+			GameHandler.saveDataRebirth.rebirth -= shopData.rebirthPrice
+			shopData.rebirthPrice = int(floor(shopData.rebirthPrice * shopData.tax))
+			shopData.tax += shopData.taxInc
+			TweenColor(Color(0.0, 0.905, 0.2))
+			TweenUtils.tweenCustom(self,40,0,0.2,TweenUtils.Ease.linear,func(val):
+					moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [val,NumberFormat.Format(shopData.rebirthPrice) if shopData.rebirthPrice > 0 else "Free"])
+			if shopData.level == 0:
+				TweenUtils.tweenY(moneyNodePos,priceLevelYdef,0.3,TweenUtils.Ease.OutCirc)
+				TweenUtils.tweenScale(moneyNodePos,Vector2(0.8,0.8),0.3,TweenUtils.Ease.OutCirc)
+				TweenUtils.tweenAlpha(levelNode,1,0.3,TweenUtils.Ease.linear)
+			shopData.level += 1
+			ModifyTexts()
+			var priceTotal:String = NumberFormat.Format(shopData.rebirthPrice)
+			TweenUtils.tweenCustom(self,40,0,0.2,TweenUtils.Ease.linear,func(val):
+					moneyNode.text = "[wave amp=%d freq=10]%s[/wave]" % [val,priceTotal if shopData.rebirthPrice > 0 else "Free"])
+
+			#ResourceUtil.SaveResource(GameHandler.saveData,"ShopList.tres","saver")
+			var partic = InstantiateUtil.Instantiate(particle,get_tree().get_first_node_in_group("UI"))
+			partic.global_position = get_node("Holder/ParticlePlace").global_position
+			GlobalAudio.PlayOneShot("res://Sounds/bought.mp3",-2)
+			GlobalAudio.PlayOneShot("res://Sounds/party_popper.mp3",5)
+			GlobalAudio.PlayOneShot("res://Sounds/party_sound.mp3",5)
+			GlobalAudio.PlayOneShot("res://Sounds/RebirthBought.mp3",3)
+			GoldBGShaderTween()
+			BoughtUnlock()
+			GameHandler.SaveAllDataGlob()
+			#ResourceSaver.save(GameHandler.shopListGlob,"res://saver/ShopList.tres") # save shop list
+		else:
+			moneyNodePos.position.x = originalPosXMoney - 7
+			TweenUtils.StopTween(tweenXtext)
+			tweenXtext = TweenUtils.tweenX(moneyNodePos,originalPosXMoney,0.3,TweenUtils.Ease.OutCirc)
+			TweenColor(Color(1.0, 0.0, 0.0))
+			GlobalAudio.PlayOneShot("res://Sounds/negative.mp3",10)
+
+
+func ToShine():
+	match (shopData.power):
+		Powers.rainbowWoolMultiply:
+			rebirthItems["Rainbow wool"].Shine()
+
+var tweenGold:Tween
+var tweenColorBG:Tween
+var tweenColorBG2:Tween
+
+var twShine:Tween
+func Shine():
+	TweenUtils.StopTween(tweenAlpha)
+	tweenAlpha = TweenUtils.tweenAlpha(bG,170/255.0,0.2,TweenUtils.Ease.OutCirc)
+	tweenAlpha.finished.connect(ShineSignal)
+
+func ShineSignal():
+	tweenAlpha = TweenUtils.tweenAlpha(bG,95.0/255.0,0.2,TweenUtils.Ease.OutCirc)
+	tweenAlpha.finished.connect(func():
+		tweenAlpha = TweenUtils.tweenAlpha(bG,170/255.0,0.2,TweenUtils.Ease.OutCirc)
+		tweenAlpha.finished.connect(func():
+			tweenAlpha = TweenUtils.tweenAlpha(bG,95.0/255.0,0.2,TweenUtils.Ease.OutCirc))
+		)
+
+func GoldBGShaderTween():
+	TweenUtils.StopTween(tweenGold)
+	tweenGold = TweenUtils.tweenCustom(self, 7.0, 2.584, 0.3, TweenUtils.Ease.OutCirc, func(val): 
+		bG.material.set_shader_parameter("border_px", val)
+		bG2.material.set_shader_parameter("border_px", val)
+	)
+	ModifyColorRGB(bG,Color(1.0, 1.0, 0.0))
+	ModifyColorRGB(bG2,Color(1.0, 1.0, 0.0))
+	TweenUtils.StopTween(tweenColorBG)
+	TweenUtils.StopTween(tweenColorBG2)
+	tweenColorBG = TweenUtils.tweenColorRGB(bG,Color(1,1,1),0.3,TweenUtils.Ease.OutCirc)
+	tweenColorBG2 = TweenUtils.tweenColorRGB(bG2,Color(1,1,1),0.3,TweenUtils.Ease.OutCirc)
+
+func ModifyColorRGB(node,color:Color):
+	node.modulate.r = color.r
+	node.modulate.g = color.g
+	node.modulate.b = color.b

@@ -1,0 +1,866 @@
+[gd_scene format=3 uid="uid://isevecd4fd6k"]
+
+[ext_resource type="Script" uid="uid://xylvnwq7tccl" path="res://Scripts/SkinChanger/SkinChanger.gd" id="1_bfxyv"]
+[ext_resource type="Script" uid="uid://o4xv73vec1sb" path="res://Scripts/Background/Background.gd" id="2_2sy7n"]
+[ext_resource type="PackedScene" uid="uid://cp3edlim8vx5p" path="res://Prefabs/sheep.tscn" id="2_x5u6f"]
+[ext_resource type="Texture2D" uid="uid://culgokfekyvvr" path="res://Sprites/Background/Background.png" id="3_qwu56"]
+[ext_resource type="Script" uid="uid://b5fcg5dm7vrvn" path="res://Scripts/Background/StarSpawner.gd" id="4_ibc7c"]
+[ext_resource type="PackedScene" uid="uid://ddgokw610x7j8" path="res://Prefabs/star.tscn" id="5_b1oa7"]
+[ext_resource type="Texture2D" uid="uid://col8i6cdksjl4" path="res://Sprites/Background/Grass.png" id="6_77y01"]
+[ext_resource type="Script" uid="uid://dxmag42v53qiw" path="res://Scripts/Background/GrassTween.gd" id="7_ptdcd"]
+[ext_resource type="Texture2D" uid="uid://fa5le6kburmh" path="res://Sprites/Sheep/sheep sprite.png" id="8_6lplx"]
+[ext_resource type="Texture2D" uid="uid://dgirwjhs053n5" path="res://Sprites/Background/Floor.png" id="8_ibc7c"]
+[ext_resource type="Script" uid="uid://co0lo02vnu10n" path="res://addons/font_auto_size_labels/auto_size_rich_text_label.gd" id="9_qwu56"]
+[ext_resource type="Texture2D" uid="uid://dyrhuwlihtfea" path="res://Sprites/OptionUIs/Settings name.png" id="10_6lplx"]
+[ext_resource type="Texture2D" uid="uid://me6utmnqir7i" path="res://Sprites/OptionUIs/UICorner.png" id="10_77y01"]
+[ext_resource type="Texture2D" uid="uid://bqnxqa7h53u2m" path="res://Sprites/ButtonSprites/Button.png" id="12_jj64x"]
+[ext_resource type="Texture2D" uid="uid://bj1alcwg1g3gh" path="res://Sprites/ButtonSprites/ButtonNon.png" id="13_bgdy0"]
+[ext_resource type="Texture2D" uid="uid://cmq6mhs8xxqlb" path="res://Sprites/OptionUIs/Arrow3.png" id="13_jj64x"]
+[ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="14_bgdy0"]
+[ext_resource type="Texture2D" uid="uid://dcr8psxns5jbc" path="res://Sprites/ButtonSprites/ButtonPressed.png" id="14_tms6k"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6lplx"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2sy7n"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bgdy0"]
+texture = ExtResource("12_jj64x")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tms6k"]
+texture = ExtResource("13_bgdy0")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0dpa0"]
+texture = ExtResource("14_tms6k")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[node name="SkinChanger" type="Node2D" unique_id=336374009 node_paths=PackedStringArray("sheep", "textSkin", "textDescSkin", "textEffectSkin")]
+script = ExtResource("1_bfxyv")
+sheep = NodePath("Sheep2")
+textSkin = NodePath("Control/CanvasLayer/Title")
+textDescSkin = NodePath("Control/CanvasLayer/Description")
+textEffectSkin = NodePath("Control/CanvasLayer/Effect")
+metadata/_edit_vertical_guides_ = [900.0, 0.0]
+metadata/_edit_horizontal_guides_ = [-74.0]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2012442508]
+clip_children = 1
+position = Vector2(451.25, 459.00003)
+scale = Vector2(902.5, 632.00006)
+texture = SubResource("CanvasTexture_6lplx")
+
+[node name="night" type="Sprite2D" parent="Sprite2D" unique_id=490552418]
+position = Vector2(-0.301108, -0.09036985)
+scale = Vector2(0.003698061, 0.0046580597)
+texture = ExtResource("3_qwu56")
+
+[node name="Background" type="Node2D" parent="." unique_id=1567083700 node_paths=PackedStringArray("nightBackground")]
+position = Vector2(179.50002, 352.00003)
+scale = Vector2(1.25, 1.25)
+script = ExtResource("2_2sy7n")
+nightBackground = NodePath("../Sprite2D/night")
+
+[node name="Stars" type="Node2D" parent="Background" unique_id=586092324 groups=["StarSpawner"]]
+position = Vector2(66, -69)
+script = ExtResource("4_ibc7c")
+starInstance = ExtResource("5_b1oa7")
+numberStarsSpawn = 42
+numberStarsSpawnLow = 12
+
+[node name="Grasses" type="Node2D" parent="Background" unique_id=1838897625]
+
+[node name="Grass" type="Sprite2D" parent="Background/Grasses" unique_id=1408842367 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+clip_children = 2
+position = Vector2(-259, 214)
+rotation = -0.11170108
+scale = Vector2(3.265, 2.2950003)
+skew = -0.23561943
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -10.95
+end = -2.995
+duration = 2.1
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+skipShake = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass" unique_id=1725311445]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Grasses/Grass" unique_id=114985066]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass4" type="Sprite2D" parent="Background/Grasses" unique_id=1621411169 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+clip_children = 2
+position = Vector2(10, 227.00003)
+scale = Vector2(2.415, 3.45)
+skew = -0.15009832
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -8.6
+end = 9.1
+duration = 2.14
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+skipShake = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass4" unique_id=1838058971]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Grasses/Grass4" unique_id=1225468681]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass2" type="Sprite2D" parent="Background/Grasses" unique_id=217046372 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+clip_children = 2
+position = Vector2(-82, 222)
+rotation = 0.22514749
+scale = Vector2(3.095, 3.095)
+skew = -0.09424782
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -5.4
+end = 10.6
+duration = 2.5
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+skipShake = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass2" unique_id=1320862733]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Grasses/Grass2" unique_id=2127617921]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass3" type="Sprite2D" parent="Background/Grasses" unique_id=721589684 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+clip_children = 2
+position = Vector2(137, 218)
+scale = Vector2(2.22, 2.2199998)
+skew = -0.12217307
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -7.0
+end = 10.7
+duration = 1.8
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+skipShake = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass3" unique_id=1593309404]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Grasses/Grass3" unique_id=1680546233]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass5" type="Sprite2D" parent="Background/Grasses" unique_id=1551071907 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+clip_children = 2
+position = Vector2(284, 229)
+rotation = 0.11170108
+scale = Vector2(2.98, 2.745)
+skew = 0.04712379
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = 2.7
+end = 12.3
+duration = 1.78
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+skipShake = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass5" unique_id=592179569]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Grasses/Grass5" unique_id=1536885772]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass6" type="Sprite2D" parent="Background/Grasses" unique_id=863002832 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+clip_children = 2
+position = Vector2(634, 240)
+scale = Vector2(2.98, 2.745)
+skew = -0.3455752
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -19.8
+end = -12.53
+duration = 2.555
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+skipShake = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass6" unique_id=149433100]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Grasses/Grass6" unique_id=1525728158]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass7" type="Sprite2D" parent="Background/Grasses" unique_id=2041718372 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+clip_children = 2
+position = Vector2(460, 244)
+rotation = 0.11344639
+scale = Vector2(2.7750003, 3.32)
+skew = -0.31764996
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -18.2
+end = -0.5
+duration = 2.17
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+skipShake = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Grasses/Grass7" unique_id=1499547076]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Grasses/Grass7" unique_id=1202540623]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Floor" type="Sprite2D" parent="Background" unique_id=899590654]
+clip_children = 2
+position = Vector2(-1.399967, 0)
+scale = Vector2(2.6725001, 2.67)
+texture = ExtResource("8_ibc7c")
+
+[node name="SheepShadow" type="Sprite2D" parent="Background/Floor" unique_id=1431314661]
+self_modulate = Color(0, 0, 0, 0.3529412)
+texture_filter = 1
+position = Vector2(81.34702, 110.861435)
+scale = Vector2(0.8089888, 0.8089888)
+skew = 0.43807757
+texture = ExtResource("8_6lplx")
+offset = Vector2(3.2407265, -63.759247)
+hframes = 2
+frame = 1
+
+[node name="GrassesDark" type="Node2D" parent="Background/Floor" unique_id=1102190099 groups=["GrassDark"]]
+position = Vector2(0.5238495, 0)
+scale = Vector2(0.37418145, 0.3745318)
+
+[node name="Grass" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=424493993 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+self_modulate = Color(0, 0, 0, 0.13725491)
+position = Vector2(-258, 202)
+rotation = 3.0298915
+scale = Vector2(3.265, 2.2950003)
+skew = -0.23561943
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -10.95
+end = -2.995
+duration = 2.1
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+isShadow = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass" unique_id=1854531867]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass" unique_id=137177787]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass2" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1149864404 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+self_modulate = Color(0, 0, 0, 0.13725491)
+position = Vector2(-65, 205.00003)
+rotation = 3.668682
+scale = Vector2(3.095, 3.0950005)
+skew = -0.09424794
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -5.4
+end = 10.6
+duration = 2.5
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+isShadow = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass2" unique_id=2047992946]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass2" unique_id=599772017]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass3" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=151956576 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+self_modulate = Color(0, 0, 0, 0.13725491)
+position = Vector2(147, 205.00003)
+rotation = 2.994985
+scale = Vector2(2.22, 2.2199998)
+skew = -0.12217307
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -7.0
+end = 10.7
+duration = 1.8
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+isShadow = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass3" unique_id=1316245008]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass3" unique_id=1013109916]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass4" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1820540732 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+self_modulate = Color(0, 0, 0, 0.13333334)
+position = Vector2(14, 210.00003)
+rotation = 2.9164453
+scale = Vector2(2.415, 3.4500005)
+skew = -0.15009832
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("7_ptdcd")
+start = -8.6
+end = 9.1
+duration = 2.14
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+isShadow = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass4" unique_id=755724178]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass4" unique_id=1350747829]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass5" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=6533927 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+self_modulate = Color(0, 0, 0, 0.13725491)
+position = Vector2(291, 222.00003)
+rotation = 3.39292
+scale = Vector2(2.98, 2.7450001)
+skew = 0.04712367
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = 2.7
+end = 12.3
+duration = 1.78
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+isShadow = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass5" unique_id=955238770]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass5" unique_id=365496081]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass6" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1856985571 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+self_modulate = Color(0, 0, 0, 0.13725491)
+position = Vector2(627, 233.00003)
+rotation = -2.804744
+scale = Vector2(2.98, 2.7450001)
+skew = -0.3455752
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -19.8
+end = -12.53
+duration = 2.555
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+isShadow = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass6" unique_id=229380361]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass6" unique_id=646590431]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Grass7" type="Sprite2D" parent="Background/Floor/GrassesDark" unique_id=1032359054 node_paths=PackedStringArray("preShadowObj", "shadowObj") groups=["Grass"]]
+self_modulate = Color(0, 0, 0, 0.13725491)
+position = Vector2(460, 217.00003)
+rotation = 3.063053
+scale = Vector2(2.7750003, 3.3200002)
+skew = -0.31764996
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+script = ExtResource("7_ptdcd")
+start = -18.2
+end = -0.5
+duration = 2.17
+preShadowObj = NodePath("GrassShadow")
+start_preShadow = -2.075
+end_preShadow = 1.585
+shadowObj = NodePath("GrassShadow2")
+start_shadow = -5.35
+end_shadow = 3.335
+isShadow = true
+metadata/_edit_group_ = true
+
+[node name="GrassShadow" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass7" unique_id=165018484]
+self_modulate = Color(0, 0, 0, 0.20392157)
+position = Vector2(0.23107558, 0.42570207)
+scale = Vector2(0.94, 0.94)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="GrassShadow2" type="Sprite2D" parent="Background/Floor/GrassesDark/Grass7" unique_id=1771779326]
+self_modulate = Color(0, 0, 0, 0.25882354)
+position = Vector2(1.2681998, 1.8867111)
+scale = Vector2(0.94, 0.8868217)
+texture = ExtResource("6_77y01")
+offset = Vector2(0, -31.835205)
+
+[node name="Control" type="Control" parent="." unique_id=1233455478]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=174460980]
+
+[node name="TextureCanvas" type="Control" parent="Control/CanvasLayer" unique_id=926380101]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 71.0
+offset_right = 40.0
+offset_bottom = 111.0
+
+[node name="Canv1" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas" unique_id=2047911657]
+clip_children = 1
+layout_mode = 1
+offset_left = 53.0
+offset_top = 24.0
+offset_right = 781.1
+offset_bottom = 102.72003
+rotation = 1.5707964
+texture = ExtResource("10_6lplx")
+
+[node name="TextureCanv2" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas/Canv1" unique_id=111049443]
+self_modulate = Color(0.83137256, 0.83137256, 0.83137256, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.568
+anchor_right = 0.07
+anchor_bottom = 0.568
+offset_left = 0.22299957
+offset_top = 0.0070533752
+offset_right = 40.223
+offset_bottom = 665.0071
+rotation = -1.5707964
+texture = SubResource("CanvasTexture_2sy7n")
+
+[node name="Canv1Black" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas" unique_id=288091814]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 2.025
+anchor_bottom = 2.7
+offset_right = 8.0
+offset_bottom = 638.0
+texture = SubResource("CanvasTexture_2sy7n")
+
+[node name="Canv2" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas" unique_id=363205412]
+clip_children = 1
+layout_mode = 1
+offset_left = 920.0
+offset_top = 24.0
+offset_right = 1648.1
+offset_bottom = 102.72003
+rotation = 1.5707964
+texture = ExtResource("10_6lplx")
+flip_v = true
+
+[node name="TextureCanv2" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas/Canv2" unique_id=1764464438]
+self_modulate = Color(0.83137256, 0.83137256, 0.83137256, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.568
+anchor_right = 0.07
+anchor_bottom = 0.568
+offset_left = 1.0329971
+offset_top = 46.28702
+offset_right = 63.033
+offset_bottom = 711.28705
+rotation = -1.5707964
+texture = SubResource("CanvasTexture_2sy7n")
+flip_v = true
+
+[node name="Canv1Black2" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas" unique_id=535363165]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 2.025
+anchor_bottom = 2.7
+offset_left = 891.0
+offset_right = 899.0
+offset_bottom = 638.0
+texture = SubResource("CanvasTexture_2sy7n")
+
+[node name="Canv3" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas" unique_id=411531042]
+clip_children = 1
+layout_mode = 1
+offset_left = -12.0
+offset_top = 44.0
+offset_right = 882.0
+offset_bottom = 122.72003
+scale = Vector2(1, 1.008)
+texture = ExtResource("10_6lplx")
+flip_v = true
+
+[node name="TextureCanv2" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas/Canv3" unique_id=1506668072]
+self_modulate = Color(0.83137256, 0.83137256, 0.83137256, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.568
+anchor_right = 0.07
+anchor_bottom = 0.568
+offset_left = 828.42
+offset_top = -10.712971
+offset_right = 890.42
+offset_bottom = 830.456
+rotation = 1.5707964
+texture = SubResource("CanvasTexture_2sy7n")
+flip_v = true
+
+[node name="TextureCanv" type="TextureRect" parent="Control/CanvasLayer/TextureCanvas" unique_id=1109642465]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -1.8
+anchor_bottom = -1.8
+offset_right = 899.0
+offset_bottom = 161.0
+texture = ExtResource("10_6lplx")
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="RichTextLabel" parent="Control/CanvasLayer" unique_id=1160064601]
+offset_left = 131.0
+offset_top = 194.0
+offset_right = 763.0
+offset_bottom = 282.0
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 49
+text = "Default"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_qwu56")
+_max_size = 49
+_current_font_size = 49
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Description" type="RichTextLabel" parent="Control/CanvasLayer" unique_id=335431421]
+offset_left = 119.0
+offset_top = 273.0
+offset_right = 751.0
+offset_bottom = 366.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 26
+text = "just thrilling with the originality"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_qwu56")
+_max_size = 26
+_current_font_size = 26
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="Effect" type="RichTextLabel" parent="Control/CanvasLayer" unique_id=1678677907]
+offset_left = 123.0
+offset_top = 698.0
+offset_right = 755.0
+offset_bottom = 791.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 26
+text = "Effect:None"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_qwu56")
+_max_size = 26
+_current_font_size = 26
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="ApplySkin" type="Button" parent="Control/CanvasLayer" unique_id=490381021]
+offset_left = 248.0
+offset_top = 59.0
+offset_right = 637.0
+offset_bottom = 150.0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 59
+theme_override_styles/normal = SubResource("StyleBoxTexture_bgdy0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tms6k")
+theme_override_styles/hover = SubResource("StyleBoxTexture_0dpa0")
+text = "Apply"
+
+[node name="Left" type="TextureButton" parent="Control/CanvasLayer" unique_id=1993310565]
+offset_left = 46.0
+offset_top = 74.0
+offset_right = 180.0
+offset_bottom = 152.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_77y01")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Left" unique_id=1604142095]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+scale = Vector2(1.5441122, 1.9841123)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("13_jj64x")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Left" unique_id=1754374073 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("14_bgdy0")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+useScalingSingle = true
+useDefaultScale = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="Right" type="TextureButton" parent="Control/CanvasLayer" unique_id=505179897]
+offset_left = 713.0
+offset_top = 74.0
+offset_right = 847.0
+offset_bottom = 152.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("10_77y01")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/Right" unique_id=1777612895]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -32.0
+offset_right = 43.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+scale = Vector2(1.5441122, 1.9841123)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("13_jj64x")
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Right" unique_id=1672290297 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("14_bgdy0")
+node = NodePath("../TextureRect")
+scaleVal = 1.1
+useScalingSingle = true
+useDefaultScale = true
+dependOnButton = true
+button = NodePath("..")
+
+[node name="Sheep2" parent="." unique_id=1343371003 node_paths=PackedStringArray("sheepShadow") instance=ExtResource("2_x5u6f")]
+position = Vector2(468.49997, 727.00006)
+scale = Vector2(3.055, 3.055)
+sheepShadow = NodePath("../Background/Floor/SheepShadow")
+
+[connection signal="pressed" from="Control/CanvasLayer/ApplySkin" to="." method="_on_apply_skin_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Right" to="." method="_on_right_pressed"]

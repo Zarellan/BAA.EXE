@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://b51ymvp8hbbyi"]
+
+[ext_resource type="Script" uid="uid://1cx33pmf0xfg" path="res://Scripts/Background/Star2.gd" id="1_ogfje"]
+[ext_resource type="Texture2D" uid="uid://duakhtlquvg18" path="res://Sprites/Background/Star.png" id="2_8y71b"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="4_piv77"]
+
+[sub_resource type="Shader" id="Shader_ogfje"]
+code = "shader_type canvas_item;
+
+uniform vec2 light_position = vec2(0.5, 0.5);
+uniform float radius = 0.3;
+uniform float softness = 0.1;
+
+uniform vec4 light_color : source_color = vec4(1.0, 1.0, 0.8, 1.0);
+uniform float intensity = 1.5;
+
+void fragment() {
+
+    // Distance from light center
+    float dist = distance(UV, light_position);
+
+    // Circular falloff
+    float light = 1.0 - smoothstep(radius - softness, radius, dist);
+
+    // Final light color
+    vec3 final_light = light_color.rgb * light * intensity;
+
+    // Invisible sprite, visible light only
+    COLOR = vec4(final_light, light);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_atmvy"]
+shader = SubResource("Shader_ogfje")
+shader_parameter/light_position = Vector2(0.5, 0.5)
+shader_parameter/radius = 0.3
+shader_parameter/softness = 0.385
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 1.5
+
+[node name="Star" type="Node2D" unique_id=824519994]
+script = ExtResource("1_ogfje")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1120654826]
+texture = ExtResource("2_8y71b")
+
+[node name="FakeLight" type="Sprite2D" parent="." unique_id=900876329]
+material = SubResource("ShaderMaterial_atmvy")
+texture = ExtResource("4_piv77")

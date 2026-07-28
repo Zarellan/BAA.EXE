@@ -1,0 +1,112 @@
+extends Node2D
+class_name Skins
+
+@export var sheep:Sheep
+@export var skins:Array[SkinItem]
+@export var skinUses:Array[Node2D]
+
+static var currentSkin = "Def"
+var index:int = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	if (GameHandler.saveDataAchievements.skins == null || GameHandler.saveDataAchievements.skins.size() == 0):
+		GameHandler.saveDataAchievements.skins = skins
+		GameHandler.saveDataAchievements.skinUsed = GameHandler.saveDataAchievements.skins[0].name
+	currentSkin = GameHandler.saveDataAchievements.skinUsed
+	FindSkinIndex(currentSkin)
+	LoadSkin()
+	SuperPower()
+	set_process(false)
+	set_physics_process(false)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta: float) -> void:
+	#if (Input.is_action_just_pressed("ui_right") && sheep.isSkin):
+		#FindSkinIndex(GameHandler.saveDataAchievements.skinUsed)
+		#ChooseSkin(1)
+		#LoadSkin()
+		#SuperPower()
+	pass
+
+func SetSkin(strn:String):
+	FindSkinIndex(strn)
+	LoadSkin()
+	SuperPower()
+
+
+func SuperPower():
+	BringToDefault()
+	match (GameHandler.saveDataAchievements.skinUsed):
+		"Eid":GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.4
+		"Jump sheep":GameHandler.saveDataAchievements.increaseJumpAchievement = 200
+		"Font":
+			GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.9
+			GameHandler.saveDataAchievements.canColorWool = false
+			get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", Color(1,1,1))
+		"Glorious sheep":
+			GameHandler.saveDataAchievements.multiplyMoneyAchievement = 15.0
+func LoadSkin():
+	sheep.get_node("StaticBody2D/Sprite2D").texture = load("res://Sprites/Sheep/sheep sprite.png")
+	for i in range(skinUses.size()):
+		if (currentSkin == skinUses[i].name):
+			skinUses[i].visible = true
+		else:
+			skinUses[i].visible = false
+	ExceptionalSkins(currentSkin)
+	pass
+
+func ExceptionalSkins(nam):
+	sheep.get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	get_node("Glorious sheep/Crown").material.set_shader_parameter("speed", 2.0)
+	match (nam):
+		"Font":
+			sheep.get_node("StaticBody2D/Sprite2D").texture = load("res://Sprites/Sheep/sheep u.png")
+			sheep.get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", Color(1,1,1))
+		"Glorious sheep":
+			if (!GameHandler.saveDataAchievements.skins[FindSkinIndexRet("Glorious sheep")].unlocked):
+				get_node("Glorious sheep/Crown").material.set_shader_parameter("speed", 0)
+			
+func SaveSkin():
+	GameHandler.saveDataAchievements.skinUsed = currentSkin
+func FindSkinIndex(nameStr:String):
+	var skinsVar:Array[SkinItem] = GameHandler.saveDataAchievements.skins
+	for i in range(skinsVar.size()):
+		if (skinsVar[i].name == nameStr):
+			index = i
+			break
+			pass
+		pass
+
+func FindSkinIndexRet(nameStr:String):
+	var skinsVar:Array[SkinItem] = GameHandler.saveDataAchievements.skins
+	for i in range(skinsVar.size()):
+		if (skinsVar[i].name == nameStr):
+			return i
+	return 0
+
+func ChooseSkin(indexer:int):
+	index += indexer
+	IndexRangeLimit(GameHandler.saveDataAchievements.skins)
+	currentSkin = GameHandler.saveDataAchievements.skins[index].name
+	LoadSkin()
+
+
+func SetSkinMain():
+	LoadSkin()
+	SaveSkin()
+	SuperPower()
+
+func IndexRangeLimit(indexMax:Array):
+	if (indexMax.size() - 1 < index):
+		index = 0
+	elif (index < 0):
+		index = indexMax.size() - 1
+
+func BringToDefault():
+	GameHandler.saveDataAchievements.canColorWool = true
+	get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", GameHandler.saveDataSettings.sheepColor)
+	GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.0
+	GameHandler.saveDataAchievements.increaseJumpAchievement = 0

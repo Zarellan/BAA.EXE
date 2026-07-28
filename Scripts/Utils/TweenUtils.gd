@@ -1,0 +1,235 @@
+class_name TweenUtils
+
+enum Ease{
+	OutCirc,
+	InSine,
+	InOutSine,
+	linear
+	}
+
+
+static func isAlive(twen:Tween):
+	if (twen != null && twen.is_valid()):
+		return true
+	return false
+
+static func StopTween(twen:Tween):
+	if (twen != null && twen.is_valid()):
+		twen.kill()
+
+
+static func EasingType(tween, easing:Ease):
+	var eas = Tween.EASE_IN_OUT
+	var transition = Tween.TRANS_LINEAR
+	
+	match easing:
+		Ease.OutCirc: 
+			eas = Tween.EASE_OUT
+			transition = Tween.TRANS_CIRC
+		Ease.InSine: 
+			eas = Tween.EASE_IN
+			transition = Tween.TRANS_SINE
+
+		Ease.InOutSine:
+			eas = Tween.EASE_IN_OUT
+			transition = Tween.TRANS_SINE
+		Ease.linear:
+			eas = Tween.EASE_IN_OUT
+			transition = Tween.TRANS_LINEAR
+	tween.set_trans(transition).set_ease(eas)
+
+static func tweenX(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "position:x", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenY(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "position:y", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenRotation(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "rotation_degrees", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenColor(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "modulate", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenColorRGB(object, color, duration, eas):
+	var tween = object.create_tween()
+	var currentColor = object.modulate
+	var step = tween.tween_method(func(col):
+		object.modulate.r = col.r
+		object.modulate.g = col.g
+		object.modulate.b = col.b
+	, currentColor, color, duration)
+	EasingType(step, eas)
+	return tween
+static func tweenColorRGBself(object, color, duration, eas):
+	var tween = object.create_tween()
+	var currentColor = object.self_modulate
+	var step = tween.tween_method(func(col):
+		object.self_modulate.r = col.r
+		object.self_modulate.g = col.g
+		object.self_modulate.b = col.b
+	, currentColor, color, duration)
+	EasingType(step, eas)
+	return tween
+static func tweenColorRGBPingPong(object,startValue,endValue,duration,eas):
+	var tween = object.create_tween().set_loops(-1)
+	var currentColor = object.modulate
+	var step = tween.tween_method(func(col):
+		object.modulate.r = col.r
+		object.modulate.g = col.g
+		object.modulate.b = col.b
+	, currentColor, startValue, duration)
+	EasingType(step, eas)
+	var currentColor2 = startValue
+	var step2 = tween.tween_method(func(col):
+		object.modulate.r = col.r
+		object.modulate.g = col.g
+		object.modulate.b = col.b
+	, currentColor2, endValue, duration)
+	EasingType(step2, eas)
+	return tween
+
+static func tweenAlpha(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "modulate:a", position, duration)
+	EasingType(step, eas)
+	return tween
+	
+static func tweenAlphaPingPong(object,startValue,endValue,duration,eas, instant = false):
+	var tween = object.create_tween().set_loops(-1)
+	
+	if (instant):
+		object.scale = startValue
+	var step1 = tween.tween_property(object, "alpha", startValue, duration)
+	EasingType(step1, eas)
+
+	var step2 = tween.tween_property(object, "alpha", endValue, duration)
+	EasingType(step2, eas)
+
+	return tween
+static func tweenAlphaSelf(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "self_modulate:a", position, duration)
+	EasingType(step, eas)
+	return tween
+static func tweenAlphaSelfPingPong(object,startValue,endValue,duration,eas, instant = false):
+	var tween = object.create_tween().set_loops(-1)
+	
+	if (instant):
+		object.scale = startValue
+	var step1 = tween.tween_property(object, "self_modulate:a", startValue, duration)
+	EasingType(step1, eas)
+
+	var step2 = tween.tween_property(object, "self_modulate:a", endValue, duration)
+	EasingType(step2, eas)
+
+	return tween
+static func tweenNumber(owner, objectValue:ValueSaver,value,duration,eas):
+	var tween = owner.create_tween()
+	var currentInt = objectValue.number
+
+	var step = tween.tween_method(func(integral):
+		if is_instance_valid(objectValue):
+			objectValue.number = integral
+	, currentInt, value, duration)
+
+	EasingType(step, eas)
+	return tween
+	
+# example: TweenUtils.tweenCustom(self, 0, 100.0, 2.0, TweenUtils.Ease.linear, func(val): print(val))
+static func tweenCustom(owner: Node, current_val: float, target_val: float, duration: float, eas: int, setter_callable: Callable) -> Tween:
+	var tween = owner.create_tween()
+	
+	# Pass the lambda function directly to the engine backend
+	var step = tween.tween_method(setter_callable, current_val, target_val, duration)
+	
+	EasingType(step, eas)
+	return tween
+static func tweenNumberPingPong(owner, objectValue:ValueSaver,value, value2,duration,eas):
+	var tween = owner.create_tween().set_loops(-1)
+
+	var step = tween.tween_method(func(integral):
+		if is_instance_valid(objectValue):
+			objectValue.number = integral
+	, value, value2, duration)
+	EasingType(step, eas)
+	var step2 = tween.tween_method(func(integral):
+		if is_instance_valid(objectValue):
+			objectValue.number = integral
+	, value2, value, duration)
+
+	EasingType(step2, eas)
+	return tween
+
+static func tweenScale(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "scale", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenScalePingPong(object,startValue,endValue,duration,eas, instant = false):
+	var tween = object.create_tween().set_loops(-1)
+	
+	if (instant):
+		object.scale = startValue
+	var step1 = tween.tween_property(object, "scale", startValue, duration)
+	EasingType(step1, eas)
+
+	var step2 = tween.tween_property(object, "scale", endValue, duration)
+	EasingType(step2, eas)
+
+	return tween
+
+static func tweenScaleX(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "scale:x", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenScaleY(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "scale:y", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenSkew(object,value,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "skew", value, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenSkewPingPong(object,startValue,endValue,duration,eas, instant = false):
+	var tween = object.create_tween().set_loops(-1)
+	
+	if (instant):
+		object.skew = startValue
+	var step1 = tween.tween_property(object, "skew", startValue, duration)
+	EasingType(step1, eas)
+
+	var step2 = tween.tween_property(object, "skew", endValue, duration)
+	EasingType(step2, eas)
+
+	return tween
+
+static func tweenScrollY(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "scroll_vertical", position, duration)
+	EasingType(step, eas)
+	return tween
+
+static func tweenScrollYRichText(object,position,duration,eas):
+	var tween = object.create_tween()
+	var step = tween.tween_property(object, "scroll_vertical", position, duration)
+	EasingType(step, eas)
+	return tween
