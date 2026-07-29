@@ -132,7 +132,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_urp6s")
 title = "Reach the Glory (ending)"
 image = ExtResource("13_gx00u")
-rebirthPrice = 5000
+level = 1
 power = 12
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -144,4 +144,5 @@ metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [resource]
 script = ExtResource("15_8mocp")
+rebirth = 5000
 rebirthListData = SubResource("Resource_gx00u")

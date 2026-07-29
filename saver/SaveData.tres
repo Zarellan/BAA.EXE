@@ -17,9 +17,10 @@ script = ExtResource("2_wh28c")
 title = "Improve Shear"
 image = ExtResource("3_w66ht")
 description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2[/wave]"
-price = 25
+price = 159346
+level = 16
 power = 1
-tax = 1.05
+tax = 2.6500000000000012
 taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -28,9 +29,10 @@ script = ExtResource("2_wh28c")
 title = "Auto collect"
 image = ExtResource("4_gdvw8")
 description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+32[/wave]"
-price = 250
+price = 74751
+level = 13
 power = 2
-tax = 1.1
+tax = 2.140000000000001
 taxInc = 0.08
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -39,10 +41,12 @@ script = ExtResource("2_wh28c")
 title = "Faster Auto Collect"
 image = ExtResource("5_hqqsl")
 description = "make the auto collector collects faster"
-price = 1250
+price = 16032
+level = 7
 power = 3
-tax = 1.1
+tax = 1.9400000000000008
 taxInc = 0.12
+canBuy = false
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_gdvw8"]
@@ -60,9 +64,10 @@ script = ExtResource("2_wh28c")
 title = "[rainbow]Multilplier"
 image = ExtResource("7_tu810")
 description = "the more you buy it the more the collect doubles"
-price = 7000
+price = 10500
+level = 1
 power = 5
-tax = 1.5
+tax = 1.8
 taxInc = 0.3
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -70,9 +75,10 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_wh28c")
 title = "[rainbow]Auto Collect Sheep"
 image = ExtResource("8_bo316")
-price = 4000
+price = 8580
+level = 3
 power = 6
-tax = 1.1
+tax = 1.7
 taxInc = 0.2
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -103,6 +109,12 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_hantp")
-money = 82
+money = 459084
+increment = 34
+clickMultiply = 2
+autoCollect = 416
+collectSpeed = 0.9000000000000004
+autoCollectSheepAbility = true
+autoCollectSheep = 2.7
 shopListData = SubResource("Resource_d26l7")
 tutorialed = true

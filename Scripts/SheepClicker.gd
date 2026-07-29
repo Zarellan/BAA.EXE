@@ -36,7 +36,6 @@ func _ready() -> void:
 		ParticleManager.PlayParticleWarmup(part)
 		ParticleManager.PlayParticleWarmup(partRare)
 		ParticleManager.PlayParticleWarmup(partRainbow)
-	
 		if (!GameHandler.saveData.tutorialed):
 			tutorialTimer.start()
 			tutorialTimer.timeout.connect(StartTutorial)

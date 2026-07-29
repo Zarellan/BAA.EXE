@@ -307,3 +307,4 @@ func Changing():
 func SceneChangedFromMinigame():
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
 	GlobalSoundtrack.pitch_scale = 1
+	GlobalSoundtrack.volume_db = -80

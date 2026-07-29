@@ -23,6 +23,8 @@ var dirtySave := false
 var timerAutoCollector:Timer
 var timerAutoCollectorSheep:Timer
 
+var offlineLastTimeMinuteAdd:Timer
+
 var fontSkinCondition
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,6 +34,8 @@ func _ready() -> void:
 	saveDataRebirth = GameSaveRebirth.new()
 	saveDataSettings = GameSaveSettings.new()
 	saveDataAchievements = GameSaveAchievements.new()
+	if (is_equal_approx(saveDataAchievements.lastTime,0)):
+		fetch_online_time(false)
 	GameHandler.LoadAllDataGlob()
 	timerSaveCooldown = CreateTimer(3, _on_save_timer_timeout)
 	timerAutoCollector = CreateTimer(saveData.collectSpeed, NowCollect, false)
@@ -39,11 +43,96 @@ func _ready() -> void:
 	timerAutoCollectorSheep = CreateTimer(saveData.autoCollectSheep, CollectSheep, false)
 	timerAutoCollectorSheep.wait_time = AutoCollectSheepTotalParse()
 	timerAutoCollectorSheep.start()
+	offlineLastTimeMinuteAdd = CreateTimer(5, AddMinuteFromLastTime, false)
+	offlineLastTimeMinuteAdd.start()
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
 	#set_process(false)
+	fetch_online_time()
 	set_physics_process(false)
 	pass # Replace with function body.
 
+#region Time Offline Respone
+
+func AddMinuteFromLastTime():
+	saveDataAchievements.lastTime += 5
+var failedTimeOnline:bool = false
+func fetch_online_time(collectNow:bool = true) -> void:
+	# Safety Fallback: Ensure we always have a valid local baseline instantly 
+	# so the game never processes an uninitialized '0' timestamp.
+	if saveDataAchievements.lastTime <= 0:
+		saveDataAchievements.lastTime = Time.get_unix_time_from_system()
+
+	var http = HTTPRequest.new()
+	add_child(http)
+	
+	var request_resolved = false
+	http.timeout = 6.0
+	http.request_completed.connect(func(result, response_code, headers, body):
+		if request_resolved:
+			return
+		request_resolved = true
+		
+		var current_time = 0
+		if response_code == 200:
+			var json = JSON.new()
+			if json.parse(body.get_string_from_utf8()) == OK:
+				current_time = json.get_data().get("unixtime", 0)
+		
+		# Fallback to system time if API response was invalid
+		if current_time <= 0:
+			current_time = Time.get_unix_time_from_system()
+			
+		if collectNow:
+			OfflineProgress(current_time)
+			
+		if is_instance_valid(http):
+			http.queue_free()
+	)
+	
+	# Fire the request
+	var err = http.request("https://www.timeapi.io/api/Time/current/zone?timeZone=UTC")
+	if err != OK:
+		# If the request fails to send entirely (e.g., no internet connection)
+		if not request_resolved:
+			request_resolved = true
+			if is_instance_valid(http):
+				http.queue_free()
+			if collectNow:
+				OfflineProgress(Time.get_unix_time_from_system())
+func OfflineProgress(current_time):
+	var power_per_second = saveData.autoCollect
+	var interval: float = saveData.collectSpeed
+	var elapsed_seconds: int = clamp(current_time - saveDataAchievements.lastTime,0,24 * 60 * 60)
+	if (elapsed_seconds < 5 * 60):
+		var leftover_time = fmod(elapsed_seconds, interval)
+		saveDataAchievements.lastTime = current_time - int(leftover_time)
+		print("5 minutes isn't bypassed")
+		return
+	var total_ticks = floor(elapsed_seconds / interval)
+
+	var total_collected: float = total_ticks * power_per_second
+
+	var leftover_time = fmod(elapsed_seconds, interval)
+	if (saveData.autoCollect > 0 || !is_equal_approx(saveDataAchievements.lastTime,0)):
+		saveData.money += max(0,total_collected)
+	OfflineProgress2(current_time)
+	#saveDataAchievements.lastTime = current_time - int(leftover_time)
+	#SaveAllDataGlob()
+func OfflineProgress2(current_time):
+	var power_per_second = IncrementTotal()
+	var interval: float = AutoCollectSheepTotalParse()
+	var elapsed_seconds: int = clamp(current_time - saveDataAchievements.lastTime,0,24 * 60 * 60)
+
+	var total_ticks = floor(elapsed_seconds / interval)
+
+	var total_collected: float = total_ticks * power_per_second
+
+	var leftover_time = fmod(elapsed_seconds, interval)
+	if (AutoCollectSheepActive()):
+		saveData.money += max(0,total_collected)
+	saveDataAchievements.lastTime = current_time - int(leftover_time)
+	SaveAllDataGlob()
+#endregion
 var del:float = 0
 func _process(delta: float) -> void:
 	if (is_instance_valid(FindSkinByName("Font")) && FindSkinByName("Font").unlocked):
@@ -141,6 +230,8 @@ func ResetData():
 	saveDataRebirth = GameSaveRebirth.new()
 	ResourceUtil.RemoveResources("SaveDataAchievements","saver")
 	saveDataAchievements = GameSaveAchievements.new()
+	if (is_equal_approx(saveDataAchievements.lastTime,0)):
+		fetch_online_time(false)
 func AddMoney():
 	if (IncrementTotal() < 0):
 		return

@@ -336,6 +336,7 @@ func _on_delete_data_pressed() -> void:
 func DeleteData():
 	GameHandler.ResetData()
 	GameHandler.StaticReset()
+	GameHandler.fetch_online_time(false)
 
 
 func _on_glitch_effect_box_toggled(toggled_on: bool) -> void:

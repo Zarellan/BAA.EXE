@@ -26,5 +26,7 @@ class_name GameSaveAchievements
 	"rebirth_2": false
 }
 
+# offline collect
+@export var lastTime:float = 0
 # beated the game
 @export var beatedTheGame:bool = false

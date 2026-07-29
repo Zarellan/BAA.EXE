@@ -36,7 +36,6 @@ effectDescription = "effect: increase your jump by +200"
 achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
 achievementImage = ExtResource("5_r8lss")
-unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_sbckw"]
@@ -64,15 +63,15 @@ metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 script = ExtResource("1_p7hsg")
 skins = Array[ExtResource("2_r7ikc")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
 skinUsed = "Glorious sheep"
-playerClicks = 23
-moneyCollected = 82
-increaseJumpAchievement = 200.0
-platformMinigameScore = 43
+playerClicks = 282
+moneyCollected = 134392
+multiplyMoneyAchievement = 15.0
 tips = Dictionary[String, bool]({
-"choose_wise": false,
+"choose_wise": true,
 "minigame_1": true,
 "minigame_2": false,
-"rebirth_1": false,
-"rebirth_2": false
+"rebirth_1": true,
+"rebirth_2": true
 })
+lastTime = 1785353935.365241
 beatedTheGame = true
