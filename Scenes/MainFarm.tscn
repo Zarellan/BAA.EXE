@@ -101,6 +101,7 @@
 [ext_resource type="Texture2D" uid="uid://dqks1kt5m5ks3" path="res://Sprites/OptionUIs/questionMark.png" id="78_ueu3d"]
 [ext_resource type="Texture2D" uid="uid://me6utmnqir7i" path="res://Sprites/OptionUIs/UICorner.png" id="85_gnh6p"]
 [ext_resource type="Script" uid="uid://cift52ay7a3ox" path="res://tips/Tips.gd" id="85_tgjpn"]
+[ext_resource type="Script" uid="uid://b6yfro2grgrit" path="res://Scripts/OfflineGrind/OfflineGrindSystem.gd" id="101_utk63"]
 
 [sub_resource type="Animation" id="Animation_u06jq"]
 length = 0.001
@@ -745,6 +746,8 @@ shader_parameter/gradient = SubResource("GradientTexture2D_wpcgh")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/progress = 0.0
 shader_parameter/random_start = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_nme7v"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5w07k"]
 texture = ExtResource("71_dwm4h")
@@ -2167,6 +2170,92 @@ script = ExtResource("40_8hf41")
 node = NodePath("../Holder")
 scaleVal = 1.1
 button = NodePath("..")
+
+[node name="OfflineGrind" type="Control" parent="Control/CanvasLayer" unique_id=1429931278 node_paths=PackedStringArray("textureBlack", "textureCollect", "pauseButton", "frontPauseButtonParent", "backPauseButtonParent", "infoText") groups=["OfflineGrind"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("101_utk63")
+textureBlack = NodePath("Black")
+textureCollect = NodePath("CollectTex")
+pauseButton = NodePath("../OptionUI/PauseButton")
+frontPauseButtonParent = NodePath("../PauseButtonFront")
+backPauseButtonParent = NodePath("../OptionUI")
+infoText = NodePath("CollectTex/InfoText")
+
+[node name="Black" type="TextureRect" parent="Control/CanvasLayer/OfflineGrind" unique_id=1883525309]
+self_modulate = Color(0, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_nme7v")
+
+[node name="CollectTex" type="NinePatchRect" parent="Control/CanvasLayer/OfflineGrind" unique_id=1851041765]
+self_modulate = Color(0.601223, 0.601223, 0.60122293, 0.69411767)
+layout_mode = 0
+offset_left = 278.0
+offset_top = 119.0
+offset_right = 1000.0
+offset_bottom = 599.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("85_gnh6p")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 17
+patch_margin_top = 18
+patch_margin_right = 17
+patch_margin_bottom = 17
+
+[node name="WelcomeBackText" type="RichTextLabel" parent="Control/CanvasLayer/OfflineGrind/CollectTex" unique_id=10375030]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11218837
+anchor_top = 0.052083332
+anchor_right = 0.89612186
+anchor_bottom = 0.24375
+grow_horizontal = 2
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/normal_font_size = 37
+text = "Welcome Back :]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 37
+_current_font_size = 37
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
+
+[node name="InfoText" type="RichTextLabel" parent="Control/CanvasLayer/OfflineGrind/CollectTex" unique_id=423592222]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 129.0
+offset_right = 612.0
+offset_bottom = 301.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 26
+text = "the auto collectors collected [money] for you while you were away for [minute or hours]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 26
+_current_font_size = 26
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+
+[node name="PauseButtonFront" type="Control" parent="Control/CanvasLayer" unique_id=964589464]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
 layout_mode = 3
@@ -3613,6 +3702,7 @@ script = ExtResource("85_tgjpn")
 texr = NodePath("TextureRect/Text")
 tipFinishTimer = NodePath("TipFinished")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="NinePatchRect" parent="Control/CanvasLayer/Tips" unique_id=1771305609]
 self_modulate = Color(1, 1, 1, 0.5058824)

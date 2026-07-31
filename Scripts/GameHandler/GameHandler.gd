@@ -13,7 +13,6 @@ enum Quality{
 @export var saveDataSettings:GameSaveSettings
 @export var saveDataAchievements:GameSaveAchievements
 
-
 var globalDelta:float
 
 var timerSaveCooldown:Timer
@@ -55,8 +54,8 @@ func _ready() -> void:
 
 func AddMinuteFromLastTime():
 	saveDataAchievements.lastTime += 5
-var failedTimeOnline:bool = false
-func fetch_online_time(collectNow:bool = true) -> void:
+
+func fetch_online_time(collectNow:bool = true, setLastTime:bool = false) -> void:
 	# Safety Fallback: Ensure we always have a valid local baseline instantly 
 	# so the game never processes an uninitialized '0' timestamp.
 	if saveDataAchievements.lastTime <= 0:
@@ -81,7 +80,9 @@ func fetch_online_time(collectNow:bool = true) -> void:
 		# Fallback to system time if API response was invalid
 		if current_time <= 0:
 			current_time = Time.get_unix_time_from_system()
-			
+		
+		if (setLastTime):
+				saveDataAchievements.lastTime = current_time
 		if collectNow:
 			OfflineProgress(current_time)
 			
@@ -97,41 +98,49 @@ func fetch_online_time(collectNow:bool = true) -> void:
 			request_resolved = true
 			if is_instance_valid(http):
 				http.queue_free()
+			if (setLastTime):
+				saveDataAchievements.lastTime = Time.get_unix_time_from_system()
 			if collectNow:
 				OfflineProgress(Time.get_unix_time_from_system())
 func OfflineProgress(current_time):
 	var power_per_second = saveData.autoCollect
 	var interval: float = saveData.collectSpeed
-	var elapsed_seconds: int = clamp(current_time - saveDataAchievements.lastTime,0,24 * 60 * 60)
+	var elapsed_seconds: int = clamp(current_time - saveDataAchievements.lastTime,0,8 * 60 * 60)
 	if (elapsed_seconds < 5 * 60):
-		var leftover_time = fmod(elapsed_seconds, interval)
-		saveDataAchievements.lastTime = current_time - int(leftover_time)
+		if (saveDataAchievements.moneyToCollectOffline > 0):
+			get_tree().get_first_node_in_group("OfflineGrind").BringOfflineCollect(saveDataAchievements.moneyToCollectOffline, ConvToStringTime(saveDataAchievements.lastTime - current_time))
+		saveDataAchievements.lastTime = current_time
 		print("5 minutes isn't bypassed")
 		return
 	var total_ticks = floor(elapsed_seconds / interval)
 
 	var total_collected: float = total_ticks * power_per_second
 
-	var leftover_time = fmod(elapsed_seconds, interval)
 	if (saveData.autoCollect > 0 || !is_equal_approx(saveDataAchievements.lastTime,0)):
-		saveData.money += max(0,total_collected)
-	OfflineProgress2(current_time)
-	#saveDataAchievements.lastTime = current_time - int(leftover_time)
-	#SaveAllDataGlob()
-func OfflineProgress2(current_time):
+		saveDataAchievements.moneyToCollectOffline += max(0,total_collected)
+	OfflineProgress2(current_time, elapsed_seconds)
+func OfflineProgress2(current_time, elapsed_seconds):
 	var power_per_second = IncrementTotal()
 	var interval: float = AutoCollectSheepTotalParse()
-	var elapsed_seconds: int = clamp(current_time - saveDataAchievements.lastTime,0,24 * 60 * 60)
 
 	var total_ticks = floor(elapsed_seconds / interval)
 
 	var total_collected: float = total_ticks * power_per_second
 
-	var leftover_time = fmod(elapsed_seconds, interval)
 	if (AutoCollectSheepActive()):
-		saveData.money += max(0,total_collected)
-	saveDataAchievements.lastTime = current_time - int(leftover_time)
+		saveDataAchievements.moneyToCollectOffline += max(0,total_collected)
+	if (saveDataAchievements.moneyToCollectOffline > 0):
+		get_tree().get_first_node_in_group("OfflineGrind").BringOfflineCollect(saveDataAchievements.moneyToCollectOffline, ConvToStringTime(saveDataAchievements.lastTime - current_time))
+	saveDataAchievements.lastTime = current_time
 	SaveAllDataGlob()
+
+func ConvToStringTime(time):
+	if time <= 0:
+		return "0 min"
+	if time > 60 * 60:
+		return str(time / 60 / 60) + " hours"
+	else:
+		return str(time / 60) + " min"
 #endregion
 var del:float = 0
 func _process(delta: float) -> void:
@@ -300,7 +309,7 @@ func NowCollect():
 
 func GamePausedPartil() -> bool:
 	return PauseScript.paused || RebirthMenu.isRebirthMenu || SkinChanger.isSkinChanging || \
-	AchievementHandler.isAchievement || MinigamesMenu.isMinigame
+	AchievementHandler.isAchievement || MinigamesMenu.isMinigame || OfflineGrind.isOfflineGrind
 	
 func AutoCollectSheepActive():
 	return saveData.autoCollectSheepAbility || saveDataRebirth.autoCollectSheepAbility
