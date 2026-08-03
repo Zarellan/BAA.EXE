@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://2ices0ip234m"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://2ngdfax85627"]
 
 [ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_p7hsg"]
 [ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_r7ikc"]
@@ -64,8 +64,8 @@ metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 script = ExtResource("1_p7hsg")
 skins = Array[ExtResource("2_r7ikc")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
 skinUsed = "Glorious sheep"
-playerClicks = 611
-moneyCollected = 816140
+playerClicks = 731
+moneyCollected = 93075642
 multiplyMoneyAchievement = 15.0
 tips = Dictionary[String, bool]({
 "choose_wise": true,
@@ -74,6 +74,5 @@ tips = Dictionary[String, bool]({
 "rebirth_1": true,
 "rebirth_2": true
 })
-lastTime = 1785525773.901068
-moneyToCollectOffline = 3001396
+lastTime = 1785781552.267641
 beatedTheGame = true

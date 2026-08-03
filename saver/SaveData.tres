@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://ffe62uq8rfaj"]
+[gd_resource type="Resource" script_class="GameSaveData" format=3 uid="uid://df0daxyvxu573"]
 
 [ext_resource type="Script" uid="uid://lvtpvbs1d8u2" path="res://Scripts/GameSaveData/GameSaveData.gd" id="1_hantp"]
 [ext_resource type="Script" uid="uid://bkluf3o0xvjq2" path="res://Scripts/Shop/ShopClass.gd" id="2_wh28c"]
@@ -53,9 +53,10 @@ metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 script = ExtResource("2_wh28c")
 title = "Rare Wool"
 image = ExtResource("6_xdoum")
-price = 2000
+price = 2400
+level = 1
 power = 4
-tax = 1.2
+tax = 1.25
 taxInc = 0.05
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
@@ -110,13 +111,14 @@ metadata/_custom_type_script = "uid://cwsi8g3ox6y7a"
 
 [resource]
 script = ExtResource("1_hantp")
-money = 82601852
+money = 174859354
 increment = 34
 clickMultiply = 2
 autoCollect = 416
 collectSpeed = 0.9000000000000004
 autoCollectSheepAbility = true
 autoCollectSheep = 2.7
+rareChance = 0.01
 shopListData = SubResource("Resource_d26l7")
 tutorialed = true
 jumpPower = 25.0

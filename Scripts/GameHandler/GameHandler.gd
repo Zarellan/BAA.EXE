@@ -13,7 +13,10 @@ enum Quality{
 @export var saveDataSettings:GameSaveSettings
 @export var saveDataAchievements:GameSaveAchievements
 
-var globalDelta:float
+
+var collected:bool = false
+
+var offlineGrinded:bool = false
 
 var timerSaveCooldown:Timer
 var canSave = true
@@ -42,22 +45,34 @@ func _ready() -> void:
 	timerAutoCollectorSheep = CreateTimer(saveData.autoCollectSheep, CollectSheep, false)
 	timerAutoCollectorSheep.wait_time = AutoCollectSheepTotalParse()
 	timerAutoCollectorSheep.start()
-	offlineLastTimeMinuteAdd = CreateTimer(5, AddMinuteFromLastTime, false)
+	offlineLastTimeMinuteAdd = CreateTimer(5, AddSecondsFromLastTime, false)
 	offlineLastTimeMinuteAdd.start()
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
-	#set_process(false)
-	fetch_online_time()
 	set_physics_process(false)
 	pass # Replace with function body.
 
+func BringGrindParse():
+	await RenderingServer.frame_post_draw
+	await get_tree().create_timer(1).timeout
+	var grindAttempts:int = 0
+	while (true):
+		if (collected):
+			print(collected)
+			BringOfflineGrind()
+			break
+		if (grindAttempts >= 10):
+			OfflineProgress(Time.get_unix_time_from_system())
+			BringOfflineGrind()
+			break
+		grindAttempts += 1
+		await get_tree().create_timer(0.5).timeout
+
 #region Time Offline Respone
 
-func AddMinuteFromLastTime():
+func AddSecondsFromLastTime():
 	saveDataAchievements.lastTime += 5
 
 func fetch_online_time(collectNow:bool = true, setLastTime:bool = false) -> void:
-	# Safety Fallback: Ensure we always have a valid local baseline instantly 
-	# so the game never processes an uninitialized '0' timestamp.
 	if saveDataAchievements.lastTime <= 0:
 		saveDataAchievements.lastTime = Time.get_unix_time_from_system()
 
@@ -80,7 +95,6 @@ func fetch_online_time(collectNow:bool = true, setLastTime:bool = false) -> void
 		# Fallback to system time if API response was invalid
 		if current_time <= 0:
 			current_time = Time.get_unix_time_from_system()
-		
 		if (setLastTime):
 				saveDataAchievements.lastTime = current_time
 		if collectNow:
@@ -93,7 +107,6 @@ func fetch_online_time(collectNow:bool = true, setLastTime:bool = false) -> void
 	# Fire the request
 	var err = http.request("https://www.timeapi.io/api/Time/current/zone?timeZone=UTC")
 	if err != OK:
-		# If the request fails to send entirely (e.g., no internet connection)
 		if not request_resolved:
 			request_resolved = true
 			if is_instance_valid(http):
@@ -107,9 +120,8 @@ func OfflineProgress(current_time):
 	var interval: float = saveData.collectSpeed
 	var elapsed_seconds: int = clamp(current_time - saveDataAchievements.lastTime,0,8 * 60 * 60)
 	if (elapsed_seconds < 5 * 60):
-		if (saveDataAchievements.moneyToCollectOffline > 0):
-			get_tree().get_first_node_in_group("OfflineGrind").BringOfflineCollect(saveDataAchievements.moneyToCollectOffline, ConvToStringTime(saveDataAchievements.lastTime - current_time))
 		saveDataAchievements.lastTime = current_time
+		collected = true
 		print("5 minutes isn't bypassed")
 		return
 	var total_ticks = floor(elapsed_seconds / interval)
@@ -126,11 +138,13 @@ func OfflineProgress2(current_time, elapsed_seconds):
 	var total_ticks = floor(elapsed_seconds / interval)
 
 	var total_collected: float = total_ticks * power_per_second
-
+	
 	if (AutoCollectSheepActive()):
 		saveDataAchievements.moneyToCollectOffline += max(0,total_collected)
 	if (saveDataAchievements.moneyToCollectOffline > 0):
-		get_tree().get_first_node_in_group("OfflineGrind").BringOfflineCollect(saveDataAchievements.moneyToCollectOffline, ConvToStringTime(saveDataAchievements.lastTime - current_time))
+		saveDataAchievements.timeWereOffline += current_time - saveDataAchievements.lastTime
+	collected = true
+		#get_tree().get_first_node_in_group("OfflineGrind").BringOfflineCollect(saveDataAchievements.moneyToCollectOffline, ConvToStringTime(saveDataAchievements.timeWereOffline))
 	saveDataAchievements.lastTime = current_time
 	SaveAllDataGlob()
 
@@ -138,9 +152,19 @@ func ConvToStringTime(time):
 	if time <= 0:
 		return "0 min"
 	if time > 60 * 60:
-		return str(time / 60 / 60) + " hours"
+		return str(int(time / 60 / 60)) + " hours"
 	else:
-		return str(time / 60) + " min"
+		return str(int(time / 60)) + " min"
+func BringOfflineGrind():
+	if (offlineGrinded):
+		return
+	if (saveDataAchievements.moneyToCollectOffline > 0):
+		get_tree().get_first_node_in_group("OfflineGrind").BringOfflineCollect(saveDataAchievements.moneyToCollectOffline, ConvToStringTime(saveDataAchievements.timeWereOffline))
+	offlineGrinded = true
+func CollectWhatLeft(multiply:float = 1.0):
+	AddMoneyForce(saveDataAchievements.moneyToCollectOffline * multiply)
+	saveDataAchievements.moneyToCollectOffline = 0
+	saveDataAchievements.timeWereOffline = 0
 #endregion
 var del:float = 0
 func _process(delta: float) -> void:

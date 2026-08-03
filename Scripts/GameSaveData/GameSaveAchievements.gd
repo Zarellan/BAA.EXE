@@ -29,5 +29,6 @@ class_name GameSaveAchievements
 # offline collect
 @export var lastTime:float = 0
 @export var moneyToCollectOffline:int = 0
+@export var timeWereOffline:float = 0
 # beated the game
 @export var beatedTheGame:bool = false

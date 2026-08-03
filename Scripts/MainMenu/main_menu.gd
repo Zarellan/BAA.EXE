@@ -11,6 +11,7 @@ var progress : Array[float] = []
 func _ready() -> void:
 	WebsiteUtil.StopSDK()
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/MainMenu.mp3")
+	GameHandler.fetch_online_time()
 	#ResourceLoader.load_threaded_request(scenePath)
 	TweenUtils.tweenScalePingPong(background,Vector2(1,1.05),Vector2(1,1),2,TweenUtils.Ease.InOutSine)
 	TweenUtils.tweenSkewPingPong(sheep,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
@@ -36,5 +37,6 @@ func _process(_delta: float) -> void:
 			
 			var scene = ResourceLoader.load_threaded_get(scenePath)
 			TransitionScript.ChangeScene2(scene,func():
-				GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3"))
+				GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
+				GameHandler.BringGrindParse())
 	pass

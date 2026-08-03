@@ -2200,9 +2200,9 @@ texture = SubResource("CanvasTexture_nme7v")
 self_modulate = Color(0.601223, 0.601223, 0.60122293, 0.69411767)
 layout_mode = 0
 offset_left = 278.0
-offset_top = 119.0
+offset_top = -599.0
 offset_right = 1000.0
-offset_bottom = 599.0
+offset_bottom = -119.0
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("85_gnh6p")
 region_rect = Rect2(0, 0, 64, 64)
@@ -2251,6 +2251,45 @@ _current_font_size = 26
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
+[node name="Collect" type="Button" parent="Control/CanvasLayer/OfflineGrind/CollectTex" unique_id=743850956]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.085872576
+anchor_top = 0.74791664
+anchor_right = 0.45013854
+anchor_bottom = 0.92291665
+offset_right = -3.0517578e-05
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
+text = "Collect X1
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Collect2" type="Button" parent="Control/CanvasLayer/OfflineGrind/CollectTex" unique_id=487697875]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.54432136
+anchor_top = 0.74791664
+anchor_right = 0.9085873
+anchor_bottom = 0.92291665
+offset_right = -3.0517578e-05
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_5w07k")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_341u3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nme7v")
+text = "Collect X3"
+metadata/_edit_use_anchors_ = true
+
 [node name="PauseButtonFront" type="Control" parent="Control/CanvasLayer" unique_id=964589464]
 layout_mode = 3
 anchors_preset = 0
@@ -2258,6 +2297,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -3773,6 +3813,9 @@ limit_enabled = false
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/Achievements" to="Control/CanvasLayer/Achievements" method="_on_achievements_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/Minigames-UI" to="Control/CanvasLayer/Minigames" method="_on_minigames_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/OptionUI/RebirthIc" to="Control/CanvasLayer/RebirthMenu" method="_on_rebirth_ic_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/OfflineGrind/CollectTex/Collect" to="Control/CanvasLayer/OfflineGrind" method="_on_collect_pressed"]
+[connection signal="button_up" from="Control/CanvasLayer/OfflineGrind/CollectTex/Collect2" to="Control/CanvasLayer/OfflineGrind" method="_on_collect_2_button_up"]
+[connection signal="pressed" from="Control/CanvasLayer/OfflineGrind/CollectTex/Collect2" to="Control/CanvasLayer/OfflineGrind" method="_on_collect_2_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Resume" to="Control/CanvasLayer/PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Settings" to="Control/CanvasLayer/PauseMenu" method="_on_settings_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/PauseMenu/Save" to="Control/CanvasLayer/PauseMenu" method="_on_save_pressed"]
