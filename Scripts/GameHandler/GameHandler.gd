@@ -32,6 +32,7 @@ var fontSkinCondition
 func _ready() -> void:
 	if (OS.has_feature("editor")):
 		get_tree().reload_current_scene.call_deferred() # reloading early to face early crash rather that being surprised
+	ResourceUtil.EmergencyChange()
 	saveData = GameSaveData.new()
 	saveDataRebirth = GameSaveRebirth.new()
 	saveDataSettings = GameSaveSettings.new()
@@ -81,7 +82,7 @@ func fetch_online_time(collectNow:bool = true, setLastTime:bool = false) -> void
 	
 	var request_resolved = false
 	http.timeout = 6.0
-	http.request_completed.connect(func(result, response_code, headers, body):
+	http.request_completed.connect(func(_result, response_code, _headers, body):
 		if request_resolved:
 			return
 		request_resolved = true
@@ -104,7 +105,6 @@ func fetch_online_time(collectNow:bool = true, setLastTime:bool = false) -> void
 			http.queue_free()
 	)
 	
-	# Fire the request
 	var err = http.request("https://www.timeapi.io/api/Time/current/zone?timeZone=UTC")
 	if err != OK:
 		if not request_resolved:
@@ -155,6 +155,7 @@ func ConvToStringTime(time):
 		return str(int(time / 60 / 60)) + " hours"
 	else:
 		return str(int(time / 60)) + " min"
+
 func BringOfflineGrind():
 	if (offlineGrinded):
 		return
@@ -162,7 +163,7 @@ func BringOfflineGrind():
 		get_tree().get_first_node_in_group("OfflineGrind").BringOfflineCollect(saveDataAchievements.moneyToCollectOffline, ConvToStringTime(saveDataAchievements.timeWereOffline))
 	offlineGrinded = true
 func CollectWhatLeft(multiply:float = 1.0):
-	AddMoneyForce(saveDataAchievements.moneyToCollectOffline * multiply)
+	AddMoneyForce(int(saveDataAchievements.moneyToCollectOffline * multiply))
 	saveDataAchievements.moneyToCollectOffline = 0
 	saveDataAchievements.timeWereOffline = 0
 #endregion
@@ -333,7 +334,7 @@ func NowCollect():
 
 func GamePausedPartil() -> bool:
 	return PauseScript.paused || RebirthMenu.isRebirthMenu || SkinChanger.isSkinChanging || \
-	AchievementHandler.isAchievement || MinigamesMenu.isMinigame || OfflineGrind.isOfflineGrind
+	AchievementHandler.isAchievement || MinigamesMenu.isMinigame || OfflineGrind.isOfflineGrind || TransitionScript.isChanging
 	
 func AutoCollectSheepActive():
 	return saveData.autoCollectSheepAbility || saveDataRebirth.autoCollectSheepAbility

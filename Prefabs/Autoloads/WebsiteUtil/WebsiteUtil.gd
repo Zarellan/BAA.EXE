@@ -19,6 +19,8 @@ var platformMain
 var adSucceed
 
 var caughtError:bool = false
+
+var adSupport:bool = true
 func _ready() -> void:
 	BuildType()
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -33,9 +35,13 @@ func BuildType():
 	if (OS.has_feature("CrazyGames")):
 		platformType = Platform.crazyGames
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/CrazyGames.gd").new()
+		adSupport = true
 	else:
 		platformType = Platform.none
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/BasePlatform.gd").new()
+		adSupport = false
+	if (OS.has_feature("editor")):
+		adSupport = true
 	platformMain.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(platformMain)
 

@@ -5,7 +5,8 @@ class_name PlatformWay
 enum Type{
 	normal,
 	move,
-	cloud
+	cloud,
+	revive
 }
 
 @export var visibleNotifier:VisibleOnScreenNotifier2D
@@ -66,6 +67,8 @@ func Move(delta):
 
 var twPosY:Tween
 func JumpedOn(velocityStrengthY: float, stomped = false):
+	if (platformType == Type.revive):
+		return 0
 	var standard_landing_velocity = 500.0
 	
 	var velocity_factor = absf(velocityStrengthY) / standard_landing_velocity

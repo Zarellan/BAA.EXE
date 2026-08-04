@@ -16,13 +16,11 @@ var tweenGrindPanel:Tween
 func _ready() -> void:
 	isOfflineGrind = false
 	visible = false
+	set_process(false)
+	set_physics_process(false)
 	await RenderingServer.frame_post_draw
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func BringOfflineCollect(money, time):
 	if (!isOfflineGrind):

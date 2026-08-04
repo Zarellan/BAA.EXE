@@ -23,9 +23,15 @@ var tweenScaleWool2:Tween
 
 @export var phoneButtons:Array[Control]
 
+@export var sparkReviveParticle:GPUParticles2D
+
+@export var reviveChoice:Control
+
 var died = false
 
 var imgLose:Image
+
+var defaultSoundtrackDB:float = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#if (instance == null):
@@ -34,12 +40,13 @@ func _ready() -> void:
 	tweenScaleWool2 = TweenUtils.tweenScalePingPong(woolBarrier2,Vector2(0.95,1),Vector2(1.05,1),3.2,TweenUtils.Ease.InOutSine)
 	ParticleManager.PlayParticleWarmup(woolBarrier1Particle)
 	ParticleManager.PlayParticleWarmup(woolBarrier2Particle)
+	ParticleManager.PlayParticleWarmup(sparkReviveParticle)
 	PlatformSpawner()
 	died = false
 	score = 0
 	gameOverScreenTimer.timeout.connect(BringGameOverScreen)
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/PlatformMinigame.mp3")
-	
+	defaultSoundtrackDB = GlobalSoundtrack.volume_db
 	modify_curve_domain()
 	isPhone()
 	ScreenShotGame()
@@ -120,6 +127,8 @@ func _process(_delta: float) -> void:
 	if (maxSpawnY > get_tree().get_first_node_in_group("PlayerPlatform").position.y - 1000):
 		maxSpawnY = currentYspawn - 500
 		PlatformSpawner()
+	if (Input.is_action_just_pressed("Enter_Key")):
+		Revive()
 	#if (Input.is_action_just_pressed("ui_down")):
 		#ScreenShotGame()
 	pass
@@ -221,7 +230,6 @@ static func IncScore():
 	TweenUtils.tweenScale(instance.textScore,Vector2.ONE,0.3,TweenUtils.Ease.OutCirc)
 	pass
 
-var twVolume:Tween
 
 var twVolWp:Tween
 
@@ -232,26 +240,89 @@ var twVolWp:Tween
 @export var quitButton:Control
 @export var gameOverScreenTimer:Timer
 
+func Revive():
+	WebsiteUtil.StartSDK()
+	RemoveReviveBox(true)
+	TweenUtils.StopTween(twVolWp)
+	if (DeviceCheckerUtil.IsUsingPhone()):
+		for i in range(phoneButtons.size()):
+			TweenUtils.tweenAlphaSelf(phoneButtons,1,0.3,TweenUtils.Ease.linear)
+	twVolWp = TweenUtils.tweenCustom(self, 0.3, 1, 0.5, TweenUtils.Ease.linear, func(val): 
+		GlobalSoundtrack.pitch_scale = val)
+	TweenUtils.tweenCustom(self, -80, defaultSoundtrackDB, 0.5, TweenUtils.Ease.linear, func(val): 
+		GlobalSoundtrack.volume_db = val
+		)
+	var playero:PlayerPlatform = get_tree().get_first_node_in_group("PlayerPlatform")
+	var platformRev = InstantiateUtil.Instantiate(platformPrefab,self)
+	platformRev.position = Vector2(CalculateBasedOfZoomXrng(),camera.position.y + 600)
+	(platformRev as PlatformWay).platformType = PlatformWay.Type.revive
+	TweenUtils.tweenY(platformRev,camera.position.y + 150,0.3,TweenUtils.Ease.OutCirc).finished.connect(func():
+		await get_tree().create_timer(0.2).timeout
+		playero.temporaryExtraJump += 200 # you get more power, me get more money
+		playero.JUMP_VELOCITY = -GameHandler.TotalJumpPower() - playero.temporaryExtraJump
+		playero.xPow = 0
+		playero.velocity = Vector2(0,0)
+		playero.jumpVector = Vector2(0,0)
+		playero.activeGravity = false
+		playero.global_position = platformRev.global_position - Vector2(0,75)
+		sparkReviveParticle.global_position = playero.global_position
+		ParticleManager.PlayParticleOv(sparkReviveParticle,randi_range(15,25))
+		TweenUtils.tweenCustom(self,1,0,0.3,TweenUtils.Ease.linear,func(val):
+			playero.sprite.get_node("SheepBright").material.set_shader_parameter("flash_modifier",val))
+		await get_tree().create_timer(0.5).timeout
+		playero.activeGravity = true
+		died = false
+	)
+	revivedCount += 1
+var revivedCount:int = 0
 func GameOver():
 	if (died):
 		return
 	WebsiteUtil.StopSDK()
-	gameoverUI.visible = true
 	if (DeviceCheckerUtil.IsUsingPhone()):
 		for i in range(phoneButtons.size()):
 			TweenUtils.tweenAlphaSelf(phoneButtons,0,0.3,TweenUtils.Ease.linear)
 	twVolWp = TweenUtils.tweenCustom(self, 1, 0.3, 2, TweenUtils.Ease.linear, func(val): 
 		GlobalSoundtrack.pitch_scale = val)
 	twVolWp.finished.connect(func():
-			twVolWp = TweenUtils.tweenCustom(self, 0, -80, 4, TweenUtils.Ease.linear, func(val): 
+			twVolWp = TweenUtils.tweenCustom(self, defaultSoundtrackDB, -80, 4, TweenUtils.Ease.linear, func(val): 
 				GlobalSoundtrack.volume_db = val))
 	if (GameHandler.saveDataAchievements.platformMinigameScore < score):
 		GameHandler.saveDataAchievements.platformMinigameScore = score
-	gameOverScreenTimer.start()
+	died = true
+	await get_tree().create_timer(0.4).timeout
+	if (WebsiteUtil.adSupport && revivedCount < 1):
+		ReviveBox()
+	else:
+		BringGameOver()
+	pass
+@export var progressReviveBar:ProgressBar
+var tweenRevive:Tween
+var tweenRevealChoice:Tween
+var canReviveButton:bool = false
+func ReviveBox():
+	canReviveButton = true
+	reviveChoice.visible = true
+	tweenRevealChoice = TweenUtils.tweenY(reviveChoice,0,0.3,TweenUtils.Ease.OutCirc)
+	tweenRevive = TweenUtils.tweenCustom(self,1.0,-0.2,5,TweenUtils.Ease.linear,func(val):
+		progressReviveBar.value = val)
+	tweenRevive.finished.connect(RemoveReviveBox)
+func RemoveReviveBox(reviveSuccess:bool = false):
+	canReviveButton = false
+	TweenUtils.StopTween(tweenRevealChoice)
+	TweenUtils.StopTween(tweenRevive)
+	tweenRevealChoice = TweenUtils.tweenY(reviveChoice,-1280,0.3,TweenUtils.Ease.InSine)
+	tweenRevealChoice.finished.connect(func():
+		reviveChoice.visible = false)
+	if (!reviveSuccess):
+		BringGameOver(0.5)
+
+func BringGameOver(timer:float = 1.7):
+	gameoverUI.visible = true
+	gameOverScreenTimer.start(timer)
 	
 	GameHandler.SaveAllDataGlob()
-	died = true
-	pass
+
 func BringGameOverScreen():
 	TweenUtils.tweenAlphaSelf(blackoutTexture,0.4,0.3,TweenUtils.Ease.linear)
 	StartPositionTextureGameOver(loseTexture.get_parent())
@@ -308,3 +379,16 @@ func SceneChangedFromMinigame():
 	GlobalSoundtrack.PlaySoundtrack("res://Soundtrack/lesiakower-morning-coffee-396750.mp3")
 	GlobalSoundtrack.pitch_scale = 1
 	GlobalSoundtrack.volume_db = -80
+
+
+func _on_giveup_pressed() -> void:
+	if (canReviveButton):
+		RemoveReviveBox()
+	pass # Replace with function body.
+
+
+func _on_revive_pressed() -> void:
+	if (canReviveButton):
+		WebsiteUtil.play_ad_award(func():
+			Revive())
+	pass # Replace with function body.

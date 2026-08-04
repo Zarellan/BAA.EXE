@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://2ngdfax85627"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://0x4k6fuk2nwk"]
 
 [ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_p7hsg"]
 [ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_r7ikc"]
@@ -46,7 +46,6 @@ effectDescription = "Effect: collect multiplier x1.9"
 achievementName = "Font"
 achievementTask = "don't click/tap anything for whole 30 seconds"
 achievementImage = ExtResource("6_dhwaq")
-unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_1vh0c"]
@@ -64,15 +63,16 @@ metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 script = ExtResource("1_p7hsg")
 skins = Array[ExtResource("2_r7ikc")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
 skinUsed = "Glorious sheep"
-playerClicks = 731
-moneyCollected = 93075642
+playerClicks = 154
+moneyCollected = 23800
+rebirthCollected = 1
 multiplyMoneyAchievement = 15.0
 tips = Dictionary[String, bool]({
 "choose_wise": true,
 "minigame_1": true,
-"minigame_2": true,
+"minigame_2": false,
 "rebirth_1": true,
 "rebirth_2": true
 })
-lastTime = 1785781552.267641
+lastTime = 1785869184.050686
 beatedTheGame = true

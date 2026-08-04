@@ -25,8 +25,13 @@ var defaultScale = Vector2()
 var twScaleSprite:Tween
 
 var prevVelocityY = 0
+
+var activeGravity:bool = true
+
+var temporaryExtraJump:float = 0
+
 func _ready() -> void:
-	JUMP_VELOCITY = -GameHandler.TotalJumpPower()
+	JUMP_VELOCITY = -GameHandler.TotalJumpPower() - temporaryExtraJump
 	defaultScale = sprite.scale
 	ParticleManager.PlayParticleWarmup(dirtParticle)
 	takeImageTimer.timeout.connect(func():
@@ -35,7 +40,8 @@ func _physics_process(delta: float) -> void:
 	anchorArrow.position = $Sprite2D/Nodo.global_position
 
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		if (activeGravity):
+			velocity += get_gravity() * delta
 		velocity.x = -jumpVector.x
 		anchorArrow.visible = false
 		prevVelocityY = velocity.y

@@ -20,6 +20,10 @@
 [ext_resource type="Script" uid="uid://dgeq0drm8oqaq" path="res://Scripts/Utils/ScaleOverlap.gd" id="18_vf3s3"]
 [ext_resource type="Texture2D" uid="uid://ur8hde5qx5fq" path="res://Sprites/OptionUIs/exit door.png" id="20_r1fok"]
 [ext_resource type="Texture2D" uid="uid://cmq6mhs8xxqlb" path="res://Sprites/OptionUIs/Arrow3.png" id="21_6b8ww"]
+[ext_resource type="Texture2D" uid="uid://me6utmnqir7i" path="res://Sprites/OptionUIs/UICorner.png" id="21_r1fok"]
+[ext_resource type="Texture2D" uid="uid://bqnxqa7h53u2m" path="res://Sprites/ButtonSprites/Button.png" id="22_m6kgy"]
+[ext_resource type="Texture2D" uid="uid://bj1alcwg1g3gh" path="res://Sprites/ButtonSprites/ButtonNon.png" id="23_qql5m"]
+[ext_resource type="Texture2D" uid="uid://dcr8psxns5jbc" path="res://Sprites/ButtonSprites/ButtonPressed.png" id="24_iedsg"]
 
 [sub_resource type="Curve" id="Curve_vyqy7"]
 _limits = [3.0, 15.0, 0.0, 10000.0]
@@ -28,6 +32,21 @@ point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw4da"]
 size = Vector2(137.16626, 130)
+
+[sub_resource type="Shader" id="Shader_vf3s3"]
+code = "shader_type canvas_item;
+
+// Controls the white flash intensity (0.0 = completely invisible, 1.0 = pure white overlay)
+uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
+
+void fragment() {
+    // Simply render solid white, and control the visibility via the modifier
+    COLOR = vec4(1.0, 1.0, 1.0, flash_modifier);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6b8ww"]
+shader = SubResource("Shader_vf3s3")
+shader_parameter/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tp4em"]
 size = Vector2(86.6283, 122.456635)
@@ -282,11 +301,81 @@ _data = {
 &"RESET": SubResource("Animation_jmhar")
 }
 
+[sub_resource type="Curve" id="Curve_vf3s3"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, -76.85388), 0.0, 0.0, 0, 0, Vector2(1, 12.134888), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q14y5"]
+curve = SubResource("Curve_vf3s3")
+
+[sub_resource type="Gradient" id="Gradient_r1fok"]
+offsets = PackedFloat32Array(0, 0.89453125, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qxec0"]
+gradient = SubResource("Gradient_r1fok")
+
+[sub_resource type="Curve" id="Curve_6b8ww"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.20218581, 0.23595512), 0.0, 0.0, 0, 0, Vector2(1, 0.15730345), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fip8v"]
+curve = SubResource("Curve_6b8ww")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s7soa"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 34.36
+angle_min = -7.4999895
+angle_max = 7.500011
+angle_curve = SubResource("CurveTexture_q14y5")
+direction = Vector3(1, -20.33, 0)
+spread = 105.319
+flatness = 0.34
+initial_velocity_min = 269.65
+initial_velocity_max = 523.24
+gravity = Vector3(0, 98, 0)
+scale_min = 1.1999999
+scale_max = 4.0
+color_ramp = SubResource("GradientTexture1D_qxec0")
+turbulence_enabled = true
+turbulence_noise_strength = 3.0
+turbulence_initial_displacement_min = -42.5
+turbulence_initial_displacement_max = 22.600002
+turbulence_influence_over_life = SubResource("CurveTexture_fip8v")
+
 [sub_resource type="CanvasTexture" id="CanvasTexture_4nel2"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_pyr1d"]
 
-[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle", "textScore", "player", "camera", "phoneButtons", "gameoverUI", "loseTexture", "blackoutTexture", "retryButton", "quitButton", "gameOverScreenTimer")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1fok"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1fok"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1v42m"]
+texture = ExtResource("22_m6kgy")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sffty"]
+texture = ExtResource("23_qql5m")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qikx"]
+texture = ExtResource("24_iedsg")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[node name="PlatformMinigame" type="Node2D" unique_id=2025532831 node_paths=PackedStringArray("woolBarrier1", "woolBarrier2", "woolBarrier1Particle", "woolBarrier2Particle", "textScore", "player", "camera", "phoneButtons", "sparkReviveParticle", "reviveChoice", "gameoverUI", "loseTexture", "blackoutTexture", "retryButton", "quitButton", "gameOverScreenTimer", "progressReviveBar")]
 rotation = -0.0002622433
 script = ExtResource("1_kk0mp")
 platformPrefab = ExtResource("5_tks0h")
@@ -299,12 +388,15 @@ curveDistance = SubResource("Curve_vyqy7")
 player = NodePath("CharacterBody2D")
 camera = NodePath("Camera2D")
 phoneButtons = [NodePath("Control/CanvasLayer/TextureButton"), NodePath("Control/CanvasLayer/Left")]
+sparkReviveParticle = NodePath("SparkleRev")
+reviveChoice = NodePath("Control/CanvasLayer/ReviveChoice")
 gameoverUI = NodePath("Control/CanvasLayer/GameOver")
 loseTexture = NodePath("Control/CanvasLayer/GameOver/imageWh/Image")
 blackoutTexture = NodePath("Control/CanvasLayer/GameOver/BlackOut")
 retryButton = NodePath("Control/CanvasLayer/GameOver/Buttons/Retry")
 quitButton = NodePath("Control/CanvasLayer/GameOver/Buttons/Quit")
 gameOverScreenTimer = NodePath("Control/CanvasLayer/GameOver/GameOverScreen")
+progressReviveBar = NodePath("Control/CanvasLayer/ReviveChoice/ReviveBox/ReviveChanceBar")
 
 [node name="Ground" type="StaticBody2D" parent="." unique_id=1320418300 node_paths=PackedStringArray("visibleNotifier")]
 position = Vector2(612, 579)
@@ -362,6 +454,14 @@ frame = 1
 
 [node name="Nodo" type="Node2D" parent="CharacterBody2D/Sprite2D" unique_id=358907344]
 position = Vector2(0, -63.611717)
+
+[node name="SheepBright" type="ColorRect" parent="CharacterBody2D/Sprite2D" unique_id=670159228]
+material = SubResource("ShaderMaterial_6b8ww")
+offset_left = -68.98243
+offset_top = -98.71175
+offset_right = 66.37983
+offset_bottom = 14.056541
+mouse_filter = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=706593397]
 position = Vector2(1.8475342, 2.7714844)
@@ -495,6 +595,17 @@ process_material = SubResource("ParticleProcessMaterial_7olyu")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D/WoolBarrier2" unique_id=1172394557]
 libraries/ = SubResource("AnimationLibrary_mt4ev")
 autoplay = &"Idle"
+
+[node name="SparkleRev" type="GPUParticles2D" parent="." unique_id=84333653]
+z_index = 3
+texture_filter = 1
+position = Vector2(609.8867, 432.15997)
+emitting = false
+amount = 20
+lifetime = 6.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_s7soa")
 
 [node name="Control" type="Control" parent="." unique_id=1892803073]
 layout_mode = 3
@@ -916,6 +1027,124 @@ useScalingSingle = true
 dependOnButton = true
 button = NodePath("..")
 
+[node name="ReviveChoice" type="Control" parent="Control/CanvasLayer" unique_id=497499692]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1280.0
+offset_bottom = -1280.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ReviveBox" type="NinePatchRect" parent="Control/CanvasLayer/ReviveChoice" unique_id=171721672]
+self_modulate = Color(0.601223, 0.601223, 0.60122293, 0.69411767)
+layout_mode = 0
+offset_left = 440.0
+offset_top = 80.0
+offset_right = 838.0
+offset_bottom = 560.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("21_r1fok")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 17
+patch_margin_top = 18
+patch_margin_right = 17
+patch_margin_bottom = 17
+
+[node name="Title" type="RichTextLabel" parent="Control/CanvasLayer/ReviveChoice/ReviveBox" unique_id=2135507534]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.060301524
+anchor_top = 0.022916667
+anchor_right = 0.9223683
+anchor_bottom = 0.17083333
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 30
+text = "oh you lost"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_vyqy7")
+_max_size = 30
+_current_font_size = 30
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
+
+[node name="Desc" type="RichTextLabel" parent="Control/CanvasLayer/ReviveChoice/ReviveBox" unique_id=1881532017]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.06783921
+anchor_top = 0.15208334
+anchor_right = 0.92990595
+anchor_bottom = 0.33125
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "want to revive with extra 200 jump power ?"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("11_vyqy7")
+_max_size = 15
+_current_font_size = 15
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
+
+[node name="ReviveChanceBar" type="ProgressBar" parent="Control/CanvasLayer/ReviveChoice/ReviveBox" unique_id=1411425107]
+layout_mode = 0
+anchor_left = 0.09045226
+anchor_top = 0.34166667
+anchor_right = 0.8919598
+anchor_bottom = 0.38333333
+theme_override_styles/background = SubResource("StyleBoxEmpty_r1fok")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r1fok")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Revive" type="Button" parent="Control/CanvasLayer/ReviveChoice/ReviveBox" unique_id=2048797629]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11055278
+anchor_top = 0.5208333
+anchor_right = 0.89949757
+anchor_bottom = 0.6958333
+offset_right = -3.0517578e-05
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 33
+theme_override_styles/normal = SubResource("StyleBoxTexture_1v42m")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sffty")
+theme_override_styles/hover = SubResource("StyleBoxTexture_7qikx")
+text = "Revive
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="Giveup" type="Button" parent="Control/CanvasLayer/ReviveChoice/ReviveBox" unique_id=2001757551]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.11055278
+anchor_top = 0.7416667
+anchor_right = 0.89949757
+anchor_bottom = 0.9166667
+offset_right = -3.0517578e-05
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 33
+theme_override_styles/normal = SubResource("StyleBoxTexture_1v42m")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sffty")
+theme_override_styles/hover = SubResource("StyleBoxTexture_7qikx")
+text = "Give up"
+metadata/_edit_use_anchors_ = true
+
 [connection signal="body_entered" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_entered"]
 [connection signal="body_exited" from="CharacterBody2D/FeetDetector" to="CharacterBody2D" method="_on_feet_detector_body_exited"]
 [connection signal="body_entered" from="Camera2D/WoolBarrier/WoolBarrierCollision" to="." method="_on_wool_barrier_collision_body_entered"]
@@ -934,3 +1163,5 @@ button = NodePath("..")
 [connection signal="button_up" from="Control/CanvasLayer/TextureButton" to="CharacterBody2D" method="_on_texture_button_button_up"]
 [connection signal="pressed" from="Control/CanvasLayer/Retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/ReviveChoice/ReviveBox/Revive" to="." method="_on_revive_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/ReviveChoice/ReviveBox/Giveup" to="." method="_on_giveup_pressed"]

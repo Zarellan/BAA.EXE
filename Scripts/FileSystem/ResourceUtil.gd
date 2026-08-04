@@ -4,6 +4,10 @@ class_name ResourceUtil
 static var saveTo:String = "res://" # swap to user:// once finished
 static var type = ".tres"
 
+static func EmergencyChange(): #in case I forgot to change the saveTo
+	if (!OS.has_feature("editor")):
+		saveTo = "user://"
+		type = ".res"
 static func RemoveResources(path:String, directory:String):
 	var fullPath = RemoveRootPath(path)
 	if (!ResourceLoader.exists(saveTo + directory + "/" + fullPath + type)):

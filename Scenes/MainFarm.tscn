@@ -172,7 +172,7 @@ color_ramp = SubResource("GradientTexture1D_17bn8")
 anim_offset_max = 1.0
 turbulence_noise_strength = 3.0
 
-[sub_resource type="Shader" id="Shader_wcncl"]
+[sub_resource type="Shader" id="Shader_utk63"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.6.2.stable's CanvasItemMaterial.
 
 shader_type canvas_item;
@@ -239,17 +239,17 @@ void fragment() {
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.7372549, 0.7372549, 0, 1, 0.8862745, 0.7058824, 0.41568628, 1, 1, 1, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_v1gif"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3e000"]
 gradient = SubResource("Gradient_8hf41")
 fill_from = Vector2(0, 0.9273504)
 fill_to = Vector2(1, 0.6111111)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8hf41"]
-shader = SubResource("Shader_wcncl")
+shader = SubResource("Shader_utk63")
 shader_parameter/particles_anim_h_frames = 3
 shader_parameter/particles_anim_v_frames = 1
 shader_parameter/particles_anim_loop = false
-shader_parameter/gradient = SubResource("GradientTexture2D_v1gif")
+shader_parameter/gradient = SubResource("GradientTexture2D_3e000")
 shader_parameter/gradient_mix_amount = 1.0
 shader_parameter/progress = 0.0
 shader_parameter/random_start = 0.0
@@ -259,30 +259,30 @@ _limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, -76.85388), 0.0, 0.0, 0, 0, Vector2(1, 12.134888), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_q14y5"]
+[sub_resource type="CurveTexture" id="CurveTexture_qv28c"]
 curve = SubResource("Curve_5xh03")
 
 [sub_resource type="Gradient" id="Gradient_4gutc"]
 offsets = PackedFloat32Array(0, 0.89453125, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qxec0"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_l3kyi"]
 gradient = SubResource("Gradient_4gutc")
 
 [sub_resource type="Curve" id="Curve_ujam8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.20218581, 0.23595512), 0.0, 0.0, 0, 0, Vector2(1, 0.15730345), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_fip8v"]
+[sub_resource type="CurveTexture" id="CurveTexture_wi5hg"]
 curve = SubResource("Curve_ujam8")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ujam8"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rnp0f"]
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 34.36
 angle_min = -7.4999895
 angle_max = 7.500011
-angle_curve = SubResource("CurveTexture_q14y5")
+angle_curve = SubResource("CurveTexture_qv28c")
 direction = Vector3(1, -20.33, 0)
 spread = 105.319
 flatness = 0.34
@@ -290,13 +290,13 @@ initial_velocity_min = 269.65
 initial_velocity_max = 523.24
 gravity = Vector3(0, 98, 0)
 scale_min = 0.59999996
-color_ramp = SubResource("GradientTexture1D_qxec0")
+color_ramp = SubResource("GradientTexture1D_l3kyi")
 anim_offset_max = 1.0
 turbulence_enabled = true
 turbulence_noise_strength = 3.0
 turbulence_initial_displacement_min = -42.5
 turbulence_initial_displacement_max = 22.600002
-turbulence_influence_over_life = SubResource("CurveTexture_fip8v")
+turbulence_influence_over_life = SubResource("CurveTexture_wi5hg")
 
 [sub_resource type="Shader" id="Shader_7yrkc"]
 code = "// NOTE: Shader automatically converted from Godot Engine 4.6.2.stable's CanvasItemMaterial.
@@ -380,6 +380,28 @@ shader_parameter/speed = 0.9
 shader_parameter/rainbow_mix = 0.5
 shader_parameter/glow_intensity = 1.5
 shader_parameter/node_size = Vector2(64, 64)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ujam8"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 34.36
+angle_min = -7.4999895
+angle_max = 7.500011
+angle_curve = SubResource("CurveTexture_qv28c")
+direction = Vector3(1, -20.33, 0)
+spread = 105.319
+flatness = 0.34
+initial_velocity_min = 269.65
+initial_velocity_max = 523.24
+gravity = Vector3(0, 98, 0)
+scale_min = 0.59999996
+color_ramp = SubResource("GradientTexture1D_l3kyi")
+anim_offset_max = 1.0
+turbulence_enabled = true
+turbulence_noise_strength = 3.0
+turbulence_initial_displacement_min = -42.5
+turbulence_initial_displacement_max = 22.600002
+turbulence_influence_over_life = SubResource("CurveTexture_wi5hg")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amxxf"]
 size = Vector2(162, 98)
@@ -1496,7 +1518,7 @@ texture = ExtResource("3_4gutc")
 lifetime = 6.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_ujam8")
+process_material = SubResource("ParticleProcessMaterial_rnp0f")
 
 [node name="GoldShadeScript" type="Node2D" parent="RareWool" unique_id=1129252644]
 script = ExtResource("12_1x37o")
@@ -2185,6 +2207,7 @@ pauseButton = NodePath("../OptionUI/PauseButton")
 frontPauseButtonParent = NodePath("../PauseButtonFront")
 backPauseButtonParent = NodePath("../OptionUI")
 infoText = NodePath("CollectTex/InfoText")
+metadata/_edit_use_anchors_ = true
 
 [node name="Black" type="TextureRect" parent="Control/CanvasLayer/OfflineGrind" unique_id=1883525309]
 self_modulate = Color(0, 0, 0, 0)
@@ -2195,6 +2218,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("CanvasTexture_nme7v")
+metadata/_edit_use_anchors_ = true
 
 [node name="CollectTex" type="NinePatchRect" parent="Control/CanvasLayer/OfflineGrind" unique_id=1851041765]
 self_modulate = Color(0.601223, 0.601223, 0.60122293, 0.69411767)
@@ -2210,6 +2234,7 @@ patch_margin_left = 17
 patch_margin_top = 18
 patch_margin_right = 17
 patch_margin_bottom = 17
+metadata/_edit_use_anchors_ = true
 
 [node name="WelcomeBackText" type="RichTextLabel" parent="Control/CanvasLayer/OfflineGrind/CollectTex" unique_id=10375030]
 clip_contents = false
@@ -2250,6 +2275,7 @@ _max_size = 26
 _current_font_size = 26
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
 
 [node name="Collect" type="Button" parent="Control/CanvasLayer/OfflineGrind/CollectTex" unique_id=743850956]
 layout_mode = 1
@@ -2295,6 +2321,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="PauseMenu" type="Control" parent="Control/CanvasLayer" unique_id=969040763 node_paths=PackedStringArray("settings")]
 visible = false
@@ -3772,7 +3799,7 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/outline_size = 9
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 text = "tired of grinding ?
