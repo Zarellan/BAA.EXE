@@ -1,78 +1,103 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://0x4k6fuk2nwk"]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://crtnwe0unkfor"]
 
-[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_p7hsg"]
-[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_r7ikc"]
-[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_gj7pw"]
-[ext_resource type="Texture2D" uid="uid://cb4tdhf3rwt47" path="res://Sprites/AchievementImages/Eid.png" id="4_tvj3r"]
-[ext_resource type="Texture2D" uid="uid://qmvgd4igr5y5" path="res://Sprites/AchievementImages/Jump.png" id="5_r8lss"]
-[ext_resource type="Texture2D" uid="uid://dhx0xyysxy81i" path="res://Sprites/AchievementImages/Font.png" id="6_dhwaq"]
-[ext_resource type="Texture2D" uid="uid://tk73uyx0108s" path="res://Sprites/ShopImages/Rebirth/Glory.png" id="7_0y634"]
+[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_2yxkc"]
+[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_h3mo4"]
+[ext_resource type="Texture2D" uid="uid://clc1p3x4ryd4" path="res://Sprites/AchievementImages/Sniper.png" id="3_qa4yv"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_r7ikc"]
+[ext_resource type="Texture2D" uid="uid://cb4tdhf3rwt47" path="res://Sprites/AchievementImages/Eid.png" id="4_gj7pw"]
+[ext_resource type="Texture2D" uid="uid://qmvgd4igr5y5" path="res://Sprites/AchievementImages/Jump.png" id="5_tvj3r"]
+[ext_resource type="Texture2D" uid="uid://5cyro3kncifb" path="res://Sprites/AchievementImages/SniperMonster.png" id="7_gj7pw"]
+[ext_resource type="Texture2D" uid="uid://dhx0xyysxy81i" path="res://Sprites/AchievementImages/Font.png" id="7_r8lss"]
+[ext_resource type="Texture2D" uid="uid://tk73uyx0108s" path="res://Sprites/ShopImages/Rebirth/Glory.png" id="8_dhwaq"]
 
 [sub_resource type="Resource" id="Resource_ykfix"]
-script = ExtResource("2_r7ikc")
+script = ExtResource("2_h3mo4")
 description = "just thrilling with the originality"
 effectDescription = "Effect: None"
 achievementName = "None"
 achievementTask = "None"
-achievementImage = ExtResource("3_gj7pw")
+achievementImage = ExtResource("3_r7ikc")
 unlocked = true
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_fip8v"]
-script = ExtResource("2_r7ikc")
+script = ExtResource("2_h3mo4")
 name = "Eid"
 description = "the game was suppose to be for eid, but then I decide to polish it"
 effectDescription = "Effect: collect multiplier x1.4"
 achievementName = "Code"
 achievementTask = "Type \"eid mubarak\" in code settings"
-achievementImage = ExtResource("4_tvj3r")
+achievementImage = ExtResource("4_gj7pw")
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_vhidr"]
-script = ExtResource("2_r7ikc")
+script = ExtResource("2_h3mo4")
 name = "Jump sheep"
 description = "hmm...he looks like someone...but ninjas might haunt me if I mentioned it ;)"
 effectDescription = "effect: increase your jump by +200"
 achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
-achievementImage = ExtResource("5_r8lss")
+achievementImage = ExtResource("5_tvj3r")
+unlocked = true
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
+[sub_resource type="Resource" id="Resource_0dnco"]
+script = ExtResource("2_h3mo4")
+name = "School sheep"
+description = "what a hero, he saved the school from specific kid"
+effectDescription = "Effect: increase your jump by +500"
+achievementName = "Shooting stars"
+achievementTask = "Shoot 5 stars from the background"
+achievementImage = ExtResource("3_qa4yv")
+unlocked = true
+platformAvailable = 2
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
+[sub_resource type="Resource" id="Resource_6bdr0"]
+script = ExtResource("2_h3mo4")
+name = "Tank sheep"
+description = "well he wasn't going to spill in the tank"
+effectDescription = "Effect: collect multiplier x3.2"
+achievementName = "YOU MONSTER !"
+achievementTask = "click the sheep while you right click"
+achievementImage = ExtResource("7_gj7pw")
+unlocked = true
+platformAvailable = 2
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_sbckw"]
-script = ExtResource("2_r7ikc")
+script = ExtResource("2_h3mo4")
 name = "Font"
 description = "you gonna have a Baaaa'd clock"
 effectDescription = "Effect: collect multiplier x1.9"
 achievementName = "Font"
 achievementTask = "don't click/tap anything for whole 30 seconds"
-achievementImage = ExtResource("6_dhwaq")
+achievementImage = ExtResource("7_r8lss")
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_1vh0c"]
-script = ExtResource("2_r7ikc")
+script = ExtResource("2_h3mo4")
 name = "Glorious sheep"
 description = "The loyalty looks too glorious (even thought he is a sheep)"
 effectDescription = "Effect: collect multiplier x15"
 achievementName = "King sheep"
 achievementTask = "Beat the game"
-achievementImage = ExtResource("7_0y634")
-unlocked = true
+achievementImage = ExtResource("8_dhwaq")
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [resource]
-script = ExtResource("1_p7hsg")
-skins = Array[ExtResource("2_r7ikc")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
-skinUsed = "Glorious sheep"
-playerClicks = 154
-moneyCollected = 23800
-rebirthCollected = 1
-multiplyMoneyAchievement = 15.0
+script = ExtResource("1_2yxkc")
+skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_0dnco"), SubResource("Resource_6bdr0"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
+skinUsed = "Tank sheep"
+playerClicks = 5
+moneyCollected = 26
+multiplyMoneyAchievement = 3.2
+platformMinigameScore = 1
 tips = Dictionary[String, bool]({
-"choose_wise": true,
+"choose_wise": false,
 "minigame_1": true,
 "minigame_2": false,
-"rebirth_1": true,
-"rebirth_2": true
+"rebirth_1": false,
+"rebirth_2": false
 })
-lastTime = 1785869184.050686
-beatedTheGame = true
+lastTime = 1785956950.382632

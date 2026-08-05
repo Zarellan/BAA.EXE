@@ -9,6 +9,9 @@ jump sound: https://pixabay.com/sound-effects/film-special-effects-whoosh-gaming
 jump land sound: https://pixabay.com/sound-effects/film-special-effects-land2-43790/
 game over sound: https://pixabay.com/sound-effects/musical-game-over-39-199830/
 wool hit: https://pixabay.com/sound-effects/film-special-effects-heavy-cloth-rustle-106346/
+teleport sound: https://pixabay.com/sound-effects/film-special-effects-transition-futuristic-teleport-121420/
+falling sound: https://pixabay.com/sound-effects/film-special-effects-fall-217900/
+
 
 Platform minigame soundtrack: https://pixabay.com/music/upbeat-level-one-8-bit-pixel-warriors-chapter-one-415685/
 MainMenu soundtrack: https://pixabay.com/music/beats-lovely-garden-540008/

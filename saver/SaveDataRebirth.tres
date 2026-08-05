@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://cpc2p05yauei6"]
+[gd_resource type="Resource" script_class="GameSaveRebirth" format=3 uid="uid://cs3t6wefu4fl"]
 
 [ext_resource type="Script" uid="uid://cdnm7de0x2dq8" path="res://Scripts/Shop/rebirth/RebirthClass.gd" id="1_urp6s"]
 [ext_resource type="Texture2D" uid="uid://cce7c8i62ko24" path="res://Sprites/ShopImages/Rebirth/Main Multiplier.png" id="2_35u3r"]
@@ -21,8 +21,7 @@ script = ExtResource("1_urp6s")
 title = "Main multiplier"
 image = ExtResource("2_35u3r")
 description = "the more you buy it the more the collect doubles (will stay the same multiply even after [rainbow]rebirth[/rainbow])"
-rebirthPrice = 2
-level = 1
+rebirthPrice = 1
 power = 1
 tax = 2.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -123,10 +122,9 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_urp6s")
 title = "Cheaper rebirth"
 image = ExtResource("12_tw7iy")
-rebirthPrice = 6
-level = 2
+rebirthPrice = 3
 power = 8
-tax = 1.8000000000000005
+tax = 1.6
 taxInc = 0.1
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
@@ -134,7 +132,7 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("1_urp6s")
 title = "Reach the Glory (ending)"
 image = ExtResource("13_gx00u")
-level = 1
+rebirthPrice = 5000
 power = 12
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -146,7 +144,4 @@ metadata/_custom_type_script = "uid://b6bpycct3x2he"
 
 [resource]
 script = ExtResource("15_8mocp")
-rebirth = 4993
 rebirthListData = SubResource("Resource_gx00u")
-multiplier_reb = 2
-cheaperRebirth = 1.2000000000000002

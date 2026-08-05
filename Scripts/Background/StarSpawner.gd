@@ -1,6 +1,8 @@
 extends Node2D
 class_name StarSpawner
 
+static var starsShooted:int = 0
+
 @export var starInstance:PackedScene
 @export var numberStarsSpawn:int
 @export var numberStarsSpawnLow:int
@@ -11,6 +13,7 @@ var spawned = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#SpawnStars()
+	starsShooted = 0
 	set_process(false)
 	set_physics_process(false)
 	pass # Replace with function body.
@@ -18,7 +21,8 @@ func _ready() -> void:
 func SpawnStars():
 	var maxSpawn = numberStarsSpawn if (GameHandler.saveDataSettings.quality == GameHandler.Quality.High) else numberStarsSpawnLow
 	for rem in range(starsPack.size() - 1,-1,-1):
-		starsPack[rem].queue_free()
+		if (is_instance_valid(starsPack[rem])):
+			starsPack[rem].queue_free()
 	starsPack.clear()
 	if (GameHandler.saveDataSettings.quality == GameHandler.Quality.TooLow):
 		return

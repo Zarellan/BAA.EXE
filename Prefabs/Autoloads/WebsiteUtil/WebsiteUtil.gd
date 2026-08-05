@@ -4,7 +4,8 @@ extends Node # responsible for SDK websites
 enum Platform
 {
 	none,
-	crazyGames
+	crazyGames,
+	newground
 }
 
 var gameStarted:bool = false
@@ -36,8 +37,13 @@ func BuildType():
 		platformType = Platform.crazyGames
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/CrazyGames.gd").new()
 		adSupport = true
+	elif (OS.has_feature("Newground")): 
+		platformType = Platform.newground
+		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/BasePlatform.gd").new()
+		adSupport = false
 	else:
-		platformType = Platform.none
+		#platformType = Platform.none
+		platformType = Platform.newground
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/BasePlatform.gd").new()
 		adSupport = false
 	if (OS.has_feature("editor")):
@@ -66,7 +72,7 @@ func StopSDK():
 
 ## Call this during natural breaks (player death, level change, match over)
 func RequestMidgameAd() -> void:
-	if (platformType == Platform.none):
+	if (platformType == Platform.none || platformType == Platform.newground):
 		return
 	caughtError = false
 	platformMain.RequestMidgameAd()
@@ -76,7 +82,7 @@ func RequestMidgameAd() -> void:
 # =============================================================================
 
 func play_ad_award(funct: Callable) -> void:
-	if (platformType == Platform.none):
+	if (platformType == Platform.none || platformType == Platform.newground):
 		if (OS.has_feature("editor")):
 			funct.call()
 		return

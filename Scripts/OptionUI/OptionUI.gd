@@ -136,6 +136,22 @@ var goldRebirth2Tween:Tween
 var goldRebirth1Value:ValueSaver
 var goldRebirth2Value:ValueSaver
 
+func BothExit():
+	if (isShop):
+		TweenUtils.StopTween(tweenShopPanel)
+		tweenShopPanel = TweenUtils.tweenX(shopPanel,2480.0,0.3,TweenUtils.Ease.InSine)
+		isShop = false
+		tweenShopPanel.finished.connect(func():
+			shopPanel.visible = false
+			ActiveShopItems(false))
+	if (isRebirth):
+		TweenUtils.StopTween(tweenRebirthPanel)
+		tweenRebirthPanel = TweenUtils.tweenX(rebirthPanel,2480.0,0.3,TweenUtils.Ease.InSine)
+		isRebirth = false
+		tweenRebirthPanel.finished.connect(func():
+			rebirthPanel.visible = false
+			ActiveRebirth(false))
+
 func GoldenTweens(): # since GPU "TIME" is heavy, I'll have to use CPU instead
 	goldRebirth1Value = ValueSaver.new()
 	goldRebirth2Value = ValueSaver.new()

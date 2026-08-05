@@ -74,6 +74,8 @@
 [ext_resource type="Texture2D" uid="uid://clfttv2ggs4qt" path="res://Sprites/OptionUIs/WhiteShirt.png" id="54_q14y5"]
 [ext_resource type="Texture2D" uid="uid://cx4oq5cwfkygh" path="res://Sprites/OptionUIs/trophy.png" id="60_4ghmb"]
 [ext_resource type="Texture2D" uid="uid://j3622u0du1nv" path="res://Sprites/OptionUIs/controller.png" id="61_bvqys"]
+[ext_resource type="Shader" uid="uid://c2j477xvmdm3b" path="res://Shaders/CircleSniper.gdshader" id="62_3e000"]
+[ext_resource type="Script" uid="uid://bo0c310ecdvhb" path="res://Scripts/newground/Sniper.gd" id="62_qv28c"]
 [ext_resource type="Script" uid="uid://bv6wpis75gryx" path="res://Scripts/SkinChanger/SkinChangeMain.gd" id="64_fip8v"]
 [ext_resource type="PackedScene" uid="uid://isevecd4fd6k" path="res://Scenes/SkinChanger.tscn" id="64_qxec0"]
 [ext_resource type="Script" uid="uid://c3fhx3vqoprj3" path="res://Scripts/Achievements/AchievementInit.gd" id="69_l88l1"]
@@ -675,6 +677,17 @@ metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 script = ExtResource("28_hotcp")
 items = Array[ExtResource("27_phtv5")]([SubResource("Resource_hotcp"), SubResource("Resource_1x37o"), SubResource("Resource_17bn8"), SubResource("Resource_wcncl"), SubResource("Resource_q14y5"), SubResource("Resource_ueu3d"), SubResource("Resource_8hf41"), SubResource("Resource_tdfnv"), SubResource("Resource_amxxf"), SubResource("Resource_p5ocn"), SubResource("Resource_ovgwv"), SubResource("Resource_ebyxy")])
 metadata/_custom_type_script = "uid://b6bpycct3x2he"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qv28c"]
+shader = ExtResource("62_3e000")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 5.0
+shader_parameter/feather = 0.1210000057475
+shader_parameter/line_thickness = 0.003
+shader_parameter/line_length = 15.0
+shader_parameter/line_gap = 0.02
+shader_parameter/show_center_dot = true
+shader_parameter/dot_radius = 0.0
 
 [sub_resource type="Gradient" id="Gradient_iwha0"]
 offsets = PackedFloat32Array(0, 0.48876405, 0.7303371, 1)
@@ -1465,7 +1478,7 @@ scale = Vector2(0.94, 0.8868217)
 texture = ExtResource("2_4tk57")
 offset = Vector2(0, -31.835205)
 
-[node name="Sheep" parent="." unique_id=1343371003 node_paths=PackedStringArray("tutorial", "tutorialTimer", "moneyText", "textMoneyRev", "part", "partRare", "partRainbow", "mouseControl", "sheepShadow", "rainbowStarParticle") groups=["Sheep"] instance=ExtResource("8_wcncl")]
+[node name="Sheep" parent="." unique_id=1343371003 node_paths=PackedStringArray("tutorial", "tutorialTimer", "moneyText", "textMoneyRev", "part", "partRare", "partRainbow", "mouseControl", "sheepShadow", "rainbowStarParticle", "sniperNode", "optionUI") groups=["Sheep"] instance=ExtResource("8_wcncl")]
 light_mask = 3
 position = Vector2(132, 680)
 isMain = true
@@ -1479,6 +1492,8 @@ partRainbow = NodePath("../RainbowWool")
 mouseControl = NodePath("../Control/CanvasLayer/Mouse")
 sheepShadow = NodePath("../Background/Floor/SheepShadow")
 rainbowStarParticle = NodePath("../RainbowStarParticle")
+sniperNode = NodePath("../Control/CanvasLayer/Sniper")
+optionUI = NodePath("../Control/CanvasLayer/OptionUI")
 
 [node name="Tutorial" type="Node2D" parent="." unique_id=1475479390]
 modulate = Color(1, 1, 1, 0)
@@ -1556,114 +1571,6 @@ anchors_preset = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Control" unique_id=699005217 groups=["UI"]]
-
-[node name="WoolCounter" type="Control" parent="Control/CanvasLayer" unique_id=972502790]
-layout_mode = 3
-anchors_preset = 0
-pivot_offset = Vector2(1, 0)
-size_flags_horizontal = 0
-size_flags_vertical = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/WoolCounter" unique_id=428712004]
-layout_mode = 1
-offset_right = 283.0
-offset_bottom = 61.0
-pivot_offset = Vector2(20, 20)
-texture = ExtResource("15_wnqqd")
-metadata/_edit_use_anchors_ = true
-
-[node name="MoneyCounter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=2131891367]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.032786883
-anchor_bottom = -0.032786883
-offset_right = 283.0
-offset_bottom = 61.0
-pivot_offset_ratio = Vector2(0, 0.5)
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/line_separation = 1
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-vertical_alignment = 1
-script = ExtResource("16_joy2m")
-_max_size = 32
-_outline_ratio = 0.0
-_current_font_size = 32
-_editor_defaults_set = true
-metadata/_custom_type_script = "uid://co0lo02vnu10n"
-metadata/_edit_use_anchors_ = true
-
-[node name="Script" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter" unique_id=1097378439 node_paths=PackedStringArray("moneyCounterText")]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_5xh03")
-moneyCounterText = NodePath("..")
-metadata/_edit_use_anchors_ = true
-
-[node name="RebirthCount" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=541613207]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 0
-offset_right = 60.0
-offset_bottom = 61.0
-metadata/_edit_use_anchors_ = true
-
-[node name="RebirthCounter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=1505046559]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -30.5
-offset_right = 229.0
-offset_bottom = 30.5
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "313"
-scroll_active = false
-vertical_alignment = 1
-script = ExtResource("16_joy2m")
-_max_size = 32
-_outline_ratio = 0.0
-_current_font_size = 32
-_editor_defaults_set = true
-metadata/_custom_type_script = "uid://co0lo02vnu10n"
-metadata/_edit_use_anchors_ = true
-
-[node name="Rebirth" type="TextureRect" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=59527763]
-layout_mode = 0
-offset_left = 3.0000038
-offset_top = 12.0
-offset_right = 57.000004
-offset_bottom = 56.0
-pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("26_u06jq")
-expand_mode = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Rebirth2" type="TextureRect" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=480601130]
-layout_mode = 0
-offset_top = 2.0
-offset_right = 54.000004
-offset_bottom = 46.0
-rotation = -3.1415927
-pivot_offset_ratio = Vector2(0.5, 0.5)
-texture = ExtResource("26_u06jq")
-expand_mode = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="RebirthCountScript" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=203582194 node_paths=PackedStringArray("rebirthText")]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("15_210na")
-rebirthText = NodePath("../RebirthCounter")
-metadata/_edit_use_anchors_ = true
 
 [node name="TextRev" type="Control" parent="Control/CanvasLayer" unique_id=1274630093 node_paths=PackedStringArray("sheep") groups=["Sheep"]]
 layout_mode = 3
@@ -1900,6 +1807,136 @@ grow_vertical = 2
 pivot_offset = Vector2(29, 40)
 mouse_filter = 2
 texture = ExtResource("12_pbqe1")
+
+[node name="Sniper" type="Control" parent="Control/CanvasLayer" unique_id=1467031101 node_paths=PackedStringArray("sniperRect")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("62_qv28c")
+sniperRect = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="Control/CanvasLayer/Sniper" unique_id=909655807]
+material = SubResource("ShaderMaterial_qv28c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="WoolCounter" type="Control" parent="Control/CanvasLayer" unique_id=972502790]
+layout_mode = 3
+anchors_preset = 0
+pivot_offset = Vector2(1, 0)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/CanvasLayer/WoolCounter" unique_id=428712004]
+layout_mode = 1
+offset_right = 283.0
+offset_bottom = 61.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("15_wnqqd")
+metadata/_edit_use_anchors_ = true
+
+[node name="MoneyCounter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=2131891367]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.032786883
+anchor_bottom = -0.032786883
+offset_right = 283.0
+offset_bottom = 61.0
+pivot_offset_ratio = Vector2(0, 0.5)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = 1
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 32
+_outline_ratio = 0.0
+_current_font_size = 32
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
+
+[node name="Script" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect/MoneyCounter" unique_id=1097378439 node_paths=PackedStringArray("moneyCounterText")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_5xh03")
+moneyCounterText = NodePath("..")
+metadata/_edit_use_anchors_ = true
+
+[node name="RebirthCount" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect" unique_id=541613207]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 0
+offset_right = 60.0
+offset_bottom = 61.0
+metadata/_edit_use_anchors_ = true
+
+[node name="RebirthCounter" type="RichTextLabel" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=1505046559]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -30.5
+offset_right = 229.0
+offset_bottom = 30.5
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "313"
+scroll_active = false
+vertical_alignment = 1
+script = ExtResource("16_joy2m")
+_max_size = 32
+_outline_ratio = 0.0
+_current_font_size = 32
+_editor_defaults_set = true
+metadata/_custom_type_script = "uid://co0lo02vnu10n"
+metadata/_edit_use_anchors_ = true
+
+[node name="Rebirth" type="TextureRect" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=59527763]
+layout_mode = 0
+offset_left = 3.0000038
+offset_top = 12.0
+offset_right = 57.000004
+offset_bottom = 56.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("26_u06jq")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Rebirth2" type="TextureRect" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=480601130]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 54.000004
+offset_bottom = 46.0
+rotation = -3.1415927
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("26_u06jq")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="RebirthCountScript" type="Control" parent="Control/CanvasLayer/WoolCounter/TextureRect/RebirthCount" unique_id=203582194 node_paths=PackedStringArray("rebirthText")]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("15_210na")
+rebirthText = NodePath("../RebirthCounter")
+metadata/_edit_use_anchors_ = true
 
 [node name="OptionUI" type="Control" parent="Control/CanvasLayer" unique_id=1519445988 node_paths=PackedStringArray("refresh1", "refresh2", "shoppingKart", "shopPanel", "rebirthPanel", "upScroll", "downScroll", "moneyText", "rebirthText") groups=["OptionUI"]]
 layout_mode = 3
@@ -3370,7 +3407,6 @@ button = NodePath("..")
 metadata/_edit_use_anchors_ = true
 
 [node name="Achievements" type="Control" parent="Control/CanvasLayer" unique_id=715517]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -3421,13 +3457,69 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/CanvasLayer/Achievements/TextureRect/TextureRect2/ScrollContainer" unique_id=84288405]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Control/CanvasLayer/Achievements" unique_id=1206291248]
+[node name="Back" type="TextureButton" parent="Control/CanvasLayer/Achievements" unique_id=58158625]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -132.0
+offset_right = 259.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("15_wnqqd")
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="Control/CanvasLayer/Achievements/Back" unique_id=1244321268]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -230.46875
+offset_top = -50.78125
+offset_right = 230.46875
+offset_bottom = 50.78125
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92, 0.92)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Door" type="TextureRect" parent="Control/CanvasLayer/Achievements/Back/Control" unique_id=2033372933]
 layout_mode = 0
-offset_left = 344.0
-offset_top = 584.0
-offset_right = 943.0
-offset_bottom = 675.0
-text = "Back"
+offset_left = 228.98149
+offset_right = 326.9815
+offset_bottom = 97.0
+mouse_filter = 2
+texture = ExtResource("76_3xwj6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Arrow" type="TextureRect" parent="Control/CanvasLayer/Achievements/Back/Control" unique_id=1142644817]
+layout_mode = 0
+offset_left = 253.98149
+offset_top = 17.999996
+offset_right = 324.43524
+offset_bottom = 120.41901
+rotation = 1.5707964
+mouse_filter = 2
+texture = ExtResource("77_y7kse")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="ScaleOverlap" type="Control" parent="Control/CanvasLayer/Achievements/Back" unique_id=1479512656 node_paths=PackedStringArray("node", "button")]
+anchors_preset = 0
+script = ExtResource("40_8hf41")
+node = NodePath("../Control")
+button = NodePath("..")
+metadata/_edit_use_anchors_ = true
 
 [node name="Minigames" type="Control" parent="Control/CanvasLayer" unique_id=750604673 node_paths=PackedStringArray("title", "desc", "image", "multi", "gameButton")]
 visible = false
@@ -3799,7 +3891,7 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 9
 theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 text = "tired of grinding ?
@@ -3869,7 +3961,7 @@ limit_enabled = false
 [connection signal="pressed" from="Control/CanvasLayer/RebirthMenu/TextureRect/Back" to="Control/CanvasLayer/RebirthMenu" method="_on_back_pressed"]
 [connection signal="timeout" from="Control/CanvasLayer/RebirthMenu/SquareRootCalculate" to="Control/CanvasLayer/RebirthMenu" method="_on_square_root_calculate_timeout"]
 [connection signal="pressed" from="Control/CanvasLayer/SkinPanel/Back" to="Control/CanvasLayer/SkinPanel" method="_on_back_pressed"]
-[connection signal="pressed" from="Control/CanvasLayer/Achievements/Button" to="Control/CanvasLayer/Achievements" method="_on_button_pressed"]
+[connection signal="pressed" from="Control/CanvasLayer/Achievements/Back" to="Control/CanvasLayer/Achievements" method="_on_back_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Minigames/TextureRect/TextureButton" to="Control/CanvasLayer/Minigames" method="_on_texture_button_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Minigames/TextureRect/TutorialHelp" to="Control/CanvasLayer/Minigames" method="_on_tutorial_help_pressed"]
 [connection signal="pressed" from="Control/CanvasLayer/Minigames/ExitButton" to="Control/CanvasLayer/Minigames" method="_on_exit_button_pressed"]

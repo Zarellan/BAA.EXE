@@ -209,9 +209,10 @@ func CalculateBasedOfZoomXrng():
 
 func CameraZoom():
 	var height_ratio = abs(player.global_position.y) / 20000.0
-	height_ratio = clamp(height_ratio, 0.0, 1.0)
+	height_ratio = clamp(height_ratio, (1-(600/GameHandler.TotalJumpPower()))*1.2, 1.0)
 	var target_zoom_val = lerp(1.0, 0.5, height_ratio)
 	target_zoom_val = snapped(target_zoom_val,0.1)
+	
 	TweenUtils.tweenCustom(self, camera.zoom.x, target_zoom_val, 2.0, TweenUtils.Ease.OutCirc, func(val): 
 		camera.zoom = Vector2(val,val)
 		var inverse_scale = 1.0 / camera.zoom.x
@@ -244,6 +245,8 @@ func Revive():
 	WebsiteUtil.StartSDK()
 	RemoveReviveBox(true)
 	TweenUtils.StopTween(twVolWp)
+	TweenUtils.StopTween(audioFallVolumeTween)
+	audioFall.queue_free()
 	if (DeviceCheckerUtil.IsUsingPhone()):
 		for i in range(phoneButtons.size()):
 			TweenUtils.tweenAlphaSelf(phoneButtons,1,0.3,TweenUtils.Ease.linear)
@@ -254,6 +257,7 @@ func Revive():
 		)
 	var playero:PlayerPlatform = get_tree().get_first_node_in_group("PlayerPlatform")
 	var platformRev = InstantiateUtil.Instantiate(platformPrefab,self)
+	playero.stomped = false
 	platformRev.position = Vector2(CalculateBasedOfZoomXrng(),camera.position.y + 600)
 	(platformRev as PlatformWay).platformType = PlatformWay.Type.revive
 	TweenUtils.tweenY(platformRev,camera.position.y + 150,0.3,TweenUtils.Ease.OutCirc).finished.connect(func():
@@ -267,14 +271,19 @@ func Revive():
 		playero.global_position = platformRev.global_position - Vector2(0,75)
 		sparkReviveParticle.global_position = playero.global_position
 		ParticleManager.PlayParticleOv(sparkReviveParticle,randi_range(15,25))
-		TweenUtils.tweenCustom(self,1,0,0.3,TweenUtils.Ease.linear,func(val):
+		var audioTelep = GlobalAudio.PlayOneShot("res://Sounds/teleport.mp3",8)
+		audioTelep.seek(0.3)
+		TweenUtils.tweenCustom(self,1,0,0.4,TweenUtils.Ease.linear,func(val):
 			playero.sprite.get_node("SheepBright").material.set_shader_parameter("flash_modifier",val))
+		(camera as CameraShake).add_trauma(0.25)
 		await get_tree().create_timer(0.5).timeout
 		playero.activeGravity = true
 		died = false
 	)
 	revivedCount += 1
 var revivedCount:int = 0
+var audioFall:AudioStreamPlayer
+var audioFallVolumeTween:Tween
 func GameOver():
 	if (died):
 		return
@@ -287,6 +296,9 @@ func GameOver():
 	twVolWp.finished.connect(func():
 			twVolWp = TweenUtils.tweenCustom(self, defaultSoundtrackDB, -80, 4, TweenUtils.Ease.linear, func(val): 
 				GlobalSoundtrack.volume_db = val))
+	audioFall = GlobalAudio.PlayOneShot("res://Sounds/falling.mp3",-3)
+	audioFallVolumeTween = TweenUtils.tweenCustom(self,-3,-80,10,TweenUtils.Ease.linear,func(val):
+		audioFall.volume_db = val)
 	if (GameHandler.saveDataAchievements.platformMinigameScore < score):
 		GameHandler.saveDataAchievements.platformMinigameScore = score
 	died = true

@@ -11,10 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://qmvgd4igr5y5" path="res://Sprites/AchievementImages/Jump.png" id="8_1vh0c"]
 [ext_resource type="Texture2D" uid="uid://bpnwkowpfyd2m" path="res://Sprites/Sheep/helmet.png" id="8_m7uoi"]
 [ext_resource type="Texture2D" uid="uid://dhx0xyysxy81i" path="res://Sprites/AchievementImages/Font.png" id="8_vt7wm"]
+[ext_resource type="Texture2D" uid="uid://clc1p3x4ryd4" path="res://Sprites/AchievementImages/Sniper.png" id="9_6bdr0"]
 [ext_resource type="Texture2D" uid="uid://dyp0gw4466eum" path="res://Sprites/Sheep/plumber.png" id="9_sbckw"]
 [ext_resource type="Texture2D" uid="uid://tk73uyx0108s" path="res://Sprites/ShopImages/Rebirth/Glory.png" id="10_0dnco"]
+[ext_resource type="Texture2D" uid="uid://5cyro3kncifb" path="res://Sprites/AchievementImages/SniperMonster.png" id="10_tw6gr"]
 [ext_resource type="Texture2D" uid="uid://dipdeix8qipxo" path="res://Sprites/Sheep/Crown.png" id="13_6ttsc"]
 [ext_resource type="Shader" uid="uid://b52nbl1qabtvu" path="res://Shaders/ShinyTexture.gdshader" id="13_uxlox"]
+[ext_resource type="Texture2D" uid="uid://dbyvl3m0msrx1" path="res://Sprites/Sheep/school sheep.png" id="14_gc6h3"]
+[ext_resource type="Texture2D" uid="uid://wholmpy2g7co" path="res://Sprites/Sheep/tanksheep.png" id="16_4vmt5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pwu8p"]
 shader = ExtResource("4_vhidr")
@@ -140,6 +144,28 @@ effectDescription = "effect: increase your jump by +200"
 achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
 achievementImage = ExtResource("8_1vh0c")
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
+[sub_resource type="Resource" id="Resource_0dnco"]
+script = ExtResource("5_ibwm0")
+name = "School sheep"
+description = "what a hero, he saved the school from specific kid"
+effectDescription = "Effect: increase your jump by +500"
+achievementName = "Shooting stars"
+achievementTask = "Shoot 5 stars from the background"
+achievementImage = ExtResource("9_6bdr0")
+platformAvailable = 2
+metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
+
+[sub_resource type="Resource" id="Resource_6bdr0"]
+script = ExtResource("5_ibwm0")
+name = "Tank sheep"
+description = "well he wasn't going to spill in the tank"
+effectDescription = "Effect: collect multiplier x3.2"
+achievementName = "YOU MONSTER !"
+achievementTask = "click the sheep while you right click"
+achievementImage = ExtResource("10_tw6gr")
+platformAvailable = 2
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_sbckw"]
@@ -309,8 +335,8 @@ shape = SubResource("RectangleShape2D_0r47l")
 [node name="Skins" type="Node2D" parent="StaticBody2D" unique_id=1683950373 node_paths=PackedStringArray("sheep", "skinUses")]
 script = ExtResource("4_sbckw")
 sheep = NodePath("../..")
-skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
-skinUses = [NodePath("Eid"), NodePath("Jump sheep"), NodePath("Glorious sheep")]
+skins = Array[ExtResource("5_ibwm0")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_0dnco"), SubResource("Resource_6bdr0"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
+skinUses = [NodePath("Eid"), NodePath("Jump sheep"), NodePath("School sheep"), NodePath("Tank sheep"), NodePath("Glorious sheep")]
 
 [node name="Eid" type="Node2D" parent="StaticBody2D/Skins" unique_id=242466799]
 visible = false
@@ -387,7 +413,63 @@ offset_right = 58.33333
 offset_bottom = 47.92592
 mouse_filter = 2
 
+[node name="School sheep" type="Node2D" parent="StaticBody2D/Skins" unique_id=808835369]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/Skins/School sheep" unique_id=767295453]
+clip_children = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_xyweb")
+position = Vector2(-0.926, -0.437)
+texture = ExtResource("14_gc6h3")
+offset = Vector2(0, -17)
+
+[node name="Shadow" type="Sprite2D" parent="StaticBody2D/Skins/School sheep/Sprite2D" unique_id=277038438]
+self_modulate = Color(0, 0, 0, 0.42745098)
+texture_filter = 1
+material = SubResource("ShaderMaterial_vhidr")
+use_parent_material = true
+position = Vector2(1.8519258, 0.6777397)
+texture = ExtResource("14_gc6h3")
+offset = Vector2(0, -17)
+
+[node name="SheepBright" type="ColorRect" parent="StaticBody2D/Skins/School sheep/Sprite2D" unique_id=1903443950]
+material = SubResource("ShaderMaterial_m7uoi")
+offset_left = -63.888885
+offset_top = -76.61109
+offset_right = 58.33333
+offset_bottom = 47.92592
+mouse_filter = 2
+
+[node name="Tank sheep" type="Node2D" parent="StaticBody2D/Skins" unique_id=750817826]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/Skins/Tank sheep" unique_id=211354271]
+clip_children = 2
+texture_filter = 1
+material = SubResource("ShaderMaterial_xyweb")
+position = Vector2(-3.2407408, -0.6851849)
+texture = ExtResource("16_4vmt5")
+offset = Vector2(0, -17)
+
+[node name="Shadow" type="Sprite2D" parent="StaticBody2D/Skins/Tank sheep/Sprite2D" unique_id=2067780014]
+self_modulate = Color(0, 0, 0, 0.42745098)
+texture_filter = 1
+material = SubResource("ShaderMaterial_vhidr")
+use_parent_material = true
+position = Vector2(2.314815, 2.7777765)
+texture = ExtResource("16_4vmt5")
+offset = Vector2(0, -17)
+
+[node name="SheepBright" type="ColorRect" parent="StaticBody2D/Skins/Tank sheep/Sprite2D" unique_id=1659298699]
+material = SubResource("ShaderMaterial_m7uoi")
+offset_left = -63.888885
+offset_top = -76.61109
+offset_right = 58.33333
+offset_bottom = 47.92592
+mouse_filter = 2
+
 [node name="Glorious sheep" type="Node2D" parent="StaticBody2D/Skins" unique_id=354183321]
+visible = false
 
 [node name="Crown" type="Sprite2D" parent="StaticBody2D/Skins/Glorious sheep" unique_id=1551123688]
 clip_children = 2

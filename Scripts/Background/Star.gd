@@ -7,6 +7,10 @@ var lightNode:Node2D
 var intense:ValueSaver
 
 var materialLight:ShaderMaterial
+
+var gotShot:bool = false
+
+var gravity:float = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	intense = ValueSaver.new()
@@ -25,7 +29,25 @@ func _ready() -> void:
 		lightNode.material = null
 	pass # Replace with function body.
 
-func _process(_delta: float) -> void:
+var posXmove:float = 0
+func _process(delta: float) -> void:
+	var mouse_pos = get_local_mouse_position()
+
 	if (lightNode.material != null):
 		materialLight.set_shader_parameter("radius", intense.number)
+	if (starNode.get_rect().has_point(mouse_pos) && Input.is_action_just_pressed("LeftMouse") && (Sheep.holdSniper && Sheep.canShoot) && !gotShot):
+		posXmove = randf_range(-10,10)
+		gravity = -15
+		StarSpawner.starsShooted += 1
+		GlobalAudio.PlayOneShot("res://Sounds/RebirthBought.mp3", 0)
+		if (StarSpawner.starsShooted >= 5):
+			GameHandler.UnlockSkin("School sheep")
+		gotShot = true
+	if (gotShot):
+		position.x += posXmove * 5 * delta
+		gravity += delta * 40
+		position.y += gravity
+		rotate(posXmove * delta)
+		if (position.y > 1500):
+			queue_free()
 	pass

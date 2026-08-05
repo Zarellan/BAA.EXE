@@ -1,6 +1,8 @@
 extends Node2D
 class_name Sheep
 
+static var holdSniper:bool = false
+static var canShoot:bool = true
 
 @export var isMain = false
 @export var isSkin = false
@@ -20,6 +22,10 @@ class_name Sheep
 
 @export var skins:Skins
 
+@export var sniperNode:SniperClass
+
+@export var optionUI:OptionUI
+
 static var isInside = false
 
 var twe:Tween
@@ -28,6 +34,8 @@ var defaultScale
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	holdSniper = false
+	canShoot = true
 	TweenUtils.tweenSkewPingPong(self,-0.04,0.04,1,TweenUtils.Ease.InOutSine)
 	defaultScale = scale
 	if (is_instance_valid(sheepShadow)):
@@ -39,6 +47,7 @@ func _ready() -> void:
 		if (!GameHandler.saveData.tutorialed):
 			tutorialTimer.start()
 			tutorialTimer.timeout.connect(StartTutorial)
+		holdSniper = false
 	else:
 		SetUniqueShader(get_node("StaticBody2D/Sprite2D"))
 	
@@ -47,7 +56,24 @@ func _ready() -> void:
 	if (GameHandler.saveDataRebirth.rebirth >= 1 && GameHandler.GiveTip("rebirth_2", "since you rebirthed successfully, try to buy rebirth items to make the grinding faster :]",10)):
 		GameHandler.GetScaleOverlap("ShoppingKartRebirth").ShineTheButton()
 	pass # Replace with function body.
-	
+
+var gunAudio:AudioStreamPlayer
+func NewgroundOnly():
+	if not is_instance_valid(sniperNode):
+		return
+	if (!holdSniper && Input.is_action_pressed("RightMouse") && !GameHandler.GamePausedPartil()):
+		holdSniper = true
+		sniperNode.SetSnipe(true)
+		optionUI.BothExit()
+	elif (holdSniper && (!Input.is_action_pressed("RightMouse") || GameHandler.GamePausedPartil())):
+		holdSniper = false
+		sniperNode.SetSnipe(false)
+	if (canShoot && holdSniper && Input.is_action_just_pressed("LeftMouse")):
+		sniperNode.ShootEffect()
+		gunAudio = GlobalAudio.PlayOneShot("res://Sounds/Sniper.mp3",0,randf_range(0.95,1.05))
+		canShoot = false
+		gunAudio.finished.connect(func():
+			canShoot = true)
 func SetUniqueShader(obj:Node):
 	if (is_instance_valid(obj.material)):
 		var shade = obj.material.duplicate()
@@ -65,6 +91,10 @@ func SheepShaderCondition():
 		get_node("StaticBody2D/Skins/Jump sheep/Sprite2D/SheepBright").queue_free()
 		get_node("StaticBody2D/Skins/Glorious sheep/Crown/SheepBright").material = null
 		get_node("StaticBody2D/Skins/Glorious sheep/Crown/SheepBright").queue_free()
+		get_node("StaticBody2D/Skins/School sheep/Sprite2D/SheepBright").material = null
+		get_node("StaticBody2D/Skins/School sheep/Sprite2D/SheepBright").queue_free()
+		get_node("StaticBody2D/Skins/Tank sheep/Sprite2D/SheepBright").material = null
+		get_node("StaticBody2D/Skins/Tank sheep/Sprite2D/SheepBright").queue_free()
 var twTutorial:Tween
 func StartTutorial():
 	twTutorial = TweenUtils.tweenAlpha(tutorial,1,2,TweenUtils.Ease.linear)
@@ -79,6 +109,8 @@ func _process(_delta: float) -> void:
 	#if (Input.is_action_just_pressed("ui_accept") && isMain):
 		#WebsiteUtil.play_ad_award(func():
 			#GameHandler.AddMoneyForce(10000))
+	if (WebsiteUtil.platformType == WebsiteUtil.Platform.newground):
+		NewgroundOnly()
 	pass
 
 func ReInitializeParticle(partic):
@@ -87,6 +119,8 @@ func ReInitializeParticle(partic):
 	partic.emitting = false
 
 var scaleYtween:Tween
+var scaleXtween:Tween
+
 var canPress = true
 
 func TweenTextMoney():
@@ -107,7 +141,7 @@ func RainbowWool():
 	rainbowSheepTween = TweenUtils.tweenCustom(self, 0.55, 0.0, 1.1, TweenUtils.Ease.linear, func(val): 
 		get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("rainbow_mix", val))
 func Pressed():
-	if canPress:
+	if canPress && (!holdSniper || canShoot):
 		if (randf_range(0.0,1.0) < GameHandler.saveDataRebirth.rainbowWoolChance):
 			GameHandler.AddMoneyRainbow()
 			RainbowWool()
@@ -117,19 +151,30 @@ func Pressed():
 			GameHandler.AddMoneyRare()
 			GlobalAudio.PlayOneShot("res://Sounds/RareWool.mp3", 0,randf_range(0.99,1.01))
 			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal() * GameHandler.GoldWoolMultiplierTotal(),Color(0.945, 1.0, 0.0, 1.0))
+		elif (holdSniper):
+			GameHandler.AddMoneyForce(GameHandler.IncrementTotal() * 3)
+			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal() * 3)
 		else:
 			GameHandler.AddMoney()
 			(textMoneyRev as TextMoneyRev).RevealMoney(GameHandler.IncrementTotal())
 		MoneyCollectedText()
 		part.modulate = GameHandler.saveDataSettings.sheepColor
 		ParticleManager.PlayParticleOv(part,3)
-		GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 12,randf_range(0.90,1.10))
+		if (holdSniper):
+			ParticleManager.PlayParticleOv(part,15)
 		mouseControl.WoolCollected()
 		#TweenTextMoney()
 		if (TweenUtils.isAlive(scaleYtween)):
 			scaleYtween.stop()
-		scale.y = defaultScale.y - 0.20
+		if (!holdSniper):
+			scale.y = defaultScale.y - 0.20
+			GlobalAudio.PlayOneShot("res://Sounds/cut_sound.ogg", 12,randf_range(0.90,1.10))
+		else:
+			scale.y = defaultScale.y - 1.2
+			scale.x = defaultScale.x + 1.2
+			GameHandler.UnlockSkin("Tank sheep")
 		scaleYtween = TweenUtils.tweenScaleY(self,defaultScale.y,0.3,TweenUtils.Ease.OutCirc)
+		scaleXtween = TweenUtils.tweenScaleX(self,defaultScale.x,0.3,TweenUtils.Ease.OutCirc)
 		if (!GameHandler.saveData.tutorialed):
 			tutorialTimer.stop()
 			TweenUtils.StopTween(twTutorial)

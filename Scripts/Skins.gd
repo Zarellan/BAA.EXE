@@ -11,7 +11,10 @@ var index:int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if (GameHandler.saveDataAchievements.skins == null || GameHandler.saveDataAchievements.skins.size() == 0):
-		GameHandler.saveDataAchievements.skins = skins
+		GameHandler.saveDataAchievements.skins = []
+		for i in range(skins.size()):
+			if (skins[i].platformAvailable == WebsiteUtil.platformType || skins[i].platformAvailable == WebsiteUtil.Platform.none):
+				GameHandler.saveDataAchievements.skins.append(skins[i])
 		GameHandler.saveDataAchievements.skinUsed = GameHandler.saveDataAchievements.skins[0].name
 	currentSkin = GameHandler.saveDataAchievements.skinUsed
 	FindSkinIndex(currentSkin)
@@ -46,6 +49,10 @@ func SuperPower():
 			GameHandler.saveDataAchievements.multiplyMoneyAchievement = 1.9
 			GameHandler.saveDataAchievements.canColorWool = false
 			get_tree().get_first_node_in_group("Sheep").get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("replace_color", Color(1,1,1))
+		"School sheep":
+			GameHandler.saveDataAchievements.increaseJumpAchievement = 500
+		"Tank sheep":
+			GameHandler.saveDataAchievements.multiplyMoneyAchievement = 3.2
 		"Glorious sheep":
 			GameHandler.saveDataAchievements.multiplyMoneyAchievement = 15.0
 func LoadSkin():

@@ -44,7 +44,6 @@ func _on_achievements_pressed() -> void:
 	GlobalAudio.PlayOneShot("res://Sounds/menuClick.mp3",20,randf_range(0.95,1.15))
 	pass # Replace with function body.
 
-
-func _on_button_pressed() -> void:
+func _on_back_pressed() -> void:
 	ExitAchievement()
 	pass # Replace with function body.

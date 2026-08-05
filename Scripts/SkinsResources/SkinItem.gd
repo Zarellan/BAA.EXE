@@ -10,3 +10,4 @@ class_name SkinItem
 @export var achievementImage:Texture = load("res://icon.svg")
 
 @export var unlocked:bool = false
+@export var platformAvailable = WebsiteUtil.Platform.none

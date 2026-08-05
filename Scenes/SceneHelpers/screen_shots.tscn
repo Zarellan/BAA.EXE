@@ -22,6 +22,9 @@
 [ext_resource type="Texture2D" uid="uid://wnk0scnna26v" path="res://Sprites/ImageHelpers/question box.png" id="20_kjbxo"]
 [ext_resource type="Texture2D" uid="uid://dj776vx4wvw5y" path="res://Sprites/ImageHelpers/wrench.png" id="21_qneym"]
 [ext_resource type="Texture2D" uid="uid://dipdeix8qipxo" path="res://Sprites/Sheep/Crown.png" id="22_20eau"]
+[ext_resource type="Texture2D" uid="uid://bdkv2fm8i21x2" path="res://Sprites/ImageHelpers/sniper.png" id="23_3uupn"]
+[ext_resource type="Texture2D" uid="uid://21lhvd3b0kmk" path="res://Sprites/Sheep/baa icon.png" id="24_1d558"]
+[ext_resource type="Shader" uid="uid://c2j477xvmdm3b" path="res://Shaders/CircleSniper.gdshader" id="25_hhk6q"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_id86e"]
 
@@ -117,6 +120,17 @@ shader_parameter/speed = 0.9
 shader_parameter/rainbow_mix = 0.5
 shader_parameter/glow_intensity = 1.5
 shader_parameter/node_size = Vector2(64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njnjs"]
+shader = ExtResource("25_hhk6q")
+shader_parameter/center = Vector2(0.495, 0.445)
+shader_parameter/radius = 0.42000001995
+shader_parameter/feather = 0.05
+shader_parameter/line_thickness = 0.006000000284999999
+shader_parameter/line_length = 0.08
+shader_parameter/line_gap = 0.0
+shader_parameter/show_center_dot = true
+shader_parameter/dot_radius = 0.0050000002375
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_7pbid"]
 
@@ -260,7 +274,6 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("CanvasTexture_itva4")
 
 [node name="TextureRectAchievement" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1316919056]
-visible = false
 self_modulate = Color(0, 0.49717718, 0.92716724, 0.8235294)
 offset_right = 637.0
 offset_bottom = 636.0
@@ -322,6 +335,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("CanvasTexture_itva4")
 
 [node name="TextureRectAchievementGlory" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=573342112]
+visible = false
 self_modulate = Color(1.4369954, 0.84358025, 0, 0.77254903)
 offset_right = 637.0
 offset_bottom = 636.0
@@ -1346,6 +1360,7 @@ offset_bottom = 763.0
 texture = ExtResource("21_qneym")
 
 [node name="Glory Achievement" type="Control" parent="SubViewportContainer/SubViewport" unique_id=132176463]
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 0
@@ -1360,6 +1375,47 @@ offset_top = -2.0
 offset_right = 755.9326
 offset_bottom = 742.0
 texture = ExtResource("22_20eau")
+
+[node name="Sniper Achievement" type="Control" parent="SubViewportContainer/SubViewport" unique_id=1540746360]
+visible = false
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Sniper Achievement" unique_id=885492834]
+texture_filter = 1
+layout_mode = 0
+offset_left = -8.0
+offset_top = 9.0
+offset_right = 602.2172
+offset_bottom = 608.0
+texture = ExtResource("23_3uupn")
+
+[node name="MONSTER achievement" type="Control" parent="SubViewportContainer/SubViewport" unique_id=14938099]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/MONSTER achievement" unique_id=1091902424]
+texture_filter = 1
+layout_mode = 0
+offset_left = 6.0
+offset_top = 13.0
+offset_right = 616.2172
+offset_bottom = 612.0
+texture = ExtResource("24_1d558")
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/MONSTER achievement" unique_id=1372628364]
+material = SubResource("ShaderMaterial_njnjs")
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 638.0
+offset_bottom = 639.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1655893819]
 position = Vector2(355, 400.99997)

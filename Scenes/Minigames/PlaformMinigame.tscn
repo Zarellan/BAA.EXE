@@ -406,12 +406,12 @@ visibleNotifier = NodePath("VisibleNotif")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground" unique_id=1874496451]
 position = Vector2(4.694105, -290.18668)
-scale = Vector2(0.43592238, 2.280048)
+scale = Vector2(0.66068333, 2.280048)
 texture = ExtResource("4_7olyu")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Ground" unique_id=995741723]
-position = Vector2(2.8557374, 10573.048)
-scale = Vector2(0.3285939, 78.21042)
+position = Vector2(4.288765, 32396.8)
+scale = Vector2(0.6589589, 239.9034)
 texture = ExtResource("4_7olyu")
 flip_v = true
 

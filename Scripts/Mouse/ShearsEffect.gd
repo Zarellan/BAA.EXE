@@ -22,10 +22,13 @@ func _process(_delta: float) -> void:
 	if DeviceCheckerUtil.IsUsingPhone(): # if using phone, it's annoying to make shear appear in random place
 		visible = false
 		return
-	if Sheep.isInside && !GameHandler.GamePausedPartil():
+	if (Sheep.isInside || Sheep.holdSniper) && !GameHandler.GamePausedPartil():
 		position = get_viewport().get_mouse_position() - pivot_offset
 		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
-		visible = true
+		if (!Sheep.holdSniper):
+			visible = true
+		else:
+			visible = false
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		visible = false
