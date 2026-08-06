@@ -18,8 +18,14 @@ func _ready() -> void:
 	visible = false
 	set_process(false)
 	set_physics_process(false)
+	if (!WebsiteUtil.adSupport):
+		SetButtonsNoAds()
 	await RenderingServer.frame_post_draw
 	pass # Replace with function body.
+
+func SetButtonsNoAds():
+	get_node("CollectTex/Collect").position.x = 210.0
+	get_node("CollectTex/Collect2").visible = false
 
 
 func BringOfflineCollect(money, time):

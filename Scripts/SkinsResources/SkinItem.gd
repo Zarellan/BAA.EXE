@@ -11,3 +11,6 @@ class_name SkinItem
 
 @export var unlocked:bool = false
 @export var platformAvailable = WebsiteUtil.Platform.none
+
+# newground
+@export var achievementID:int = 0 

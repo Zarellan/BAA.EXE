@@ -43,7 +43,7 @@ func BuildType():
 		adSupport = false
 	else:
 		#platformType = Platform.none
-		platformType = Platform.newground
+		platformType = Platform.none
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/BasePlatform.gd").new()
 		adSupport = false
 	if (OS.has_feature("editor")):
@@ -124,3 +124,7 @@ func _on_ad_error(error_code) -> void:
 func _resume_game() -> void:
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
 	get_tree().paused = false
+
+
+func PartyPopper():
+	platformMain.PartyPopper()

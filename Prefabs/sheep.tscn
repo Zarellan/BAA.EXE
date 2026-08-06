@@ -134,6 +134,7 @@ effectDescription = "Effect: collect multiplier x1.4"
 achievementName = "Code"
 achievementTask = "Type \"eid mubarak\" in code settings"
 achievementImage = ExtResource("7_ibwm0")
+achievementID = 91639
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_vhidr"]
@@ -144,6 +145,7 @@ effectDescription = "effect: increase your jump by +200"
 achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
 achievementImage = ExtResource("8_1vh0c")
+achievementID = 91641
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_0dnco"]
@@ -155,6 +157,7 @@ achievementName = "Shooting stars"
 achievementTask = "Shoot 5 stars from the background"
 achievementImage = ExtResource("9_6bdr0")
 platformAvailable = 2
+achievementID = 91642
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_6bdr0"]
@@ -166,6 +169,7 @@ achievementName = "YOU MONSTER !"
 achievementTask = "click the sheep while you right click"
 achievementImage = ExtResource("10_tw6gr")
 platformAvailable = 2
+achievementID = 91643
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_sbckw"]
@@ -176,6 +180,7 @@ effectDescription = "Effect: collect multiplier x1.9"
 achievementName = "Font"
 achievementTask = "don't click/tap anything for whole 30 seconds"
 achievementImage = ExtResource("8_vt7wm")
+achievementID = 91640
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Resource" id="Resource_1vh0c"]
@@ -183,9 +188,10 @@ script = ExtResource("5_ibwm0")
 name = "Glorious sheep"
 description = "The loyalty looks too glorious (even thought he is a sheep)"
 effectDescription = "Effect: collect multiplier x15"
-achievementName = "King sheep"
+achievementName = "Reach the glory"
 achievementTask = "Beat the game"
 achievementImage = ExtResource("10_0dnco")
+achievementID = 91644
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [sub_resource type="Gradient" id="Gradient_uxlox"]

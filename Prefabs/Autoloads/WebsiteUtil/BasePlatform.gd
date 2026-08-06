@@ -23,3 +23,6 @@ func request_midgame_ad() -> void:
 func play_rewarded_ad(callback: Callable) -> void:
 	# Default editor fail-safe: instantly reward the player
 	callback.call()
+
+func PartyPopper():
+	pass

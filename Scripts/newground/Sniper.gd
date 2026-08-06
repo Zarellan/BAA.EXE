@@ -28,7 +28,7 @@ func ShootEffect():
 	radTween = TweenUtils.tweenCustom(self,0.5,0.2,0.3,TweenUtils.Ease.OutCirc,func(val):
 			sniperRect.material.set_shader_parameter("radius", val))
 # Inside a script attached to your ColorRect
-func _process(delta):
+func _process(_delta):
 	var mouse_pos = get_viewport().get_mouse_position()
 	var screen_size = get_viewport().get_visible_rect().size
 

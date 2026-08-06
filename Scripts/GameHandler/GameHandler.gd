@@ -392,6 +392,10 @@ func UnlockSkin(strn:String, playAchievement:bool = true):
 					AchievementItem.achievementItem[skn[i].achievementName].AchievementUpdate()
 			if (playAchievement):
 				Achievement.PlayAchievement(skn[i].achievementName,skn[i].achievementTask,skn[i].achievementImage)
+			if (WebsiteUtil.platformType == WebsiteUtil.Platform.newground):
+				var ng = get_node_or_null("/root/NG")
+				if (ng):
+					await ng.medal_unlock(skn[i].achievementID, true)
 			SaveAllDataGlob()
 			return
 	push_error("no skin found as ",strn)

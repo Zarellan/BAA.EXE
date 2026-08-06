@@ -35,6 +35,8 @@ func _ready() -> void:
 	GameHandler.saveDataAchievements.beatedTheGame = true
 	GameHandler.SaveAllDataGlob()
 	GameHandler.saveDataAchievements.skinUsed = "Glorious sheep"
+	if (WebsiteUtil.platformType == WebsiteUtil.Platform.crazyGames):
+		WebsiteUtil.PartyPopper()
 	#richTextStat.get_v_scroll_bar().value_changed.connect(func(_val):
 		#TweenUtils.StopTween(twScrollStats))
 	pass

@@ -28,6 +28,8 @@ Achievement="*uid://t7wlwjpi4a52"
 WebsiteUtil="*uid://ss7ohaxsw2c3"
 CrazyGamesBridge="*uid://27gwoulmadaf"
 CrazyGames="*uid://bfr587jfvj6f4"
+NG="*uid://cx0lbddb6da4w"
+NGCloudSave="*uid://b7g1k2gu4cpve"
 
 [display]
 
@@ -42,11 +44,12 @@ run/main_run_args="--rendering-driver opengl3"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/crazygames/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/indentationsupport/plugin.cfg", "res://addons/linux_driver_plugins/plugin.cfg", "res://addons/minimize_html_build/plugin.cfg", "res://addons/simple_event_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/crazygames/plugin.cfg", "res://addons/font_auto_size_labels/plugin.cfg", "res://addons/indentationsupport/plugin.cfg", "res://addons/linux_driver_plugins/plugin.cfg", "res://addons/minimize_html_build/plugin.cfg", "res://addons/newgrounds/plugin.cfg", "res://addons/simple_event_system/plugin.cfg")
 
 [global_group]
 
 Grass=""
+CloudSave="Newgrounds Cloudsave"
 
 [gui]
 
@@ -103,6 +106,12 @@ zoom-out={
 [internationalization]
 
 rendering/root_node_layout_direction=1
+
+[newgrounds.io]
+
+app_id="62559:7dcBYMPF"
+AES-128_key="10nVAC830H4pLG9ROiEuzg=="
+opened_getting_started_page=true
 
 [physics]
 

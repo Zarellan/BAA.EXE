@@ -34,3 +34,6 @@ func play_ad_award() -> void:
 	else:
 		print("Ad was not finished. No reward given. Status: ", result)
 	WebsiteUtil._current_reward_callback = Callable()
+
+func PartyPopper():
+	CrazyGames.Game.happy_time()
