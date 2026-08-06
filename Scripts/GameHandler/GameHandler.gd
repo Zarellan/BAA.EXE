@@ -339,13 +339,12 @@ func GamePausedPartil() -> bool:
 func AutoCollectSheepActive():
 	return saveData.autoCollectSheepAbility || saveDataRebirth.autoCollectSheepAbility
 
+var allowedMinimumCollect:float = 0.035
+var _allowedMinimumCollectParse:float = 0.03
 func AutoCollectSheepTotal():
-	return saveData.autoCollectSheep + saveDataRebirth.autoCollectSheep
+	return maxf(_allowedMinimumCollectParse,saveData.autoCollectSheep + saveDataRebirth.autoCollectSheep)
 func AutoCollectSheepTotalParse():
-	if (saveData.autoCollectSheep + saveDataRebirth.autoCollectSheep >= 0.15):
-		return saveData.autoCollectSheep + saveDataRebirth.autoCollectSheep
-	else:
-		return 0.15
+	return maxf(_allowedMinimumCollectParse,saveData.autoCollectSheep + saveDataRebirth.autoCollectSheep)
 
 func GoldWoolMultiplierTotal():
 	return 10 + saveDataRebirth.goldWoolMultiplier

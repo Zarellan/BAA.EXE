@@ -416,7 +416,7 @@ description = "improve the wool collect by [wave amp=25.0 freq=10 connected=0]+2
 price = 25
 power = 1
 tax = 1.05
-taxInc = 0.1
+taxInc = 0.04
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_4db3b"]
@@ -427,7 +427,7 @@ description = "now you will auto collect [wave amp=25.0 freq=10 connected=0]+32[
 price = 250
 power = 2
 tax = 1.1
-taxInc = 0.08
+taxInc = 0.05
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_kdc4j"]
@@ -438,7 +438,7 @@ description = "make the auto collector collects faster"
 price = 1250
 power = 3
 tax = 1.1
-taxInc = 0.12
+taxInc = 0.06
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_dunvt"]
@@ -458,8 +458,8 @@ image = ExtResource("21_bhny3")
 description = "the more you buy it the more the collect doubles"
 price = 7000
 power = 5
-tax = 1.5
-taxInc = 0.3
+tax = 1.25
+taxInc = 0.14
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_tgjpn"]
@@ -469,7 +469,7 @@ image = ExtResource("21_edtci")
 price = 4000
 power = 6
 tax = 1.1
-taxInc = 0.2
+taxInc = 0.13
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_s0s3s"]
@@ -479,7 +479,7 @@ image = ExtResource("30_17bn8")
 price = 400
 power = 7
 tax = 1.1
-taxInc = 0.2
+taxInc = 0.1
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_ruovs"]
@@ -489,7 +489,7 @@ image = ExtResource("31_v1gif")
 price = 725
 power = 8
 tax = 1.2
-taxInc = 0.25
+taxInc = 0.18
 metadata/_custom_type_script = "uid://bkluf3o0xvjq2"
 
 [sub_resource type="Resource" id="Resource_wpcgh"]
@@ -569,7 +569,7 @@ image = ExtResource("35_r1qcv")
 rebirthPrice = 1
 power = 2
 tax = 2.0
-taxInc = 0.05
+taxInc = 0.02
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_17bn8"]
@@ -579,7 +579,7 @@ image = ExtResource("37_wcncl")
 rebirthPrice = 2
 power = 3
 tax = 1.5
-taxInc = 0.03
+taxInc = 0.02
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_wcncl"]
@@ -601,7 +601,7 @@ image = ExtResource("40_x45b6")
 rebirthPrice = 6
 power = 10
 tax = 1.2
-taxInc = 0.03
+taxInc = 0.02
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_ueu3d"]
@@ -611,7 +611,7 @@ image = ExtResource("41_wpcgh")
 rebirthPrice = 8
 power = 11
 tax = 1.25
-taxInc = 0.1
+taxInc = 0.07
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_8hf41"]
@@ -631,7 +631,7 @@ image = ExtResource("36_p5ocn")
 rebirthPrice = 3
 power = 5
 tax = 1.5
-taxInc = 0.1
+taxInc = 0.04
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_amxxf"]
@@ -641,7 +641,7 @@ image = ExtResource("37_ovgwv")
 rebirthPrice = 4
 power = 6
 tax = 1.5
-taxInc = 0.05
+taxInc = 0.03
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_p5ocn"]
@@ -651,7 +651,7 @@ image = ExtResource("38_ebyxy")
 rebirthPrice = 2
 power = 7
 tax = 1.5
-taxInc = 0.04
+taxInc = 0.02
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_ovgwv"]
@@ -661,14 +661,14 @@ image = ExtResource("40_q3ouh")
 rebirthPrice = 3
 power = 8
 tax = 1.6
-taxInc = 0.1
+taxInc = 0.06
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
 
 [sub_resource type="Resource" id="Resource_ebyxy"]
 script = ExtResource("27_phtv5")
 title = "Reach the Glory (ending)"
 image = ExtResource("52_nme7v")
-rebirthPrice = 5000
+rebirthPrice = 2500
 power = 12
 tax = 1.0
 metadata/_custom_type_script = "uid://cdnm7de0x2dq8"
@@ -2681,13 +2681,13 @@ offset_right = 821.0
 offset_bottom = 208.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Track Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -2701,13 +2701,13 @@ offset_right = 823.0
 offset_bottom = 303.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Audio Volume:"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -2880,13 +2880,13 @@ offset_right = 821.0
 offset_bottom = 241.0
 mouse_filter = 2
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Update Intervals:31"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 
@@ -3014,13 +3014,13 @@ offset_top = 192.0
 offset_right = 634.0
 offset_bottom = 252.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Glitch Effect"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -3044,14 +3044,14 @@ offset_top = 290.0
 offset_right = 692.0
 offset_bottom = 350.0
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/normal_font_size = 31
+theme_override_font_sizes/normal_font_size = 30
 text = "Shading
 Border"
 scroll_active = false
 vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 31
-_current_font_size = 31
+_current_font_size = 30
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true
@@ -3891,8 +3891,8 @@ offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/normal_font_size = 26
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
 text = "tired of grinding ?
 Try playing a [rainbow]minigame[/rainbow] to boost your grinding! :]"
@@ -3902,7 +3902,7 @@ vertical_alignment = 1
 script = ExtResource("16_joy2m")
 _max_size = 26
 _outline_ratio = 0.4
-_current_font_size = 26
+_current_font_size = 21
 _editor_defaults_set = true
 metadata/_custom_type_script = "uid://co0lo02vnu10n"
 metadata/_edit_use_anchors_ = true

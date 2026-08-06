@@ -53,6 +53,7 @@ func _ready() -> void:
 	CustomItemText()
 	SetBasedOnLevel()
 	ExceptionalItems()
+	ExceptionalPurchase()
 	shopItems[shopData.title] = self
 	pass # Replace with function body.
 
@@ -152,7 +153,7 @@ var exceptioned := false
 func ExceptionalPurchase():
 	match (shopData.power):
 		Powers.autoCollectSheep:
-			if (GameHandler.AutoCollectSheepTotal() <= 0.30 && !exceptioned):
+			if (GameHandler.AutoCollectSheepTotal() <= GameHandler.allowedMinimumCollect && !exceptioned):
 				TweenLevelMax()
 				levelNode.modulate.a = 1
 				levelNode.text = "lv:Max"
@@ -229,7 +230,7 @@ func PowersAct():
 				GameHandler.saveData.autoCollectSheepAbility = true
 			else:
 				GameHandler.saveData.autoCollectSheep -= 0.15
-			if (GameHandler.AutoCollectSheepTotal() <= 0.30):
+			if (GameHandler.AutoCollectSheepTotal() <= GameHandler.allowedMinimumCollect):
 				TweenLevelMax()
 				shopData.canBuy = false
 		Powers.jumpPower:

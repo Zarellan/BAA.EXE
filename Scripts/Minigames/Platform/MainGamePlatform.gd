@@ -299,8 +299,7 @@ func GameOver():
 	audioFall = GlobalAudio.PlayOneShot("res://Sounds/falling.mp3",-3)
 	audioFallVolumeTween = TweenUtils.tweenCustom(self,-3,-80,10,TweenUtils.Ease.linear,func(val):
 		audioFall.volume_db = val)
-	if (GameHandler.saveDataAchievements.platformMinigameScore < score):
-		GameHandler.saveDataAchievements.platformMinigameScore = score
+	SetScore()
 	died = true
 	await get_tree().create_timer(0.4).timeout
 	if (WebsiteUtil.adSupport && revivedCount < 1):
@@ -376,8 +375,7 @@ func _on_retry_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	TransitionScript.ChangeScene("res://Scenes/MainFarm.tscn",SceneChangedFromMinigame)
-	if (GameHandler.saveDataAchievements.platformMinigameScore < score):
-		GameHandler.saveDataAchievements.platformMinigameScore = score
+	SetScore()
 	GameHandler.SaveAllDataGlob()
 	Changing()
 	pass # Replace with function body.
@@ -404,3 +402,11 @@ func _on_revive_pressed() -> void:
 		WebsiteUtil.play_ad_award(func():
 			Revive())
 	pass # Replace with function body.
+
+func SetScore():
+	if (GameHandler.saveDataAchievements.platformMinigameScore < score):
+		GameHandler.saveDataAchievements.platformMinigameScore = score
+		if (WebsiteUtil.platformType == WebsiteUtil.Platform.newground):
+			var ng = get_node_or_null("/root/NG")
+			if (ng):
+				ng.scoreboard_submit(16113,score)

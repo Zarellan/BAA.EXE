@@ -37,12 +37,11 @@ func BuildType():
 		platformType = Platform.crazyGames
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/CrazyGames.gd").new()
 		adSupport = true
-	elif (OS.has_feature("Newground")): 
+	elif (OS.has_feature("Newground")):
 		platformType = Platform.newground
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/BasePlatform.gd").new()
 		adSupport = false
 	else:
-		#platformType = Platform.none
 		platformType = Platform.none
 		platformMain = load("res://Prefabs/Autoloads/WebsiteUtil/BasePlatform.gd").new()
 		adSupport = false

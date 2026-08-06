@@ -14,7 +14,7 @@ func _ready() -> void:
 		GameHandler.saveDataAchievements.skins = []
 		for i in range(skins.size()):
 			if (skins[i].platformAvailable == WebsiteUtil.platformType || skins[i].platformAvailable == WebsiteUtil.Platform.none):
-				GameHandler.saveDataAchievements.skins.append(skins[i])
+				GameHandler.saveDataAchievements.skins.append(skins[i].duplicate(true))
 		GameHandler.saveDataAchievements.skinUsed = GameHandler.saveDataAchievements.skins[0].name
 	currentSkin = GameHandler.saveDataAchievements.skinUsed
 	FindSkinIndex(currentSkin)

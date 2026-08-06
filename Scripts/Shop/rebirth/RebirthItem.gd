@@ -398,10 +398,11 @@ func PowersAct(): #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 				shopData.canBuy = false
 		Powers.autoCollect:
 			GameHandler.saveDataRebirth.autoCollectSheep -= 0.15
+			ShopItem.shopItems["[rainbow]Auto Collect Sheep"].ModifyTexts()
 			if (!GameHandler.saveDataRebirth.autoCollectSheepAbility):
 				GameHandler.saveDataRebirth.autoCollectSheepAbility = true
-			if (GameHandler.saveDataRebirth.autoCollectSheep < (0.15 - 3) || is_equal_approx(GameHandler.saveDataRebirth.autoCollectSheep, (0.15 - 3))):
-				GameHandler.saveDataRebirth.autoCollectSheep = 0.15 - 3
+			if (GameHandler.saveDataRebirth.autoCollectSheep < (GameHandler.allowedMinimumCollect - 3) || is_equal_approx(GameHandler.saveDataRebirth.autoCollectSheep, (GameHandler.allowedMinimumCollect - 3))):
+				GameHandler.saveDataRebirth.autoCollectSheep = GameHandler.allowedMinimumCollect - 3
 				TweenLevelMax()
 				shopData.canBuy = false
 		Powers.goldWoolMultiply:

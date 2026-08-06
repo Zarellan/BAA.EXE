@@ -1,76 +1,78 @@
-[gd_resource type="Resource" script_class="GameSaveAchievements" format=3]
+[gd_resource type="Resource" script_class="GameSaveAchievements" format=3 uid="uid://bw0cbth0yxmmq"]
 
-[ext_resource type="Script" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_2yxkc"]
-[ext_resource type="Script" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_h3mo4"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_r7ikc"]
-[ext_resource type="Texture2D" path="res://Sprites/AchievementImages/Eid.png" id="4_gj7pw"]
-[ext_resource type="Texture2D" path="res://Sprites/AchievementImages/Jump.png" id="5_tvj3r"]
-[ext_resource type="Texture2D" path="res://Sprites/AchievementImages/Font.png" id="7_r8lss"]
-[ext_resource type="Texture2D" path="res://Sprites/ShopImages/Rebirth/Glory.png" id="8_dhwaq"]
+[ext_resource type="Script" uid="uid://bamlmaasao1n7" path="res://Scripts/GameSaveData/GameSaveAchievements.gd" id="1_p7hsg"]
+[ext_resource type="Script" uid="uid://ddy1amsnkc3gd" path="res://Scripts/SkinsResources/SkinItem.gd" id="2_r7ikc"]
+[ext_resource type="Texture2D" uid="uid://bvq6dly70hnlc" path="res://icon.svg" id="3_gj7pw"]
+[ext_resource type="Texture2D" uid="uid://cb4tdhf3rwt47" path="res://Sprites/AchievementImages/Eid.png" id="4_tvj3r"]
+[ext_resource type="Texture2D" uid="uid://qmvgd4igr5y5" path="res://Sprites/AchievementImages/Jump.png" id="5_r8lss"]
+[ext_resource type="Texture2D" uid="uid://dhx0xyysxy81i" path="res://Sprites/AchievementImages/Font.png" id="6_dhwaq"]
+[ext_resource type="Texture2D" uid="uid://tk73uyx0108s" path="res://Sprites/ShopImages/Rebirth/Glory.png" id="7_0y634"]
 
-[sub_resource type="Resource" id="Resource_ykfix"]
-script = ExtResource("2_h3mo4")
+[sub_resource type="Resource" id="Resource_p7hsg"]
+script = ExtResource("2_r7ikc")
 description = "just thrilling with the originality"
 effectDescription = "Effect: None"
 achievementName = "None"
 achievementTask = "None"
-achievementImage = ExtResource("3_r7ikc")
+achievementImage = ExtResource("3_gj7pw")
 unlocked = true
-platformAvailable = 0
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
-[sub_resource type="Resource" id="Resource_fip8v"]
-script = ExtResource("2_h3mo4")
+[sub_resource type="Resource" id="Resource_r7ikc"]
+script = ExtResource("2_r7ikc")
 name = "Eid"
 description = "the game was suppose to be for eid, but then I decide to polish it"
 effectDescription = "Effect: collect multiplier x1.4"
 achievementName = "Code"
 achievementTask = "Type \"eid mubarak\" in code settings"
-achievementImage = ExtResource("4_gj7pw")
-platformAvailable = 0
+achievementImage = ExtResource("4_tvj3r")
 achievementID = 91639
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
-[sub_resource type="Resource" id="Resource_vhidr"]
-script = ExtResource("2_h3mo4")
+[sub_resource type="Resource" id="Resource_gj7pw"]
+script = ExtResource("2_r7ikc")
 name = "Jump sheep"
 description = "hmm...he looks like someone...but ninjas might haunt me if I mentioned it ;)"
 effectDescription = "effect: increase your jump by +200"
 achievementName = "Jump sheep"
 achievementTask = "Reach 20 score in platform minigame"
-achievementImage = ExtResource("5_tvj3r")
-platformAvailable = 0
+achievementImage = ExtResource("5_r8lss")
 achievementID = 91641
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
-[sub_resource type="Resource" id="Resource_sbckw"]
-script = ExtResource("2_h3mo4")
+[sub_resource type="Resource" id="Resource_tvj3r"]
+script = ExtResource("2_r7ikc")
 name = "Font"
 description = "you gonna have a Baaaa'd clock"
 effectDescription = "Effect: collect multiplier x1.9"
 achievementName = "Font"
 achievementTask = "don't click/tap anything for whole 30 seconds"
-achievementImage = ExtResource("7_r8lss")
-platformAvailable = 0
+achievementImage = ExtResource("6_dhwaq")
 achievementID = 91640
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
-[sub_resource type="Resource" id="Resource_1vh0c"]
-script = ExtResource("2_h3mo4")
+[sub_resource type="Resource" id="Resource_r8lss"]
+script = ExtResource("2_r7ikc")
 name = "Glorious sheep"
 description = "The loyalty looks too glorious (even thought he is a sheep)"
 effectDescription = "Effect: collect multiplier x15"
 achievementName = "Reach the glory"
 achievementTask = "Beat the game"
-achievementImage = ExtResource("8_dhwaq")
-platformAvailable = 0
+achievementImage = ExtResource("7_0y634")
 achievementID = 91644
 metadata/_custom_type_script = "uid://ddy1amsnkc3gd"
 
 [resource]
-script = ExtResource("1_2yxkc")
-skins = Array[ExtResource("2_h3mo4")]([SubResource("Resource_ykfix"), SubResource("Resource_fip8v"), SubResource("Resource_vhidr"), SubResource("Resource_sbckw"), SubResource("Resource_1vh0c")])
+script = ExtResource("1_p7hsg")
+skins = Array[ExtResource("2_r7ikc")]([SubResource("Resource_p7hsg"), SubResource("Resource_r7ikc"), SubResource("Resource_gj7pw"), SubResource("Resource_tvj3r"), SubResource("Resource_r8lss")])
 skinUsed = "Default"
-playerClicks = 19
-moneyCollected = 40
-lastTime = 1786002736.952188
+playerClicks = 2958
+moneyCollected = 8588560796.0
+tips = Dictionary[String, bool]({
+"choose_wise": true,
+"minigame_1": true,
+"minigame_2": true,
+"rebirth_1": true,
+"rebirth_2": true
+})
+lastTime = 1786053176.278
