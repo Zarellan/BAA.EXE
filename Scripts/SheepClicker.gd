@@ -44,6 +44,7 @@ func _ready() -> void:
 		ParticleManager.PlayParticleWarmup(part)
 		ParticleManager.PlayParticleWarmup(partRare)
 		ParticleManager.PlayParticleWarmup(partRainbow)
+		get_node("StaticBody2D/Sprite2D").material.set_shader_parameter("rainbow_mix",0)
 		if (!GameHandler.saveData.tutorialed):
 			tutorialTimer.start()
 			tutorialTimer.timeout.connect(StartTutorial)

@@ -1818,6 +1818,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("62_qv28c")
 sniperRect = NodePath("ColorRect")
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Control/CanvasLayer/Sniper" unique_id=909655807]
 material = SubResource("ShaderMaterial_qv28c")
@@ -1829,6 +1830,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="WoolCounter" type="Control" parent="Control/CanvasLayer" unique_id=972502790]
 layout_mode = 3

@@ -14,8 +14,8 @@ func _process(delta: float) -> void:
 	position = Vector2(cos(startFrom + startTime * 5) * 150,-450 + (sin(startFrom + startTime * 5) * 30))
 	
 	if (lastPositionX - position.x >= 0.01):
-		z_index = 2
-		get_node("Trail").z_index = 1
+		z_index = 3
+		get_node("Trail").z_index = 2
 	else:
 		z_index = 0
 		get_node("Trail").z_index = 0
@@ -41,4 +41,4 @@ func trail(delta):
 	get_node("Trail").clear_points()
 	for point in trailArray:
 		get_node("Trail").add_point(point)
-	await get_tree().create_timer(0.5).timeout 
+	await get_tree().create_timer(0.5).timeout
